@@ -1,0 +1,13 @@
+slug: getting-started
+title: Getting Started
+summary: Install Tai Link and connect your first device.
+pages:
+  - slug: what-is-tai-link
+    title: What Is Tai Link
+    summary: "Product positioning: let agents control your other devices."
+  - slug: installation
+    title: Installation
+    summary: Install the Tai Link client on each platform.
+  - slug: connect-first-device
+    title: Connect Your First Device
+    summary: Scan QR code or enter pairing code to complete the connection.

@@ -1,0 +1,10 @@
+slug: execution-pipeline
+title: Execution Pipeline
+summary: How a robot executes automatically through stages. Each stage has a dedicated agent you can customize.
+pages:
+  - slug: pipeline-overview
+    title: Pipeline Overview
+    summary: Think of it as an assembly line — each station has a specialist. Products flow from start to finish.
+  - slug: replacing-stage-agents
+    title: Replacing Stage Agents
+    summary: Swap any default pipeline agent with one you installed or created.

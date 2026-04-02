@@ -1,0 +1,18 @@
+slug: mission-control
+title: Mission Control
+summary: "Core feature: orchestrate a team of experts to complete tasks automatically."
+pages:
+  - slug: what-is-mission-control
+    title: What Is Mission Control
+    summary: "Core idea: you are the commander. Assemble experts, define the workflow, let them collaborate."
+  - slug: creating-a-robot
+    title: Creating a Robot
+    summary: Basic info, identity setup, and platform integration for a new robot.
+  - slug: progress-and-results
+    title: Progress & Results
+    summary: Running status, logs, deliverables, pause and resume.
+  - slug: scheduling-and-triggers
+    title: Scheduling & Triggers
+    summary: Scheduled execution, event triggers, Webhook notifications.
+children:
+  - execution-pipeline

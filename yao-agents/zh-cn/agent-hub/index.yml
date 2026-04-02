@@ -1,0 +1,16 @@
+slug: agent-hub
+title: Agent 生态
+summary: 扩展 Agent 能力：安装现成的，或自己创建。
+pages:
+  - slug: hub-overview
+    title: Hub 概览
+    summary: 什么是 Agent Hub、浏览与发现。
+  - slug: custom-assistants
+    title: 自定义 AI 助手
+    summary: 四种方式获取新助手（由易到难）：AI 开发助手对话式创建、Hub 一键安装、OpenClaw Hub、编程开发。
+  - slug: managing-agents
+    title: 管理 Agent
+    summary: 查看已安装、更新、卸载（内置 Agent 不可卸载）。
+  - slug: agent-configuration
+    title: Agent 配置
+    summary: 修改已安装 Agent 的参数、行为、权限。

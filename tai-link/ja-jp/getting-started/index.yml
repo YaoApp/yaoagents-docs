@@ -1,0 +1,13 @@
+slug: getting-started
+title: はじめに
+summary: Tai Linkをインストールし、最初のデバイスを接続。
+pages:
+  - slug: what-is-tai-link
+    title: Tai Linkとは
+    summary: 製品の位置づけ：エージェントが他のデバイスを制御。
+  - slug: installation
+    title: インストール
+    summary: 各プラットフォームにTai Linkクライアントをインストール。
+  - slug: connect-first-device
+    title: 最初のデバイスを接続
+    summary: QRコードスキャンまたはペアリングコード入力で接続完了。

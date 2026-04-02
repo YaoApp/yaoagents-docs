@@ -1,0 +1,19 @@
+slug: integrations
+title: 整合
+summary: 向外：接入 IM 平台和 API；向內：連接 AI 模型和 MCP 工具。
+pages:
+  - slug: chat-platforms
+    title: 聊天平台 (IM)
+    summary: 將助手/機器人綁定到 Slack、微信、釘釘、飛書、Telegram、Discord。
+  - slug: api-direct-connect
+    title: API 直連
+    summary: 相容 OpenAI Chat Completion 協定，從任何相容工具呼叫你的 Agent。
+  - slug: api-keys
+    title: API 金鑰
+    summary: 產生和管理 API Key，用於外部呼叫 Yao Agents 介面的認證。
+  - slug: ai-models
+    title: AI 模型
+    summary: 設定 AI 連接器：OpenAI / Claude / 本地模型等。
+  - slug: mcp-tools
+    title: MCP 工具
+    summary: 連接外部 MCP 伺服器，擴展助手可用的工具。

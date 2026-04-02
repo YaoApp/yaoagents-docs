@@ -1,0 +1,16 @@
+slug: settings
+title: 設定
+summary: 個人化設定。
+pages:
+  - slug: general-settings
+    title: 通用設定
+    summary: 語言、主題、啟動行為。
+  - slug: account
+    title: 帳戶
+    summary: 登入、個人資訊、安全。
+  - slug: data-management
+    title: 資料管理
+    summary: 匯出對話、備份資料、清除快取。
+  - slug: advanced-settings
+    title: 進階設定
+    summary: 代理網路、儲存路徑、效能選項。

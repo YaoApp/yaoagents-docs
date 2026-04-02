@@ -1,0 +1,10 @@
+slug: execution-pipeline
+title: 実行パイプライン
+summary: ロボットがステージごとに自動実行。各ステージのデフォルトエージェントをカスタマイズ可能。
+pages:
+  - slug: pipeline-overview
+    title: パイプライン概要
+    summary: 組立ラインのように、各ステーションに専門家が配置され、製品が最初から最後まで流れます。
+  - slug: replacing-stage-agents
+    title: ステージエージェントの置き換え
+    summary: デフォルトのパイプラインエージェントを、インストールまたは作成したものに差し替え。

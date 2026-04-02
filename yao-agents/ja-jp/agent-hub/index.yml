@@ -1,0 +1,16 @@
+slug: agent-hub
+title: Agent Hub
+summary: 機能拡張：既製エージェントのインストールまたは自作。
+pages:
+  - slug: hub-overview
+    title: Hub 概要
+    summary: Agent Hubとは、エージェントの閲覧と発見。
+  - slug: custom-assistants
+    title: カスタムAIアシスタント
+    summary: 新しいアシスタントを入手する4つの方法。AI開発アシスタント、Hubインストール、OpenClaw Hub、コーディング。
+  - slug: managing-agents
+    title: エージェント管理
+    summary: インストール済みの確認、更新、アンインストール。
+  - slug: agent-configuration
+    title: エージェント設定
+    summary: インストール済みエージェントのパラメータ、動作、権限を変更。

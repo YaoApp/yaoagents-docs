@@ -1,0 +1,16 @@
+slug: settings
+title: 设置
+summary: 个性化配置。
+pages:
+  - slug: general-settings
+    title: 通用设置
+    summary: 语言、主题、启动行为。
+  - slug: account
+    title: 账户
+    summary: 登录、个人信息、安全。
+  - slug: data-management
+    title: 数据管理
+    summary: 导出对话、备份数据、清除缓存。
+  - slug: advanced-settings
+    title: 高级设置
+    summary: 代理网络、存储路径、性能选项。

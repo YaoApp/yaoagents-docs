@@ -1,0 +1,49 @@
+slug: built-in-agents
+title: Built-in Agents
+summary: "All pre-installed agents. Each has a detail page: intro, strengths, use cases, prompt reference, tips."
+pages:
+  - slug: general
+    title: General
+    summary: General-purpose assistant. Everyday Q&A, versatile tasks, best starting point for new users.
+  - slug: keeper
+    title: Keeper
+    summary: Knowledge base manager. Save/retrieve web pages, notes, files, bookmarks with tags and categories.
+  - slug: pm
+    title: PM
+    summary: Project manager. Task breakdown, progress tracking, team coordination.
+  - slug: postman
+    title: Postman
+    summary: Email assistant. Draft emails, scheduled sending, email templates.
+  - slug: scout
+    title: Scout
+    summary: Market researcher. Information collection, competitive analysis, report generation.
+  - slug: website
+    title: Website
+    summary: Website builder. Site construction, form development, page design.
+  - slug: applet
+    title: Applet
+    summary: Mini-app builder. Create web widgets with live VNC preview.
+  - slug: web-scraper
+    title: Web Scraper
+    summary: Web content collector. Scrape web pages and extract structured data.
+  - slug: report-writer
+    title: Report Writer
+    summary: Report-writing robot (used in Mission Control). Auto-generates analysis reports, data formatting.
+  - slug: robot-host
+    title: Robot Host
+    summary: "Pipeline agent — Intake stage. Human-machine intermediary: collects input, reports status, confirms decisions."
+  - slug: robot-goals
+    title: Robot Goals
+    summary: Pipeline agent — Goal-setting stage. Understands requirements and breaks them into actionable goals.
+  - slug: robot-inspiration
+    title: Robot Inspiration
+    summary: Pipeline agent — Inspiration stage. Searches for relevant information and reference materials.
+  - slug: robot-tasks
+    title: Robot Tasks
+    summary: Pipeline agent — Execution stage. Carries out work step-by-step according to goals.
+  - slug: robot-validation
+    title: Robot Validation
+    summary: Pipeline agent — Validation stage. Checks output quality and identifies issues.
+  - slug: robot-delivery
+    title: Robot Delivery
+    summary: Pipeline agent — Delivery stage. Assembles final deliverables and formats output.

@@ -1,0 +1,49 @@
+slug: built-in-agents
+title: 内置智能体
+summary: 所有随产品预装的智能体。每个有独立详情页：简介、擅长什么、使用场景、提示词参考、使用技巧。
+pages:
+  - slug: general
+    title: General（通用助手）
+    summary: 日常问答、通用任务、新手首选。
+  - slug: keeper
+    title: Keeper（知识库管理）
+    summary: 保存/检索内容（网页/笔记/文件/书签）、分类标签、外部数据导入。
+  - slug: pm
+    title: PM（项目经理）
+    summary: 项目管理、任务拆解与跟踪、团队协作。
+  - slug: postman
+    title: Postman（邮件助手）
+    summary: 邮件撰写、定时发送、邮件模板。
+  - slug: scout
+    title: Scout（市场调研）
+    summary: 信息收集与分析、竞品调研、报告生成。
+  - slug: website
+    title: Website（网站构建）
+    summary: 网站搭建、表单开发、页面设计。
+  - slug: applet
+    title: Applet（小工具开发）
+    summary: 创建 Web 小工具、VNC 实时预览。
+  - slug: web-scraper
+    title: Web Scraper（网页采集）
+    summary: 网页内容抓取、数据提取。
+  - slug: report-writer
+    title: Report Writer（报告撰写）
+    summary: 机器人类型。在任务编排中自动生成分析报告、数据整理、格式化输出。
+  - slug: robot-host
+    title: Robot Host（接单）
+    summary: 流水线智能体。人机交互中介、接收输入、反馈状态。
+  - slug: robot-goals
+    title: Robot Goals（定目标）
+    summary: 流水线智能体。理解需求、拆解为可执行目标。
+  - slug: robot-inspiration
+    title: Robot Inspiration（找灵感）
+    summary: 流水线智能体。搜索信息、收集参考资料。
+  - slug: robot-tasks
+    title: Robot Tasks（干活）
+    summary: 流水线智能体。按目标逐步执行具体工作。
+  - slug: robot-validation
+    title: Robot Validation（验收）
+    summary: 流水线智能体。验证产出质量、发现问题。
+  - slug: robot-delivery
+    title: Robot Delivery（交付）
+    summary: 流水线智能体。整理最终成果、交付输出。

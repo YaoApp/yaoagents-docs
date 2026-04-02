@@ -1,0 +1,22 @@
+slug: user-guide
+title: User Guide
+summary: Manage devices, remote operations, file sync, and more.
+pages:
+  - slug: device-management
+    title: Device Management
+    summary: View device list, online status, naming.
+  - slug: remote-operations
+    title: Remote Operations
+    summary: Control remote devices through agents.
+  - slug: file-sync
+    title: File Sync
+    summary: Sync files between devices.
+  - slug: remote-desktop
+    title: Remote Desktop
+    summary: VNC remote viewing and control.
+  - slug: security-and-privacy
+    title: Security & Privacy
+    summary: Connection encryption, authorization management, disconnect devices.
+  - slug: tunnel-mode
+    title: Tunnel Mode
+    summary: NAT traversal, no port forwarding required.

@@ -1,0 +1,10 @@
+slug: preferences
+title: アシスタント設定
+summary: アシスタントの動作をカスタマイズ。
+pages:
+  - slug: model-selection
+    title: モデル選択
+    summary: アシスタントが使用するAIモデルを切り替え。先に統合でAIモデルの設定が必要。
+  - slug: tools-and-permissions
+    title: ツールと権限
+    summary: アシスタントが使用できるMCPツールと操作権限を管理。

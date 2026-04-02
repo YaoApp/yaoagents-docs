@@ -1,0 +1,22 @@
+slug: resources
+title: リソース
+summary: 用語集、FAQ、ショートカット、システム要件、変更履歴、コミュニティ。
+pages:
+  - slug: glossary
+    title: 用語集
+    summary: 主要用語のわかりやすい説明。
+  - slug: faq
+    title: よくある質問
+    summary: インストール、接続、エージェント使用に関するFAQ。
+  - slug: shortcuts
+    title: キーボードショートカット
+    summary: 完全なショートカットリファレンス。
+  - slug: system-requirements
+    title: システム要件
+    summary: 各プラットフォームの最小スペック。
+  - slug: changelog
+    title: 変更履歴
+    summary: バージョンリリースノートと更新情報。
+  - slug: community
+    title: コミュニティ
+    summary: GitHub、Discord、フィードバックチャンネル。

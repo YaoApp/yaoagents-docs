@@ -1,0 +1,49 @@
+slug: built-in-agents
+title: 組み込みエージェント
+summary: 製品にプリインストールされた全エージェント。各詳細ページあり。
+pages:
+  - slug: general
+    title: General（汎用アシスタント）
+    summary: 日常Q&A、汎用タスク、初心者向け。
+  - slug: keeper
+    title: Keeper（ナレッジベース）
+    summary: コンテンツの保存/検索、タグ分類、外部データインポート。
+  - slug: pm
+    title: PM（プロジェクトマネージャー）
+    summary: プロジェクト管理、タスク分解、チーム連携。
+  - slug: postman
+    title: Postman（メールアシスタント）
+    summary: メール作成、予約送信、テンプレート。
+  - slug: scout
+    title: Scout（市場リサーチ）
+    summary: 情報収集・分析、競合調査、レポート生成。
+  - slug: website
+    title: Website（ウェブサイト構築）
+    summary: サイト構築、フォーム開発、ページデザイン。
+  - slug: applet
+    title: Applet（ミニアプリ）
+    summary: Webウィジェット作成、VNCライブプレビュー。
+  - slug: web-scraper
+    title: Web Scraper（ウェブスクレイピング）
+    summary: Webページのコンテンツ取得、データ抽出。
+  - slug: report-writer
+    title: Report Writer（レポート作成）
+    summary: ロボットタイプ。タスクオーケストレーションで分析レポートを自動生成。
+  - slug: robot-host
+    title: Robot Host（受付）
+    summary: パイプラインエージェント。入力収集、ステータスフィードバック。
+  - slug: robot-goals
+    title: Robot Goals（目標設定）
+    summary: パイプラインエージェント。要件理解、実行可能な目標に分解。
+  - slug: robot-inspiration
+    title: Robot Inspiration（インスピレーション）
+    summary: パイプラインエージェント。情報検索、参考資料収集。
+  - slug: robot-tasks
+    title: Robot Tasks（実行）
+    summary: パイプラインエージェント。目標に沿って作業を実行。
+  - slug: robot-validation
+    title: Robot Validation（検証）
+    summary: パイプラインエージェント。成果物の品質検証。
+  - slug: robot-delivery
+    title: Robot Delivery（納品）
+    summary: パイプラインエージェント。最終成果物の整理・出力。

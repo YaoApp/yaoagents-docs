@@ -1,0 +1,13 @@
+slug: getting-started
+title: 入門
+summary: 安裝 Tai Link 並連接第一台裝置。
+pages:
+  - slug: what-is-tai-link
+    title: 什麼是 Tai Link
+    summary: 產品定位：讓 Agent 控制你的其他裝置。
+  - slug: installation
+    title: 安裝
+    summary: 在各平台安裝 Tai Link 客戶端。
+  - slug: connect-first-device
+    title: 連接第一台裝置
+    summary: 掃碼/輸入配對碼，完成連接。

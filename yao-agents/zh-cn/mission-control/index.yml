@@ -1,0 +1,18 @@
+slug: mission-control
+title: 任务控制中心
+summary: 核心功能之二：编排专家组自动协作完成任务。
+pages:
+  - slug: what-is-mission-control
+    title: 什么是任务控制中心
+    summary: 核心理念：你是总指挥，编排一组专家完成一件事。
+  - slug: creating-a-robot
+    title: 创建机器人
+    summary: 基本信息、身份设定、平台集成。
+  - slug: progress-and-results
+    title: 查看进度与结果
+    summary: 运行状态、日志、产出物、中断与恢复。
+  - slug: scheduling-and-triggers
+    title: 定时与触发
+    summary: 定时执行、事件触发、Webhook 通知。
+children:
+  - execution-pipeline

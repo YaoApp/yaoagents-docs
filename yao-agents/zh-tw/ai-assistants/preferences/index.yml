@@ -1,0 +1,10 @@
+slug: preferences
+title: 助手偏好
+summary: 自訂助手的行為方式。
+pages:
+  - slug: model-selection
+    title: 模型選擇
+    summary: 為助手切換不同的 AI 模型。需先在「整合 → AI 模型」中完成設定。
+  - slug: tools-and-permissions
+    title: 工具與權限
+    summary: 管理助手可使用的 MCP 工具和操作權限。

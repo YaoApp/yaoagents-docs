@@ -1,0 +1,16 @@
+slug: usage
+title: Using AI Assistants
+summary: How to work with AI assistants effectively.
+pages:
+  - slug: choosing-an-assistant
+    title: Choosing the Right Assistant
+    summary: 'Quick-reference table: "I want to do X → use this assistant." Each name links to the Built-in Agents detail page.'
+  - slug: conversation-tips
+    title: Conversation Tips
+    summary: How to describe requirements precisely, multi-turn conversations, context management, history. Supports multilingual conversations.
+  - slug: files-and-attachments
+    title: Files & Attachments
+    summary: Upload files, images, and documents for the assistant to process.
+  - slug: search
+    title: Search
+    summary: Web search, knowledge base search, and citation of search results.

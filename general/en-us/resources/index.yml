@@ -1,0 +1,22 @@
+slug: resources
+title: Resources
+summary: Glossary, FAQ, shortcuts, system requirements, changelog, community.
+pages:
+  - slug: glossary
+    title: Glossary
+    summary: "User-friendly explanations of key terms: AI Assistant, Robot, Agent, Pipeline, Hub, MCP, Tai Link, etc."
+  - slug: faq
+    title: FAQ
+    summary: Common questions about installation, connectivity, agent usage, etc.
+  - slug: shortcuts
+    title: Keyboard Shortcuts
+    summary: Complete keyboard shortcut reference.
+  - slug: system-requirements
+    title: System Requirements
+    summary: Minimum specs for each platform.
+  - slug: changelog
+    title: Changelog
+    summary: Version release notes and updates.
+  - slug: community
+    title: Community
+    summary: GitHub, Discord, feedback channels.

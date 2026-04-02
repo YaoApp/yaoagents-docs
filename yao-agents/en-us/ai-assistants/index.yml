@@ -1,0 +1,6 @@
+slug: ai-assistants
+title: AI Assistants
+summary: "Core feature: each assistant is a domain expert you can chat with."
+children:
+  - usage
+  - preferences

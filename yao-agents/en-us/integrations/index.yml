@@ -1,0 +1,19 @@
+slug: integrations
+title: Integrations
+summary: "Outbound: connect to IM platforms and APIs. Inbound: connect AI models and MCP tools."
+pages:
+  - slug: chat-platforms
+    title: Chat Platforms (IM)
+    summary: Bind assistants/robots to Slack, WeChat, DingTalk, Feishu, Telegram, Discord.
+  - slug: api-direct-connect
+    title: API Direct Connect
+    summary: OpenAI-compatible Chat Completion protocol. Call your agents from any OpenAI-compatible tool.
+  - slug: api-keys
+    title: API Keys
+    summary: Generate and manage API keys for authenticating external calls to Yao Agents.
+  - slug: ai-models
+    title: AI Models
+    summary: "Configure AI connectors: OpenAI, Claude, local models, etc."
+  - slug: mcp-tools
+    title: MCP Tools
+    summary: Connect external MCP servers to extend the tools available to assistants.

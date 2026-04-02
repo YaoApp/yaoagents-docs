@@ -1,0 +1,19 @@
+slug: getting-started
+title: はじめに
+summary: インストールから製品のコアを理解するまで、必読ガイド。
+pages:
+  - slug: what-is-yao-agents
+    title: Yao Agents とは
+    summary: 製品の位置づけ、コアバリュー、何ができるか。用語クイックリファレンス付き。
+  - slug: installation
+    title: インストール
+    summary: macOS / Windows / Linux でダウンロードしてインストール。
+  - slug: ai-assistants-intro
+    title: AI アシスタント：エキスパートに仕事を頼む
+    summary: コアコンセプト 1。各 AI アシスタントは専門家です。適切なアシスタントの選び方、要件の伝え方、最良の結果を得る方法。
+  - slug: mission-control-intro
+    title: ミッションコントロール：自動化のオーケストレーション
+    summary: コアコンセプト 2。あなたが指揮者です。専門家チームを編成し、ワークフローを定義して自動連携させます。
+  - slug: whats-next
+    title: 次のステップ
+    summary: さらなる機能の概要：Tai Link、統合、Agent Hub。各機能の一行紹介とリンク。

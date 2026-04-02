@@ -1,0 +1,10 @@
+slug: preferences
+title: Assistant Preferences
+summary: Customize how your assistants behave.
+pages:
+  - slug: model-selection
+    title: Model Selection
+    summary: Switch the AI model used by an assistant. Requires AI model configuration in Integrations first.
+  - slug: tools-and-permissions
+    title: Tools & Permissions
+    summary: Manage which MCP tools an assistant can use and its operation permissions.

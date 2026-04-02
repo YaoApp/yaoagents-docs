@@ -1,0 +1,16 @@
+slug: settings
+title: Settings
+summary: Personalize your Yao Agents experience.
+pages:
+  - slug: general-settings
+    title: General Settings
+    summary: Language, theme, startup behavior.
+  - slug: account
+    title: Account
+    summary: Login, profile, security.
+  - slug: data-management
+    title: Data Management
+    summary: Export conversations, backup data, clear cache.
+  - slug: advanced-settings
+    title: Advanced Settings
+    summary: Proxy, storage path, performance options.

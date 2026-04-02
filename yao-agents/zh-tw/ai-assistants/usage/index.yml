@@ -1,0 +1,16 @@
+slug: usage
+title: 使用 AI 助手
+summary: 如何高效地使用 AI 助手。
+pages:
+  - slug: choosing-an-assistant
+    title: 選擇合適的助手
+    summary: 速查表：「我想做 X → 找哪個助手」。每個助手名稱可跳轉到內建智能體詳情。
+  - slug: conversation-tips
+    title: 對話技巧
+    summary: 如何精確描述需求、多輪對話、上下文管理、歷史記錄。支援多語言對話。
+  - slug: files-and-attachments
+    title: 檔案與附件
+    summary: 上傳檔案/圖片/文件給助手處理。
+  - slug: search
+    title: 搜尋能力
+    summary: 連網搜尋、知識庫搜尋、搜尋結果引用。

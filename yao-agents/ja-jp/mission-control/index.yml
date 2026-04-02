@@ -1,0 +1,18 @@
+slug: mission-control
+title: ミッションコントロール
+summary: コア機能：専門家チームをオーケストレーションしてタスクを自動完了。
+pages:
+  - slug: what-is-mission-control
+    title: ミッションコントロールとは
+    summary: コアアイデア：あなたが指揮者。専門家を編成し、ワークフローを定義。
+  - slug: creating-a-robot
+    title: ロボットの作成
+    summary: 基本情報、アイデンティティ設定、プラットフォーム統合。
+  - slug: progress-and-results
+    title: 進捗と結果
+    summary: 実行状態、ログ、成果物、一時停止と再開。
+  - slug: scheduling-and-triggers
+    title: スケジュールとトリガー
+    summary: 定期実行、イベントトリガー、Webhook通知。
+children:
+  - execution-pipeline

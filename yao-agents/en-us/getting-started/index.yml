@@ -1,0 +1,19 @@
+slug: getting-started
+title: Getting Started
+summary: From installation to understanding the core product.
+pages:
+  - slug: what-is-yao-agents
+    title: What Is Yao Agents
+    summary: Product positioning, core value, and what you can do with it. Includes a glossary quick-reference card.
+  - slug: installation
+    title: Installation
+    summary: Download and install on macOS, Windows, or Linux — as easy as installing any app.
+  - slug: ai-assistants-intro
+    title: "AI Assistants: Find an Expert"
+    summary: Core concept 1. Each AI assistant is a domain expert. Learn how to pick the right one, describe your needs, and get the best results.
+  - slug: mission-control-intro
+    title: "Mission Control: Orchestrate Automation"
+    summary: Core concept 2. You are the commander — assemble a team of experts, define the workflow, and let them collaborate automatically.
+  - slug: whats-next
+    title: What's Next
+    summary: "Brief overview of advanced capabilities: Tai Link, Integrations, Agent Hub. One-sentence intro + links."

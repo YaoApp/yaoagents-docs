@@ -1,0 +1,22 @@
+slug: user-guide
+title: 使用指南
+summary: 裝置管理、遠端操作、檔案同步等。
+pages:
+  - slug: device-management
+    title: 裝置管理
+    summary: 查看裝置清單、線上狀態、命名。
+  - slug: remote-operations
+    title: 遠端操作
+    summary: 透過 Agent 操控遠端裝置。
+  - slug: file-sync
+    title: 檔案同步
+    summary: 裝置間檔案同步。
+  - slug: remote-desktop
+    title: 遠端桌面
+    summary: VNC 遠端查看與控制。
+  - slug: security-and-privacy
+    title: 安全與隱私
+    summary: 連線加密、授權管理、中斷裝置。
+  - slug: tunnel-mode
+    title: 隧道模式
+    summary: NAT 穿透，無需端口轉發。

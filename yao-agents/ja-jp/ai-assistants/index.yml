@@ -1,0 +1,6 @@
+slug: ai-assistants
+title: AI アシスタント
+summary: コア機能：各アシスタントはあなたと対話できる専門家です。
+children:
+  - usage
+  - preferences

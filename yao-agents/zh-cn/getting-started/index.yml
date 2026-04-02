@@ -1,0 +1,19 @@
+slug: getting-started
+title: 入门
+summary: 从安装到理解产品核心，用户必读。
+pages:
+  - slug: what-is-yao-agents
+    title: 什么是 Yao Agents
+    summary: 产品定位、核心价值、你能用它做什么。末尾附术语速查卡片。
+  - slug: installation
+    title: 安装
+    summary: 在 macOS / Windows / Linux 上下载安装，像装普通 App 一样简单。
+  - slug: ai-assistants-intro
+    title: AI 助手：找专家干活
+    summary: 核心概念 1。每个 AI 助手是一个领域专家。如何选择合适的助手、如何描述你的需求、如何获得最佳结果。
+  - slug: mission-control-intro
+    title: 任务控制中心：编排自动化
+    summary: 核心概念 2。你来编排——拉一组专家组成团队，定义流程，让它们自动协作完成。
+  - slug: whats-next
+    title: 更进一步
+    summary: 产品还有更多能力：Tai Link 连接多设备、集成接入 IM / API、Agent Hub 扩展新助手。

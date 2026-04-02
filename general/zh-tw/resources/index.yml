@@ -1,0 +1,22 @@
+slug: resources
+title: 資源
+summary: 術語表、常見問題、快捷鍵、系統需求、更新日誌、社群。
+pages:
+  - slug: glossary
+    title: 術語表
+    summary: 使用者友善的術語解釋。
+  - slug: faq
+    title: 常見問題
+    summary: 安裝、連線、Agent 使用等常見問題。
+  - slug: shortcuts
+    title: 快捷鍵
+    summary: 完整快捷鍵列表。
+  - slug: system-requirements
+    title: 系統需求
+    summary: 各平台最低配置。
+  - slug: changelog
+    title: 更新日誌
+    summary: 版本更新內容。
+  - slug: community
+    title: 社群
+    summary: GitHub、Discord、反饋管道。

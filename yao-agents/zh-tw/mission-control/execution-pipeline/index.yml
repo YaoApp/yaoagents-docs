@@ -1,0 +1,10 @@
+slug: execution-pipeline
+title: 執行流水線
+summary: 機器人按階段自動執行。每個階段有預設智能體，你也可以替換為自己的。
+pages:
+  - slug: pipeline-overview
+    title: 流水線概覽
+    summary: 想像一條流水線——每個工位有一個專人負責，產品從頭走到尾。
+  - slug: replacing-stage-agents
+    title: 替換階段智能體
+    summary: 在進階設定中，將任意階段的預設智能體替換為你安裝或建立的智能體。

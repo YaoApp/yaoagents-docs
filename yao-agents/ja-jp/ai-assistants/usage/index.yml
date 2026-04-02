@@ -1,0 +1,16 @@
+slug: usage
+title: AI アシスタントの使い方
+summary: AI アシスタントを効果的に活用する方法。
+pages:
+  - slug: choosing-an-assistant
+    title: 適切なアシスタントを選ぶ
+    summary: クイックリファレンス：「Xをしたい→このアシスタント」。各名前は組み込みエージェント詳細にリンク。
+  - slug: conversation-tips
+    title: 対話のコツ
+    summary: 要件の正確な伝え方、マルチターン会話、コンテキスト管理、履歴。多言語対応。
+  - slug: files-and-attachments
+    title: ファイルと添付
+    summary: ファイル、画像、ドキュメントをアップロードして処理。
+  - slug: search
+    title: 検索機能
+    summary: Web検索、ナレッジベース検索、検索結果の引用。

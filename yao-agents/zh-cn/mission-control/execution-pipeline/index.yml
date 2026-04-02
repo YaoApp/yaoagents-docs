@@ -1,0 +1,10 @@
+slug: execution-pipeline
+title: 执行流水线
+summary: 机器人按阶段自动执行。每个阶段有默认智能体，你也可以替换为自己的。
+pages:
+  - slug: pipeline-overview
+    title: 流水线概览
+    summary: 想象一条流水线——每个工位有一个专人负责，产品从头走到尾。
+  - slug: replacing-stage-agents
+    title: 替换阶段智能体
+    summary: 在高级配置中，将任意阶段的默认智能体替换为你安装或创建的智能体。

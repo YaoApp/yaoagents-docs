@@ -1,0 +1,22 @@
+slug: user-guide
+title: 使用指南
+summary: 设备管理、远程操作、文件同步等。
+pages:
+  - slug: device-management
+    title: 设备管理
+    summary: 查看设备列表、在线状态、命名。
+  - slug: remote-operations
+    title: 远程操作
+    summary: 通过 Agent 操控远程设备。
+  - slug: file-sync
+    title: 文件同步
+    summary: 设备间文件同步。
+  - slug: remote-desktop
+    title: 远程桌面
+    summary: VNC 远程查看与控制。
+  - slug: security-and-privacy
+    title: 安全与隐私
+    summary: 连接加密、授权管理、断开设备。
+  - slug: tunnel-mode
+    title: 隧道模式
+    summary: NAT 穿透，无需端口转发。

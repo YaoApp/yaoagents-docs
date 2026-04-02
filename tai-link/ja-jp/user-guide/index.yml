@@ -1,0 +1,22 @@
+slug: user-guide
+title: ユーザーガイド
+summary: デバイス管理、リモート操作、ファイル同期など。
+pages:
+  - slug: device-management
+    title: デバイス管理
+    summary: デバイス一覧、オンライン状態、命名。
+  - slug: remote-operations
+    title: リモート操作
+    summary: エージェント経由でリモートデバイスを操作。
+  - slug: file-sync
+    title: ファイル同期
+    summary: デバイス間のファイル同期。
+  - slug: remote-desktop
+    title: リモートデスクトップ
+    summary: VNCリモート表示と操作。
+  - slug: security-and-privacy
+    title: セキュリティとプライバシー
+    summary: 接続暗号化、認可管理、デバイス切断。
+  - slug: tunnel-mode
+    title: トンネルモード
+    summary: NATトラバーサル、ポートフォワーディング不要。

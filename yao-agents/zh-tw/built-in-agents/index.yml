@@ -1,0 +1,49 @@
+slug: built-in-agents
+title: 內建智能體
+summary: 所有隨產品預裝的智能體。每個有獨立詳情頁。
+pages:
+  - slug: general
+    title: General（通用助手）
+    summary: 日常問答、通用任務、新手首選。
+  - slug: keeper
+    title: Keeper（知識庫管理）
+    summary: 儲存/檢索內容、分類標籤、外部資料匯入。
+  - slug: pm
+    title: PM（專案經理）
+    summary: 專案管理、任務拆解與追蹤、團隊協作。
+  - slug: postman
+    title: Postman（郵件助手）
+    summary: 郵件撰寫、定時發送、郵件範本。
+  - slug: scout
+    title: Scout（市場調研）
+    summary: 資訊收集與分析、競品調研、報告生成。
+  - slug: website
+    title: Website（網站建構）
+    summary: 網站搭建、表單開發、頁面設計。
+  - slug: applet
+    title: Applet（小工具開發）
+    summary: 建立 Web 小工具、VNC 即時預覽。
+  - slug: web-scraper
+    title: Web Scraper（網頁採集）
+    summary: 網頁內容擷取、資料提取。
+  - slug: report-writer
+    title: Report Writer（報告撰寫）
+    summary: 機器人類型。在任務編排中自動生成分析報告。
+  - slug: robot-host
+    title: Robot Host（接單）
+    summary: 流水線智能體。人機互動中介。
+  - slug: robot-goals
+    title: Robot Goals（定目標）
+    summary: 流水線智能體。理解需求、拆解為可執行目標。
+  - slug: robot-inspiration
+    title: Robot Inspiration（找靈感）
+    summary: 流水線智能體。搜尋資訊、收集參考資料。
+  - slug: robot-tasks
+    title: Robot Tasks（幹活）
+    summary: 流水線智能體。按目標逐步執行具體工作。
+  - slug: robot-validation
+    title: Robot Validation（驗收）
+    summary: 流水線智能體。驗證產出品質、發現問題。
+  - slug: robot-delivery
+    title: Robot Delivery（交付）
+    summary: 流水線智能體。整理最終成果、交付輸出。
