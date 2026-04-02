@@ -4,4 +4,163 @@ slug: what-is-yao-agents
 
 # 什么是 Yao Agents
 
-产品定位、核心价值、你能用它做什么。末尾附术语速查卡片。
+Yao Agents 是一个**开源的 AI Agent 托管平台**，完全运行在你自己的设备上。你可以构建、部署和管理智能 AI 助手——无需依赖任何第三方云服务。
+
+> **核心理念：** 你的数据留在你的设备上。你的 AI，你做主。
+
+## 为什么选择 Yao Agents
+
+传统 AI 方案需要将数据发送到外部服务器。Yao Agents 采用了完全不同的方式：
+
+- **隐私优先** — 所有数据和模型推理都留在你的本地机器或私有服务器上
+- **无厂商锁定** — 自由切换 LLM 提供商（OpenAI、Anthropic、本地模型）
+- **企业级就绪** — 角色权限控制、审计日志、合规友好的架构
+- **开发者友好** — 通过 TypeScript Hooks、MCP 工具和强大的插件 API 扩展一切
+
+### 适合谁使用
+
+Yao Agents 为以下人群设计：
+
+1. **开发者** — 想要构建自定义 AI 工作流
+2. **团队** — 需要私有化部署的 AI 助手
+3. **企业** — 寻找 SaaS AI 平台的自托管替代方案
+4. **爱好者** — 喜欢折腾本地 AI 的极客
+
+## 核心概念
+
+### Agent（智能体）
+
+**Agent** 是具有特定角色、性格和工具集的 AI 助手。每个 Agent 包含：
+
+- 定义其行为的系统提示词
+- 访问一个或多个 LLM 后端
+- 可选的 MCP 工具用于外部集成
+- Hooks（`Create` / `Next`）用于自定义处理逻辑
+
+### Mission（任务）
+
+**Mission** 是结构化的任务流水线。你可以：
+
+1. 定义目标和子任务
+2. 为每个步骤分配 Agent
+3. 设置触发器（手动、定时、事件驱动）
+4. 实时监控执行进度
+
+### Hub（中心）
+
+**Hub** 是发现和安装社区构建的 Agent 的市场。可以把它理解为 AI 助手的"应用商店"。
+
+## 架构概览
+
+| 组件             | 角色                     | 技术栈           |
+| ---------------- | ------------------------ | ---------------- |
+| Yao Engine       | 核心运行时和 API 服务器  | Go               |
+| SUI Framework    | 服务端渲染 UI 框架       | HTML + JS + CSS  |
+| Agent Runtime    | LLM 编排与工具调用       | TypeScript       |
+| Tai Link         | P2P 设备通信             | Go + WebRTC      |
+| CUI              | 对话式 UI 组件           | TypeScript       |
+| Mission Control  | 任务流水线引擎           | Go + TypeScript  |
+
+## 快速示例
+
+这是一个最小的 Agent 配置：
+
+```json
+{
+  "name": "General",
+  "description": "通用助手",
+  "model": "gpt-4o",
+  "system_prompt": "你是一个有用的助手。",
+  "tools": ["web_search", "file_reader"],
+  "temperature": 0.7
+}
+```
+
+你也可以用 TypeScript 定义 Hooks：
+
+```typescript
+function Create(context: Context): Assistant {
+  const assistant = context.newAssistant();
+  assistant.setModel("gpt-4o");
+  assistant.setSystemPrompt("你是一个有用的助手。");
+  return assistant;
+}
+
+function Next(context: Context, input: Message): Response {
+  const result = context.chat(input);
+  if (result.toolCalls.length > 0) {
+    return context.executeTool(result.toolCalls[0]);
+  }
+  return result;
+}
+```
+
+一个简单的 YAML 任务定义：
+
+```yaml
+name: 每日报告
+trigger:
+  type: schedule
+  cron: "0 9 * * *"
+steps:
+  - agent: data-collector
+    action: fetch_metrics
+  - agent: report-writer
+    action: generate_report
+    input: $prev.output
+  - agent: messenger
+    action: send_email
+    input: $prev.output
+```
+
+### 运行 Shell 命令
+
+Agent 在获得权限后也可以执行 Shell 命令：
+
+```bash
+yao agent run general --input "总结今天的日志"
+yao mission start daily-report --env production
+```
+
+## 功能对比
+
+| 特性             | Yao Agents       | 云端 AI SaaS     | 其他开源方案       |
+| ---------------- | ---------------- | ---------------- | ------------------ |
+| 数据隐私         | 完全自主         | 依赖厂商         | 各有不同           |
+| 部署方式         | 自托管           | 仅云端           | 自托管             |
+| 多 Agent 流水线  | 内置支持         | 有限             | 需手动搭建         |
+| UI 框架          | SUI（内置）      | 仅仪表盘         | 无 / 自行构建      |
+| 模型灵活性       | 任意 LLM         | 厂商锁定         | 任意 LLM           |
+| 企业级功能       | RBAC、审计、SSO  | 支持             | 社区插件           |
+| 社区市场         | Hub              | 厂商商店         | 无                 |
+
+## 安装速览
+
+安装 Yao Agents 就像下载一个普通 App 一样简单：
+
+1. 从[官网](https://yaoagents.com/download)下载安装包
+2. 运行安装程序 — 支持 **macOS**、**Windows** 和 **Linux**
+3. 打开浏览器访问 `http://localhost:5096`
+
+> 详细步骤请参阅[安装指南](/docs/zh-cn/getting-started/installation)。
+
+## 下一步
+
+- [安装](/docs/zh-cn/getting-started/installation) — 下载并配置 Yao Agents
+- [AI 助手：找专家干活](/docs/zh-cn/getting-started/find-an-expert) — 发现内置 Agent
+- [任务控制中心](/docs/zh-cn/getting-started/mission-control) — 自动化多步骤工作流
+
+---
+
+## 术语表
+
+| 术语             | 定义                                                              |
+| ---------------- | ----------------------------------------------------------------- |
+| **Agent**        | 具有特定角色、工具和行为的 AI 助手                                |
+| **Mission**      | 结构化的多步骤任务流水线                                          |
+| **Hook**         | 自定义 Agent 行为的 TypeScript 函数                               |
+| **MCP Tool**     | 模型上下文协议工具，用于外部集成                                  |
+| **Hub**          | Agent 和插件的社区市场                                            |
+| **SUI**          | 服务端 UI 框架，用于构建 Web 界面                                 |
+| **Tai Link**     | P2P 通信层，连接设备                                              |
+| **CUI**          | 对话式用户界面 — 聊天组件                                         |

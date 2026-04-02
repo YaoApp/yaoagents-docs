@@ -4,4 +4,163 @@ slug: what-is-yao-agents
 
 # Yao Agents とは
 
-製品の位置づけ、コアバリュー、何ができるか。用語クイックリファレンス付き。
+Yao Agents は**オープンソースの AI Agent ホスティングプラットフォーム**です。お使いのデバイス上で完全に動作し、インテリジェントな AI アシスタントの構築・デプロイ・管理が可能です。サードパーティのクラウドサービスに依存する必要はありません。
+
+> **コアコンセプト：** データはあなたのデバイスに。あなたの AI は、あなたのルールで。
+
+## なぜ Yao Agents なのか
+
+従来の AI ソリューションはデータを外部サーバーに送信する必要がありました。Yao Agents は全く異なるアプローチを取ります：
+
+- **プライバシーファースト** — すべてのデータとモデル推論はローカルマシンまたはプライベートサーバー上に保持
+- **ベンダーロックインなし** — LLM プロバイダー（OpenAI、Anthropic、ローカルモデル）を自由に切り替え
+- **エンタープライズ対応** — ロールベースのアクセス制御、監査ログ、コンプライアンス対応アーキテクチャ
+- **開発者フレンドリー** — TypeScript Hooks、MCP ツール、強力なプラグイン API で拡張
+
+### 対象ユーザー
+
+Yao Agents は以下のユーザー向けに設計されています：
+
+1. **開発者** — カスタム AI ワークフローを構築したい方
+2. **チーム** — プライベートなオンプレミス AI アシスタントが必要な方
+3. **企業** — SaaS AI プラットフォームのセルフホスト代替を探している方
+4. **ホビイスト** — ローカル AI のセットアップを楽しみたい方
+
+## コアコンセプト
+
+### Agent（エージェント）
+
+**Agent** は特定の役割、パーソナリティ、ツールセットを持つ AI アシスタントです。各 Agent には：
+
+- 動作を定義するシステムプロンプト
+- 1つ以上の LLM バックエンドへのアクセス
+- 外部統合用のオプション MCP ツール
+- カスタム処理ロジック用の Hooks（`Create` / `Next`）
+
+### Mission（ミッション）
+
+**Mission** は構造化されたタスクパイプラインです。以下が可能です：
+
+1. 目標とサブタスクの定義
+2. 各ステップへの Agent の割り当て
+3. トリガーの設定（手動、スケジュール、イベント駆動）
+4. リアルタイムでの進捗モニタリング
+
+### Hub（ハブ）
+
+**Hub** はコミュニティが構築した Agent を発見・インストールできるマーケットプレイスです。AI アシスタントの「App Store」のようなものです。
+
+## アーキテクチャ概要
+
+| コンポーネント    | 役割                          | テクノロジー      |
+| ---------------- | ----------------------------- | ---------------- |
+| Yao Engine       | コアランタイム & API サーバー  | Go               |
+| SUI Framework    | サーバーサイドレンダリング UI   | HTML + JS + CSS  |
+| Agent Runtime    | LLM オーケストレーション       | TypeScript       |
+| Tai Link         | P2P デバイス通信               | Go + WebRTC      |
+| CUI              | 会話型 UI コンポーネント       | TypeScript       |
+| Mission Control  | タスクパイプラインエンジン     | Go + TypeScript  |
+
+## クイックサンプル
+
+最小限の Agent 設定：
+
+```json
+{
+  "name": "General",
+  "description": "汎用アシスタント",
+  "model": "gpt-4o",
+  "system_prompt": "あなたは便利なアシスタントです。",
+  "tools": ["web_search", "file_reader"],
+  "temperature": 0.7
+}
+```
+
+TypeScript で Hooks を定義：
+
+```typescript
+function Create(context: Context): Assistant {
+  const assistant = context.newAssistant();
+  assistant.setModel("gpt-4o");
+  assistant.setSystemPrompt("あなたは便利なアシスタントです。");
+  return assistant;
+}
+
+function Next(context: Context, input: Message): Response {
+  const result = context.chat(input);
+  if (result.toolCalls.length > 0) {
+    return context.executeTool(result.toolCalls[0]);
+  }
+  return result;
+}
+```
+
+シンプルな YAML ミッション定義：
+
+```yaml
+name: デイリーレポート
+trigger:
+  type: schedule
+  cron: "0 9 * * *"
+steps:
+  - agent: data-collector
+    action: fetch_metrics
+  - agent: report-writer
+    action: generate_report
+    input: $prev.output
+  - agent: messenger
+    action: send_email
+    input: $prev.output
+```
+
+### シェルコマンドの実行
+
+Agent は権限が付与されるとシェルコマンドも実行できます：
+
+```bash
+yao agent run general --input "今日のログをまとめて"
+yao mission start daily-report --env production
+```
+
+## 機能比較
+
+| 機能              | Yao Agents       | クラウド AI SaaS  | その他 OSS         |
+| ---------------- | ---------------- | ---------------- | ------------------ |
+| データプライバシー | 完全管理         | ベンダー依存      | 様々               |
+| デプロイ          | セルフホスト      | クラウドのみ      | セルフホスト        |
+| マルチ Agent     | 内蔵             | 限定的           | 手動構築           |
+| UI フレームワーク | SUI（内蔵）      | ダッシュボードのみ | なし / BYO        |
+| モデル柔軟性      | 任意の LLM       | プロバイダー固定  | 任意の LLM         |
+| エンタープライズ  | RBAC、監査、SSO  | あり             | コミュニティ       |
+| マーケットプレイス | Hub              | ベンダーストア    | なし               |
+
+## インストール概要
+
+Yao Agents のインストールはアプリをダウンロードするのと同じくらい簡単です：
+
+1. [公式サイト](https://yaoagents.com/download)からインストーラーをダウンロード
+2. インストーラーを実行 — **macOS**、**Windows**、**Linux** に対応
+3. ブラウザで `http://localhost:5096` を開く
+
+> 詳細な手順は[インストールガイド](/docs/ja-jp/getting-started/installation)をご覧ください。
+
+## 次のステップ
+
+- [インストール](/docs/ja-jp/getting-started/installation) — Yao Agents のダウンロードとセットアップ
+- [AI アシスタント：エキスパートを探す](/docs/ja-jp/getting-started/find-an-expert) — 内蔵 Agent の紹介
+- [ミッションコントロール](/docs/ja-jp/getting-started/mission-control) — マルチステップワークフローの自動化
+
+---
+
+## 用語集
+
+| 用語             | 定義                                                              |
+| ---------------- | ----------------------------------------------------------------- |
+| **Agent**        | 特定の役割、ツール、動作を持つ AI アシスタント                    |
+| **Mission**      | 構造化されたマルチステップタスクパイプライン                      |
+| **Hook**         | Agent の動作をカスタマイズする TypeScript 関数                    |
+| **MCP Tool**     | 外部統合用のモデルコンテキストプロトコルツール                    |
+| **Hub**          | Agent とプラグインのコミュニティマーケットプレイス                |
+| **SUI**          | Web インターフェース構築用のサーバーサイド UI フレームワーク      |
+| **Tai Link**     | デバイスを接続する P2P 通信レイヤー                              |
+| **CUI**          | 会話型ユーザーインターフェース — チャットコンポーネント            |

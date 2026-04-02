@@ -4,4 +4,163 @@ slug: what-is-yao-agents
 
 # What Is Yao Agents
 
-Product positioning, core value, and what you can do with it. Includes a glossary quick-reference card.
+Yao Agents is an **open-source AI Agent hosting platform** that runs entirely on your own devices. It lets you build, deploy, and manage intelligent AI assistants — without relying on any third-party cloud service.
+
+> **Core philosophy:** Your data stays on your device. Your AI, your rules.
+
+## Why Yao Agents
+
+Traditional AI solutions require you to send data to external servers. Yao Agents takes a different approach:
+
+- **Privacy first** — all data and model inference stay on your local machine or private server
+- **No vendor lock-in** — switch between LLM providers (OpenAI, Anthropic, local models) freely
+- **Enterprise ready** — role-based access control, audit logs, and compliance-friendly architecture
+- **Developer friendly** — extend everything with TypeScript hooks, MCP tools, and a powerful Plugin API
+
+### Who Is It For
+
+Yao Agents is designed for:
+
+1. **Developers** who want to build custom AI workflows
+2. **Teams** that need private, on-premise AI assistants
+3. **Enterprises** looking for a self-hosted alternative to SaaS AI platforms
+4. **Hobbyists** who enjoy tinkering with local AI setups
+
+## Core Concepts
+
+### Agents
+
+An **Agent** is an AI assistant with a specific role, personality, and set of tools. Each agent has:
+
+- A system prompt defining its behavior
+- Access to one or more LLM backends
+- Optional MCP tools for external integrations
+- Hooks (`Create` / `Next`) for custom processing logic
+
+### Missions
+
+A **Mission** is a structured task pipeline. You can:
+
+1. Define goals and sub-tasks
+2. Assign agents to each step
+3. Set triggers (manual, scheduled, or event-driven)
+4. Monitor progress in real time
+
+### The Hub
+
+The **Hub** is a marketplace for discovering and installing community-built agents. Think of it as an "App Store" for AI assistants.
+
+## Architecture Overview
+
+| Component        | Role                             | Technology      |
+| ---------------- | -------------------------------- | --------------- |
+| Yao Engine       | Core runtime & API server        | Go              |
+| SUI Framework    | Server-side rendered UI          | HTML + JS + CSS |
+| Agent Runtime    | LLM orchestration & tool calling | TypeScript      |
+| Tai Link         | P2P device communication         | Go + WebRTC     |
+| CUI              | Conversational UI component      | TypeScript      |
+| Mission Control  | Task pipeline engine             | Go + TypeScript |
+
+## Quick Example
+
+Here is a minimal agent configuration:
+
+```json
+{
+  "name": "General",
+  "description": "A general-purpose assistant",
+  "model": "gpt-4o",
+  "system_prompt": "You are a helpful assistant.",
+  "tools": ["web_search", "file_reader"],
+  "temperature": 0.7
+}
+```
+
+You can also define hooks in TypeScript:
+
+```typescript
+function Create(context: Context): Assistant {
+  const assistant = context.newAssistant();
+  assistant.setModel("gpt-4o");
+  assistant.setSystemPrompt("You are a helpful assistant.");
+  return assistant;
+}
+
+function Next(context: Context, input: Message): Response {
+  const result = context.chat(input);
+  if (result.toolCalls.length > 0) {
+    return context.executeTool(result.toolCalls[0]);
+  }
+  return result;
+}
+```
+
+A simple YAML mission definition:
+
+```yaml
+name: Daily Report
+trigger:
+  type: schedule
+  cron: "0 9 * * *"
+steps:
+  - agent: data-collector
+    action: fetch_metrics
+  - agent: report-writer
+    action: generate_report
+    input: $prev.output
+  - agent: messenger
+    action: send_email
+    input: $prev.output
+```
+
+### Running a Shell Command
+
+Agents can also execute shell commands when granted permission:
+
+```bash
+yao agent run general --input "Summarize today's logs"
+yao mission start daily-report --env production
+```
+
+## Feature Comparison
+
+| Feature               | Yao Agents       | Cloud AI SaaS    | Open-source Alt   |
+| --------------------- | ---------------- | ---------------- | ----------------- |
+| Data privacy          | Full control     | Vendor-dependent | Varies            |
+| Deployment            | Self-hosted      | Cloud only       | Self-hosted       |
+| Multi-agent pipeline  | Built-in         | Limited          | Manual setup      |
+| UI framework          | SUI (included)   | Dashboard only   | None / BYO        |
+| Model flexibility     | Any LLM          | Provider-locked  | Any LLM           |
+| Enterprise features   | RBAC, audit, SSO | Yes              | Community plugins |
+| Community marketplace | Hub              | Vendor store     | None              |
+
+## Installation at a Glance
+
+Installing Yao Agents is as simple as downloading an app:
+
+1. Download the installer from the [official website](https://yaoagents.com/download)
+2. Run the installer — it works on **macOS**, **Windows**, and **Linux**
+3. Open the dashboard at `http://localhost:5096`
+
+> For detailed steps, see the [Installation](/docs/en-us/getting-started/installation) guide.
+
+## What's Next
+
+- [Installation](/docs/en-us/getting-started/installation) — download and set up Yao Agents
+- [AI Assistants: Find an Expert](/docs/en-us/getting-started/find-an-expert) — discover built-in agents
+- [Mission Control](/docs/en-us/getting-started/mission-control) — automate multi-step workflows
+
+---
+
+## Glossary
+
+| Term            | Definition                                                        |
+| --------------- | ----------------------------------------------------------------- |
+| **Agent**       | An AI assistant with a defined role, tools, and behavior          |
+| **Mission**     | A structured, multi-step task pipeline                            |
+| **Hook**        | A TypeScript function that customizes agent behavior              |
+| **MCP Tool**    | A Model Context Protocol tool for external integrations           |
+| **Hub**         | Community marketplace for agents and plugins                      |
+| **SUI**         | Server-side UI framework used for the web interface               |
+| **Tai Link**    | P2P communication layer connecting devices                        |
+| **CUI**         | Conversational User Interface — the chat component                |
