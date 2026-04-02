@@ -1,0 +1,31 @@
+slug: tai-link
+title: Tai Link
+summary: Device connectivity guide — connect your devices and let agents work across them.
+pages:
+  - slug: what-is-tai-link
+    title: What Is Tai Link
+    summary: "Product positioning: let agents control your other devices."
+  - slug: installation
+    title: Installation
+    summary: Install the Tai Link client on each platform.
+  - slug: connect-first-device
+    title: Connect Your First Device
+    summary: Scan QR code or enter pairing code to complete the connection.
+  - slug: device-management
+    title: Device Management
+    summary: View device list, online status, naming.
+  - slug: remote-operations
+    title: Remote Operations
+    summary: Control remote devices through agents.
+  - slug: file-sync
+    title: File Sync
+    summary: Sync files between devices.
+  - slug: remote-desktop
+    title: Remote Desktop
+    summary: VNC remote viewing and control.
+  - slug: security-and-privacy
+    title: Security & Privacy
+    summary: Connection encryption, authorization management, disconnect devices.
+  - slug: tunnel-mode
+    title: Tunnel Mode
+    summary: NAT traversal, no port forwarding required.

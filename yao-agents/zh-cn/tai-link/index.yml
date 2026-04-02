@@ -1,0 +1,31 @@
+slug: tai-link
+title: Tai Link
+summary: 设备连接指南 — 连接你的设备，让 Agent 跨设备工作。
+pages:
+  - slug: what-is-tai-link
+    title: 什么是 Tai Link
+    summary: 产品定位：让 Agent 控制你的其他设备。
+  - slug: installation
+    title: 安装
+    summary: 在各平台安装 Tai Link 客户端。
+  - slug: connect-first-device
+    title: 连接第一台设备
+    summary: 扫码/输入配对码，完成连接。
+  - slug: device-management
+    title: 设备管理
+    summary: 查看设备列表、在线状态、命名。
+  - slug: remote-operations
+    title: 远程操作
+    summary: 通过 Agent 操控远程设备。
+  - slug: file-sync
+    title: 文件同步
+    summary: 设备间文件同步。
+  - slug: remote-desktop
+    title: 远程桌面
+    summary: VNC 远程查看与控制。
+  - slug: security-and-privacy
+    title: 安全与隐私
+    summary: 连接加密、授权管理、断开设备。
+  - slug: tunnel-mode
+    title: 隧道模式
+    summary: NAT 穿透，无需端口转发。

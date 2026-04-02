@@ -1,0 +1,22 @@
+slug: resources
+title: 资源
+summary: 术语表、常见问题、快捷键、系统要求、更新日志、社区。
+pages:
+  - slug: glossary
+    title: 术语表
+    summary: 用户友好的术语解释：AI 助手、机器人、智能体、流水线、Hub、MCP、Tai Link 等。
+  - slug: faq
+    title: 常见问题
+    summary: 安装问题、连接问题、Agent 使用问题等。
+  - slug: shortcuts
+    title: 快捷键
+    summary: 完整快捷键列表。
+  - slug: system-requirements
+    title: 系统要求
+    summary: 各平台最低配置。
+  - slug: changelog
+    title: 更新日志
+    summary: 版本更新内容。
+  - slug: community
+    title: 社区
+    summary: GitHub、Discord、反馈渠道。
