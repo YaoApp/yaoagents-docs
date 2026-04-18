@@ -1,7 +1,65 @@
 ---
-slug: website
+slug: web-builder
 ---
 
-# Website（网站构建）
+# Web Builder
 
-网站搭建、表单开发、页面设计。
+构建网站和 Web 应用——从想法到上线部署。描述你的需求，Web Builder 编写代码，在实时桌面上预览，并将应用推送到你的服务器，自动配置 HTTPS。
+
+## 擅长做什么
+
+- **网站开发** — 企业官网、产品落地页、作品集、活动页面
+- **表单应用** — 注册表单、会员注册、调查问卷，带服务端验证和防机器人机制
+- **实时预览** — 开发期间在 VNC 桌面浏览器中运行应用，上线前就能看到效果
+- **视觉测试** — 自动截图检查多个视口尺寸（桌面端 + 移动端）的响应式布局
+- **SSH 部署** — 将构建产物推送到服务器，启动 Docker 容器，自动配置 NGINX 和 Let's Encrypt HTTPS
+- **项目管理** — 每个项目独立目录，统一索引，状态跟踪（开发中 / 已上线 / 已归档）
+
+## 工作原理
+
+Web Builder 使用注入了 SSH 凭据的完整桌面沙箱。技术栈为 Next.js App Router + Tailwind CSS + TypeScript。表单使用 Zod 进行服务端验证，SQLite 存储数据，SVG Captcha 防止机器人。
+
+开发期间，Web Builder 启动本地开发服务器并在 VNC 浏览器中打开。自动截图验证布局，如有问题则迭代修改。
+
+准备部署时，执行构建，通过 SSH 将输出推送到服务器，自动配置 NGINX + Docker + Let's Encrypt。无需手动服务器设置。
+
+沙箱为 `longrunning`——空闲时暂停，回来时恢复。所有项目目录和配置永久存储在 Workspace 中。
+
+## 怎么写好 Prompt
+
+**描述网站的目的和结构。** "一个包含首页、关于我们、服务和联系页面的企业官网"足以让 Web Builder 立即搭建框架。
+
+**说明所有表单及其要求。** "一个带手机号验证、验证码和确认邮件的活动报名表单"涵盖了关键约束。
+
+**准备好时提供部署信息。** 部署需要域名、服务器 IP 和 SSH 凭据。你可以随时提供——Web Builder 会在需要时询问。
+
+**示例：**
+
+> 构建一个企业官网：首页、关于我们、服务和联系表单。使用海军蓝和白色的简洁现代设计。
+
+> 为我们的年度会议创建一个活动报名表单，收集姓名、邮箱、公司和职位。包含验证码并发送确认邮件。
+
+> 构建一个带手机验证和支付占位符的会员注册页面。
+
+> 将当前项目部署到我的服务器 43.162.98.169，域名 mysite.com，我来粘贴 SSH 密钥。
+
+> 显示当前项目状态——哪些已上线，哪些还在开发中。
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| 技术栈 | Next.js App Router + Tailwind CSS + TypeScript |
+| 表单 | Zod 验证、SQLite 存储、SVG Captcha |
+| 预览 | VNC 桌面 + 自动响应式截图 |
+| 部署 | SSH → Docker → NGINX → Let's Encrypt HTTPS |
+| 项目管理 | 独立项目目录、统一索引、状态跟踪 |
+| 沙箱 | `claude-desktop-ssh` 镜像，4 GB 内存，2 vCPU，VNC + SSH 已启用 |
+| 生命周期 | 长期运行——空闲 1 小时后暂停，每次最长 24 小时 |
+| Workspace | 永久存储——所有项目文件和配置无限期保留 |
+
+## 下一步
+
+- [Applet Workshop](/docs/zh-cn/built-in-agents/applet) — 不需要部署的轻量级工具使用 Applet Workshop
+- [通用助手](/docs/zh-cn/built-in-agents/general) — Web 项目之外的自定义后端逻辑或脚本
+- [AI 专家：找到合适的那个](/docs/zh-cn/getting-started/ai-experts-intro) — 查看所有内置专家

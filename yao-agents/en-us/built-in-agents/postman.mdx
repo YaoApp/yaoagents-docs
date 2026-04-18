@@ -4,4 +4,57 @@ slug: postman
 
 # Postman
 
-Email assistant. Draft emails, scheduled sending, email templates.
+Your email assistant. Fetch new messages from any IMAP account, read and summarize them, draft replies, and send — all from a single conversation. Handles plain text and HTML emails with attachments, reply threading, and automatic archiving.
+
+## What it's good at
+
+- **Receiving emails** — connects via IMAP and fetches new messages incrementally; catches up with `--all` or filters with `--since`
+- **Parsing attachments** — reads PDFs, Excel files, and documents attached to incoming emails
+- **Drafting emails** — writes plain text or HTML emails from your instructions, including signature and proper layout for HTML
+- **Sending emails** — sends via SMTP with SSL/STARTTLS; supports To, Cc, Bcc, and file attachments
+- **Reply threading** — replies with quoted original content and correct `In-Reply-To` / `References` headers for proper thread linking
+- **Account management** — save multiple email accounts by nickname; switch between them without re-entering credentials
+
+## How it works
+
+Postman stores email accounts in its workspace and references them by nickname. When fetching, it connects to the IMAP server, reads from the last-seen UID cursor so it only pulls new messages, and saves each email as a folder with the raw EML, a Markdown body, a plain-text summary, and any attachments. Daily index files (`INDEX.md`) are created per date for fast scanning.
+
+Drafts are saved under `emails/Draft/` before sending. Sent copies go to `emails/Sent/` automatically.
+
+The sandbox runs `oneshot` per conversation. All email archives and account configs live in the workspace and persist between sessions.
+
+## How to write a good prompt
+
+**Name the account.** Always tell Postman which account to use — either by nickname or by describing it: "fetch new emails from my work account (robot1)."
+
+**For drafts, give the full context.** Specify recipient, subject intent, and tone. For HTML emails, just say "HTML format" — Postman handles the layout.
+
+**For replies, include or reference the original.** Paste the original email text or tell Postman which message in the archive to reply to.
+
+**Examples:**
+
+> Fetch new emails from my work account (robot1) and summarize what came in today.
+
+> Add a new email account: SMTP server smtp.example.com, IMAP server imap.example.com, user max@example.com. Save it as "work".
+
+> Write an HTML invitation email to max@iqka.com from robot1. Subject: Q2 Review — June 5, 2 PM. Include the agenda: 1) Quarterly results, 2) Roadmap, 3) Open floor.
+
+> Reply to the last email from alice@example.com in my inbox — tell her the file is ready and I'll send it Monday.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Protocols | IMAP (receive), SMTP with SSL/STARTTLS (send) |
+| Email formats | Plain text and HTML with signature |
+| Attachments | Receive: PDF, Excel, documents. Send: any file from workspace |
+| Threading | `In-Reply-To` / `References` headers for proper thread linking |
+| Archive structure | `emails/{Folder}/{Date}/{Seq_Slug}/` — EML + body + summary + attachments |
+| Sandbox | `claude` image (no VNC), 2 GB RAM, `oneshot` lifecycle |
+| Workspace | Permanently stored — email archive and account configs persist indefinitely |
+
+## What's next
+
+- [Project Manager](/docs/en-us/built-in-agents/pm) — have Postman fetch emails; Project Manager processes them into project records
+- [Mission Control](/docs/en-us/getting-started/mission-control-intro) — automate daily email fetching as a scheduled Robot
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

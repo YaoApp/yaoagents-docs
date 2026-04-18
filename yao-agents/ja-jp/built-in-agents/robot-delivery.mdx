@@ -2,6 +2,50 @@
 slug: robot-delivery
 ---
 
-# Robot Delivery（納品）
+# Robot Delivery Agent
 
-パイプラインエージェント。最終成果物の整理・出力。
+Delivery Agent はすべての完了したタスクの結果を集約し、構造化された出力にフォーマットして、設定されたチャンネル——メール、Webhook、ファイル、または通知——に送信します。
+
+これはパイプラインステージ Agent です。AI エキスパートのチャットリストには表示されません。Robot の詳細設定で Delivery ステージの Agent を置き換える際に、**実行パイプライン**ドロップダウンで見つかります。[Report Writer](/docs/ja-jp/built-in-agents/report-writer) はこのステージに割り当てられるカスタム Agent の例です。
+
+## できること
+
+- すべてのパイプラインタスクの完全な実行結果を受け取る
+- 出力をフォーマット：サマリー、詳細な Markdown 本文、ファイル添付
+- Robot の設定に基づいて1つ以上のチャンネルに配信する
+
+## 配信チャンネル
+
+| チャンネル | 説明 |
+|-----------|------|
+| `email` | Robot の受信者にフォーマット済みメールを送信 |
+| `webhook` | 外部 URL に結果ペイロードを POST |
+| `file` | 出力をストレージに保存 |
+| `notify` | ユーザーにアプリ内通知を送信 |
+
+チャンネルは Robot の**詳細**タブで設定します：Webhook/プロセスは**開発者オプション**、受信者は**アイデンティティ**タブで設定します。
+
+## ファイル参照
+
+結果には2つのソースからのファイルが含まれる場合があります——両方とも配信出力にそのまま保持されます：
+
+| フォーマット | ソース |
+|------------|--------|
+| `__yao.attachment://<fileID>` | 添付ファイルシステムに保存されたアップロードファイル |
+| `workspace://<workspace-id>/path` | サンドボックス Workspace 内で生成されたファイル |
+
+## 機能一覧
+
+| 機能 | 詳細 |
+|------|------|
+| Agent タイプ | `robot-delivery`——パイプラインステージ Agent |
+| 置き換え可能 | 可——Delivery ステージのドロップダウンで選択可能 |
+| 入力 | 集約されたタスク結果、配信ターゲット設定（チャンネル、受信者、フォーマット） |
+| 出力 | フォーマット済みサマリー + 本文 + 添付、設定されたチャンネルに配信 |
+| サンドボックス | コンテナなし |
+
+## 次のステップ
+
+- [Report Writer](/docs/ja-jp/built-in-agents/report-writer) — 洗練された Markdown レポートを生成するカスタム配信 Agent
+- [ステージ Agent の置き換え](/docs/ja-jp/mission-control/execution-pipeline/replacing-stage-agents) — この Agent をカスタム Agent に交換する方法
+- [パイプライン概要](/docs/ja-jp/mission-control/execution-pipeline/pipeline-overview) — すべてのステージがどのように接続されるか

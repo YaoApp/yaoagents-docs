@@ -4,4 +4,58 @@ slug: transformer
 
 # Transformer
 
-Data structuring expert. Convert images, PDFs, JSON, and CSV into structured formats via Vision LLM.
+Converts unstructured or semi-structured data into clean, structured formats. Scanned invoices, image-based tables, text-heavy PDFs, CSV dumps, JSON blobs — Transformer reads them and outputs JSON, Markdown tables, or formatted Excel files.
+
+## What it's good at
+
+- **OCR via Vision LLM** — extract text from scanned images and image-based PDFs, including tables, invoices, and forms
+- **PDF text extraction** — pull structured text from text-based PDFs using Poppler; faster and more accurate than Vision OCR for digital documents
+- **CSV → JSON** — convert flat CSV exports into structured JSON arrays
+- **JSON → Markdown tables** — format JSON data as readable Markdown tables
+- **JSON → Excel** — export structured data to Excel with auto-formatting (column widths, headers, alignment)
+- **Custom scripts** — write and run a bespoke transformation pipeline for complex or unusual formats
+- **Batch processing** — handle multiple files in a single run
+
+## How it works
+
+Transformer uses a desktop-lite sandbox with Vision LLM credentials injected for OCR tasks. For image inputs, it calls the Vision model to extract text. For digital PDFs, it uses Poppler directly. For format conversions, it writes and runs Python scripts in the container.
+
+Output files are saved to the workspace. The lifecycle is `oneshot` — a fresh container per conversation — but all output files persist in the workspace across sessions.
+
+## How to write a good prompt
+
+**Attach the file and name the output format.** "Extract this scanned invoice to JSON" or "convert this CSV to a formatted Excel file" is enough to get started.
+
+**Describe the structure you want.** For JSON output, specify the field names if you have a schema in mind. For Excel, mention if you want specific column ordering or formatting.
+
+**For batches, be explicit.** "Process all three files and combine them into one JSON array" is clearer than assuming it will batch automatically.
+
+**Examples:**
+
+> Extract all line items from these three scanned invoices into a JSON array with fields: date, vendor, item, quantity, unit_price, total.
+
+> Convert this CSV export to a formatted Excel spreadsheet. Auto-size columns and freeze the header row.
+
+> OCR this image and output the table as a Markdown table.
+
+> This PDF is text-based — extract all the financial data and format it as JSON.
+
+> Take this messy JSON and convert it to a clean Markdown table I can paste into a report.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| OCR | Vision LLM for images and scanned PDFs |
+| PDF text extraction | Poppler for digital (non-scanned) PDFs |
+| Conversions | CSV → JSON, JSON → Markdown, JSON → Excel |
+| Custom pipelines | Python scripts for complex or non-standard formats |
+| Batch | Multiple files in a single run |
+| Sandbox | `claude-desktop-lite` image, 4 GB RAM, `oneshot` lifecycle |
+| Workspace | Permanently stored — output files persist across conversations indefinitely |
+
+## What's next
+
+- [Insights](/docs/en-us/built-in-agents/insights) — clean data with Transformer first, then analyze it in Insights
+- [Report Writer](/docs/en-us/built-in-agents/report-writer) — use Transformer to structure raw material, then write the report
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

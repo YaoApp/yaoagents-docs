@@ -2,6 +2,49 @@
 slug: robot-goals
 ---
 
-# Robot Goals（定目标）
+# Robot Goals Agent
 
-流水线智能体。理解需求、拆解为可执行目标。
+Goals Agent 接收 Inspiration 报告（或手动触发输入），并将其转化为一组清晰的战略目标——每个目标都有明确的目的、具体的交付物，以及 Validation 阶段可以检验的成功标准。
+
+这是一个流水线阶段 Agent。不出现在 AI 专家聊天列表中。在 Robot 高级设置中替换 Goals 阶段 Agent 时，你可以在**执行流水线**下拉菜单中找到它。
+
+## 它做什么
+
+- 接收来自 Inspiration 阶段（定时触发）、用户触发（手动任务）或外部事件触发的输入
+- 将高层意图转化为战略目标——不是任务，不是指令
+- 每个目标说明：要实现什么、会产生什么、如何衡量成功
+- 将目标映射到可用资源，让 Tasks Agent 知道能使用什么
+
+目标刻意保持高层级。下一阶段的 Tasks Agent 负责将其分解为可执行步骤。
+
+## 目标 vs. 任务——区别
+
+| | 目标（本阶段） | 任务（下一阶段） |
+|---|---|---|
+| 层级 | 战略层——要实现什么 | 战术层——如何实现 |
+| 示例 | "生成包含趋势分析的月度销售报告" | "调用 data-analyst 查询一月份销售数据" |
+| 执行者 | 未指定 | 具体的 Agent 或 MCP 工具 |
+
+## 触发类型
+
+Goals Agent 处理三种输入场景：
+
+- **定时触发** — 接收上一阶段的 Inspiration 报告
+- **人工触发** — 接收来自 Robot Host 的确认目标描述（手动任务指派）
+- **事件触发** — 接收来自外部系统的结构化事件数据（如 `lead.created`、`order.placed`）
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| Agent 类型 | `robot-goals`——流水线阶段 Agent |
+| 可替换 | 是——可在 Goals 阶段下拉菜单中选择 |
+| 输入 | Inspiration 报告、人工任务描述或事件数据 |
+| 输出 | 带交付物和成功标准的优先级战略目标列表 |
+| 沙箱 | 无容器 |
+
+## 下一步
+
+- [替换阶段 Agent](/docs/zh-cn/mission-control/execution-pipeline/replacing-stage-agents) — 如何将此 Agent 替换为自定义 Agent
+- [流水线概览](/docs/zh-cn/mission-control/execution-pipeline/pipeline-overview) — 所有阶段如何连接
+- [Robot Tasks Agent](/docs/zh-cn/built-in-agents/robot-tasks) — 分解这些目标的下一阶段

@@ -2,6 +2,45 @@
 slug: robot-host
 ---
 
-# Robot Host
+# Robot Host Agent
 
-Pipeline agent — Intake stage. Human-machine intermediary: collects input, reports status, confirms decisions.
+The conversation layer between a user and a Robot. When you click **Assign Task**, Robot Host is the agent that responds — it listens to what you describe, asks clarifying questions if needed, summarizes the goal back to you, and waits for your confirmation before the pipeline starts.
+
+Robot Host is a pipeline agent. You'll find it in the **Execution Pipeline** dropdown in a Robot's Advanced settings — select it for the Host stage to enable manual task triggering on that Robot.
+
+## What it does
+
+- Receives your task description when you click **Assign Task**
+- Asks clarifying questions if the intent is ambiguous
+- Summarizes the confirmed goal in plain language
+- Waits for your explicit confirmation ("ok", "start", "yes", "go", etc.)
+- Calls `confirm_task` to hand off the confirmed goals to the pipeline
+
+Robot Host deliberately does **not** discuss how the task will be executed — that's the pipeline's job. It focuses entirely on making sure the goal is correct before anything runs.
+
+## How it behaves
+
+The conversation follows a fixed pattern:
+
+1. You describe what you want
+2. Robot Host asks clarifying questions if needed
+3. Robot Host presents a goal summary
+4. You confirm
+5. Robot Host calls `confirm_task` and the pipeline starts
+
+The goals passed to the pipeline are a faithful copy of the summary you confirmed — Robot Host will not rephrase, add, or omit details after you've agreed.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Agent type | `robot-host` — pipeline agent, selectable in Execution Pipeline dropdowns |
+| Stage | Host Agent — enables manual task triggering |
+| Trigger | Activated when user clicks **Assign Task** |
+| Output | Confirmed goal description, handed to the pipeline via `confirm_task` |
+| Sandbox | No container |
+
+## What's next
+
+- [Scheduling and Triggers](/docs/en-us/mission-control/scheduling-and-triggers) — how manual triggers work
+- [Pipeline Overview](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — what happens after Robot Host confirms the goal

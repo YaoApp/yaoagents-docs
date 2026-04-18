@@ -2,6 +2,59 @@
 slug: postman
 ---
 
-# Postman（郵件助手）
+# Postman
 
-郵件撰寫、定時發送、郵件範本。
+你的郵件助手。從任意 IMAP 帳號取得新郵件、閱讀並摘要、起草回覆、發送——全程在一個對話中完成。支援純文字和 HTML 郵件、附件、回覆串和自動歸檔。
+
+## 擅長做什麼
+
+- **收取郵件** — 透過 IMAP 增量取得新郵件；用 `--all` 補全歷史，用 `--since` 按日期篩選
+- **解析附件** — 讀取郵件附帶的 PDF、Excel 檔案和文件
+- **起草郵件** — 按你的指示撰寫純文字或 HTML 郵件，包含簽名和正確的 HTML 排版
+- **發送郵件** — 透過 SMTP（SSL/STARTTLS）發送，支援收件人、副本、密件副本和檔案附件
+- **回覆串** — 引用原始郵件內容並加入正確的 `In-Reply-To` / `References` 標頭，確保串完整
+- **帳號管理** — 按暱稱儲存多個郵件帳號，切換時無需重新輸入憑證
+
+## 工作原理
+
+Postman 將郵件帳號儲存在 Workspace 中，透過暱稱引用。取得郵件時，連接 IMAP 伺服器，從上次讀取的 UID 游標開始只拉取新郵件，並將每封郵件儲存為一個資料夾，包含原始 EML、Markdown 正文、純文字摘要和附件。每天產生 `INDEX.md` 索引檔案，方便快速掃描。
+
+草稿儲存在 `emails/Draft/` 下，發送後自動複製到 `emails/Sent/`。
+
+沙箱每次對話執行 `oneshot`。所有郵件歸檔和帳號設定儲存在 Workspace 中，跨工作階段持久保留。
+
+## 怎麼寫好 Prompt
+
+**指定帳號。** 每次都要告訴 Postman 使用哪個帳號——透過暱稱或描述：「從我的工作帳號（robot1）取得新郵件。」
+
+**起草郵件時，提供完整背景。** 說明收件人、主題意圖和語氣。HTML 郵件只需說「HTML 格式」——Postman 負責排版。
+
+**回覆時，提供或引用原始郵件。** 貼上原始郵件內容，或告訴 Postman 要回覆歸檔中的哪封郵件。
+
+**範例：**
+
+> 從我的工作帳號（robot1）取得新郵件並摘要今天收到的內容。
+
+> 新增郵件帳號：SMTP 伺服器 smtp.example.com，IMAP 伺服器 imap.example.com，使用者名稱 max@example.com，儲存為「work」。
+
+> 用 robot1 向 max@iqka.com 寄送一封 HTML 邀請郵件。主旨：Q2 回顧——6 月 5 日下午 2 點。包含議程：1）季度業績，2）路線圖，3）開放討論。
+
+> 回覆收件匣中來自 alice@example.com 的最後一封郵件——告訴她檔案已準備好，我週一寄送。
+
+## 能力速覽
+
+| 能力 | 說明 |
+|------|------|
+| 協定 | IMAP（接收），SMTP（SSL/STARTTLS 發送） |
+| 郵件格式 | 純文字和帶簽名的 HTML |
+| 附件 | 接收：PDF、Excel、文件；發送：Workspace 中的任意檔案 |
+| 回覆串 | `In-Reply-To` / `References` 標頭確保串正確連結 |
+| 歸檔結構 | `emails/{資料夾}/{日期}/{序號_標題}/` — EML + 正文 + 摘要 + 附件 |
+| 沙箱 | `claude` 映像（無 VNC），2 GB 記憶體，`oneshot` 生命週期 |
+| Workspace | 永久儲存——郵件歸檔和帳號設定無限期保留 |
+
+## 下一步
+
+- [Project Manager](/docs/zh-tw/built-in-agents/pm) — 用 Postman 收取郵件，Project Manager 將其整理為專案記錄
+- [Mission Control](/docs/zh-tw/getting-started/mission-control-intro) — 將每日郵件取得設為定時 Robot 自動執行
+- [AI 專家：找到合適的那個](/docs/zh-tw/getting-started/ai-experts-intro) — 查看所有內建專家

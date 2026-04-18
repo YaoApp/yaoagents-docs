@@ -2,6 +2,57 @@
 slug: insights
 ---
 
-# Insights（数据分析）
+# Insights
 
-连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。
+带实时桌面的数据分析师。连接数据库或上传表格，Insights 自动查询、设计指标，并构建交互式 ECharts 仪表盘——通过 VNC 实时渲染可见。
+
+## 擅长做什么
+
+- **数据库分析** — 连接 MySQL 或 PostgreSQL（只读），对实时数据执行查询
+- **表格分析** — 直接读取 Excel（.xlsx）和 CSV 文件，无需手动导入
+- **指标设计** — Insights 思考该测量什么，而不仅仅是如何展示
+- **交互式仪表盘** — 输出的是 ECharts + HTML 仪表盘，不是静态图片；图表支持点击和筛选
+- **自我验证** — 在内置浏览器中预览仪表盘并截图确认渲染正确后再交付
+
+## 工作原理
+
+Insights 运行在配备 4 GB 内存、2 vCPU 和完整 VNC 桌面环境的沙箱中。提供数据源后，它会先连接、读取并探索数据结构，再询问你想分析什么。
+
+它编写 Python 或 JavaScript 分析代码，生成 ECharts 配置，构建 HTML 页面，并启动本地 HTTP 服务器，让你在 VNC 浏览器中实时预览结果。布局确认无误后，将最终仪表盘文件交付到 Workspace。
+
+沙箱使用 `longrunning` 生命周期——空闲时暂停，回来时恢复。Workspace 永久存储；仪表盘、数据文件和脚本下次打开对话时依然在那里。
+
+## 怎么写好 Prompt
+
+**先说数据源。** 告诉 Insights 数据在哪里：数据库连接、文件附件，或两者都有。越具体，分析速度越快。
+
+**描述问题，而不是图表类型。** "哪些产品在驱动营收增长"比"做一个柱状图"效果更好。Insights 会自己选择合适的可视化方式。
+
+**说明受众（如果重要）。** "这是给每周高管汇报用的"或"团队只需要一个快速概览"会影响细节程度和布局风格。
+
+**示例：**
+
+> 连接 localhost:3306 的 MySQL，数据库 `sales`，分析 2025 年 Q1–Q2 各地区的营收趋势。
+
+> 分析这个 CSV 文件。我想了解客户流失情况——哪些细分群体流失最多。
+
+> 用这份 Excel 导出文件构建 KPI 仪表盘：总订单数、平均订单价值、退货率和客户终身价值。
+
+> 连接我的 PostgreSQL 数据库，找出按利润率排名最差的 10 个 SKU。
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| 数据源 | MySQL、PostgreSQL（只读）、Excel（.xlsx）、CSV |
+| 输出 | ECharts + HTML 交互式仪表盘，交付到 Workspace |
+| 预览 | VNC 内置浏览器；自动截图验证 |
+| 沙箱 | `claude-desktop` 镜像，4 GB 内存，2 vCPU，VNC 已启用 |
+| 生命周期 | 长期运行——空闲 1 小时后暂停，每次最长 24 小时 |
+| Workspace | 永久存储——仪表盘和数据文件无限期保留 |
+
+## 下一步
+
+- [Transformer](/docs/zh-cn/built-in-agents/transformer) — 先用 Transformer 清洗和整理原始数据，再交给 Insights
+- [Report Writer](/docs/zh-cn/built-in-agents/report-writer) — 将 Insights 的分析结果转化为正式书面报告
+- [AI 专家：找到合适的那个](/docs/zh-cn/getting-started/ai-experts-intro) — 查看所有内置专家

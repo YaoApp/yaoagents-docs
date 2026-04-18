@@ -2,6 +2,49 @@
 slug: robot-goals
 ---
 
-# Robot Goals
+# Robot Goals Agent
 
-Pipeline agent — Goal-setting stage. Understands requirements and breaks them into actionable goals.
+Goals Agent takes the Inspiration report (or a manual trigger input) and converts it into a set of clear, strategic goals — each with a defined objective, a concrete deliverable, and success criteria the Validation stage can check against.
+
+This is a pipeline stage agent. It does not appear in the AI Expert chat list. You'll find it in the **Execution Pipeline** dropdown when replacing the Goals stage agent in a Robot's Advanced settings.
+
+## What it does
+
+- Receives input from the Inspiration stage (clock trigger), a user trigger (manual task), or an external event trigger
+- Converts high-level intent into strategic goals — not tasks, not instructions
+- Each goal specifies: what to achieve, what will be produced, how success is measured
+- Maps goals to available resources so the Tasks Agent knows what it can use
+
+Goals are deliberately high-level. The Tasks Agent in the next stage handles breaking them into executable steps.
+
+## Goal vs. Task — the distinction
+
+| | Goal (this stage) | Task (next stage) |
+|---|---|---|
+| Level | Strategic — what to achieve | Tactical — how to achieve it |
+| Example | "Produce monthly sales report with trend analysis" | "Call data-analyst to query January sales data" |
+| Executor | Not specified | Specific Agent or MCP tool |
+
+## Trigger types
+
+Goals Agent handles three input scenarios:
+
+- **Clock trigger** — receives an Inspiration report from the previous stage
+- **Human trigger** — receives a confirmed goal description from Robot Host (manual task assignment)
+- **Event trigger** — receives a structured event payload (e.g. `lead.created`, `order.placed`) from an external system
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Agent type | `robot-goals` — pipeline stage agent |
+| Replaceable | Yes — available in the Goals stage dropdown |
+| Input | Inspiration report, human task description, or event payload |
+| Output | Prioritized list of strategic goals with deliverables and success criteria |
+| Sandbox | No container |
+
+## What's next
+
+- [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents) — how to swap this agent for a custom one
+- [Pipeline Overview](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — how all stages connect
+- [Robot Tasks Agent](/docs/en-us/built-in-agents/robot-tasks) — the next stage that decomposes these goals

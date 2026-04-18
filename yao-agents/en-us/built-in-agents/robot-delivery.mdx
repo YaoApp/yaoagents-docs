@@ -2,6 +2,50 @@
 slug: robot-delivery
 ---
 
-# Robot Delivery
+# Robot Delivery Agent
 
-Pipeline agent — Delivery stage. Assembles final deliverables and formats output.
+Delivery Agent takes the accumulated results from all completed tasks, formats them into a structured output, and sends them to the configured channels — email, webhook, file, or notification.
+
+This is a pipeline stage agent. It does not appear in the AI Expert chat list. You'll find it in the **Execution Pipeline** dropdown when replacing the Delivery stage agent in a Robot's Advanced settings. [Report Writer](/docs/en-us/built-in-agents/report-writer) is an example of a custom agent you can assign to this stage.
+
+## What it does
+
+- Receives the full execution results from all pipeline tasks
+- Formats the output: a summary, a detailed Markdown body, and any file attachments
+- Delivers to one or more channels based on the Robot's configuration
+
+## Delivery channels
+
+| Channel | Description |
+|---------|-------------|
+| `email` | Sends a formatted email to the Robot's recipients |
+| `webhook` | POSTs the result payload to an external URL |
+| `file` | Saves the output to storage |
+| `notify` | Sends an in-app notification to the user |
+
+Channels are configured in the Robot's **Advanced** tab under **Developer Options** (webhook/process) and the **Identity** tab (recipients).
+
+## File references
+
+Results may include files from two sources — both are preserved as-is in the delivery output:
+
+| Format | Source |
+|--------|--------|
+| `__yao.attachment://<fileID>` | Uploaded files stored in the attachment system |
+| `workspace://<workspace-id>/path` | Files generated inside a sandbox workspace |
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Agent type | `robot-delivery` — pipeline stage agent |
+| Replaceable | Yes — available in the Delivery stage dropdown |
+| Input | Aggregated task results, delivery target config (channels, recipients, format) |
+| Output | Formatted summary + body + attachments, delivered to configured channels |
+| Sandbox | No container |
+
+## What's next
+
+- [Report Writer](/docs/en-us/built-in-agents/report-writer) — a custom delivery agent that produces polished Markdown reports
+- [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents) — how to swap this agent for a custom one
+- [Pipeline Overview](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — how all stages connect

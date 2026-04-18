@@ -2,6 +2,41 @@
 slug: robot-inspiration
 ---
 
-# Robot Inspiration
+# Robot Inspiration Agent
 
-Pipeline agent — Inspiration stage. Searches for relevant information and reference materials.
+Before any goals or tasks are set, Inspiration Agent reads the current context — time, the Robot's defined duties, and available resources — and produces a focused analysis report that guides everything downstream.
+
+This is a pipeline stage agent. It does not appear in the AI Expert chat list. You'll find it in the **Execution Pipeline** dropdown when replacing the Inspiration stage agent in a Robot's Advanced settings.
+
+## What it does
+
+- Reads the current date/time and identifies time-sensitive signals (deadlines, month-end, recurring patterns)
+- Reviews the Robot's role, duties, and rules to stay within scope
+- Surveys available resources: assigned AI Experts, MCP tools, knowledge bases, and data models
+- Produces a structured Markdown report with a situation summary, prioritized insights, and recommended actions mapped to specific resources
+
+The Inspiration report is the input that the Goals Agent (next stage) uses to decide what to work on.
+
+## Output format
+
+The agent always returns a Markdown report with three sections:
+
+- **Summary** — 2–3 sentences on the current situation and primary focus
+- **Key Insights** — prioritized observations tagged High / Medium / Low
+- **Recommended Actions** — concrete next steps, each with a reason and the specific Agent or MCP tool to use
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Agent type | `robot-inspiration` — pipeline stage agent |
+| Replaceable | Yes — available in the Inspiration stage dropdown |
+| Input | Time context, Robot identity (role/duties/rules), available resources |
+| Output | Structured Markdown inspiration report |
+| Sandbox | No container |
+
+## What's next
+
+- [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents) — how to swap this agent for a custom one
+- [Pipeline Overview](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — how all stages connect
+- [Robot Goals Agent](/docs/en-us/built-in-agents/robot-goals) — the next stage that receives this report

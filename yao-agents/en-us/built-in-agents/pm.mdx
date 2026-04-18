@@ -1,7 +1,61 @@
 ---
-slug: pm
+slug: project-manager
 ---
 
-# PM
+# Project Manager
 
-Project manager. Task breakdown, progress tracking, team coordination.
+Keeps your projects organized without manual upkeep. Scan emails, paste instructions, or drop in files — Project Manager reads them and updates the right project records, logs, and timelines automatically.
+
+## What it's good at
+
+- **Email triage** — scans your email folder, finds project-related messages, and routes them to the right project automatically
+- **Creating projects** — builds a full folder structure (README, stakeholder list, timeline, logs) from a single instruction
+- **Updating projects** — appends log entries, refreshes status, updates milestones, and copies in new attachments without you lifting a finger
+- **Stakeholder management** — tracks who's involved in each project and keeps their contact and role info current
+- **Summary reports** — daily digests, weekly summaries, per-project deep dives, cross-project status boards, and stakeholder briefings
+- **Queries** — ask a question about any project and get a structured Markdown report back
+
+## How it works
+
+Project Manager uses a workspace-based project store. Each project lives in `projects/YYYY/project-name/` with a `README.md`, `people.md`, `timeline.md`, `logs/`, and `attachments/` directory. Log entries are organized by date inside `logs/`.
+
+When you ask it to scan emails, it reads the `INDEX.md` in your email folders to triage efficiently, deep-reads relevant messages, and then automatically creates or updates the matching projects. You don't need to trigger create and update separately — the scan chains them.
+
+The sandbox runs `oneshot` — a fresh container for each conversation, so there's no background state. All project records live in the workspace and persist between sessions.
+
+## How to write a good prompt
+
+**For email scanning, point it at a folder.** Tell Project Manager which date folder to scan: "scan today's emails." It handles the triage.
+
+**For manual updates, be specific.** "Log a call with Alice from Acme on the website project. She confirmed the May 31 deadline." gives it enough to write a proper log entry.
+
+**For reports, name what you want.** "Give me this week's report" or "summarize the Acme project" are enough — it knows the formats.
+
+**Examples:**
+
+> Scan today's emails and classify them into projects.
+
+> Create a new project: Acme Website Redesign. Owner: Alice. Deadline: May 31. Budget: $50k.
+
+> Log a meeting with Bob (ACME) on the Acme Redesign project. We reviewed the homepage mockup and approved the color scheme. Next step: Alice sends final assets by Friday.
+
+> Generate this week's project summary report.
+
+> What's the current status of all active projects?
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Email scanning | IMAP-based triage via INDEX.md, auto-routes to projects |
+| Project structure | README, people, timeline, logs, attachments — all auto-generated |
+| Report types | Daily digest, weekly, project overview, dashboard, stakeholder brief |
+| Query | Natural language questions → structured Markdown reports |
+| Sandbox | `claude` image (no VNC), 2 GB RAM, `oneshot` lifecycle |
+| Workspace | Permanently stored — all project records persist indefinitely |
+
+## What's next
+
+- [Postman](/docs/en-us/built-in-agents/postman) — use Postman to receive and send emails; set up your email account there first
+- [Report Writer](/docs/en-us/built-in-agents/report-writer) — for polished standalone reports beyond the built-in formats
+- [Mission Control](/docs/en-us/getting-started/mission-control-intro) — automate recurring project scans as a scheduled Robot

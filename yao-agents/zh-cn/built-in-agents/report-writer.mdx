@@ -2,6 +2,40 @@
 slug: report-writer
 ---
 
-# Report Writer（报告撰写）
+# Report Writer
 
-机器人类型。在任务编排中自动生成分析报告、数据整理、格式化输出。
+将原始内容和需求转化为结构完整、格式专业的 Markdown 报告。Report Writer 是流水线 Agent——不出现在 AI 专家聊天列表中。在创建或编辑 Robot 时，你可以在专家分配列表和执行流水线的阶段替换下拉菜单中找到它。
+
+## 它做什么
+
+- 接收上游流水线阶段的输出（数据、发现、笔记、分析结果）
+- 撰写完整、结构清晰的 Markdown 报告
+- 自动整理标题层级、要点、表格和引用块
+- 支持多种报告格式：竞品分析、技术评估、周报、会议纪要等
+- 根据报告类型按需添加执行摘要、结论和建议章节
+
+## 如何在 Robot 中使用
+
+创建或编辑 Robot 时，进入 **设置 → 高级 → 执行流水线**，每个阶段都有一个 Agent 下拉菜单。将 **Delivery** 阶段设置为 **Report Writer**。
+
+此后每次 Robot 运行时，Report Writer 接收流水线的累计输出，生成格式化的 Markdown 报告，并投递给 Robot 的接收人。
+
+> **提示：** 报告质量取决于 Robot 的任务描述。在 Robot 的任务描述或身份提示中直接说明报告类型（"周报"、"竞品分析"）以及所需章节（执行摘要、建议）。
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| 角色 | 流水线 Agent——出现在 Robot 阶段选择中 |
+| 典型阶段 | Delivery |
+| 输入 | 上游流水线阶段的输出 |
+| 报告类型 | 研究报告、竞品分析、技术评估、会议纪要、周报/月报 |
+| 输出 | 结构化 Markdown 报告，转发给 Robot 接收人 |
+| 沙箱 | 无容器——轻量级 Agent |
+
+## 下一步
+
+- [替换阶段 Agent](/docs/zh-cn/mission-control/execution-pipeline/replacing-stage-agents) — 如何将 Report Writer 分配到 Robot 阶段
+- [创建 Robot](/docs/zh-cn/mission-control/creating-a-robot) — 配置使用它的 Robot
+- [Insights](/docs/zh-cn/built-in-agents/insights) — 在流水线中先用 Insights 分析数据，再由 Report Writer 格式化
+- [Market Scout](/docs/zh-cn/built-in-agents/scout) — Scout 收集情报，Report Writer 将其转化为简报

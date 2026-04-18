@@ -1,7 +1,61 @@
 ---
-slug: applet
+slug: applet-workshop
 ---
 
-# Applet
+# Applet Workshop
 
-Mini-app builder. Create web widgets with live VNC preview.
+Builds and runs mini-tools — visual utility apps you describe in plain language. Describe what you need, and Applet Workshop writes the code, starts it up, and shows it running on a live desktop in front of you.
+
+## What it's good at
+
+- **Rapid prototyping** — goes from description to running app in one conversation
+- **Visual utility tools** — calculators, converters, data dashboards, form apps, timers, file processors
+- **Live preview** — renders the app in a built-in VNC desktop so you see it as soon as it's ready
+- **AI-powered tools** — add chat, translation, summarization, or text generation to any tool via a built-in LLM API
+- **Web-connected tools** — fetch external content (prices, data, pages) via a built-in scraping service
+- **Iteration** — adjust the layout, logic, or features on the fly while it's running
+
+## How it works
+
+Applet Workshop uses a full desktop sandbox with VNC. It writes Node.js + HTML/CSS/JS apps, starts a local server, and opens the app in the desktop browser so you can see it immediately. If something looks off, you can say so and it adjusts — no restart required.
+
+The sandbox is `longrunning` — it pauses when idle and resumes when you return. The workspace is permanently stored; your built apps, scripts, and assets are there next session.
+
+## How to write a good prompt
+
+**Describe the tool, not the implementation.** "A unit converter for length, weight, and temperature with a clean UI" is perfect. You don't need to specify the stack.
+
+**Include any specific requirements upfront.** If you want AI features, mention them: "a translation tool that calls the LLM API." If you want live data, say so: "fetch current USD/CNY rates."
+
+**After it's running, iterate conversationally.** "Make the buttons bigger" or "add a dark mode toggle" are valid follow-up prompts while the app is live.
+
+**Examples:**
+
+> Build a JSON formatter and validator tool with syntax highlighting and error messages.
+
+> Make a unit converter supporting length, weight, and temperature — clean, minimal UI.
+
+> Create a Pomodoro timer with task tracking and a summary at the end of each session.
+
+> Build a simple AI chat tool I can embed — it calls the LLM API and displays the conversation.
+
+> Make a currency converter that fetches live exchange rates from the web.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Stack | Node.js + HTML/CSS/JS |
+| Preview | Live VNC desktop — app runs immediately after build |
+| AI integration | Built-in LLM API for chat, generation, translation, summarization |
+| Web access | Built-in scraping service for external content |
+| Tool types | Converters, calculators, dashboards, forms, file processors, AI chat apps |
+| Sandbox | `claude-desktop` image, 4 GB RAM, 2 vCPUs, VNC enabled |
+| Lifecycle | Long-running — pauses on idle (1 h), max 24 h per session |
+| Workspace | Permanently stored — all built apps and assets persist indefinitely |
+
+## What's next
+
+- [Web Builder](/docs/en-us/built-in-agents/website) — for full websites and production-ready web apps with deployment
+- [General Assistant](/docs/en-us/built-in-agents/general) — for open-ended coding and scripting that isn't a standalone tool
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

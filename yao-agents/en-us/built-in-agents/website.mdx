@@ -1,7 +1,65 @@
 ---
-slug: website
+slug: web-builder
 ---
 
-# Website
+# Web Builder
 
-Website builder. Site construction, form development, page design.
+Builds websites and web apps — from idea to live deployment. Describe what you need and Web Builder writes the code, previews it on a live desktop, and pushes it to your server with HTTPS configured automatically.
+
+## What it's good at
+
+- **Website development** — corporate sites, product landing pages, portfolios, event pages
+- **Form-based apps** — registration forms, membership sign-ups, surveys, with server-side validation and bot prevention
+- **Live preview** — runs the app in a VNC desktop browser during development; you see it before it ships
+- **Visual testing** — takes screenshots at multiple viewport sizes (desktop + mobile) to check responsive layout
+- **SSH deployment** — pushes build artifacts to your server, starts a Docker container, and sets up NGINX with Let's Encrypt HTTPS
+- **Project management** — one directory per project, a unified index, and status tracking (developing / live / archived)
+
+## How it works
+
+Web Builder uses a full desktop sandbox with SSH credentials injected. The stack is Next.js App Router + Tailwind CSS + TypeScript. Forms use Zod for server-side validation, SQLite for data storage, and SVG Captcha for bot prevention.
+
+During development, Web Builder starts a local dev server and opens it in the VNC browser. It takes automated screenshots to verify layout, then iterates if anything looks off.
+
+Once you're ready to deploy, it runs the build, pushes the output to your server via SSH, and configures NGINX + Docker + Let's Encrypt automatically. No manual server setup needed.
+
+The sandbox is `longrunning` — it pauses when idle and resumes when you return. All project directories and configs are permanently stored in the workspace.
+
+## How to write a good prompt
+
+**Describe the site's purpose and structure.** "A company website with home, about us, services, and contact pages" gives Web Builder enough to scaffold immediately.
+
+**Specify any forms and their requirements.** "An event registration form with phone number validation, CAPTCHA, and a confirmation email" covers the key constraints.
+
+**Provide deployment details when ready.** Domain, server IP, and SSH credentials are needed to deploy. You can supply these at any point — Web Builder will ask if it needs them.
+
+**Examples:**
+
+> Build a company website: home page, about us, services, and contact form. Use a clean, modern design with navy and white.
+
+> Create an event registration form for our annual conference. Collect name, email, company, and role. Include CAPTCHA and send a confirmation email.
+
+> Build a membership sign-up page with phone verification and a payment placeholder.
+
+> Deploy the current project to my server at 43.162.98.169. Domain: mysite.com. I'll paste the SSH key.
+
+> Show me the current project status — what's live and what's still in development.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Stack | Next.js App Router + Tailwind CSS + TypeScript |
+| Forms | Zod validation, SQLite storage, SVG Captcha |
+| Preview | VNC desktop + automated responsive screenshots |
+| Deployment | SSH → Docker → NGINX → Let's Encrypt HTTPS |
+| Project management | Per-project directories, unified index, status tracking |
+| Sandbox | `claude-desktop-ssh` image, 4 GB RAM, 2 vCPUs, VNC + SSH enabled |
+| Lifecycle | Long-running — pauses on idle (1 h), max 24 h per session |
+| Workspace | Permanently stored — all project files and configs persist indefinitely |
+
+## What's next
+
+- [Applet Workshop](/docs/en-us/built-in-agents/applet) — for lightweight tools that don't need deployment
+- [General Assistant](/docs/en-us/built-in-agents/general) — for custom backend logic or scripts outside a web project
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

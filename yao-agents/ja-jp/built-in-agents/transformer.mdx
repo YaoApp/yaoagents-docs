@@ -2,6 +2,60 @@
 slug: transformer
 ---
 
-# Transformer（データ変換）
+# Transformer
 
-画像・PDF・JSON・CSVを構造化形式に変換、Vision LLM OCR対応。
+非構造化または半構造化データをクリーンな構造化フォーマットに変換します。スキャンした請求書、画像ベースの表、テキスト密度の高い PDF、CSV ダンプ、JSON データ——Transformer が読み取って JSON、Markdown テーブル、またはフォーマット済み Excel ファイルとして出力します。
+
+## 得意なこと
+
+- **Vision LLM OCR** — スキャン画像と画像ベース PDF からテキストを抽出（表、請求書、フォームを含む）
+- **PDF テキスト抽出** — Poppler でテキストベース PDF から構造化テキストを抽出、デジタル文書では Vision OCR より高速・高精度
+- **CSV → JSON** — フラットな CSV エクスポートを構造化 JSON 配列に変換
+- **JSON → Markdown テーブル** — JSON データを読みやすい Markdown テーブルにフォーマット
+- **JSON → Excel** — 構造化データを自動フォーマット付き Excel ファイルに書き出し（列幅、ヘッダー、配置）
+- **カスタムスクリプト** — 複雑または非標準フォーマット向けのカスタム変換パイプラインを作成・実行
+- **バッチ処理** — 1 回の実行で複数ファイルを処理
+
+## 仕組み
+
+Transformer は OCR タスク用に Vision LLM 認証情報が注入された desktop-lite サンドボックスを使用します。画像入力は Vision モデルを呼び出してテキストを抽出し、デジタル PDF は Poppler を直接使用し、フォーマット変換はコンテナ内で Python スクリプトを作成・実行します。
+
+出力ファイルは Workspace に保存されます。ライフサイクルは `oneshot`——会話ごとに新しいコンテナ——ですが、すべての出力ファイルはセッションをまたいで Workspace に永続します。
+
+## 良いプロンプトの書き方
+
+**ファイルを添付して出力フォーマットを指定する。** 「このスキャン請求書を JSON に抽出して」や「この CSV をフォーマット済み Excel ファイルに変換して」で十分です。
+
+**欲しい構造を説明する。** JSON 出力の場合、スキーマがあればフィールド名を指定してください。Excel の場合、特定の列順やフォーマットが必要なら事前に伝えてください。
+
+**バッチ処理は明示する。** 「3 つのファイルをすべて処理して一つの JSON 配列にまとめて」の方が、自動バッチ処理を前提とするより明確です。
+
+**例：**
+
+> この3枚のスキャン請求書からすべての明細項目を抽出して、date、vendor、item、quantity、unit_price、total フィールドを持つ JSON 配列として出力して。
+
+> この CSV エクスポートをフォーマット済み Excel スプレッドシートに変換して。列を自動サイズ調整してヘッダー行を固定して。
+
+> この画像を OCR して表を Markdown テーブルとして出力して。
+
+> この PDF はテキストベース——すべての財務データを抽出して JSON としてフォーマットして。
+
+> この乱雑な JSON をレポートに貼れるきれいな Markdown テーブルに変換して。
+
+## 機能一覧
+
+| 機能 | 詳細 |
+|------|------|
+| OCR | 画像とスキャン PDF に Vision LLM を使用 |
+| PDF テキスト抽出 | デジタル（非スキャン）PDF に Poppler を使用 |
+| 変換 | CSV → JSON、JSON → Markdown、JSON → Excel |
+| カスタムパイプライン | 複雑または非標準フォーマット向けの Python スクリプト |
+| バッチ処理 | 1 回の実行で複数ファイル |
+| サンドボックス | `claude-desktop-lite` イメージ、4 GB RAM、`oneshot` ライフサイクル |
+| Workspace | 永続保存——出力ファイルは無期限に保持 |
+
+## 次のステップ
+
+- [Insights](/docs/ja-jp/built-in-agents/insights) — まず Transformer でデータを整理してから Insights で分析する
+- [Report Writer](/docs/ja-jp/built-in-agents/report-writer) — まず Transformer で生データを構造化してからレポートを作成する
+- [AI エキスパート：最適なものを見つける](/docs/ja-jp/getting-started/ai-experts-intro) — すべての組み込みエキスパートを確認する

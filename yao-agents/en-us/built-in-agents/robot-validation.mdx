@@ -2,6 +2,45 @@
 slug: robot-validation
 ---
 
-# Robot Validation
+# Robot Validation Agent
 
-Pipeline agent — Validation stage. Checks output quality and identifies issues.
+After each task runs, Validation Agent checks the result against the expected output and validation rules defined by the Tasks stage — and returns a structured verdict with a quality score.
+
+This is a pipeline stage agent. It does not appear in the AI Expert chat list. You'll find it in the **Execution Pipeline** dropdown when replacing the Validation stage agent in a Robot's Advanced settings.
+
+## What it does
+
+- Receives a completed task definition alongside its execution result
+- Evaluates whether the result satisfies the expected output
+- Checks compliance with any validation rules defined for the task
+- Returns a JSON verdict: passed/failed, a quality score (0.0–1.0), a list of issues, and a plain-language explanation
+
+Validation is semantic — it reads and interprets the result, not just checking whether it exists or has a certain format.
+
+## Scoring scale
+
+| Score | Meaning |
+|-------|---------|
+| 1.0 | Perfect — meets or exceeds all expectations |
+| 0.8–0.99 | Good — minor improvements possible |
+| 0.6–0.79 | Acceptable — some issues present |
+| 0.4–0.59 | Marginal — significant issues |
+| 0.0–0.39 | Unacceptable — fails requirements |
+
+A `passed: false` verdict means the task result fails at least one critical requirement. The pipeline uses this to decide whether to retry, escalate, or proceed.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Agent type | `robot-validation` — pipeline stage agent |
+| Replaceable | Yes — available in the Validation stage dropdown |
+| Input | Task definition (instructions, expected output, validation rules) + execution result |
+| Output | JSON verdict: `passed`, `score`, `issues`, `details` |
+| Sandbox | No container |
+
+## What's next
+
+- [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents) — how to swap this agent for a custom one
+- [Pipeline Overview](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — how all stages connect
+- [Robot Delivery Agent](/docs/en-us/built-in-agents/robot-delivery) — the final stage that formats and delivers results

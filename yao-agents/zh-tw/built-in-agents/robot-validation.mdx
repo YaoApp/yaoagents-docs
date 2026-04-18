@@ -2,6 +2,45 @@
 slug: robot-validation
 ---
 
-# Robot Validation（驗收）
+# Robot Validation Agent
 
-流水線智能體。驗證產出品質、發現問題。
+每個任務執行完成後，Validation Agent 對照 Tasks 階段定義的預期輸出和驗證規則檢查結果，並返回帶品質評分的結構化裁決。
+
+這是一個流水線階段 Agent。不出現在 AI 專家聊天清單中。在 Robot 進階設定中替換 Validation 階段 Agent 時，你可以在**執行流水線**下拉選單中找到它。
+
+## 它做什麼
+
+- 接收已完成的任務定義及其執行結果
+- 評估結果是否滿足預期輸出
+- 檢查是否符合任務定義的所有驗證規則
+- 返回 JSON 裁決：通過/失敗、品質評分（0.0–1.0）、問題清單和簡潔說明
+
+驗證是語義層面的——它讀取並解讀結果，而不僅僅檢查結果是否存在或格式是否正確。
+
+## 評分標準
+
+| 評分 | 含義 |
+|------|------|
+| 1.0 | 完美——達到或超過所有期望 |
+| 0.8–0.99 | 良好——可做少量改進 |
+| 0.6–0.79 | 可接受——存在一些問題 |
+| 0.4–0.59 | 勉強——存在重大問題 |
+| 0.0–0.39 | 不可接受——未達到要求 |
+
+`passed: false` 意味著任務結果至少未滿足一項關鍵要求。流水線根據此裁決決定是否重試、升級處理或繼續執行。
+
+## 能力速覽
+
+| 能力 | 說明 |
+|------|------|
+| Agent 類型 | `robot-validation`——流水線階段 Agent |
+| 可替換 | 是——可在 Validation 階段下拉選單中選擇 |
+| 輸入 | 任務定義（指令、預期輸出、驗證規則）+ 執行結果 |
+| 輸出 | JSON 裁決：`passed`、`score`、`issues`、`details` |
+| 沙箱 | 無容器 |
+
+## 下一步
+
+- [替換階段 Agent](/docs/zh-tw/mission-control/execution-pipeline/replacing-stage-agents) — 如何將此 Agent 替換為自訂 Agent
+- [流水線概覽](/docs/zh-tw/mission-control/execution-pipeline/pipeline-overview) — 所有階段如何連接
+- [Robot Delivery Agent](/docs/zh-tw/built-in-agents/robot-delivery) — 格式化並投遞結果的最終階段

@@ -2,6 +2,41 @@
 slug: robot-inspiration
 ---
 
-# Robot Inspiration（找灵感）
+# Robot Inspiration Agent
 
-流水线智能体。搜索信息、收集参考资料。
+在设定任何目标或任务之前，Inspiration Agent 读取当前上下文——时间、Robot 定义的职责和可用资源——并生成一份有针对性的分析报告，指导后续所有阶段。
+
+这是一个流水线阶段 Agent。不出现在 AI 专家聊天列表中。在 Robot 高级设置中替换 Inspiration 阶段 Agent 时，你可以在**执行流水线**下拉菜单中找到它。
+
+## 它做什么
+
+- 读取当前日期/时间，识别时效性信号（截止日期、月末、周期性规律）
+- 审查 Robot 的角色、职责和规则，保持在职责范围内
+- 调查可用资源：分配的 AI 专家、MCP 工具、知识库和数据模型
+- 生成结构化 Markdown 报告，包含现状摘要、优先级见解和映射到具体资源的推荐行动
+
+Inspiration 报告是 Goals Agent（下一阶段）用来决定要做什么的输入。
+
+## 输出格式
+
+Agent 始终返回包含三个部分的 Markdown 报告：
+
+- **摘要** — 对当前情况和主要关注点的 2–3 句描述
+- **关键见解** — 按优先级标注 High / Medium / Low 的观察结果
+- **推荐行动** — 具体的下一步，每条都附有原因和要使用的具体 Agent 或 MCP 工具
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| Agent 类型 | `robot-inspiration`——流水线阶段 Agent |
+| 可替换 | 是——可在 Inspiration 阶段下拉菜单中选择 |
+| 输入 | 时间上下文、Robot 身份（角色/职责/规则）、可用资源 |
+| 输出 | 结构化 Markdown 灵感报告 |
+| 沙箱 | 无容器 |
+
+## 下一步
+
+- [替换阶段 Agent](/docs/zh-cn/mission-control/execution-pipeline/replacing-stage-agents) — 如何将此 Agent 替换为自定义 Agent
+- [流水线概览](/docs/zh-cn/mission-control/execution-pipeline/pipeline-overview) — 所有阶段如何连接
+- [Robot Goals Agent](/docs/zh-cn/built-in-agents/robot-goals) — 接收此报告的下一阶段

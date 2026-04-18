@@ -4,4 +4,58 @@ slug: slides
 
 # Slides
 
-Slide deck builder. Turn outlines or documents into themed HTML presentations, export to PDF.
+Turns ideas, outlines, or documents into polished presentation decks and exports them as PDF. Give Slides a topic or paste your content — it handles structure, design, and output.
+
+## What it's good at
+
+- **Deck creation** — takes any input (topic, bullet list, document, meeting notes) and builds a structured, designed slide deck
+- **Professional themes** — 9 built-in themes: Tech, Business, Science, Nature, Education, Art, Culture, Lifestyle, Health
+- **PDF export** — high-quality 16:9 PDF at 1920×1080 (2× retina), ready to share or present
+- **Content generation** — writes and refines slide content using a built-in LLM, including summaries and translations
+- **Research** — can fetch web content to supplement your slides with current data
+- **Custom visuals** — generates images for slides when needed
+
+## How it works
+
+Slides follows a four-stage workflow: **outline → content → design → export**.
+
+First it proposes a slide structure based on your input. Once you approve (or adjust), it writes the content for each slide, applies the chosen theme, renders the HTML, and takes a screenshot to verify the layout. Finally it exports to PDF and delivers the file to your workspace.
+
+The sandbox uses a desktop-lite image without a full VNC display — rendering is handled headlessly. The lifecycle is `oneshot`, so each conversation starts fresh. Deck files are saved to the workspace and persist between sessions.
+
+## How to write a good prompt
+
+**Start with a topic or paste your content.** The less Slides has to guess, the better the structure. A one-line topic works; pasted meeting notes work even better.
+
+**Specify the length and audience.** "10 slides for a product launch, audience is the sales team" gives Slides enough context to calibrate depth and tone.
+
+**Name the theme if you have a preference.** Otherwise Slides picks based on the topic — Tech and Business are defaults for most professional decks.
+
+**Iterate on the outline before the content.** It's faster to change structure before Slides writes all the copy.
+
+**Examples:**
+
+> Create a 10-slide deck introducing our new product: an AI-powered analytics platform. Audience: enterprise sales. Use the Business theme.
+
+> Make a presentation about AI trends in 2026 — 8 slides, Tech theme, written for a general audience.
+
+> Turn these meeting notes into a 6-slide summary deck: [paste notes]
+
+> Translate this existing deck into English and reformat it as a Business theme presentation.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Input | Topic, outline, document text, meeting notes |
+| Themes | Tech, Business, Science, Nature, Education, Art, Culture, Lifestyle, Health |
+| Output | HTML deck + PDF (16:9, 1920×1080, 2× retina) |
+| AI features | Content writing, summarization, translation, web research, image generation |
+| Sandbox | `claude-desktop-lite` image, 4 GB RAM, `oneshot` lifecycle |
+| Workspace | Permanently stored — deck files persist across conversations indefinitely |
+
+## What's next
+
+- [Report Writer](/docs/en-us/built-in-agents/report-writer) — for text-first deliverables instead of slides
+- [Transformer](/docs/en-us/built-in-agents/transformer) — structure raw data before feeding it to Slides
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

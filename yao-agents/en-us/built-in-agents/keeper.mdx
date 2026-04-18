@@ -4,4 +4,55 @@ slug: keeper
 
 # Keeper
 
-Knowledge base manager. Save/retrieve web pages, notes, files, bookmarks with tags and categories.
+Your knowledge hub. Save anything — webpages, notes, research, files — and find it again later. Keeper reads, tags, and organizes everything so you don't have to.
+
+## What it's good at
+
+- **Saving webpages** — paste a URL and Keeper extracts the full content, stores it, and makes it searchable
+- **Storing notes and research** — drop in text snippets, meeting notes, or findings; Keeper classifies and tags them automatically
+- **File ingestion** — upload PDFs, documents, and other files; Keeper reads and indexes their content
+- **Organizing into collections** — content is grouped by topic and type, not just dumped into a flat list
+- **Retrieval** — search by keyword, tag, or natural language across everything you've saved
+
+## How it works
+
+Keeper is a conversation-first knowledge store. You feed it content — a URL, a block of text, a file — and it saves, classifies, and tags the entry automatically. Every entry is stored with metadata (source, date, topic, type) so you can find things later.
+
+Search works in natural language. You can ask "what did I save about competitor pricing last month?" and Keeper queries its index to surface relevant entries.
+
+There is no sandbox container — Keeper runs as a lightweight agent backed by a structured knowledge store tied to your workspace. Data persists across conversations.
+
+## How to write a good prompt
+
+**Give it a source, not a summary.** Paste the URL or attach the file — let Keeper do the reading. You don't need to summarize the content yourself.
+
+**Tag intentionally.** If you want entries organized by project or topic, mention it: "save this and tag it as Q2 research." Keeper will auto-tag too, but your label takes priority.
+
+**Ask in plain language.** When retrieving, describe what you're looking for naturally: "anything I saved about MUJI" or "show me all entries tagged pricing."
+
+**Examples:**
+
+> Save https://www.bcg.com/publications/2025/ai-agent-trends to my research collection and tag it as AI strategy.
+
+> Store this meeting note and tag it as product and Q2: [paste note text]
+
+> Search my entries about competitor pricing from the last two weeks.
+
+> What have I saved about supply chain disruptions?
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Input methods | URL paste, text input, file upload |
+| File types | PDF, documents, plain text |
+| Organization | Auto-tagging, topic classification, collections |
+| Retrieval | Keyword search, tag filter, natural language queries |
+| Sandbox | No container — lightweight agent with persistent knowledge store |
+| Workspace | Knowledge store persists across conversations indefinitely |
+
+## What's next
+
+- [General Assistant](/docs/en-us/built-in-agents/general) — use General to research a topic, then pipe results into Keeper
+- [Market Scout](/docs/en-us/built-in-agents/scout) — Scout monitors feeds automatically; Keeper stores what you want to keep
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

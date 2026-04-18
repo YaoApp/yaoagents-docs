@@ -2,6 +2,45 @@
 slug: robot-validation
 ---
 
-# Robot Validation（验收）
+# Robot Validation Agent
 
-流水线智能体。验证产出质量、发现问题。
+每个任务运行完成后，Validation Agent 对照 Tasks 阶段定义的预期输出和验证规则检查结果，并返回带质量评分的结构化裁决。
+
+这是一个流水线阶段 Agent。不出现在 AI 专家聊天列表中。在 Robot 高级设置中替换 Validation 阶段 Agent 时，你可以在**执行流水线**下拉菜单中找到它。
+
+## 它做什么
+
+- 接收已完成的任务定义及其执行结果
+- 评估结果是否满足预期输出
+- 检查是否符合任务定义的所有验证规则
+- 返回 JSON 裁决：通过/失败、质量评分（0.0–1.0）、问题列表和简洁说明
+
+验证是语义层面的——它读取并解读结果，而不仅仅检查结果是否存在或格式是否正确。
+
+## 评分标准
+
+| 评分 | 含义 |
+|------|------|
+| 1.0 | 完美——达到或超过所有期望 |
+| 0.8–0.99 | 良好——可做少量改进 |
+| 0.6–0.79 | 可接受——存在一些问题 |
+| 0.4–0.59 | 勉强——存在重大问题 |
+| 0.0–0.39 | 不可接受——未达到要求 |
+
+`passed: false` 意味着任务结果至少未满足一项关键要求。流水线根据此裁决决定是否重试、升级处理或继续执行。
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| Agent 类型 | `robot-validation`——流水线阶段 Agent |
+| 可替换 | 是——可在 Validation 阶段下拉菜单中选择 |
+| 输入 | 任务定义（指令、预期输出、验证规则）+ 执行结果 |
+| 输出 | JSON 裁决：`passed`、`score`、`issues`、`details` |
+| 沙箱 | 无容器 |
+
+## 下一步
+
+- [替换阶段 Agent](/docs/zh-cn/mission-control/execution-pipeline/replacing-stage-agents) — 如何将此 Agent 替换为自定义 Agent
+- [流水线概览](/docs/zh-cn/mission-control/execution-pipeline/pipeline-overview) — 所有阶段如何连接
+- [Robot Delivery Agent](/docs/zh-cn/built-in-agents/robot-delivery) — 格式化并投递结果的最终阶段

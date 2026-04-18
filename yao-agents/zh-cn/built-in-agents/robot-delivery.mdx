@@ -2,6 +2,50 @@
 slug: robot-delivery
 ---
 
-# Robot Delivery（交付）
+# Robot Delivery Agent
 
-流水线智能体。整理最终成果、交付输出。
+Delivery Agent 汇总所有已完成任务的结果，将其格式化为结构化输出，并发送到配置的渠道——邮件、Webhook、文件或通知。
+
+这是一个流水线阶段 Agent。不出现在 AI 专家聊天列表中。在 Robot 高级设置中替换 Delivery 阶段 Agent 时，你可以在**执行流水线**下拉菜单中找到它。[Report Writer](/docs/zh-cn/built-in-agents/report-writer) 是可分配到此阶段的自定义 Agent 示例。
+
+## 它做什么
+
+- 接收所有流水线任务的完整执行结果
+- 格式化输出：摘要、详细 Markdown 正文和任何文件附件
+- 根据 Robot 的配置投递到一个或多个渠道
+
+## 投递渠道
+
+| 渠道 | 说明 |
+|------|------|
+| `email` | 向 Robot 接收人发送格式化邮件 |
+| `webhook` | 将结果数据 POST 到外部 URL |
+| `file` | 将输出保存到存储 |
+| `notify` | 向用户发送应用内通知 |
+
+渠道在 Robot 的**高级**标签页中配置：Webhook/流程在**开发者选项**中，接收人在**身份**标签页中设置。
+
+## 文件引用
+
+结果可能包含来自两个来源的文件——两者在投递输出中原样保留：
+
+| 格式 | 来源 |
+|------|------|
+| `__yao.attachment://<fileID>` | 存储在附件系统中的上传文件 |
+| `workspace://<workspace-id>/path` | 在沙箱 Workspace 中生成的文件 |
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| Agent 类型 | `robot-delivery`——流水线阶段 Agent |
+| 可替换 | 是——可在 Delivery 阶段下拉菜单中选择 |
+| 输入 | 汇总的任务结果、投递目标配置（渠道、接收人、格式） |
+| 输出 | 格式化的摘要 + 正文 + 附件，投递到配置的渠道 |
+| 沙箱 | 无容器 |
+
+## 下一步
+
+- [Report Writer](/docs/zh-cn/built-in-agents/report-writer) — 生成精美 Markdown 报告的自定义投递 Agent
+- [替换阶段 Agent](/docs/zh-cn/mission-control/execution-pipeline/replacing-stage-agents) — 如何将此 Agent 替换为自定义 Agent
+- [流水线概览](/docs/zh-cn/mission-control/execution-pipeline/pipeline-overview) — 所有阶段如何连接

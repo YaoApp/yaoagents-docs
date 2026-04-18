@@ -2,6 +2,48 @@
 slug: robot-tasks
 ---
 
-# Robot Tasks
+# Robot Tasks Agent
 
-Pipeline agent — Execution stage. Carries out work step-by-step according to goals.
+Tasks Agent receives the strategic goals from the Goals stage and decomposes them into concrete, executable tasks — each assigned to a specific Agent or MCP tool, with instructions precise enough to run directly.
+
+This is a pipeline stage agent. It does not appear in the AI Expert chat list. You'll find it in the **Execution Pipeline** dropdown when replacing the Tasks stage agent in a Robot's Advanced settings.
+
+## What it does
+
+- Reads the goals list from the previous stage
+- Decomposes each goal into one or more executable tasks
+- Assigns each task to a specific executor — an Agent (by ID) or an MCP tool — from the Robot's available resources
+- Sets dependencies between tasks where one must complete before another starts
+- Specifies the expected output and validation rules for each task, so the Validation stage knows what to check
+
+Tasks Agent can only assign executors that are listed in the Robot's available resources. It will not invent or reference agents or tools that haven't been assigned to the Robot.
+
+## Goal vs. Task — the distinction
+
+| | Goal (previous stage) | Task (this stage) |
+|---|---|---|
+| Level | Strategic — what to achieve | Tactical — how to achieve it |
+| Example | "Produce monthly sales report with trend analysis" | "Call data-analyst to query January sales data from the database" |
+| Executor | Not specified | Specific Agent or MCP tool |
+| Executable | No | Yes — runs directly |
+
+## Output
+
+Tasks Agent outputs a structured JSON execution plan — a list of tasks with executor IDs, instructions, expected outputs, validation rules, and dependency order. This plan drives the actual execution that follows.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Agent type | `robot-tasks` — pipeline stage agent |
+| Replaceable | Yes — available in the Tasks stage dropdown |
+| Input | Prioritized goals list from the Goals stage |
+| Output | JSON execution plan: tasks with executors, instructions, dependencies, validation rules |
+| Executor scope | Only Agents and MCP tools assigned to the Robot |
+| Sandbox | No container |
+
+## What's next
+
+- [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents) — how to swap this agent for a custom one
+- [Pipeline Overview](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — how all stages connect
+- [Robot Validation Agent](/docs/en-us/built-in-agents/robot-validation) — the next stage that checks each task's result

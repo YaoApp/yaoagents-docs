@@ -4,4 +4,38 @@ slug: report-writer
 
 # Report Writer
 
-Report-writing robot (used in Mission Control). Auto-generates analysis reports, data formatting.
+Formats raw findings into polished, well-structured Markdown reports. Report Writer is a pipeline agent — it doesn't appear in the AI Expert chat list. You'll find it in the agent selection list when assigning experts to a Robot, or when replacing a stage agent in a Robot's execution pipeline.
+
+## What it does
+
+- Receives the output from upstream pipeline stages (data, findings, notes, analysis results)
+- Composes a complete, well-structured Markdown report
+- Organizes headings, bullet points, tables, and blockquotes automatically
+- Supports multiple report formats: competitive analysis, technical assessment, weekly summary, meeting minutes, and more
+- Adds executive summaries, conclusions, and recommendations when the report type calls for them
+
+## How to use it in a Robot
+
+When creating or editing a Robot, go to **Settings → Advanced → Execution Pipeline**. Each stage has an agent dropdown. Set the **Delivery** stage to **Report Writer**.
+
+From that point on, every time the Robot runs, Report Writer receives the pipeline's accumulated output and produces a formatted Markdown report — which is then delivered to the Robot's recipients.
+
+> **Tip:** The quality of the report depends on the Robot's task description. Include the report type ("weekly summary", "competitive analysis") and any required sections (executive summary, recommendations) directly in the Robot's task description or identity prompt.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Role | Pipeline agent — appears in Robot stage selection |
+| Typical stage | Delivery |
+| Input | Output from upstream pipeline stages |
+| Report types | Research, competitive analysis, technical assessment, meeting minutes, weekly/monthly summary |
+| Output | Structured Markdown report, forwarded to Robot recipients |
+| Sandbox | No container — lightweight agent |
+
+## What's next
+
+- [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents) — how to assign Report Writer to a Robot stage
+- [Creating a Robot](/docs/en-us/mission-control/creating-a-robot) — set up the Robot that uses it
+- [Insights](/docs/en-us/built-in-agents/insights) — analyze data in the pipeline before Report Writer formats it
+- [Market Scout](/docs/en-us/built-in-agents/scout) — Scout collects intelligence; Report Writer turns it into a brief

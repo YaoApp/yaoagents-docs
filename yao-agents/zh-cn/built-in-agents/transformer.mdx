@@ -2,6 +2,60 @@
 slug: transformer
 ---
 
-# Transformer（数据转换）
+# Transformer
 
-将图片、PDF、JSON、CSV 转换为结构化格式，支持 Vision LLM OCR。
+将非结构化或半结构化数据转换为干净的结构化格式。扫描发票、图片表格、文字密集的 PDF、CSV 导出、JSON 数据——Transformer 读取后输出 JSON、Markdown 表格或格式化的 Excel 文件。
+
+## 擅长做什么
+
+- **Vision LLM OCR** — 从扫描图片和图片型 PDF 中提取文字，包括表格、发票和表单
+- **PDF 文字提取** — 使用 Poppler 从文字型 PDF 中提取结构化文本，比 Vision OCR 更快更准
+- **CSV → JSON** — 将扁平 CSV 导出转换为结构化 JSON 数组
+- **JSON → Markdown 表格** — 将 JSON 数据格式化为可读的 Markdown 表格
+- **JSON → Excel** — 将结构化数据导出为带自动格式化的 Excel 文件（列宽、表头、对齐）
+- **自定义脚本** — 针对复杂或非标准格式编写并运行定制转换流水线
+- **批量处理** — 一次运行处理多个文件
+
+## 工作原理
+
+Transformer 使用注入了 Vision LLM 凭据的 desktop-lite 沙箱处理 OCR 任务。图片输入调用 Vision 模型提取文字，数字型 PDF 直接使用 Poppler，格式转换则在容器内编写并运行 Python 脚本。
+
+输出文件保存到 Workspace。生命周期为 `oneshot`——每次对话使用全新容器——但所有输出文件跨会话持久保存在 Workspace 中。
+
+## 怎么写好 Prompt
+
+**上传文件并说明输出格式。** "将这张扫描发票提取为 JSON"或"将这个 CSV 转换为格式化的 Excel 文件"就够了。
+
+**描述你想要的结构。** JSON 输出时，如果有 schema，说明字段名称。Excel 时，如果需要特定列顺序或格式，提前说明。
+
+**批量处理时明确说明。** "处理这三个文件并合并为一个 JSON 数组"比让它自己猜是否批量处理更清晰。
+
+**示例：**
+
+> 从这三张扫描发票中提取所有明细项目，输出为 JSON 数组，字段：date、vendor、item、quantity、unit_price、total。
+
+> 将这个 CSV 导出转换为格式化的 Excel 电子表格，自动调整列宽并冻结标题行。
+
+> OCR 这张图片并将表格输出为 Markdown 表格。
+
+> 这个 PDF 是文字型的——提取所有财务数据并格式化为 JSON。
+
+> 将这个杂乱的 JSON 转换为可以粘贴进报告的干净 Markdown 表格。
+
+## 能力速览
+
+| 能力 | 说明 |
+|------|------|
+| OCR | 图片和扫描 PDF 使用 Vision LLM |
+| PDF 文字提取 | 数字型（非扫描）PDF 使用 Poppler |
+| 格式转换 | CSV → JSON，JSON → Markdown，JSON → Excel |
+| 自定义流水线 | 针对复杂或非标准格式的 Python 脚本 |
+| 批量处理 | 一次运行处理多个文件 |
+| 沙箱 | `claude-desktop-lite` 镜像，4 GB 内存，`oneshot` 生命周期 |
+| Workspace | 永久存储——输出文件无限期保留 |
+
+## 下一步
+
+- [Insights](/docs/zh-cn/built-in-agents/insights) — 先用 Transformer 清洗数据，再在 Insights 中分析
+- [Report Writer](/docs/zh-cn/built-in-agents/report-writer) — 先用 Transformer 整理原始资料，再撰写报告
+- [AI 专家：找到合适的那个](/docs/zh-cn/getting-started/ai-experts-intro) — 查看所有内置专家

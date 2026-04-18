@@ -2,6 +2,48 @@
 slug: robot-tasks
 ---
 
-# Robot Tasks（幹活）
+# Robot Tasks Agent
 
-流水線智能體。按目標逐步執行具體工作。
+Tasks Agent 接收 Goals 階段的戰略目標，並將其分解為具體的可執行任務——每個任務分配給特定的 Agent 或 MCP 工具，指令精確到可以直接執行。
+
+這是一個流水線階段 Agent。不出現在 AI 專家聊天清單中。在 Robot 進階設定中替換 Tasks 階段 Agent 時，你可以在**執行流水線**下拉選單中找到它。
+
+## 它做什麼
+
+- 讀取上一階段的目標清單
+- 將每個目標分解為一個或多個可執行任務
+- 從 Robot 的可用資源中為每個任務分配具體執行者——Agent（透過 ID）或 MCP 工具
+- 在需要順序執行的任務之間設置依賴關係
+- 為每個任務指定預期輸出和驗證規則，供 Validation 階段檢查
+
+Tasks Agent 只能分配 Robot 可用資源清單中的執行者，不會引用未分配給該 Robot 的 Agent 或工具。
+
+## 目標 vs. 任務——區別
+
+| | 目標（上一階段） | 任務（本階段） |
+|---|---|---|
+| 層級 | 戰略層——要實現什麼 | 戰術層——如何實現 |
+| 範例 | 「產生包含趨勢分析的月度銷售報告」 | 「呼叫 data-analyst 從資料庫查詢一月份銷售資料」 |
+| 執行者 | 未指定 | 具體的 Agent 或 MCP 工具 |
+| 可執行 | 否 | 是——直接執行 |
+
+## 輸出
+
+Tasks Agent 輸出一個結構化的 JSON 執行計畫——包含執行者 ID、指令、預期輸出、驗證規則和依賴順序的任務清單。該計畫驅動後續的實際執行。
+
+## 能力速覽
+
+| 能力 | 說明 |
+|------|------|
+| Agent 類型 | `robot-tasks`——流水線階段 Agent |
+| 可替換 | 是——可在 Tasks 階段下拉選單中選擇 |
+| 輸入 | 來自 Goals 階段的優先級目標清單 |
+| 輸出 | JSON 執行計畫：包含執行者、指令、依賴關係、驗證規則的任務清單 |
+| 執行者範圍 | 僅限分配給該 Robot 的 Agent 和 MCP 工具 |
+| 沙箱 | 無容器 |
+
+## 下一步
+
+- [替換階段 Agent](/docs/zh-tw/mission-control/execution-pipeline/replacing-stage-agents) — 如何將此 Agent 替換為自訂 Agent
+- [流水線概覽](/docs/zh-tw/mission-control/execution-pipeline/pipeline-overview) — 所有階段如何連接
+- [Robot Validation Agent](/docs/zh-tw/built-in-agents/robot-validation) — 檢查每個任務結果的下一階段

@@ -2,6 +2,64 @@
 slug: general
 ---
 
-# General
+# General Assistant
 
-General-purpose assistant. Everyday Q&A, versatile tasks, best starting point for new users.
+A versatile agent that handles any task — coding, research, data analysis, writing, automation, and more. No fixed workflow. If you're not sure which expert to use, start here.
+
+## What it's good at
+
+- **Coding** — write, run, debug, and refactor Python, Node.js, Bash, or any language it can install on the fly
+- **Research** — scrape web pages, synthesize information from multiple sources, produce structured reports
+- **Data analysis** — process CSV, JSON, and Excel files; run statistical analysis; generate charts (matplotlib, plotly)
+- **Writing** — draft reports, proposals, emails, documentation in Markdown or HTML
+- **File processing** — convert, transform, batch-process, archive, and organize files
+- **Automation** — build scripts, CLI tools, and pipelines to automate repetitive workflows
+- **LLM sub-tasks** — call the built-in LLM API to do summarization, translation, classification, or content generation as part of a larger task
+
+## How it works
+
+General Assistant runs inside a persistent Linux sandbox with a full desktop and VNC. Every session keeps its files — you can pick up a project across multiple conversations without starting from scratch.
+
+It has full terminal, filesystem, and network access. It can install packages, run servers, open a browser on the VNC desktop, and write output back to the workspace.
+
+The **workspace is permanently stored** — files you've generated, scripts you've built, and data you've processed are all still there next time you open the conversation, regardless of how long you've been away. The underlying container pauses when idle and restarts when you return, but your files are never lost.
+
+## How to write a good prompt
+
+General Assistant has no predefined workflow, which means the quality of your result depends almost entirely on how clearly you describe the task.
+
+**Be specific about the output.** "Summarize this article" is fine for a quick answer. "Summarize this article in three bullet points focused on business impact" gets you something more usable.
+
+**Describe the full job in one message.** If you want it to research a topic, write a report, and email it to you — say all three things at once. It will plan and execute the whole sequence without you having to prompt each step.
+
+**Attach files when relevant.** Drop in a PDF, spreadsheet, or image directly in the chat. It reads the file and works with it — no need to copy-paste content.
+
+**Iterate.** Your first result is a draft. Ask it to revise, go deeper, change the format, or try a different approach. The conversation is the workspace.
+
+**Examples of effective prompts:**
+
+> Scrape the top 5 results for "AI agent frameworks 2025", extract their key features, and produce a comparison table in Markdown.
+
+> Analyze the attached sales-report.xlsx. Identify the top 3 products by revenue growth and generate a bar chart. Save the chart as a PNG.
+
+> Draft a two-page proposal for a new internal knowledge-sharing system. Audience: engineering managers. Tone: concise and direct.
+
+> Write a Python script that watches a folder for new CSV files, merges them into a single file, and outputs a summary report.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Languages | Python, Node.js, Bash, and anything installable |
+| Web access | Scrape pages, fetch content, follow links |
+| File I/O | Read and write CSV, JSON, Excel, PDF, images, text |
+| Visualization | matplotlib, plotly, ECharts |
+| LLM sub-calls | Summarize, classify, translate via built-in API |
+| Sandbox | Persistent Linux desktop, VNC, full terminal |
+| Workspace | Permanently stored — files persist across conversations indefinitely |
+
+## What's next
+
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts and when to use each
+- [Keeper](/docs/en-us/built-in-agents/keeper) — save and organize research results into a knowledge base
+- [Insights](/docs/en-us/built-in-agents/insights) — connect to a database or spreadsheet and build an interactive dashboard

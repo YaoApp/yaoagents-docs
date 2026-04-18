@@ -2,6 +2,57 @@
 slug: insights
 ---
 
-# Insights（資料分析）
+# Insights
 
-連接資料庫、讀取表格、建構 ECharts 互動看板，VNC 即時預覽。
+帶有即時桌面的資料分析師。連接資料庫或上傳試算表，Insights 自動查詢、設計指標，並建構互動式 ECharts 儀表板——透過 VNC 即時渲染可見。
+
+## 擅長做什麼
+
+- **資料庫分析** — 連接 MySQL 或 PostgreSQL（唯讀），對即時資料執行查詢
+- **試算表分析** — 直接讀取 Excel（.xlsx）和 CSV 檔案，無需手動匯入
+- **指標設計** — Insights 思考該測量什麼，而不僅僅是如何呈現
+- **互動式儀表板** — 輸出的是 ECharts + HTML 儀表板，不是靜態圖片；圖表支援點擊和篩選
+- **自我驗證** — 在內建瀏覽器中預覽儀表板並截圖確認渲染正確後再交付
+
+## 工作原理
+
+Insights 執行在配備 4 GB 記憶體、2 vCPU 和完整 VNC 桌面環境的沙箱中。提供資料來源後，它會先連接、讀取並探索資料結構，再詢問你想分析什麼。
+
+它編寫 Python 或 JavaScript 分析程式碼，產生 ECharts 設定，建構 HTML 頁面，並啟動本地 HTTP 伺服器，讓你在 VNC 瀏覽器中即時預覽結果。確認版面無誤後，將最終儀表板檔案交付到 Workspace。
+
+沙箱使用 `longrunning` 生命週期——閒置時暫停，回來時恢復。Workspace 永久儲存；儀表板、資料檔案和腳本下次開啟對話時依然存在。
+
+## 怎麼寫好 Prompt
+
+**先說資料來源。** 告訴 Insights 資料在哪裡：資料庫連線、檔案附件，或兩者皆有。越具體，分析速度越快。
+
+**描述問題，而不是圖表類型。** 「哪些產品在推動營收成長」比「做一個長條圖」效果更好。Insights 會自行選擇合適的視覺化方式。
+
+**說明受眾（如果重要）。** 「這是給每週高層匯報用的」或「團隊只需要一個快速概覽」會影響細節程度和版面風格。
+
+**範例：**
+
+> 連接 localhost:3306 的 MySQL，資料庫 `sales`，分析 2025 年 Q1–Q2 各地區的營收趨勢。
+
+> 分析這個 CSV 檔案。我想了解客戶流失情況——哪些細分群體流失最多。
+
+> 用這份 Excel 匯出檔案建構 KPI 儀表板：總訂單數、平均訂單金額、退貨率和客戶終身價值。
+
+> 連接我的 PostgreSQL 資料庫，找出按利潤率排名最差的 10 個 SKU。
+
+## 能力速覽
+
+| 能力 | 說明 |
+|------|------|
+| 資料來源 | MySQL、PostgreSQL（唯讀）、Excel（.xlsx）、CSV |
+| 輸出 | ECharts + HTML 互動式儀表板，交付到 Workspace |
+| 預覽 | VNC 內建瀏覽器；自動截圖驗證 |
+| 沙箱 | `claude-desktop` 映像，4 GB 記憶體，2 vCPU，VNC 已啟用 |
+| 生命週期 | 長期執行——閒置 1 小時後暫停，每次最長 24 小時 |
+| Workspace | 永久儲存——儀表板和資料檔案無限期保留 |
+
+## 下一步
+
+- [Transformer](/docs/zh-tw/built-in-agents/transformer) — 先用 Transformer 清理和整理原始資料，再交給 Insights
+- [Report Writer](/docs/zh-tw/built-in-agents/report-writer) — 將 Insights 的分析結果轉化為正式書面報告
+- [AI 專家：找到合適的那個](/docs/zh-tw/getting-started/ai-experts-intro) — 查看所有內建專家

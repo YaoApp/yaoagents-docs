@@ -2,6 +2,41 @@
 slug: robot-inspiration
 ---
 
-# Robot Inspiration（インスピレーション）
+# Robot Inspiration Agent
 
-パイプラインエージェント。情報検索、参考資料収集。
+目標やタスクが設定される前に、Inspiration Agent が現在のコンテキスト——時間、Robot に定義された職務、利用可能なリソース——を読み取り、後続のすべてのステージを導く的を絞った分析レポートを生成します。
+
+これはパイプラインステージ Agent です。AI エキスパートのチャットリストには表示されません。Robot の詳細設定で Inspiration ステージの Agent を置き換える際に、**実行パイプライン**ドロップダウンで見つかります。
+
+## できること
+
+- 現在の日時を読み取り、時間的に重要なシグナルを識別（締め切り、月末、繰り返しパターン）
+- Robot の役割、職務、ルールを確認して職務範囲内に留まる
+- 利用可能なリソースを調査：割り当てられた AI エキスパート、MCP ツール、ナレッジベース、データモデル
+- 状況サマリー、優先度付きインサイト、特定のリソースにマッピングされた推奨アクションを含む構造化 Markdown レポートを生成
+
+Inspiration レポートは、Goals Agent（次のステージ）が何に取り組むかを決定するための入力となります。
+
+## 出力フォーマット
+
+Agent は常に3つのセクションを持つ Markdown レポートを返します：
+
+- **サマリー** — 現在の状況と主な焦点についての 2〜3 文
+- **重要なインサイト** — High / Medium / Low でタグ付けされた優先度順の観察
+- **推奨アクション** — 具体的な次のステップ、それぞれに理由と使用する具体的な Agent または MCP ツール
+
+## 機能一覧
+
+| 機能 | 詳細 |
+|------|------|
+| Agent タイプ | `robot-inspiration`——パイプラインステージ Agent |
+| 置き換え可能 | 可——Inspiration ステージのドロップダウンで選択可能 |
+| 入力 | 時間コンテキスト、Robot アイデンティティ（役割/職務/ルール）、利用可能なリソース |
+| 出力 | 構造化 Markdown インスピレーションレポート |
+| サンドボックス | コンテナなし |
+
+## 次のステップ
+
+- [ステージ Agent の置き換え](/docs/ja-jp/mission-control/execution-pipeline/replacing-stage-agents) — この Agent をカスタム Agent に交換する方法
+- [パイプライン概要](/docs/ja-jp/mission-control/execution-pipeline/pipeline-overview) — すべてのステージがどのように接続されるか
+- [Robot Goals Agent](/docs/ja-jp/built-in-agents/robot-goals) — このレポートを受け取る次のステージ

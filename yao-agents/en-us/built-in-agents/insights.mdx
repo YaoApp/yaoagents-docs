@@ -4,4 +4,55 @@ slug: insights
 
 # Insights
 
-Data analyst. Connect to databases, read spreadsheets, build ECharts dashboards with live VNC preview.
+Data analyst with a live desktop. Connect Insights to a database or drop in a spreadsheet and it queries, designs metrics, and builds an interactive ECharts dashboard — rendered and visible in real time via VNC.
+
+## What it's good at
+
+- **Database analysis** — connect to MySQL or PostgreSQL (read-only) and run queries against your live data
+- **Spreadsheet analysis** — read Excel (.xlsx) and CSV files directly; no manual import needed
+- **Metric design** — Insights thinks about what to measure, not just how to display it
+- **Interactive dashboards** — output is an ECharts + HTML dashboard, not a static image; charts are clickable and filterable
+- **Self-verification** — Insights previews the dashboard in a built-in browser and takes a screenshot to confirm it renders correctly before delivering
+
+## How it works
+
+Insights runs in a persistent sandbox with 4 GB RAM, 2 vCPUs, and a full VNC desktop environment. When you provide a data source, it connects, reads, and explores the data to understand its structure before asking what you want to analyze.
+
+It writes Python or JavaScript analysis code, generates ECharts configuration, builds an HTML page, and starts a local HTTP server so you can preview the result live in the VNC browser. Once the layout looks right, it delivers the final dashboard files to your workspace.
+
+The sandbox uses a `longrunning` lifecycle — it pauses when idle and resumes when you return. The workspace is permanently stored; your dashboards, data files, and scripts are there next time you open the conversation.
+
+## How to write a good prompt
+
+**Lead with the data source.** Tell Insights where the data is: a database connection, a file attachment, or both. The more specific you are, the faster it gets to the analysis.
+
+**Describe the question, not the chart type.** "Show me which products are driving revenue growth" works better than "make a bar chart." Insights will choose the right visualization.
+
+**Specify the audience if it matters.** "This is for a weekly exec review" or "the team just needs a quick overview" shapes the level of detail and layout.
+
+**Examples:**
+
+> Connect to MySQL at localhost:3306, database `sales`, and analyze revenue trends by region for Q1–Q2 2025.
+
+> Analyze this CSV file. I want to understand customer churn — which segments are leaving most.
+
+> Build a KPI dashboard for this Excel export: total orders, avg order value, return rate, and customer lifetime value.
+
+> Connect to my PostgreSQL database and find the top 10 underperforming SKUs by margin.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Data sources | MySQL, PostgreSQL (read-only), Excel (.xlsx), CSV |
+| Output | ECharts + HTML interactive dashboard, delivered to workspace |
+| Preview | Built-in browser via VNC; auto-screenshot for verification |
+| Sandbox | `claude-desktop` image, 4 GB RAM, 2 vCPUs, VNC enabled |
+| Lifecycle | Long-running — pauses on idle (1 h), max 24 h per session |
+| Workspace | Permanently stored — dashboards and data files persist indefinitely |
+
+## What's next
+
+- [Transformer](/docs/en-us/built-in-agents/transformer) — clean and restructure raw data before handing it to Insights
+- [Report Writer](/docs/en-us/built-in-agents/report-writer) — turn Insights findings into a formal written report
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

@@ -1,7 +1,65 @@
 ---
-slug: website
+slug: web-builder
 ---
 
-# Website（網站建構）
+# Web Builder
 
-網站搭建、表單開發、頁面設計。
+構建網站和 Web 應用——從想法到上線部署。描述你的需求，Web Builder 編寫程式碼，在即時桌面上預覽，並將應用推送到你的伺服器，自動設定 HTTPS。
+
+## 擅長做什麼
+
+- **網站開發** — 企業官網、產品登陸頁、作品集、活動頁面
+- **表單應用** — 報名表單、會員註冊、問卷調查，帶伺服器端驗證和防機器人機制
+- **即時預覽** — 開發期間在 VNC 桌面瀏覽器中執行應用，上線前就能看到效果
+- **視覺測試** — 自動截圖檢查多個視口尺寸（桌面端 + 行動端）的響應式版面
+- **SSH 部署** — 將建構產物推送到伺服器，啟動 Docker 容器，自動設定 NGINX 和 Let's Encrypt HTTPS
+- **專案管理** — 每個專案獨立目錄，統一索引，狀態追蹤（開發中 / 已上線 / 已歸檔）
+
+## 工作原理
+
+Web Builder 使用注入了 SSH 憑證的完整桌面沙箱。技術堆疊為 Next.js App Router + Tailwind CSS + TypeScript。表單使用 Zod 進行伺服器端驗證，SQLite 儲存資料，SVG Captcha 防止機器人。
+
+開發期間，Web Builder 啟動本地開發伺服器並在 VNC 瀏覽器中開啟。自動截圖驗證版面，如有問題則迭代修改。
+
+準備部署時，執行建構，透過 SSH 將輸出推送到伺服器，自動設定 NGINX + Docker + Let's Encrypt。無需手動伺服器設定。
+
+沙箱為 `longrunning`——閒置時暫停，回來時恢復。所有專案目錄和設定永久儲存在 Workspace 中。
+
+## 怎麼寫好 Prompt
+
+**描述網站的目的和結構。** 「一個包含首頁、關於我們、服務和聯絡頁面的企業官網」足以讓 Web Builder 立即搭建框架。
+
+**說明所有表單及其要求。** 「一個帶手機號碼驗證、驗證碼和確認郵件的活動報名表單」涵蓋了關鍵限制。
+
+**準備好時提供部署資訊。** 部署需要網域、伺服器 IP 和 SSH 憑證。你可以隨時提供——Web Builder 會在需要時詢問。
+
+**範例：**
+
+> 構建一個企業官網：首頁、關於我們、服務和聯絡表單。使用海軍藍和白色的簡潔現代設計。
+
+> 為我們的年度會議建立一個活動報名表單，收集姓名、電子郵件、公司和職位。包含驗證碼並發送確認郵件。
+
+> 構建一個帶手機驗證和付款占位符的會員註冊頁面。
+
+> 將目前專案部署到我的伺服器 43.162.98.169，網域 mysite.com，我來貼上 SSH 金鑰。
+
+> 顯示目前專案狀態——哪些已上線，哪些還在開發中。
+
+## 能力速覽
+
+| 能力 | 說明 |
+|------|------|
+| 技術堆疊 | Next.js App Router + Tailwind CSS + TypeScript |
+| 表單 | Zod 驗證、SQLite 儲存、SVG Captcha |
+| 預覽 | VNC 桌面 + 自動響應式截圖 |
+| 部署 | SSH → Docker → NGINX → Let's Encrypt HTTPS |
+| 專案管理 | 獨立專案目錄、統一索引、狀態追蹤 |
+| 沙箱 | `claude-desktop-ssh` 映像，4 GB 記憶體，2 vCPU，VNC + SSH 已啟用 |
+| 生命週期 | 長期執行——閒置 1 小時後暫停，每次最長 24 小時 |
+| Workspace | 永久儲存——所有專案檔案和設定無限期保留 |
+
+## 下一步
+
+- [Applet Workshop](/docs/zh-tw/built-in-agents/applet) — 不需要部署的輕量級工具使用 Applet Workshop
+- [通用助手](/docs/zh-tw/built-in-agents/general) — Web 專案之外的自訂後端邏輯或腳本
+- [AI 專家：找到合適的那個](/docs/zh-tw/getting-started/ai-experts-intro) — 查看所有內建專家

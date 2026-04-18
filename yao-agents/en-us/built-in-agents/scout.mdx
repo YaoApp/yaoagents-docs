@@ -1,7 +1,60 @@
 ---
-slug: scout
+slug: market-scout
 ---
 
-# Scout
+# Market Scout
 
-Market researcher. Information collection, competitive analysis, report generation.
+Your market intelligence feed. Subscribe to sources — news sites, industry blogs, competitor pages — and Market Scout monitors them automatically, fetches the latest content, classifies it, and organizes everything into your Market Research collection.
+
+## What it's good at
+
+- **Source monitoring** — regularly checks your subscribed feeds for new content
+- **Content classification** — tags fetched articles by industry, topic, and relevance; no manual sorting
+- **Trend analysis** — identifies patterns across multiple sources; surfaces emerging themes
+- **Briefings** — produces daily or weekly intelligence summaries across all monitored sources
+- **On-demand queries** — ask about a topic and get the relevant entries from your collected data
+
+## How it works
+
+Market Scout reads from your configured subscription sources on a schedule or on demand. When it fetches new content, it classifies each article by topic and relevance, then stores the results in your **Market Research** collection (which is also accessible via Keeper).
+
+Because Market Scout has no sandbox container, it runs as a lightweight agent. All collected intelligence persists in the knowledge store across conversations.
+
+For high-volume monitoring, pair Market Scout with a scheduled Robot in Mission Control — set it to run daily and it will feed your collection automatically without manual prompting.
+
+## How to write a good prompt
+
+**Start with your sources.** The first time, tell Scout which websites or feeds to monitor: "add these three URLs to my monitoring list." After that, "check for updates" is enough.
+
+**Scope the query when retrieving.** "What's new in AI agent frameworks this week?" or "find articles about supply chain from the last month" narrows the search to what's useful.
+
+**Ask for a briefing.** "Give me today's market summary" is a fast way to get a digest across all your sources.
+
+**Examples:**
+
+> Add these sources to my monitoring list: https://techcrunch.com, https://www.theinformation.com, https://news.ycombinator.com
+
+> Fetch today's updates from all my subscribed sources.
+
+> What are the latest trends in AI infrastructure?
+
+> Give me a weekly briefing on everything I've collected this week.
+
+> Find any articles about competitor pricing or fundraising in the last two weeks.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Input | Subscription URLs, on-demand topic queries |
+| Classification | Auto-tagged by industry, topic, and relevance |
+| Output | Market Research collection (shared with Keeper) |
+| Briefing formats | Daily digest, weekly summary |
+| Sandbox | No container — lightweight agent with persistent knowledge store |
+| Workspace | Knowledge store persists across conversations indefinitely |
+
+## What's next
+
+- [Keeper](/docs/en-us/built-in-agents/keeper) — store specific articles permanently in your broader knowledge base
+- [Report Writer](/docs/en-us/built-in-agents/report-writer) — turn Market Scout's findings into a structured intelligence report
+- [Mission Control](/docs/en-us/getting-started/mission-control-intro) — automate daily or weekly market monitoring as a scheduled Robot

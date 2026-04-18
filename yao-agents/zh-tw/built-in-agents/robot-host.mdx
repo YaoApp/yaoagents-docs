@@ -2,6 +2,45 @@
 slug: robot-host
 ---
 
-# Robot Host（接單）
+# Robot Host Agent
 
-流水線智能體。人機互動中介。
+使用者和 Robot 之間的對話層。當你點擊**指派工作**時，Robot Host 負責回應——它傾聽你的描述，必要時提出澄清問題，將目標總結回饋給你，並在流水線啟動前等待你的確認。
+
+Robot Host 是流水線 Agent。在 Robot 的進階設定中，你可以在**執行流水線**下拉選單裡找到它——將其選為 Host 階段，即可為該 Robot 啟用手動任務觸發功能。
+
+## 它做什麼
+
+- 接收你點擊**指派工作**時的任務描述
+- 如果意圖不明確，提出澄清問題
+- 用簡潔的語言總結確認後的目標
+- 等待你的明確確認（"ok"、"start"、"yes"、"go" 等）
+- 呼叫 `confirm_task` 將確認的目標移交給流水線
+
+Robot Host 刻意**不討論**任務將如何執行——那是流水線的職責。它專注於確保目標正確，然後才啟動任何流程。
+
+## 行為方式
+
+對話遵循固定模式：
+
+1. 你描述你想要什麼
+2. Robot Host 根據需要提出澄清問題
+3. Robot Host 呈現目標摘要
+4. 你確認
+5. Robot Host 呼叫 `confirm_task`，流水線啟動
+
+傳遞給流水線的目標是你確認的摘要的忠實副本——Robot Host 不會在你同意後重新措辭、新增或刪減內容。
+
+## 能力速覽
+
+| 能力 | 說明 |
+|------|------|
+| Agent 類型 | `robot-host`——流水線 Agent，可在執行流水線下拉選單中選擇 |
+| 階段 | Host Agent——啟用手動任務觸發 |
+| 觸發方式 | 使用者點擊**指派工作**時激活 |
+| 輸出 | 確認的目標描述，透過 `confirm_task` 移交給流水線 |
+| 沙箱 | 無容器 |
+
+## 下一步
+
+- [排程與觸發](/docs/zh-tw/mission-control/scheduling-and-triggers) — 手動觸發的工作原理
+- [流水線概覽](/docs/zh-tw/mission-control/execution-pipeline/pipeline-overview) — Robot Host 確認目標後發生什麼
