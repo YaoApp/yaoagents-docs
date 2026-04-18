@@ -4,4 +4,52 @@ slug: what-is-mission-control
 
 # What Is Mission Control
 
-Core idea: you are the commander. Assemble experts, define the workflow, let them collaborate.
+Mission Control is the task automation center in Yao Agents. You build Robots — autonomous workers that run on a schedule or respond to triggers — and they get things done without you asking every time.
+
+> You're the commander. Define the goal, assign the team, let it run.
+
+## Why Mission Control exists
+
+AI Experts are powerful, but they're reactive — they work when you ask. If you need the same thing done every morning, every hour, or whenever something happens, you'd have to ask every time. That doesn't scale.
+
+Mission Control flips the model. You describe a job once: what the Robot does, what resources it has, and when it should run. After that, it handles itself — collecting, processing, writing, sending — and reports back with the results.
+
+## What a Robot can do
+
+- **Work on a schedule** — daily briefings, weekly reports, hourly data checks. Set it once.
+- **Respond to events** — run when triggered by a Webhook, an incoming message, or an API call.
+- **Accept manual tasks** — click **Assign Task**, describe what you need, and Robot Host confirms the goal before the pipeline starts.
+- **Deliver to where you work** — send results by email, post to Telegram, push to Discord, or call an API. The output goes where you need it.
+- **Coordinate a team of AI Task Agents** — each Robot runs a Pipeline: specialist agents handle planning, research, execution, validation, and delivery in sequence.
+
+![Mission Control — Robot list showing active Robots with status and last run time](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+## How it works
+
+When a Robot runs — on schedule or manually triggered — it executes a **Pipeline**: a fixed sequence of stages, each owned by a specialist AI Task Agent.
+
+```
+Inspiration → Goals → Tasks → Validation → Delivery
+```
+
+Each stage passes its output to the next. The Robot Host stage handles the human interaction side — when you manually trigger a Robot, it first clarifies the task with you before the pipeline kicks off.
+
+The default agents for each stage work well without configuration. You can swap any of them for a custom agent if you need tighter control over a specific step. → [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents)
+
+## The difference between a Robot and an AI Expert
+
+| | AI Expert | Robot (Task Agent) |
+|---|---|---|
+| **How it starts** | You open a chat and ask | Schedule, event, Webhook, or manual trigger |
+| **Who drives it** | You, in real time | Autonomous — runs without you |
+| **Best for** | One-off tasks, exploration, questions | Recurring work, automated workflows |
+| **Output** | Conversational response in chat | Structured result delivered to a destination |
+
+For everyday tasks and questions, use AI Experts. For anything you need done regularly or automatically, build a Robot.
+
+## What's next
+
+- [Creating a Robot](/docs/en-us/mission-control/creating-a-robot) — set up your first Robot in a few minutes
+- [Execution Pipeline](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — understand the stages a Robot runs through
+- [Scheduling & Triggers](/docs/en-us/mission-control/scheduling-and-triggers) — configure when and how a Robot runs
+- [Progress & Results](/docs/en-us/mission-control/progress-and-results) — read logs, check status, and access deliverables

@@ -2,6 +2,122 @@
 slug: creating-a-robot
 ---
 
-# ロボットの作成
+# Robot を作る
 
-基本情報、アイデンティティ設定、プラットフォーム統合。
+ゼロから Robot を設定するのに約5分かかります。このガイドでは各フィールドが何をするものかを順に説明します。
+
+## 始める前に
+
+- Yao Engine が起動中で、Yao Agents が接続済み
+- 少なくとも1つの AI モデルが設定済み（Settings → Models）
+- Robot に何をさせたいか分かっている——大まかなイメージでも十分
+
+---
+
+## ステップ 1 — Mission Control を開いて Robot を追加
+
+左のサイドバーから **Mission Control** を開きます。Robot の一覧が表示されます（初めての場合は空です）。
+
+右上の **+ Add Task Agent** をクリックします。
+
+![Mission Control — Add Task Agent ボタンがある Robot リスト](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+---
+
+## ステップ 2 — Basic タブを記入
+
+**Basic** タブでは Robot の基本情報と動作モードを設定します。
+
+![Robot 設定 — Basic タブ](https://assets.yaoagents.com/en/mission/02-mission-create-basic-en-$__THEME.png)
+
+**Name（名前）** — 分かりやすい名前を付けます。リストやログに表示される名前です。例：「毎朝の市場まとめ」「週次レポート生成」「サポートメール仕分け」。
+
+**Workspace（ワークスペース）** — Robot が動作するサンドボックス環境を選びます。各ワークスペースはファイルとコンテキストが独立しています。チャット Expert のファイルと分けたい場合は専用のワークスペースを使いましょう。
+
+**Work mode（作業モード）** — 2つの選択肢：
+- **Autonomous** — スケジュールやイベントトリガーで自動実行、人手不要
+- **On Demand** — 毎回あなたが手動で起動する。開始タイミングを制御したい作業に向いています
+
+**Reports to（レポート先）** — Robot の出力結果を誰が受け取るかを指定します。ユーザーアカウントまたは別の Robot を設定できます。
+
+> 💡 どちらのモードを選ぶか迷ったら、まず **On Demand** を使いましょう。テストして満足できたら Autonomous に切り替えます。
+
+---
+
+## ステップ 3 — Identity タブを設定
+
+**Identity** タブでは Robot が何をするか、何を使えるかを定義します。
+
+![Robot 設定 — Identity タブ：役割説明とリソース割り当て](https://assets.yaoagents.com/en/mission/02-mission-create-identity-en-$__THEME.png)
+
+**役割説明** — Robot の仕事を普通の言葉で説明します。具体的に書いてください：
+- 何を担当するか
+- どんな入力を扱うか（メールの件名・URL・ファイル形式など）
+- どんな結果を出すか（レポート・要約・メールなど）
+
+何を書けばいいか分からない？**Generate** をクリックすれば、入力した名前をもとに役割説明の下書きを自動生成します。
+
+**AI Experts** — パイプライン内でこの Robot が呼び出せる AI Expert を選択します。市場データを分析する Robot には Market Scout を。メールレポートを送る Robot には Postman を割り当てましょう。
+
+**Tools（ツール）** — Robot が呼び出せる追加ツールを選択します（ウェブ検索・ファイル読み込み・API コネクターなど）。
+
+> 💡 **リソースを役割に合わせましょう。** 採用に例えると、財務分析を頼むのにデータへのアクセス権を与えないようなことはしません。明確な役割説明と適切な Expert・ツールの組み合わせが、Robot が安定して機能するかどうかを左右します。メール送信が必要なら Postman を、ウェブ検索が必要なら検索ツールを追加してください。
+
+---
+
+## ステップ 4 — 保存して実行
+
+**Save Changes** をクリックすると、Robot が Mission Control のリストに表示されます。
+
+初めて実行するには：
+- リストで Robot を選択して Active ビューを開く
+- **Assign Task** をクリック — 右側にパネルが開きタスクの説明を入力できます
+- Robot Host が説明を読み、目標を確認。あなたが承認するとパイプラインが開始されます
+
+進捗ビューで各ステージのリアルタイム状況を確認できます。→ [進捗と結果](/docs/ja-jp/mission-control/progress-and-results)
+
+---
+
+## ステップ 5 — インテグレーションの設定（任意）
+
+**Integrations** タブを開いて、Robot をメッセージングプラットフォームに接続したり API として公開したりできます。
+
+![Robot 設定 — Integrations タブ](https://assets.yaoagents.com/en/mission/02-mission-create-integrations-en-$__THEME.png)
+
+**メッセージングプラットフォーム** — WeChat・Telegram・Discord・DingTalk・Lark に接続します。プラットフォームの認証情報を貼り付けると、ユーザーがそのアプリから直接 Robot とやり取りできます。
+
+**API アクセス** — 各 Robot は自動的に OpenAI 互換の Chat Completions エンドポイントを持ちます。任意の OpenAI SDK・自動化ツール・社内システムからこれを呼び出して Robot をトリガーできます。
+
+---
+
+## 詳細設定（任意）
+
+Robot が安定して動いたら、**Advanced** タブで細かく調整できます。
+
+![詳細設定 — 追加受信者・並行数・パイプライン Agent・開発者オプション](https://assets.yaoagents.com/en/mission/02-mission-create-advanced-2-en-$__THEME.png)
+
+- **Additional Recipients** — デフォルトの「レポート先」以外の追加メール受信者を設定
+- **Concurrency** — 大量処理 Robot の最大同時実行数とキューサイズを設定
+- **Execution Pipeline** — パイプラインの各ステージ（Host Agent・Goals・Tasks・Delivery）のデフォルト Agent をカスタム Agent に置き換え
+- **Developer Options** — 納品時に Webhook URL へ結果を送信、または Yao Process を呼び出す
+
+→ [ステージ Agent を置き換える](/docs/ja-jp/mission-control/execution-pipeline/replacing-stage-agents)
+
+---
+
+## トラブルシューティング
+
+**Robot は動くが結果が悪い**
+Identity タブの役割説明を見直してください。これが最も重要な要素です——より具体的に書き、割り当てた AI Expert とツールがタスクに本当に合っているか確認してください。
+
+**Robot が結果をどこにも送らない**
+Basic タブの **Reports to** フィールドと、Identity タブに Postman または適切な納品 Expert が設定されているかを確認してください。
+
+**Robot をトリガーしたが何も起きない**
+作業モードが Autonomous の場合、設定したスケジュール通りにしか動きません。On Demand に切り替えるか、ダッシュボードから手動でトリガーしてください。
+
+## 次のステップ
+
+- [実行パイプライン](/docs/ja-jp/mission-control/execution-pipeline/pipeline-overview) — Robot 実行時のパイプライン内部で何が起きているか
+- [スケジュールとトリガー](/docs/ja-jp/mission-control/scheduling-and-triggers) — スケジュール設定やイベントトリガーの設定
+- [進捗と結果](/docs/ja-jp/mission-control/progress-and-results) — 実行の監視と成果物の取得

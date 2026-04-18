@@ -4,4 +4,49 @@ slug: replacing-stage-agents
 
 # Replacing Stage Agents
 
-Swap any default pipeline agent with one you installed or created.
+Each pipeline stage has a default AI Task Agent that handles it automatically. You can replace any of them with a custom agent — one you've installed from the Agent Hub or built yourself.
+
+## When to replace a stage agent
+
+The defaults work well for most Robots. Replace a stage agent when:
+
+- The default agent doesn't fit the Robot's specific domain (e.g. you want a specialized research agent for the Inspiration stage)
+- You've built a custom agent that formats output in a specific way the Delivery stage should use
+- You want to inject domain-specific validation logic in the Validation stage
+- You're fine-tuning a high-volume Robot and want tighter control over each step
+
+You don't need to replace every stage — replace only the ones where the default behavior isn't what you need.
+
+## How to replace a stage agent
+
+Open the Robot in **Mission Control**, go to **Settings → Advanced**, and scroll to the **Execution Pipeline** section. Each stage has a dropdown — set to "Use global default" by default.
+
+![Advanced settings — Execution Pipeline section with per-stage agent dropdowns](https://assets.yaoagents.com/en/mission/02-mission-create-advanced-2-en-$__THEME.png)
+
+1. Click the dropdown for the stage you want to customize
+2. Select a replacement agent from the list
+3. Click **Save Changes**
+
+The custom agent takes effect on the next run.
+
+> 💡 Not sure which agent to use? Check the Agent Hub for community-built stage agents, or ask the General Assistant to help you evaluate options.
+
+## Reverting to the default
+
+To go back to the default agent for a stage:
+
+1. Open the Robot's **Identity** tab
+2. Click the customized stage
+3. Select **Default** from the agent list
+4. Save
+
+## Constraints
+
+- A custom agent must declare itself compatible with the pipeline stage role it's replacing. Incompatible agents won't appear in the selection list.
+- If a custom agent is deleted from your hub, the stage falls back to the default automatically on the next run.
+
+## What's next
+
+- [Pipeline Overview](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — understand what each stage does
+- [Agent Hub](/docs/en-us/agent-hub/hub-overview) — find or install agents you can use as stage replacements
+- [Custom AI Experts](/docs/en-us/agent-hub/custom-assistants) — build your own agent to slot into a pipeline stage

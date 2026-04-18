@@ -2,6 +2,51 @@
 slug: replacing-stage-agents
 ---
 
-# 替換階段智能體
+# 替換階段 Agent
 
-在進階設定中，將任意階段的預設智能體替換為你安裝或建立的智能體。
+執行管道的每個階段都有一個預設 AI Task Agent 自動處理。你可以將其中任意一個替換為自訂 Agent——從 Agent Hub 安裝的，或者自己構建的。
+
+## 什麼時候需要替換
+
+預設 Agent 對大多數 Robot 都夠用。在以下情況考慮替換：
+
+- 預設 Agent 不適合 Robot 的特定領域（比如你想給 Inspiration 階段用一個專業的調研 Agent）
+- 你構建了一個按特定格式輸出的自訂 Agent，希望 Delivery 階段使用它
+- 你想在 Validation 階段注入領域專屬的驗證邏輯
+- 你在優化高流量 Robot，需要對每個步驟更精細地控制
+
+不需要替換每個階段——只替換那些預設行為不滿足需求的。
+
+## 如何替換階段 Agent
+
+開啟 **Mission Control** 中的 Robot，進入 **Settings → Advanced**，捲動到 **Execution Pipeline** 部分。每個階段都有一個下拉選單，預設選擇「Use global default」。
+
+![進階設定 — Execution Pipeline 部分，每個階段有獨立的 Agent 下拉選單](https://assets.yaoagents.com/en/mission/02-mission-create-advanced-2-en-$__THEME.png)
+
+1. 點擊你想自訂的階段的下拉選單
+2. 從清單中選擇替換 Agent
+3. 點擊 **Save Changes**
+
+下次執行時自訂 Agent 即生效。
+
+> 💡 不確定用哪個 Agent？去 Agent Hub 找社群構建的階段 Agent，或者問 General Assistant 幫你評估選項。
+
+## 恢復預設
+
+恢復某個階段的預設 Agent：
+
+1. 開啟 Robot 的 **Advanced** 設定
+2. 點擊已自訂的階段
+3. 從清單中選擇 **Use global default**（使用全域預設）
+4. 儲存
+
+## 限制
+
+- 自訂 Agent 必須宣告自己與所替換的管道階段角色相容。不相容的 Agent 不會出現在選擇清單中。
+- 如果自訂 Agent 被從 Hub 中刪除，下次執行時該階段會自動退回預設 Agent。
+
+## 下一步
+
+- [執行管道概覽](/docs/zh-tw/mission-control/execution-pipeline/pipeline-overview) — 了解每個階段的作用
+- [Agent Hub](/docs/zh-tw/agent-hub/hub-overview) — 查找或安裝可用作階段替換的 Agent
+- [自訂 AI Expert](/docs/zh-tw/agent-hub/custom-assistants) — 構建自己的 Agent 嵌入管道階段

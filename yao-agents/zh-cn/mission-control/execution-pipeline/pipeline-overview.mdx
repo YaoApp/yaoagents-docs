@@ -2,6 +2,68 @@
 slug: pipeline-overview
 ---
 
-# 流水线概览
+# 执行管道概览
 
-想象一条流水线——每个工位有一个专人负责，产品从头走到尾。
+每个 Robot 都运行一条 Pipeline——一系列固定阶段，把一个目标一步步转化成最终交付的结果。每个阶段由专属的 AI Task Agent 负责。
+
+> 把它想象成一条生产线。每个工位都有专业人员，工件从头到尾流转，不需要你管理衔接。
+
+## 五个阶段
+
+```
+Inspiration → Goals → Tasks → Validation → Delivery
+```
+
+### Inspiration（灵感/任务简报）
+
+**Inspiration** Agent 打开管道。它读取 Robot 的角色描述、可用资源，以及本次运行的上下文（数据、文件、消息），生成一份结构化的任务简报——清晰说明需要做什么、怎么做。
+
+这份简报是后续所有阶段的工作依据。Robot 的 Identity 配置越好，简报质量就越高，下游结果也就越好。
+
+### Goals（目标分解）
+
+**Goals** Agent 接过简报，将其转化为一组高层次目标——具体、可衡量、有明确交付物。这是「我们要达成什么」的层面，在执行开始之前。
+
+### Tasks（任务执行）
+
+**Tasks** Agent 把每个目标拆解成具体的可执行步骤，分配给对应的 AI Expert 或工具。实际工作在这里发生——调研、撰写、数据处理、API 调用、文件生成，以及 Robot 被配置去做的一切。
+
+目标内的任务按顺序执行，一个目标完成后才进入验证。
+
+### Validation（结果验证）
+
+**Validation** Agent 审查 Tasks 阶段的输出，对照 Goals 阶段设定的预期——完整性、准确性、格式、质量标准。
+
+输出通过则进入 Delivery；不通过则标记问题或请求重试。
+
+### Delivery（交付）
+
+**Delivery** Agent 打包最终输出，发送到配置好的目标——邮件、消息平台、文件路径或 API 响应。这是最后一步，Delivery 完成即代表本次运行结束。
+
+---
+
+## Robot Host 阶段
+
+Robot 被**手动触发**时，管道启动前会先有一个特殊的 **Robot Host** Agent 介入。点击 Assign Task 后，Robot Host 与你进行一次简短对话，确认任务目标——就像出任务前的快速情况通报。
+
+确认后，Robot Host 把任务移交给 Inspiration 阶段，管道正常运行。
+
+Robot Host 不会在计划触发或 Webhook 触发时运行——那两种情况下管道直接从 Inspiration 开始。
+
+---
+
+## 默认 Agent 与自定义
+
+每个阶段都有内置的默认 Agent，无需任何配置即可使用。大多数场景下不需要改动。
+
+如果你需要对某个阶段的行为进行精确控制——比如让 Delivery 阶段使用自定义格式模板，或让 Tasks 阶段优先调用特定工具——可以将默认 Agent 替换为你安装或构建的自定义 Agent。
+
+→ [替换阶段 Agent](/docs/zh-cn/mission-control/execution-pipeline/replacing-stage-agents)
+
+---
+
+## 下一步
+
+- [替换阶段 Agent](/docs/zh-cn/mission-control/execution-pipeline/replacing-stage-agents) — 将默认管道 Agent 替换为自定义 Agent
+- [进度与结果](/docs/zh-cn/mission-control/progress-and-results) — 实时查看各阶段执行情况
+- [创建 Robot](/docs/zh-cn/mission-control/creating-a-robot) — 配置驱动 Inspiration 阶段的 Identity

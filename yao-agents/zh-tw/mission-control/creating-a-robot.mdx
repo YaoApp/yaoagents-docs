@@ -2,6 +2,122 @@
 slug: creating-a-robot
 ---
 
-# 建立機器人
+# 建立 Robot
 
-基本資訊、身份設定、平台整合。
+從零開始設定一個 Robot，大約需要五分鐘。本文逐欄位說明每項設定的作用。
+
+## 開始之前
+
+- Yao Engine 已執行，Yao Agents 已連線
+- 至少設定了一個 AI 模型（Settings → Models）
+- 知道你想讓 Robot 做什麼——哪怕只是個大概描述也夠了
+
+---
+
+## 第一步 — 開啟 Mission Control，新增 Robot
+
+從左側邊欄開啟 **Mission Control**，你會看到 Robot 清單（第一次則為空）。
+
+點擊右上角的 **+ Add Task Agent**。
+
+![Mission Control — 含有 Add Task Agent 按鈕的 Robot 清單](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+---
+
+## 第二步 — 填寫 Basic 標籤頁
+
+**Basic** 標籤頁設定 Robot 的基本資訊和工作模式。
+
+![Robot 設定 — Basic 標籤頁](https://assets.yaoagents.com/en/mission/02-mission-create-basic-en-$__THEME.png)
+
+**Name（名稱）** — 起一個清晰、有描述性的名字，這是你在清單和日誌中看到的名稱。範例："每日市場簡報"、"每週報告產生"、"客服郵件分類"。
+
+**Workspace（工作區）** — 選擇 Robot 執行的沙盒環境。每個工作區有獨立的檔案和情境。如果希望 Robot 的檔案與聊天 Expert 隔離，使用獨立工作區。
+
+**Work mode（工作模式）** — 兩個選項：
+- **Autonomous** — 按計畫或事件觸發，無需人工介入
+- **On Demand** — 每次由你手動啟動，適合需要控制啟動時機的任務
+
+**Reports to（匯報對象）** — 指定誰接收 Robot 的輸出結果，可以是使用者帳號或另一個 Robot。正確設定可確保結果送達正確的地方。
+
+> 💡 不確定選哪個工作模式？先用 **On Demand**。測試滿意後再切換到 Autonomous。
+
+---
+
+## 第三步 — 設定 Identity 標籤頁
+
+**Identity** 標籤頁定義 Robot 做什麼，以及它能用什麼。
+
+![Robot 設定 — Identity 標籤頁，含角色描述和資源分配](https://assets.yaoagents.com/en/mission/02-mission-create-identity-en-$__THEME.png)
+
+**角色描述** — 用日常語言描述 Robot 的工作職責，要具體說明：
+- 它負責什麼
+- 處理什麼輸入（郵件主題、URL、檔案類型等）
+- 產出什麼結果（報告、摘要、郵件等）
+
+不知道從哪裡寫起？點擊 **Generate**——它會根據你填的名稱自動起草一份角色描述。
+
+**AI Experts** — 選擇這個 Robot 在執行管道中可以呼叫的 AI Expert。分析市場資料的 Robot 應該配 Market Scout；傳送郵件報告的應該配 Postman。
+
+**Tools（工具）** — 選擇 Robot 可以呼叫的額外工具（網路搜尋、檔案讀取、API 連接器等）。
+
+> 💡 **讓資源與角色匹配。** 把它想像成招募：你不會讓人做財務分析卻不給他看資料的權限。清晰的職責描述加上合適的 Expert 和工具，是 Robot 能穩定工作的關鍵。需要發郵件就給它 Postman，需要搜尋網路就加搜尋工具。
+
+---
+
+## 第四步 — 儲存並執行
+
+完成後點擊 **Save Changes**，Robot 出現在 Mission Control 清單中。
+
+第一次執行：
+- 在清單中選取 Robot，開啟其 Active 視圖
+- 點擊 **Assign Task** — 右側彈出面板，輸入任務描述
+- Robot Host 讀取描述，確認目標，你核准後管道啟動
+
+在進度視圖中即時觀察每個階段的執行狀態。→ [進度與結果](/docs/zh-tw/mission-control/progress-and-results)
+
+---
+
+## 第五步 — 設定整合（選用）
+
+開啟 **Integrations** 標籤頁，將 Robot 接入訊息平台或作為 API 公開。
+
+![Robot 設定 — Integrations 標籤頁](https://assets.yaoagents.com/en/mission/02-mission-create-integrations-en-$__THEME.png)
+
+**訊息平台** — 接入微信、Telegram、Discord、釘釘或飛書。貼上平台憑證後，使用者可以直接在那個應用裡和 Robot 對話。
+
+**API 存取** — 每個 Robot 自動獲得一個相容 OpenAI 介面的 Chat Completions 端點。可以從任何 OpenAI SDK、自動化工具或內部系統呼叫它來觸發 Robot。
+
+---
+
+## 進階設定（選用）
+
+Robot 執行正常後，可以在 **Advanced** 標籤頁進行精細調整。
+
+![進階設定 — 收件人、並發、執行管道 Agent 和開發者選項](https://assets.yaoagents.com/en/mission/02-mission-create-advanced-2-en-$__THEME.png)
+
+- **Additional Recipients** — 在預設的「匯報對象」之外新增更多郵件收件人
+- **Concurrency** — 設定高並發 Robot 的最大同時執行數和佇列大小
+- **Execution Pipeline** — 將管道任意階段（Host Agent、Goals、Tasks、Delivery）的預設 Agent 替換為自訂 Agent
+- **Developer Options** — 在交付時推送結果到 Webhook URL，或呼叫 Yao Process
+
+→ [替換階段 Agent](/docs/zh-tw/mission-control/execution-pipeline/replacing-stage-agents)
+
+---
+
+## 常見問題
+
+**Robot 執行了，但結果很差**
+回到 Identity 標籤頁重新審視。角色描述是最關鍵的因素——寫得更具體一些，同時檢查分配的 AI Expert 和工具是否真的符合任務需要。
+
+**Robot 沒有把結果送到任何地方**
+檢查 Basic 標籤頁的 **Reports to** 欄位，以及 Identity 標籤頁中是否列出了 Postman 或對應的交付 Expert。
+
+**我觸發了 Robot，但什麼都沒發生**
+如果工作模式是 Autonomous，它只按設定的計畫執行。切換到 On Demand 或從控制台手動觸發。
+
+## 下一步
+
+- [執行管道](/docs/zh-tw/mission-control/execution-pipeline/pipeline-overview) — 了解 Robot 執行時管道內部發生了什麼
+- [計畫與觸發](/docs/zh-tw/mission-control/scheduling-and-triggers) — 設定計畫或設定事件觸發
+- [進度與結果](/docs/zh-tw/mission-control/progress-and-results) — 監控執行狀態，取得交付物

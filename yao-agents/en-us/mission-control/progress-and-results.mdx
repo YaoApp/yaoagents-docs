@@ -4,4 +4,63 @@ slug: progress-and-results
 
 # Progress & Results
 
-Running status, logs, deliverables, pause and resume.
+While a Robot is running — and after it finishes — Mission Control shows you exactly what happened, stage by stage.
+
+## Watching a run in real time
+
+Select a Robot in the Mission Control list to open its detail view. When the Robot is active, you'll see the pipeline running live: each stage lights up as it starts and goes green when it completes.
+
+![Pipeline execution in progress — stages running with real-time status](https://assets.yaoagents.com/en/mission/03-mission-running-en-$__THEME.png)
+
+Each stage shows:
+- **Status** — waiting, running, completed, or failed
+- **Agent** — which AI Task Agent is handling this stage
+- **Duration** — how long the stage took
+
+If a stage fails, it stops there. The error is logged with a message explaining what went wrong.
+
+---
+
+## Reading the results
+
+When the pipeline finishes, the result appears in the **Results** panel.
+
+![Mission result — structured output from the completed pipeline](https://assets.yaoagents.com/en/mission/04-mission-result-en-$__THEME.png)
+
+What you see depends on what the Robot's Delivery stage was configured to produce:
+
+- **Text report** — rendered Markdown, readable inline
+- **File** — download link for a generated document, spreadsheet, or PDF
+- **Message sent** — confirmation that the output was delivered to Telegram, Discord, email, etc.
+- **API response** — if triggered via Webhook, the caller received the output directly
+
+---
+
+## Run history
+
+Every run is saved. Use the run history to:
+- Compare results across different runs
+- Diagnose why a particular run produced unexpected output
+- Confirm that scheduled runs completed successfully
+
+Each history entry shows the trigger type (scheduled, manual, Webhook), start time, duration, and outcome.
+
+---
+
+## Pausing and resuming
+
+To pause a Robot without deleting it:
+1. Select it in the Mission Control list
+2. Toggle the **Active** switch to off
+
+The Robot stays configured but stops running on its schedule. Toggle it back on to resume.
+
+For a Robot that's currently running, click **Stop** to cancel the current run. The run is logged as cancelled.
+
+---
+
+## What's next
+
+- [Scheduling & Triggers](/docs/en-us/mission-control/scheduling-and-triggers) — adjust when the Robot runs
+- [Execution Pipeline](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — understand what happens inside each stage
+- [Creating a Robot](/docs/en-us/mission-control/creating-a-robot) — build a new Robot from scratch

@@ -4,4 +4,82 @@ slug: scheduling-and-triggers
 
 # Scheduling & Triggers
 
-Scheduled execution, event triggers, Webhook notifications.
+Control when your Robots run — on a fixed clock, continuously in the background, or on demand.
+
+## Work modes
+
+Every Robot has a **Work mode** that determines how it's triggered. You set this in the Robot's **Basic** tab.
+
+| Mode | How it runs | Best for |
+|------|-------------|----------|
+| **Autonomous** | On a schedule or event trigger | Recurring jobs: daily reports, hourly monitors, scheduled processing |
+| **On Demand** | You kick it off manually each time | Jobs you want to control precisely — or test before automating |
+
+---
+
+## Scheduled execution
+
+When work mode is **Autonomous**, open the Robot's **Schedule** tab to configure when it runs.
+
+![Work Schedule settings — three mode options with timezone selector](https://assets.yaoagents.com/en/mission/05-mission-schedule-en-$__THEME.png)
+
+There are three modes:
+
+**At Specific Times** — run at a fixed time: daily at 08:00, every Monday at 09:00, or any other clock-based schedule. Choose the day(s) and time, and the Robot fires at that moment each cycle.
+
+**At Regular Intervals** — run every N minutes, hours, or days. Set the number and unit (e.g. every 2 hours), and the Robot runs on that cadence continuously. Good for monitors and processors that need to check in frequently.
+
+**Continuous** — the Robot starts a new run immediately after the previous one finishes, with no gap. Use this for agents that should always be active.
+
+**Timezone** — all schedule times are interpreted in the timezone you set here. Pick the timezone that matches where your data or audience is, not necessarily where the machine is running.
+
+> 💡 Results are sent to the manager (Reports to) by default. To add more recipients, configure them in the **Advanced** tab.
+
+---
+
+## Continuous mode
+
+Set the interval to **Continuous** and the Robot runs in a loop without stopping — each run begins immediately after the previous one finishes.
+
+Use continuous mode for:
+- Live monitors that watch for incoming data
+- Inbox processors that should always be ready
+- Background agents that respond to events as they arrive
+
+> ⚠️ Continuous mode can be resource-intensive. Make sure the Robot's pipeline is efficient and its AI Task Agents aren't doing unnecessary work on each cycle.
+
+---
+
+## Manual triggers
+
+Any Robot can be triggered manually from the Mission Control dashboard, regardless of its schedule.
+
+Open the Robot and click **Assign Task**. A panel slides in on the right where you describe what you want done.
+
+![Robot idle screen — Assign Task button in the center](https://assets.yaoagents.com/en/mission/06-mission-assign-idle-en-$__THEME.png)
+
+Type your task description and send it. Robot Host reads it, summarizes the goal back to you, and asks you to confirm before the pipeline starts.
+
+![Assign Task panel — task description sent, Robot Host confirms goal before starting](https://assets.yaoagents.com/en/mission/06-mission-assign-confirm-en-$__THEME.png)
+
+Once you confirm, the pipeline runs immediately. This is useful when the job changes each time, or when you want to review the goal before committing.
+
+---
+
+## Webhook triggers
+
+Each Robot exposes a Webhook URL you can call from an external system. When the Webhook receives a request, the Robot runs immediately.
+
+Find the Webhook URL in the Robot's **Integrations** tab under **API Access**. The endpoint is OpenAI-compatible — you can call it with any OpenAI SDK by treating the Robot like a model.
+
+Common Webhook use cases:
+- Trigger a Robot when a new file lands in a folder (via a file watcher)
+- Run a report when a customer submits a form
+- Start a task from a Slack command or external automation
+
+---
+
+## What's next
+
+- [Progress & Results](/docs/en-us/mission-control/progress-and-results) — monitor runs and access deliverables
+- [Execution Pipeline](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — understand what happens inside the pipeline when a Robot runs

@@ -2,6 +2,65 @@
 slug: progress-and-results
 ---
 
-# 查看进度与结果
+# 进度与结果
 
-运行状态、日志、产出物、中断与恢复。
+Robot 运行期间和结束后，Mission Control 都会逐阶段展示发生了什么。
+
+## 实时观察运行状态
+
+在 Mission Control 列表中选中一个 Robot，打开其详情视图。Robot 活跃时，你可以看到管道实时运行：每个阶段启动时亮起，完成时变绿。
+
+![Pipeline 执行中 — 各阶段实时状态显示](https://assets.yaoagents.com/en/mission/03-mission-running-en-$__THEME.png)
+
+每个阶段显示：
+- **状态** — 等待中、运行中、已完成或失败
+- **Agent** — 哪个 AI Task Agent 负责这个阶段
+- **耗时** — 这个阶段用了多长时间
+
+某个阶段失败时，管道在那里停止。错误日志会解释出了什么问题。
+
+---
+
+## 查看结果
+
+管道完成后，结果显示在 **Results** 面板中。
+
+![任务结果 — 已完成管道的结构化输出](https://assets.yaoagents.com/en/mission/04-mission-result-en-$__THEME.png)
+
+结果的形式取决于 Robot 的 Delivery 阶段配置：
+
+- **文本报告** — 渲染后的 Markdown，可直接在线阅读
+- **文件** — 生成的文档、表格或 PDF 的下载链接
+- **消息已发送** — 确认输出已成功投递到 Telegram、Discord、邮件等
+- **API 响应** — 如果通过 Webhook 触发，调用方已直接收到输出
+
+---
+
+## 运行历史
+
+每次运行都会保存记录。查看运行历史可以：
+- 对比不同运行的结果
+- 诊断某次运行为何产出了意外结果
+- 确认定时运行是否按时完成
+
+每条历史记录显示触发类型（计划、手动、Webhook）、开始时间、耗时和运行结果。
+
+---
+
+## 暂停与恢复
+
+暂停 Robot 而不删除它：
+1. 在 Mission Control 列表中选中它
+2. 将 **Active** 开关拨到关闭
+
+Robot 保留所有配置，但停止按计划运行。拨回开启即可恢复。
+
+如果 Robot 正在运行，点击 **Stop** 取消当前这次运行。该次运行被记录为已取消。
+
+---
+
+## 下一步
+
+- [计划与触发](/docs/zh-cn/mission-control/scheduling-and-triggers) — 调整 Robot 的运行时机
+- [执行管道](/docs/zh-cn/mission-control/execution-pipeline/pipeline-overview) — 了解每个阶段内部发生了什么
+- [创建 Robot](/docs/zh-cn/mission-control/creating-a-robot) — 从零开始构建一个新 Robot

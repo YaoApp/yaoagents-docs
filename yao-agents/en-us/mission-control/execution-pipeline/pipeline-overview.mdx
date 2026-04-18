@@ -4,4 +4,66 @@ slug: pipeline-overview
 
 # Pipeline Overview
 
-Think of it as an assembly line — each station has a specialist. Products flow from start to finish.
+Every Robot runs through a Pipeline — a fixed sequence of stages that takes a goal and turns it into a delivered result. Each stage is handled by a specialist AI Task Agent.
+
+> Think of it as a production line. Each station has a specialist. Work flows from start to finish without you managing the hand-offs.
+
+## The five stages
+
+```
+Inspiration → Goals → Tasks → Validation → Delivery
+```
+
+### Inspiration
+
+The **Inspiration** agent opens the pipeline. It reads the Robot's role description, available resources, and any context from the current run (data, files, messages) to produce a structured brief — a clear statement of what needs to be done and how.
+
+This brief is what all subsequent stages work from. A well-configured Robot identity produces a better brief, which leads to better results downstream.
+
+### Goals
+
+The **Goals** agent takes the brief and converts it into a set of high-level objectives — concrete, measurable, with clear deliverables. This is the "what we're trying to achieve" layer before execution starts.
+
+### Tasks
+
+The **Tasks** agent breaks each goal into specific executable steps and assigns them to the appropriate AI Experts or tools. This is where the actual work happens — research, writing, data processing, API calls, file generation, whatever the Robot is configured to do.
+
+Tasks run in sequence within a goal, and goals complete before moving to validation.
+
+### Validation
+
+The **Validation** agent reviews the output from the Tasks stage. It checks whether the results meet the expectations set in the Goals stage — completeness, accuracy, format, and quality criteria.
+
+If the output passes, the pipeline moves to Delivery. If it doesn't, the Validation agent can flag issues or request a retry.
+
+### Delivery
+
+The **Delivery** agent packages the final output and sends it to the configured destination — an email, a messaging platform, a file path, or an API response. This is the last step; once Delivery completes, the run is done.
+
+---
+
+## The Robot Host stage
+
+When a Robot is triggered manually, you click **Assign Task** from the Robot's Active view. A panel slides in where you describe the task. **Robot Host** reads your description, summarizes the goal, and asks you to confirm — think of it as a quick briefing before sending the team out.
+
+Once you confirm, Robot Host hands off to the Inspiration stage and the pipeline runs normally.
+
+Robot Host does not run on scheduled or Webhook-triggered runs — the pipeline starts directly from Inspiration.
+
+---
+
+## Default agents and customization
+
+Each stage comes with a built-in default agent that works without any configuration. For most use cases, you don't need to change anything.
+
+If you need precise control over how a specific stage behaves — say, you want the Delivery stage to use a custom formatting template, or you want the Tasks stage to prioritize certain tools — you can replace the default agent with one you've installed or built.
+
+→ [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents)
+
+---
+
+## What's next
+
+- [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents) — swap a default pipeline agent with a custom one
+- [Progress & Results](/docs/en-us/mission-control/progress-and-results) — watch stage-by-stage execution in real time
+- [Creating a Robot](/docs/en-us/mission-control/creating-a-robot) — configure the identity that feeds the Inspiration stage

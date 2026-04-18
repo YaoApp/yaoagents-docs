@@ -2,6 +2,51 @@
 slug: replacing-stage-agents
 ---
 
-# ステージエージェントの置き換え
+# ステージ Agent を置き換える
 
-デフォルトのパイプラインエージェントを、インストールまたは作成したものに差し替え。
+パイプラインの各ステージにはデフォルトの AI Task Agent が自動的に割り当てられています。そのうちのどれでも、Agent Hub からインストールしたものや自作のカスタム Agent に置き換えることができます。
+
+## いつ置き換えるべきか
+
+デフォルト Agent はほとんどの Robot に対して十分です。以下のような場合に置き換えを検討してください：
+
+- デフォルト Agent が Robot の特定ドメインに合わない（例：Inspiration ステージに専門の調査 Agent を使いたい）
+- 特定のフォーマットで出力するカスタム Agent を作り、Delivery ステージで使わせたい
+- Validation ステージにドメイン固有の検証ロジックを組み込みたい
+- 大量処理 Robot を最適化していて、各ステップをより細かく制御したい
+
+すべてのステージを置き換える必要はありません——デフォルトの動作が要件を満たさないステージだけ置き換えてください。
+
+## ステージ Agent を置き換える方法
+
+**Mission Control** で Robot を開き、**Settings → Advanced** に進み、**Execution Pipeline** セクションまでスクロールします。各ステージにドロップダウンがあり、デフォルトは「Use global default」になっています。
+
+![詳細設定 — Execution Pipeline セクション、各ステージに個別の Agent ドロップダウン](https://assets.yaoagents.com/en/mission/02-mission-create-advanced-2-en-$__THEME.png)
+
+1. カスタマイズしたいステージのドロップダウンをクリック
+2. リストから置き換え Agent を選択
+3. **Save Changes** をクリック
+
+次の実行からカスタム Agent が有効になります。
+
+> 💡 どの Agent を使えばいいか分からない？Agent Hub でコミュニティが作ったステージ Agent を探すか、General Assistant にどれが良いか評価してもらいましょう。
+
+## デフォルトに戻す
+
+ステージをデフォルト Agent に戻すには：
+
+1. Robot の **Advanced** 設定を開く
+2. カスタマイズ済みのステージをクリック
+3. リストから **Use global default** を選択
+4. 保存
+
+## 制約事項
+
+- カスタム Agent は、置き換えるパイプラインステージのロールと互換性があることを宣言している必要があります。互換性のない Agent は選択リストに表示されません。
+- カスタム Agent が Hub から削除された場合、次回の実行でそのステージは自動的にデフォルト Agent にフォールバックします。
+
+## 次のステップ
+
+- [パイプライン概要](/docs/ja-jp/mission-control/execution-pipeline/pipeline-overview) — 各ステージの役割を理解する
+- [Agent Hub](/docs/ja-jp/agent-hub/hub-overview) — ステージ置き換えに使える Agent を探す・インストールする
+- [カスタム AI Expert](/docs/ja-jp/agent-hub/custom-assistants) — パイプラインステージに組み込む自作 Agent を作る

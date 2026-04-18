@@ -2,6 +2,84 @@
 slug: scheduling-and-triggers
 ---
 
-# 定時與觸發
+# 計畫與觸發
 
-定時執行、事件觸發、Webhook 通知。
+控制 Robot 何時執行——按固定時鐘、持續在背景，或按需手動觸發。
+
+## 工作模式
+
+每個 Robot 都有一個 **Work mode**，決定它如何被觸發。在 Robot 的 **Basic** 標籤頁中設定。
+
+| 模式 | 執行方式 | 適合 |
+|------|---------|------|
+| **Autonomous** | 按計畫或事件觸發 | 重複性工作：每日報告、每小時監控、定時處理 |
+| **On Demand** | 每次由你手動啟動 | 需要精確控制啟動時機的任務，或測試階段 |
+
+---
+
+## 定時執行
+
+工作模式為 **Autonomous** 時，開啟 Robot 的 **Schedule** 標籤頁設定執行時間。
+
+![Work Schedule 設定 — 三種模式選項與時區選擇器](https://assets.yaoagents.com/en/mission/05-mission-schedule-en-$__THEME.png)
+
+有三種模式：
+
+**At Specific Times（定時）** — 在固定時刻執行：每天 08:00、每週一 09:00，或任意基於時鐘的計畫。選好日期和時間，Robot 在每個週期的那個時刻觸發。
+
+**At Regular Intervals（按間隔）** — 每隔 N 分鐘、小時或天執行一次。設定數字和單位（例如每 2 小時），Robot 按這個節奏持續執行。適合需要頻繁檢查的監控和處理任務。
+
+**Continuous（持續）** — 上一次執行結束後立即開始下一次，不間斷循環。用於需要始終保持活躍的 Agent。
+
+**Timezone（時區）** — 所有計畫時間按這裡設定的時區解讀。選擇你的資料或受眾所在的時區，不一定是機器所在的時區。
+
+> 💡 結果預設傳送給匯報對象（Reports to）。如需新增更多收件人，在 **Advanced** 標籤頁中設定。
+
+---
+
+## 持續模式
+
+將計畫設定為 **Continuous**，Robot 就會不間斷循環執行——每次執行結束後立即開始下一次。
+
+適合持續模式的場景：
+- 監聽新資料的即時監控
+- 需要隨時就緒的郵件處理器
+- 隨時回應事件的背景 Agent
+
+> ⚠️ 持續模式可能消耗較多資源。確保 Robot 的執行管道足夠高效，AI Task Agent 在每個週期不做無用功。
+
+---
+
+## 手動觸發
+
+無論計畫如何設定，任何 Robot 都可以從 Mission Control 控制台手動觸發。
+
+開啟 Robot，點擊 **Assign Task**，右側彈出面板，在這裡描述你想做什麼。
+
+![Robot 閒置介面 — 中央顯示 Assign Task 按鈕](https://assets.yaoagents.com/en/mission/06-mission-assign-idle-en-$__THEME.png)
+
+輸入任務描述並傳送。Robot Host 讀取後，把目標摘要回饋給你，並要求你確認再啟動管道。
+
+![Assign Task 面板 — 任務描述已傳送，Robot Host 確認目標後啟動](https://assets.yaoagents.com/en/mission/06-mission-assign-confirm-en-$__THEME.png)
+
+確認後管道立即啟動。適合每次任務內容不同，或希望在執行前審核目標的場景。
+
+---
+
+## Webhook 觸發
+
+每個 Robot 都有一個可從外部系統呼叫的 Webhook URL。Webhook 收到請求後，Robot 立即執行。
+
+在 Robot 的 **Integrations** 標籤頁的 **API Access** 下找到 Webhook URL。該端點相容 OpenAI 介面——可以用任何 OpenAI SDK 呼叫它，把 Robot 當作一個模型來使用。
+
+常見 Webhook 使用場景：
+- 新檔案落入某個目錄時觸發 Robot（透過檔案監聽器）
+- 客戶提交表單時自動執行報告
+- 透過 Slack 指令或外部自動化工具啟動任務
+
+---
+
+## 下一步
+
+- [進度與結果](/docs/zh-tw/mission-control/progress-and-results) — 監控執行狀態，取得交付物
+- [執行管道](/docs/zh-tw/mission-control/execution-pipeline/pipeline-overview) — 了解 Robot 執行時管道內部發生了什麼

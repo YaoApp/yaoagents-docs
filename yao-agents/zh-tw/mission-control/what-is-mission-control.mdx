@@ -2,6 +2,54 @@
 slug: what-is-mission-control
 ---
 
-# 什麼是任務控制中心
+# 什麼是 Mission Control
 
-核心理念：你是總指揮，編排一組專家完成一件事。
+Mission Control 是 Yao Agents 的任務自動化中心。你在這裡構建 Robot——自主執行的工作者，按計畫運行或回應觸發事件——它們不需要你每次手動發起，自己就能把事情做完。
+
+> 你是總指揮。定好目標，分配團隊，讓它運轉。
+
+## 為什麼需要 Mission Control
+
+AI Expert 很強，但它們是被動的——你問它才幹活。如果你每天早上都需要做同樣的事，或者每小時都要處理一批資料，就得每次去問。這不是長久之計。
+
+Mission Control 改變了這個模式。你把一項工作描述一次：Robot 做什麼、有哪些資源、什麼時候執行。之後它自己處理——收集、處理、撰寫、傳送——然後把結果回報給你。
+
+## Robot 能做什麼
+
+- **按計畫工作** — 每天早報、每週彙整、每小時資料巡檢。設定一次，永久生效。
+- **回應事件** — 被 Webhook、訊息或 API 呼叫觸發時立即執行。
+- **接收手動任務** — 點擊 **Assign Task**，描述任務，Robot Host 確認目標後直接進入執行管道。
+- **把結果送到你需要的地方** — 發郵件、推送到 Telegram、發到 Discord、呼叫 API，輸出去你工作的地方。
+- **協調一支 AI Task Agent 團隊** — 每個 Robot 執行一條執行管道：專屬 Agent 依序處理規劃、調研、執行、驗證和交付。
+
+![Mission Control — 顯示活躍 Robot 及狀態和最近執行時間的列表](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+## 運作原理
+
+Robot 被觸發時——無論是按計畫還是手動——它會執行一條 **Pipeline**：一系列固定階段，每個階段由專屬 AI Task Agent 負責。
+
+```
+Inspiration → Goals → Tasks → Validation → Delivery
+```
+
+每個階段把輸出傳給下一個。Robot Host 階段處理人機互動——手動觸發 Robot 時，它先與你確認任務目標，再啟動管道。
+
+每個階段的預設 Agent 開箱即用，無需設定。如果需要對某個環節精確控制，可以換成自訂 Agent。→ [替換階段 Agent](/docs/zh-tw/mission-control/execution-pipeline/replacing-stage-agents)
+
+## Robot 和 AI Expert 的差異
+
+| | AI Expert | Robot（Task Agent）|
+|---|---|---|
+| **怎麼啟動** | 你開啟對話發起請求 | 計畫、事件、Webhook 或手動 Assign Task |
+| **誰在驅動** | 你，即時參與 | 自主執行，不需要你守著 |
+| **適合什麼** | 一次性任務、探索、提問 | 重複性工作、自動化工作流程 |
+| **輸出到哪裡** | 聊天視窗裡的對話回覆 | 結構化結果，送達指定目標 |
+
+日常任務和問題用 AI Expert。需要定期或自動完成的事，建一個 Robot。
+
+## 下一步
+
+- [建立 Robot](/docs/zh-tw/mission-control/creating-a-robot) — 幾分鐘內設定好你的第一個 Robot
+- [執行管道](/docs/zh-tw/mission-control/execution-pipeline/pipeline-overview) — 了解 Robot 執行時經歷的各個階段
+- [計畫與觸發](/docs/zh-tw/mission-control/scheduling-and-triggers) — 設定 Robot 何時、如何執行
+- [進度與結果](/docs/zh-tw/mission-control/progress-and-results) — 查看日誌、確認狀態、取得交付物

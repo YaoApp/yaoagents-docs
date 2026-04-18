@@ -2,6 +2,54 @@
 slug: what-is-mission-control
 ---
 
-# ミッションコントロールとは
+# Mission Control とは
 
-コアアイデア：あなたが指揮者。専門家を編成し、ワークフローを定義。
+Mission Control は Yao Agents のタスク自動化センターです。ここで Robot を構築します——スケジュールに従って動作したりトリガーに反応したりする自律ワーカーで、毎回あなたが指示しなくても仕事を完了させます。
+
+> あなたは総司令官。目標を定め、チームを編成し、動かしてください。
+
+## なぜ Mission Control が必要なのか
+
+AI Expert は強力ですが、受動的です——あなたが聞いたときだけ動きます。毎朝同じことをする必要があったり、毎時間データを処理しなければならないなら、毎回依頼し続けなければなりません。それでは持続しません。
+
+Mission Control はこのモデルを変えます。仕事を一度説明するだけです：Robot が何をするか、どんなリソースがあるか、いつ動くか。あとは Robot が自分でこなします——収集、処理、執筆、送信——そして結果をあなたに報告します。
+
+## Robot にできること
+
+- **スケジュール通りに働く** — 毎朝のブリーフィング、週次レポート、毎時のデータチェック。一度設定すれば永続的に動きます。
+- **イベントに反応する** — Webhook・メッセージ・API コールでトリガーされると即座に実行します。
+- **手動タスクを受け付ける** — **Assign Task** をクリックしてタスクを説明すると、Robot Host が目標を確認してからパイプラインを開始します。
+- **結果を必要な場所に届ける** — メール送信・Telegram への通知・Discord への投稿・API コール。出力があなたの作業場所へ届きます。
+- **AI Task Agent チームを統率する** — 各 Robot はパイプラインを実行します：専門 Agent が計画・調査・実行・検証・納品を順番に担当します。
+
+![Mission Control — アクティブな Robot のステータスと最終実行時刻を表示するリスト](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+## 仕組み
+
+Robot がトリガーされると——スケジュールでも手動でも——**Pipeline** を実行します：固定されたステージの連続で、各ステージを専門の AI Task Agent が担当します。
+
+```
+Inspiration → Goals → Tasks → Validation → Delivery
+```
+
+各ステージは出力を次のステージに渡します。Robot Host ステージは人間とのやり取りを担当します——手動で Robot をトリガーすると、まずタスクの目標を確認してからパイプラインを開始します。
+
+各ステージにはデフォルトの Agent が用意されており、設定なしで使えます。特定のステージを細かく制御したい場合は、カスタム Agent に置き換えることができます。→ [ステージ Agent を置き換える](/docs/ja-jp/mission-control/execution-pipeline/replacing-stage-agents)
+
+## Robot と AI Expert の違い
+
+| | AI Expert | Robot（Task Agent）|
+|---|---|---|
+| **起動方法** | あなたが会話を開いて依頼する | スケジュール・イベント・Webhook・手動 Assign Task |
+| **誰が動かすか** | あなたがリアルタイムで関与する | 自律的に動く——見張る必要なし |
+| **向いているもの** | 一回限りのタスク・探索・質問 | 繰り返し作業・自動化ワークフロー |
+| **出力先** | チャット内の会話レスポンス | 構造化された結果が指定先に届く |
+
+日常のタスクや質問には AI Expert を。定期的または自動で行う必要があることには Robot を作りましょう。
+
+## 次のステップ
+
+- [Robot を作る](/docs/ja-jp/mission-control/creating-a-robot) — 数分で最初の Robot を設定
+- [実行パイプライン](/docs/ja-jp/mission-control/execution-pipeline/pipeline-overview) — Robot 実行時に経る各ステージを理解する
+- [スケジュールとトリガー](/docs/ja-jp/mission-control/scheduling-and-triggers) — Robot がいつ・どのように動くかを設定
+- [進捗と結果](/docs/ja-jp/mission-control/progress-and-results) — ログの確認・ステータスチェック・成果物の取得

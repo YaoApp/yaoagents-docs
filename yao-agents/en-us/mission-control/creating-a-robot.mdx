@@ -4,4 +4,120 @@ slug: creating-a-robot
 
 # Creating a Robot
 
-Basic info, identity setup, and platform integration for a new robot.
+Set up a Robot from scratch in about five minutes. This guide walks through every field so you know what each one does.
+
+## Before you start
+
+- Yao Engine is running and Yao Agents is connected
+- You have at least one AI model configured (Settings → Models)
+- You know what you want the Robot to do — even a rough description is enough to get started
+
+---
+
+## Step 1 — Open Mission Control and add a Robot
+
+Open **Mission Control** from the left sidebar. You'll see the list of existing Robots (empty if this is your first).
+
+Click **+ Add Task Agent** in the top-right corner.
+
+![Mission Control — Robot list with Add Task Agent button](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+---
+
+## Step 2 — Fill in the Basic tab
+
+The **Basic** tab sets the Robot's identity and operating mode.
+
+![Robot settings — Basic tab](https://assets.yaoagents.com/en/mission/02-mission-create-basic-en-$__THEME.png)
+
+**Name** — give it a clear, descriptive name. This is what you'll see in the list and in logs. Examples: "Daily Market Digest", "Weekly Report Builder", "Support Inbox Triage".
+
+**Workspace** — choose which sandbox environment the Robot runs in. Each workspace has its own files and context. Use separate workspaces if you want this Robot's files isolated from your chat Experts.
+
+**Work mode** — two options:
+- **Autonomous** — runs on a schedule or event trigger, no human required
+- **On Demand** — you manually kick it off each time; useful for jobs you want to control when they start
+
+**Reports to** — who receives the Robot's output. This can be a user account or another Robot. Setting this correctly ensures the result lands in the right place.
+
+> 💡 If you're not sure which work mode to pick, start with **On Demand**. You can switch to Autonomous once you've tested the Robot and are happy with the results.
+
+---
+
+## Step 3 — Configure the Identity tab
+
+The **Identity** tab defines what the Robot does and what it has access to.
+
+![Robot settings — Identity tab with role description and resource assignment](https://assets.yaoagents.com/en/mission/02-mission-create-identity-en-$__THEME.png)
+
+**Role description** — describe the Robot's job in plain language. Be specific about:
+- What it's responsible for
+- What inputs it works with (email subjects, URLs, file types, etc.)
+- What output it should produce (a report, a summary, an email, etc.)
+
+Not sure where to start? Click **Generate** — it will draft a role description based on the name you entered.
+
+**AI Experts** — select which AI Experts this Robot can use during its pipeline. A Robot analyzing market data should have Market Scout. One that sends email reports should have Postman.
+
+**Tools** — select additional tools the Robot can invoke (web search, file reader, API connectors, etc.).
+
+> 💡 **Match the resources to the role.** Think of it like hiring: you wouldn't ask someone to do financial analysis without giving them access to the numbers. A clear role description with the right Experts and tools is the difference between a Robot that works reliably and one that struggles. If the Robot needs to send email, give it Postman. If it needs to search the web, add the search tool.
+
+---
+
+## Step 4 — Save and run
+
+Click **Save Changes** when you're done. The Robot appears in the Mission Control list.
+
+To run it for the first time:
+- Select the Robot in the list to open its Active view
+- Click **Assign Task** — a panel slides in on the right where you describe the task
+- Robot Host reads your description, confirms the goal, and starts the pipeline once you approve
+
+Watch the pipeline progress in real time. Each stage updates as it completes. → [Progress & Results](/docs/en-us/mission-control/progress-and-results)
+
+---
+
+## Step 5 — Set up integrations (optional)
+
+Open the **Integrations** tab to connect the Robot to messaging platforms or expose it as an API.
+
+![Robot settings — Integrations tab](https://assets.yaoagents.com/en/mission/02-mission-create-integrations-en-$__THEME.png)
+
+**Messaging platforms** — connect to WeChat, Telegram, Discord, DingTalk, or Lark. Paste the platform credentials and users can chat with the Robot directly from that app.
+
+**API Access** — each Robot automatically gets an OpenAI-compatible Chat Completions endpoint. Use it to trigger the Robot from any OpenAI SDK, automation tool, or internal system.
+
+---
+
+## Advanced settings (optional)
+
+The **Advanced** tab gives you finer control once the basics are working.
+
+![Advanced Settings — delivery recipients, concurrency, pipeline agents, and developer options](https://assets.yaoagents.com/en/mission/02-mission-create-advanced-2-en-$__THEME.png)
+
+- **Additional Recipients** — add email addresses beyond the default "Reports to" recipient
+- **Concurrency** — set max concurrent runs and queue size for high-volume Robots
+- **Execution Pipeline** — replace the default agent for any pipeline stage (Host Agent, Goals, Tasks, Delivery) with a custom one
+- **Developer Options** — push results to a Webhook URL or call a Yao Process on delivery
+
+→ [Replacing Stage Agents](/docs/en-us/mission-control/execution-pipeline/replacing-stage-agents)
+
+---
+
+## Troubleshooting
+
+**The Robot runs but produces poor results**
+Revisit the Identity tab. The role description is the most important factor — make it more specific. Also check that the AI Experts and tools you've assigned match what the task actually needs.
+
+**The Robot doesn't send output anywhere**
+Check the **Reports to** field in the Basic tab and make sure Postman or the relevant delivery Expert is listed in the Identity tab.
+
+**I triggered the Robot but nothing happened**
+If the work mode is Autonomous, it only runs on the configured schedule. Switch to On Demand or trigger it manually via the dashboard.
+
+## What's next
+
+- [Execution Pipeline](/docs/en-us/mission-control/execution-pipeline/pipeline-overview) — understand what happens inside the pipeline when a Robot runs
+- [Scheduling & Triggers](/docs/en-us/mission-control/scheduling-and-triggers) — set a schedule or configure event-based triggers
+- [Progress & Results](/docs/en-us/mission-control/progress-and-results) — monitor runs and access deliverables
