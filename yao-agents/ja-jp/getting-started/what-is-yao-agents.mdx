@@ -4,163 +4,59 @@ slug: what-is-yao-agents
 
 # Yao Agents とは
 
-Yao Agents は**オープンソースの AI Agent ホスティングプラットフォーム**です。お使いのデバイス上で完全に動作し、インテリジェントな AI アシスタントの構築・デプロイ・管理が可能です。サードパーティのクラウドサービスに依存する必要はありません。
+Yao Agents は、AI エキスパートチームを手元に持てるデスクトップアプリです。すべて自分のデバイス上で動作し、データが外部に出ることはありません。
 
-> **コアコンセプト：** データはあなたのデバイスに。あなたの AI は、あなたのルールで。
+> あなたの AI チーム。あなたのデバイスで。あなたのコントロール下に。
 
 ## なぜ Yao Agents なのか
 
-従来の AI ソリューションはデータを外部サーバーに送信する必要がありました。Yao Agents は全く異なるアプローチを取ります：
+インストールするだけで、AI スタッフのチームが揃います。質問に答えるもの、スケジュールに従って自動でタスクを実行するもの、投げ込んだ情報をひっそり整理し続けるもの。すべてあなたのマシン上で動き、データはあなたのものです。
 
-- **プライバシーファースト** — すべてのデータとモデル推論はローカルマシンまたはプライベートサーバー上に保持
-- **ベンダーロックインなし** — LLM プロバイダー（OpenAI、Anthropic、ローカルモデル）を自由に切り替え
-- **エンタープライズ対応** — ロールベースのアクセス制御、監査ログ、コンプライアンス対応アーキテクチャ
-- **開発者フレンドリー** — TypeScript Hooks、MCP ツール、強力なプラグイン API で拡張
+AI があなたのパソコンを占有することもありません。別のデバイス——予備のノートPC、VM、コンテナ、ラックのサーバー——をつなげば、AI チームはそちらで働きます。あなたの画面はいつでも自由です。
 
-### 対象ユーザー
+## チームでできること
 
-Yao Agents は以下のユーザー向けに設計されています：
+- **いつでも適切な専門家に聞ける** — プログラミング・ライティング・リサーチ・データ分析・プロジェクト管理など、30以上の内蔵 AI Expert がそれぞれの領域に特化して待機しています。
+- **監視不要で自動実行** — Robot はスケジュール通りまたは自動でタスクを実行します。朝のニュースまとめ、受信トレイの処理、データレポート——寝ている間に完成しています。
+- **知識を読み取り整理する** — Keeper はウェブページ・PDF・動画・音声を消化し、要約・タグ付け・アーカイブを自動で行います。リンクを渡すだけで、あとはすべて任せられます。
+- **すべてのマシンをまたいで連携** — Tai Link でノートPC・VM・コンテナ・サーバーを接続。AI チームはリモートデバイス上で作業し、自分の画面はまったく邪魔されません。
 
-1. **開発者** — カスタム AI ワークフローを構築したい方
-2. **チーム** — プライベートなオンプレミス AI アシスタントが必要な方
-3. **企業** — SaaS AI プラットフォームのセルフホスト代替を探している方
-4. **ホビイスト** — ローカル AI のセットアップを楽しみたい方
+![Yao Agents — 30以上の内蔵エキスパートが並ぶ AI Expert パネル](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
 
-## コアコンセプト
+## 仕組み
 
-### Agent（エージェント）
+Yao Agents はローカルサーバー（Yao Engine）としてあなたのマシン上で動作します。デスクトップクライアントはそこに接続します——Engine を頭脳、クライアントをその頭脳を覗く窓と考えてください。
 
-**Agent** は特定の役割、パーソナリティ、ツールセットを持つ AI アシスタントです。各 Agent には：
+別のデバイスで AI を動かしたい場合は、そのマシンに Tai Link をインストールするだけ。Yao Engine への安全なトンネルが確立され、AI チームがそのデバイス上で操作できるようになります。あなたの画面は完全に空いたままです。
 
-- 動作を定義するシステムプロンプト
-- 1つ以上の LLM バックエンドへのアクセス
-- 外部統合用のオプション MCP ツール
-- カスタム処理ロジック用の Hooks（`Create` / `Next`）
+すべての会話履歴・ナレッジ・ファイル・タスク結果はあなたのデバイスに保存されます。外部に出るのは、接続した LLM に送るプロンプトのみ——そのプロバイダーはあなたが選びます。
 
-### Mission（ミッション）
+## Yao Agents でないもの
 
-**Mission** は構造化されたタスクパイプラインです。以下が可能です：
+製品の性格を正しく理解するために、いくつか明確にしておきます。
 
-1. 目標とサブタスクの定義
-2. 各ステップへの Agent の割り当て
-3. トリガーの設定（手動、スケジュール、イベント駆動）
-4. リアルタイムでの進捗モニタリング
-
-### Hub（ハブ）
-
-**Hub** はコミュニティが構築した Agent を発見・インストールできるマーケットプレイスです。AI アシスタントの「App Store」のようなものです。
-
-## アーキテクチャ概要
-
-| コンポーネント    | 役割                          | テクノロジー      |
-| ---------------- | ----------------------------- | ---------------- |
-| Yao Engine       | コアランタイム & API サーバー  | Go               |
-| SUI Framework    | サーバーサイドレンダリング UI   | HTML + JS + CSS  |
-| Agent Runtime    | LLM オーケストレーション       | TypeScript       |
-| Tai Link         | P2P デバイス通信               | Go + WebRTC      |
-| CUI              | 会話型 UI コンポーネント       | TypeScript       |
-| Mission Control  | タスクパイプラインエンジン     | Go + TypeScript  |
-
-## クイックサンプル
-
-最小限の Agent 設定：
-
-```json
-{
-  "name": "General",
-  "description": "汎用アシスタント",
-  "model": "gpt-4o",
-  "system_prompt": "あなたは便利なアシスタントです。",
-  "tools": ["web_search", "file_reader"],
-  "temperature": 0.7
-}
-```
-
-TypeScript で Hooks を定義：
-
-```typescript
-function Create(context: Context): Assistant {
-  const assistant = context.newAssistant();
-  assistant.setModel("gpt-4o");
-  assistant.setSystemPrompt("あなたは便利なアシスタントです。");
-  return assistant;
-}
-
-function Next(context: Context, input: Message): Response {
-  const result = context.chat(input);
-  if (result.toolCalls.length > 0) {
-    return context.executeTool(result.toolCalls[0]);
-  }
-  return result;
-}
-```
-
-シンプルな YAML ミッション定義：
-
-```yaml
-name: デイリーレポート
-trigger:
-  type: schedule
-  cron: "0 9 * * *"
-steps:
-  - agent: data-collector
-    action: fetch_metrics
-  - agent: report-writer
-    action: generate_report
-    input: $prev.output
-  - agent: messenger
-    action: send_email
-    input: $prev.output
-```
-
-### シェルコマンドの実行
-
-Agent は権限が付与されるとシェルコマンドも実行できます：
-
-```bash
-yao agent run general --input "今日のログをまとめて"
-yao mission start daily-report --env production
-```
-
-## 機能比較
-
-| 機能              | Yao Agents       | クラウド AI SaaS  | その他 OSS         |
-| ---------------- | ---------------- | ---------------- | ------------------ |
-| データプライバシー | 完全管理         | ベンダー依存      | 様々               |
-| デプロイ          | セルフホスト      | クラウドのみ      | セルフホスト        |
-| マルチ Agent     | 内蔵             | 限定的           | 手動構築           |
-| UI フレームワーク | SUI（内蔵）      | ダッシュボードのみ | なし / BYO        |
-| モデル柔軟性      | 任意の LLM       | プロバイダー固定  | 任意の LLM         |
-| エンタープライズ  | RBAC、監査、SSO  | あり             | コミュニティ       |
-| マーケットプレイス | Hub              | ベンダーストア    | なし               |
-
-## インストール概要
-
-Yao Agents のインストールはアプリをダウンロードするのと同じくらい簡単です：
-
-1. [公式サイト](https://yaoagents.com/download)からインストーラーをダウンロード
-2. インストーラーを実行 — **macOS**、**Windows**、**Linux** に対応
-3. ブラウザで `http://localhost:5096` を開く
-
-> 詳細な手順は[インストールガイド](/docs/ja-jp/getting-started/installation)をご覧ください。
+- **ノーコード Bot 構築プラットフォームではない** — フローを組んだり Pipeline を設定しなくても使えます。アプリを開いて、専門家を選んで、作業を始めるだけ。
+- **開発者専用ツールではない** — 非技術者でもすぐに使えます。開発者は Hooks・MCP・Processes で深くカスタマイズできます。
+- **ただのチャット画面ではない** — AI Expert はあなたが依頼したときにタスクを実行します。Robot は同じタスクをスケジュールに従って自律的に行います。Keeper はバックグラウンドでナレッジを管理し、あなたが声をかけなくても動いています。
 
 ## 次のステップ
 
-- [インストール](/docs/ja-jp/getting-started/installation) — Yao Agents のダウンロードとセットアップ
-- [AI アシスタント：エキスパートを探す](/docs/ja-jp/getting-started/find-an-expert) — 内蔵 Agent の紹介
-- [ミッションコントロール](/docs/ja-jp/getting-started/mission-control) — マルチステップワークフローの自動化
+- [インストール](/docs/ja-jp/getting-started/installation) — 数分でダウンロードとセットアップを完了
+- [AI Expert：適切な専門家を選ぶ](/docs/ja-jp/getting-started/ai-experts-intro) — 専門家を選んで作業を始める
+- [Mission Control：自動化を編成する](/docs/ja-jp/getting-started/mission-control-intro) — Robot に繰り返しタスクを任せる
 
 ---
 
 ## 用語集
 
-| 用語             | 定義                                                              |
-| ---------------- | ----------------------------------------------------------------- |
-| **Agent**        | 特定の役割、ツール、動作を持つ AI アシスタント                    |
-| **Mission**      | 構造化されたマルチステップタスクパイプライン                      |
-| **Hook**         | Agent の動作をカスタマイズする TypeScript 関数                    |
-| **MCP Tool**     | 外部統合用のモデルコンテキストプロトコルツール                    |
-| **Hub**          | Agent とプラグインのコミュニティマーケットプレイス                |
-| **SUI**          | Web インターフェース構築用のサーバーサイド UI フレームワーク      |
-| **Tai Link**     | デバイスを接続する P2P 通信レイヤー                              |
-| **CUI**          | 会話型ユーザーインターフェース — チャットコンポーネント            |
+| 用語 | 意味 |
+|------|------|
+| **AI Expert** | 特定領域（プログラミング・ライティング・リサーチなど）に特化した AI 専門家——30以上を内蔵し、自分で追加することも可能 |
+| **AI Task Agent** | Mission Control の実行パイプライン内で動くエージェント |
+| **Robot** | Mission Control の自律タスク実行者——スケジュールに従って動作し、手動トリガーは不要 |
+| **Keeper** | ナレッジ管理エージェント——送り込んだコンテンツを読み取り、要約し、アーカイブする |
+| **Mission Control** | タスクダッシュボード——Robot の作成・スケジュール設定・監視を行う場所 |
+| **Tai Link** | リモートデバイスを Yao Engine に接続するブリッジ |
+| **Yao Engine** | すべてを動かすローカルサーバー——あなたのマシン上で動作する |
+| **BYOK** | Bring Your Own Key——使いたい LLM の API キーを自分で用意する方式 |
+| **Pipeline** | Robot がタスクを完了するまでに経る一連の実行ステージ |

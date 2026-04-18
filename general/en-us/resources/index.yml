@@ -8,6 +8,9 @@ pages:
   - slug: faq
     title: FAQ
     summary: Common questions about installation, connectivity, agent usage, etc.
+  - slug: sandbox-images
+    title: Sandbox Images
+    summary: "Complete reference for all Docker sandbox images: what each image includes, which agents use it, and how to pull or update them."
   - slug: shortcuts
     title: Keyboard Shortcuts
     summary: Complete keyboard shortcut reference.

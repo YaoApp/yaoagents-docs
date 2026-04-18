@@ -2,165 +2,61 @@
 slug: what-is-yao-agents
 ---
 
-# 什麼是 Yao Agents
+# Yao Agents 是什麼
 
-Yao Agents 是一個**開源的 AI Agent 託管平台**，完全運行在你自己的裝置上。你可以構建、部署和管理智慧 AI 助手——無需依賴任何第三方雲端服務。
+Yao Agents 是一款桌面 AI 應用——讓你擁有一支專屬的 AI 專家團隊，完全執行在你自己的裝置上，資料從不離開你的機器。
 
-> **核心理念：** 你的資料留在你的裝置上。你的 AI，你做主。
+> 你的 AI 團隊。在你的裝置上。由你掌控。
 
 ## 為什麼選擇 Yao Agents
 
-傳統 AI 方案需要將資料傳送到外部伺服器。Yao Agents 採用了完全不同的方式：
+安裝之後，你就擁有了一支 AI 員工隊伍——有的隨時解答問題，有的按計畫自動執行任務，還有一個在背景默默整理你丟給它的一切。它們在你的機器上工作，你的資料始終是你的。
 
-- **隱私優先** — 所有資料和模型推論都留在你的本機或私有伺服器上
-- **無廠商鎖定** — 自由切換 LLM 提供商（OpenAI、Anthropic、本地模型）
-- **企業級就緒** — 角色權限控制、稽核日誌、合規友善的架構
-- **開發者友善** — 透過 TypeScript Hooks、MCP 工具和強大的外掛 API 擴展一切
+AI 不會占用你的電腦。把另一台裝置連接進來——備用筆電、虛擬機器、容器或機架上的伺服器——AI 團隊就在那台裝置上工作，你的螢幕依然自由。
 
-### 適合誰使用
+## 你的團隊能做什麼
 
-Yao Agents 為以下族群設計：
+- **隨時找到合適的專家** — 30+ 內建 AI Expert 涵蓋程式開發、寫作、研究、資料分析、專案管理等場景，每一個都為自己的領域精調過。
+- **無人值守自動執行任務** — Robot 按計畫觸發或自動執行。早報彙整、收件匣處理、資料報告——你睡著的時候它就做完了。
+- **讀懂並整理你的知識** — Keeper 消化網頁、PDF、影片、音訊，自動摘要、加標籤、存檔，方便日後查找。你丟給它一個連結，剩下的它來。
+- **跨裝置協同工作** — 透過 Tai Link 連接筆電、虛擬機器、容器或伺服器，AI 團隊在遠端裝置上操作，你自己的螢幕完全不受打擾。
 
-1. **開發者** — 想要構建自訂 AI 工作流程
-2. **團隊** — 需要私有化部署的 AI 助手
-3. **企業** — 尋找 SaaS AI 平台的自託管替代方案
-4. **愛好者** — 喜歡折騰本地 AI 的極客
+![Yao Agents — AI Expert 面板，展示 30+ 內建專家](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
 
-## 核心概念
+## 運作原理
 
-### Agent（智慧體）
+Yao Agents 以本機伺服器（Yao Engine）的形式執行在你的機器上，桌面用戶端連接到它——把 Engine 想像成大腦，用戶端是你看向它的那扇窗。
 
-**Agent** 是具有特定角色、個性和工具集的 AI 助手。每個 Agent 包含：
+想讓 AI 在另一台裝置上工作時，只需在那台機器上安裝 Tai Link。它會建立一條安全通道，連回你的 Yao Engine。AI 團隊隨即可以在那台裝置上操作，而你自己的螢幕完全空閒。
 
-- 定義其行為的系統提示詞
-- 存取一個或多個 LLM 後端
-- 可選的 MCP 工具用於外部整合
-- Hooks（`Create` / `Next`）用於自訂處理邏輯
+所有對話歷史、知識、檔案和任務結果都儲存在你的裝置上。唯一對外的流量，是傳送給你所接入之 LLM 的提示詞——而這個選擇由你決定。
 
-### Mission（任務）
+## Yao Agents 不是什麼
 
-**Mission** 是結構化的任務流水線。你可以：
+明確一些邊界，有助於理解這款產品：
 
-1. 定義目標和子任務
-2. 為每個步驟分配 Agent
-3. 設定觸發器（手動、排程、事件驅動）
-4. 即時監控執行進度
-
-### Hub（中心）
-
-**Hub** 是發現和安裝社群構建的 Agent 的市場。可以把它理解為 AI 助手的「App Store」。
-
-## 架構概覽
-
-| 元件             | 角色                     | 技術棧           |
-| ---------------- | ------------------------ | ---------------- |
-| Yao Engine       | 核心執行時和 API 伺服器  | Go               |
-| SUI Framework    | 伺服端渲染 UI 框架       | HTML + JS + CSS  |
-| Agent Runtime    | LLM 編排與工具呼叫       | TypeScript       |
-| Tai Link         | P2P 裝置通訊             | Go + WebRTC      |
-| CUI              | 對話式 UI 元件           | TypeScript       |
-| Mission Control  | 任務流水線引擎           | Go + TypeScript  |
-
-## 快速範例
-
-這是一個最小的 Agent 設定：
-
-```json
-{
-  "name": "General",
-  "description": "通用助手",
-  "model": "gpt-4o",
-  "system_prompt": "你是一個有用的助手。",
-  "tools": ["web_search", "file_reader"],
-  "temperature": 0.7
-}
-```
-
-你也可以用 TypeScript 定義 Hooks：
-
-```typescript
-function Create(context: Context): Assistant {
-  const assistant = context.newAssistant();
-  assistant.setModel("gpt-4o");
-  assistant.setSystemPrompt("你是一個有用的助手。");
-  return assistant;
-}
-
-function Next(context: Context, input: Message): Response {
-  const result = context.chat(input);
-  if (result.toolCalls.length > 0) {
-    return context.executeTool(result.toolCalls[0]);
-  }
-  return result;
-}
-```
-
-一個簡單的 YAML 任務定義：
-
-```yaml
-name: 每日報告
-trigger:
-  type: schedule
-  cron: "0 9 * * *"
-steps:
-  - agent: data-collector
-    action: fetch_metrics
-  - agent: report-writer
-    action: generate_report
-    input: $prev.output
-  - agent: messenger
-    action: send_email
-    input: $prev.output
-```
-
-### 執行 Shell 命令
-
-Agent 在獲得權限後也可以執行 Shell 命令：
-
-```bash
-yao agent run general --input "總結今天的日誌"
-yao mission start daily-report --env production
-```
-
-## 功能對比
-
-| 特性             | Yao Agents       | 雲端 AI SaaS     | 其他開源方案       |
-| ---------------- | ---------------- | ---------------- | ------------------ |
-| 資料隱私         | 完全自主         | 依賴廠商         | 各有不同           |
-| 部署方式         | 自託管           | 僅雲端           | 自託管             |
-| 多 Agent 流水線  | 內建支援         | 有限             | 需手動搭建         |
-| UI 框架          | SUI（內建）      | 僅儀表板         | 無 / 自行構建      |
-| 模型靈活性       | 任意 LLM         | 廠商鎖定         | 任意 LLM           |
-| 企業級功能       | RBAC、稽核、SSO  | 支援             | 社群外掛           |
-| 社群市場         | Hub              | 廠商商店         | 無                 |
-
-## 安裝速覽
-
-安裝 Yao Agents 就像下載一個普通 App 一樣簡單：
-
-1. 從[官網](https://yaoagents.com/download)下載安裝檔
-2. 執行安裝程式 — 支援 **macOS**、**Windows** 和 **Linux**
-3. 開啟瀏覽器存取 `http://localhost:5096`
-
-> 詳細步驟請參閱[安裝指南](/docs/zh-tw/getting-started/installation)。
+- **不是無程式碼 Bot 搭建平台** — 不需要拼流程、設定 Pipeline 才能上手。開啟應用程式，選一個專家，開始工作就行。
+- **不是只給開發者用的工具** — 非技術使用者可以開箱即用。開發者可以透過 Hooks、MCP 和 Processes 進行深度擴充。
+- **不只是聊天視窗** — AI Expert 在你發起時執行任務；Robot 按計畫自主執行，同樣的任務它來。Keeper 在背景管理你的知識，不需要你去提醒它。
 
 ## 下一步
 
-- [安裝](/docs/zh-tw/getting-started/installation) — 下載並設定 Yao Agents
-- [AI 助手：找專家幹活](/docs/zh-tw/getting-started/find-an-expert) — 發現內建 Agent
-- [任務控制中心](/docs/zh-tw/getting-started/mission-control) — 自動化多步驟工作流程
+- [安裝](/docs/zh-tw/getting-started/installation) — 幾分鐘內下載並完成設定
+- [AI Expert：找對專家](/docs/zh-tw/getting-started/ai-experts-intro) — 選擇合適的專家，開始工作
+- [Mission Control：編排自動化](/docs/zh-tw/getting-started/mission-control-intro) — 讓 Robot 處理你的重複性任務
 
 ---
 
 ## 術語表
 
-| 術語             | 定義                                                              |
-| ---------------- | ----------------------------------------------------------------- |
-| **Agent**        | 具有特定角色、工具和行為的 AI 助手                                |
-| **Mission**      | 結構化的多步驟任務流水線                                          |
-| **Hook**         | 自訂 Agent 行為的 TypeScript 函式                                 |
-| **MCP Tool**     | 模型上下文協議工具，用於外部整合                                  |
-| **Hub**          | Agent 和外掛的社群市場                                            |
-| **SUI**          | 伺服端 UI 框架，用於構建 Web 介面                                 |
-| **Tai Link**     | P2P 通訊層，連接裝置                                              |
-| **CUI**          | 對話式使用者介面 — 聊天元件                                       |
+| 術語 | 含義 |
+|------|------|
+| **AI Expert** | 針對特定領域調優的 AI 專家（程式開發、寫作、研究等）——30+ 內建，也可自行新增 |
+| **AI Task Agent** | 執行在 Mission Control 執行管道中的智能體 |
+| **Robot** | Mission Control 中的自主任務執行者——按計畫執行，無需手動觸發 |
+| **Keeper** | 知識管家——讀取、摘要、歸檔你傳送給它的一切內容 |
+| **Mission Control** | 任務控制台——在這裡建立、排程和監控 Robot |
+| **Tai Link** | 將遠端裝置連接到 Yao Engine 的橋樑 |
+| **Yao Engine** | 驅動一切的本機伺服器——執行在你的機器上 |
+| **BYOK** | 自帶金鑰（Bring Your Own Key）——你提供所用 LLM 的 API Key |
+| **Pipeline** | Robot 完成任務時經過的一系列執行階段 |

@@ -8,6 +8,9 @@ pages:
   - slug: faq
     title: よくある質問
     summary: インストール、接続、エージェント使用に関するFAQ。
+  - slug: sandbox-images
+    title: サンドボックスイメージ
+    summary: 全Dockerサンドボックスイメージの完全リファレンス：各イメージの内容、対応Agent、取得・更新方法。
   - slug: shortcuts
     title: キーボードショートカット
     summary: 完全なショートカットリファレンス。

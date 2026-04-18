@@ -104,10 +104,10 @@ const yaoAgents: Product = {
                 "Download and install on macOS, Windows, or Linux — as easy as installing any app.",
             },
             {
-              slug: "ai-assistants-intro",
-              title: "AI Assistants: Find an Expert",
+              slug: "ai-experts-intro",
+              title: "AI Experts: Find the Right One",
               summary:
-                "Core concept 1. Each AI assistant is a domain expert. Learn how to pick the right one, describe your needs, and get the best results.",
+                "Core concept 1. Each AI Expert is a domain specialist. Learn how to pick the right one, describe your needs, and get the best results.",
             },
             {
               slug: "mission-control-intro",
@@ -140,10 +140,10 @@ const yaoAgents: Product = {
                 "在 macOS / Windows / Linux 上下载安装，像装普通 App 一样简单。",
             },
             {
-              slug: "ai-assistants-intro",
-              title: "AI 助手：找专家干活",
+              slug: "ai-experts-intro",
+              title: "AI 专家：找对人，事半功倍",
               summary:
-                "核心概念 1。每个 AI 助手是一个领域专家。如何选择合适的助手、如何描述你的需求、如何获得最佳结果。",
+                "核心概念 1。每个 AI 专家都是对应领域的专才。如何选对专家、如何描述需求、如何获得最佳结果。",
             },
             {
               slug: "mission-control-intro",
@@ -176,10 +176,10 @@ const yaoAgents: Product = {
                 "在 macOS / Windows / Linux 上下載安裝，像裝一般 App 一樣簡單。",
             },
             {
-              slug: "ai-assistants-intro",
-              title: "AI 助手：找專家幹活",
+              slug: "ai-experts-intro",
+              title: "AI 專家：找對人，事半功倍",
               summary:
-                "核心概念 1。每個 AI 助手是一個領域專家。如何選擇合適的助手、如何描述你的需求、如何獲得最佳結果。",
+                "核心概念 1。每個 AI 專家都是對應領域的專才。如何選對專家、如何描述需求、如何獲得最佳結果。",
             },
             {
               slug: "mission-control-intro",
@@ -213,10 +213,10 @@ const yaoAgents: Product = {
                 "macOS / Windows / Linux でダウンロードしてインストール。",
             },
             {
-              slug: "ai-assistants-intro",
-              title: "AI アシスタント：エキスパートに仕事を頼む",
+              slug: "ai-experts-intro",
+              title: "AI エキスパート：適切な専門家を選ぶ",
               summary:
-                "コアコンセプト 1。各 AI アシスタントは専門家です。適切なアシスタントの選び方、要件の伝え方、最良の結果を得る方法。",
+                "コアコンセプト 1。各 AI エキスパートは専門分野のスペシャリストです。適切なエキスパートの選び方、要件の伝え方、最良の結果を得る方法。",
             },
             {
               slug: "mission-control-intro",
@@ -231,232 +231,6 @@ const yaoAgents: Product = {
                 "さらなる機能の概要：Tai Link、統合、Agent Hub。各機能の一行紹介とリンク。",
             },
           ],
-        },
-      },
-    },
-
-    // ── B. AI Assistants ──
-    {
-      slug: "ai-assistants",
-      children: [
-        {
-          slug: "usage",
-          locales: {
-            "en-us": {
-              title: "Using AI Assistants",
-              summary: "How to work with AI assistants effectively.",
-              pages: [
-                {
-                  slug: "choosing-an-assistant",
-                  title: "Choosing the Right Assistant",
-                  summary:
-                    'Quick-reference table: "I want to do X → use this assistant." Each name links to the Built-in Agents detail page.',
-                },
-                {
-                  slug: "conversation-tips",
-                  title: "Conversation Tips",
-                  summary:
-                    "How to describe requirements precisely, multi-turn conversations, context management, history. Supports multilingual conversations.",
-                },
-                {
-                  slug: "files-and-attachments",
-                  title: "Files & Attachments",
-                  summary:
-                    "Upload files, images, and documents for the assistant to process.",
-                },
-                {
-                  slug: "search",
-                  title: "Search",
-                  summary:
-                    "Web search, knowledge base search, and citation of search results.",
-                },
-              ],
-            },
-            "zh-cn": {
-              title: "使用 AI 助手",
-              summary: "如何高效地使用 AI 助手。",
-              pages: [
-                {
-                  slug: "choosing-an-assistant",
-                  title: "选择合适的助手",
-                  summary:
-                    "速查表：「我想做 X → 找哪个助手」。每个助手名称可跳转到内置智能体详情。",
-                },
-                {
-                  slug: "conversation-tips",
-                  title: "对话技巧",
-                  summary:
-                    "如何精确描述需求、多轮对话、上下文管理、历史记录。支持多语言对话。",
-                },
-                {
-                  slug: "files-and-attachments",
-                  title: "文件与附件",
-                  summary: "上传文件/图片/文档给助手处理。",
-                },
-                {
-                  slug: "search",
-                  title: "搜索能力",
-                  summary: "联网搜索、知识库搜索、搜索结果引用。",
-                },
-              ],
-            },
-            "zh-tw": {
-              title: "使用 AI 助手",
-              summary: "如何高效地使用 AI 助手。",
-              pages: [
-                {
-                  slug: "choosing-an-assistant",
-                  title: "選擇合適的助手",
-                  summary:
-                    "速查表：「我想做 X → 找哪個助手」。每個助手名稱可跳轉到內建智能體詳情。",
-                },
-                {
-                  slug: "conversation-tips",
-                  title: "對話技巧",
-                  summary:
-                    "如何精確描述需求、多輪對話、上下文管理、歷史記錄。支援多語言對話。",
-                },
-                {
-                  slug: "files-and-attachments",
-                  title: "檔案與附件",
-                  summary: "上傳檔案/圖片/文件給助手處理。",
-                },
-                {
-                  slug: "search",
-                  title: "搜尋能力",
-                  summary: "連網搜尋、知識庫搜尋、搜尋結果引用。",
-                },
-              ],
-            },
-            "ja-jp": {
-              title: "AI アシスタントの使い方",
-              summary: "AI アシスタントを効果的に活用する方法。",
-              pages: [
-                {
-                  slug: "choosing-an-assistant",
-                  title: "適切なアシスタントを選ぶ",
-                  summary:
-                    "クイックリファレンス：「Xをしたい→このアシスタント」。各名前は組み込みエージェント詳細にリンク。",
-                },
-                {
-                  slug: "conversation-tips",
-                  title: "対話のコツ",
-                  summary:
-                    "要件の正確な伝え方、マルチターン会話、コンテキスト管理、履歴。多言語対応。",
-                },
-                {
-                  slug: "files-and-attachments",
-                  title: "ファイルと添付",
-                  summary:
-                    "ファイル、画像、ドキュメントをアップロードして処理。",
-                },
-                {
-                  slug: "search",
-                  title: "検索機能",
-                  summary: "Web検索、ナレッジベース検索、検索結果の引用。",
-                },
-              ],
-            },
-          },
-        },
-        {
-          slug: "preferences",
-          locales: {
-            "en-us": {
-              title: "Assistant Preferences",
-              summary: "Customize how your assistants behave.",
-              pages: [
-                {
-                  slug: "model-selection",
-                  title: "Model Selection",
-                  summary:
-                    "Switch the AI model used by an assistant. Requires AI model configuration in Integrations first.",
-                },
-                {
-                  slug: "tools-and-permissions",
-                  title: "Tools & Permissions",
-                  summary:
-                    "Manage which MCP tools an assistant can use and its operation permissions.",
-                },
-              ],
-            },
-            "zh-cn": {
-              title: "助手偏好",
-              summary: "自定义助手的行为方式。",
-              pages: [
-                {
-                  slug: "model-selection",
-                  title: "模型选择",
-                  summary:
-                    "为助手切换不同的 AI 模型。需先在「集成 → AI 模型」中完成配置。",
-                },
-                {
-                  slug: "tools-and-permissions",
-                  title: "工具与权限",
-                  summary: "管理助手可使用的 MCP 工具和操作权限。",
-                },
-              ],
-            },
-            "zh-tw": {
-              title: "助手偏好",
-              summary: "自訂助手的行為方式。",
-              pages: [
-                {
-                  slug: "model-selection",
-                  title: "模型選擇",
-                  summary:
-                    "為助手切換不同的 AI 模型。需先在「整合 → AI 模型」中完成設定。",
-                },
-                {
-                  slug: "tools-and-permissions",
-                  title: "工具與權限",
-                  summary: "管理助手可使用的 MCP 工具和操作權限。",
-                },
-              ],
-            },
-            "ja-jp": {
-              title: "アシスタント設定",
-              summary: "アシスタントの動作をカスタマイズ。",
-              pages: [
-                {
-                  slug: "model-selection",
-                  title: "モデル選択",
-                  summary:
-                    "アシスタントが使用するAIモデルを切り替え。先に統合でAIモデルの設定が必要。",
-                },
-                {
-                  slug: "tools-and-permissions",
-                  title: "ツールと権限",
-                  summary:
-                    "アシスタントが使用できるMCPツールと操作権限を管理。",
-                },
-              ],
-            },
-          },
-        },
-      ],
-      locales: {
-        "en-us": {
-          title: "AI Assistants",
-          summary:
-            "Core feature: each assistant is a domain expert you can chat with.",
-          pages: [],
-        },
-        "zh-cn": {
-          title: "AI 助手",
-          summary: "核心功能之一：每个助手是一个领域专家。",
-          pages: [],
-        },
-        "zh-tw": {
-          title: "AI 助手",
-          summary: "核心功能之一：每個助手是一個領域專家。",
-          pages: [],
-        },
-        "ja-jp": {
-          title: "AI アシスタント",
-          summary:
-            "コア機能：各アシスタントはあなたと対話できる専門家です。",
-          pages: [],
         },
       },
     },
@@ -698,34 +472,46 @@ const yaoAgents: Product = {
                 "Email assistant. Draft emails, scheduled sending, email templates.",
             },
             {
-              slug: "scout",
-              title: "Scout",
+              slug: "insights",
+              title: "Insights",
               summary:
-                "Market researcher. Information collection, competitive analysis, report generation.",
+                "Data analyst. Connect to databases, read spreadsheets, build ECharts dashboards with live VNC preview.",
+            },
+            {
+              slug: "scout",
+              title: "Market Scout",
+              summary:
+                "Market intelligence. Monitor subscription feeds, classify articles, organize insights.",
+            },
+            {
+              slug: "slides",
+              title: "Slides",
+              summary:
+                "Slide deck builder. Turn outlines or documents into themed HTML presentations, export to PDF.",
+            },
+            {
+              slug: "transformer",
+              title: "Transformer",
+              summary:
+                "Data structuring expert. Convert images, PDFs, JSON, and CSV into structured formats via Vision LLM.",
             },
             {
               slug: "website",
-              title: "Website",
+              title: "Web Builder",
               summary:
-                "Website builder. Site construction, form development, page design.",
+                "Website builder. Corporate sites, landing pages, forms — Next.js + Tailwind, VNC preview, SSH deploy.",
             },
             {
               slug: "applet",
-              title: "Applet",
+              title: "Applet Workshop",
               summary:
-                "Mini-app builder. Create web widgets with live VNC preview.",
-            },
-            {
-              slug: "web-scraper",
-              title: "Web Scraper",
-              summary:
-                "Web content collector. Scrape web pages and extract structured data.",
+                "Mini-app builder. Rapidly generate visual tools with Node.js, live VNC preview.",
             },
             {
               slug: "report-writer",
               title: "Report Writer",
               summary:
-                "Report-writing robot (used in Mission Control). Auto-generates analysis reports, data formatting.",
+                "Report-writing robot (used in Mission Control). Auto-generates structured Markdown analysis reports.",
             },
             {
               slug: "robot-host",
@@ -792,30 +578,39 @@ const yaoAgents: Product = {
               summary: "邮件撰写、定时发送、邮件模板。",
             },
             {
+              slug: "insights",
+              title: "Insights（数据分析）",
+              summary: "连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。",
+            },
+            {
               slug: "scout",
-              title: "Scout（市场调研）",
-              summary: "信息收集与分析、竞品调研、报告生成。",
+              title: "Market Scout（市场情报）",
+              summary: "自动读取订阅源、抓取最新内容、分类归档市场洞察。",
+            },
+            {
+              slug: "slides",
+              title: "Slides（幻灯片制作）",
+              summary: "从大纲或文档生成专业 HTML 演示稿并导出 PDF。",
+            },
+            {
+              slug: "transformer",
+              title: "Transformer（数据转换）",
+              summary: "将图片、PDF、JSON、CSV 转换为结构化格式，支持 Vision LLM OCR。",
             },
             {
               slug: "website",
-              title: "Website（网站构建）",
-              summary: "网站搭建、表单开发、页面设计。",
+              title: "Web Builder（网站构建）",
+              summary: "企业官网、落地页、表单应用，Next.js + Tailwind，VNC 预览 + SSH 部署。",
             },
             {
               slug: "applet",
-              title: "Applet（小工具开发）",
-              summary: "创建 Web 小工具、VNC 实时预览。",
-            },
-            {
-              slug: "web-scraper",
-              title: "Web Scraper（网页采集）",
-              summary: "网页内容抓取、数据提取。",
+              title: "Applet Workshop（小工具开发）",
+              summary: "快速生成可视化 mini-tool，Node.js + VNC 实时预览。",
             },
             {
               slug: "report-writer",
               title: "Report Writer（报告撰写）",
-              summary:
-                "机器人类型。在任务编排中自动生成分析报告、数据整理、格式化输出。",
+              summary: "机器人类型。在任务编排中自动生成结构化 Markdown 分析报告。",
             },
             {
               slug: "robot-host",
@@ -859,11 +654,13 @@ const yaoAgents: Product = {
             { slug: "keeper", title: "Keeper（知識庫管理）", summary: "儲存/檢索內容、分類標籤、外部資料匯入。" },
             { slug: "pm", title: "PM（專案經理）", summary: "專案管理、任務拆解與追蹤、團隊協作。" },
             { slug: "postman", title: "Postman（郵件助手）", summary: "郵件撰寫、定時發送、郵件範本。" },
-            { slug: "scout", title: "Scout（市場調研）", summary: "資訊收集與分析、競品調研、報告生成。" },
-            { slug: "website", title: "Website（網站建構）", summary: "網站搭建、表單開發、頁面設計。" },
-            { slug: "applet", title: "Applet（小工具開發）", summary: "建立 Web 小工具、VNC 即時預覽。" },
-            { slug: "web-scraper", title: "Web Scraper（網頁採集）", summary: "網頁內容擷取、資料提取。" },
-            { slug: "report-writer", title: "Report Writer（報告撰寫）", summary: "機器人類型。在任務編排中自動生成分析報告。" },
+            { slug: "insights", title: "Insights（資料分析）", summary: "連接資料庫、讀取表格、建構 ECharts 互動看板，VNC 即時預覽。" },
+            { slug: "scout", title: "Market Scout（市場情報）", summary: "自動讀取訂閱源、擷取最新內容、分類歸檔市場洞察。" },
+            { slug: "slides", title: "Slides（簡報製作）", summary: "從大綱或文件生成專業 HTML 簡報並匯出 PDF。" },
+            { slug: "transformer", title: "Transformer（資料轉換）", summary: "將圖片、PDF、JSON、CSV 轉換為結構化格式，支援 Vision LLM OCR。" },
+            { slug: "website", title: "Web Builder（網站建構）", summary: "企業官網、落地頁、表單應用，Next.js + Tailwind，VNC 預覽 + SSH 部署。" },
+            { slug: "applet", title: "Applet Workshop（小工具開發）", summary: "快速生成可視化 mini-tool，Node.js + VNC 即時預覽。" },
+            { slug: "report-writer", title: "Report Writer（報告撰寫）", summary: "機器人類型。在任務編排中自動生成結構化 Markdown 分析報告。" },
             { slug: "robot-host", title: "Robot Host（接單）", summary: "流水線智能體。人機互動中介。" },
             { slug: "robot-goals", title: "Robot Goals（定目標）", summary: "流水線智能體。理解需求、拆解為可執行目標。" },
             { slug: "robot-inspiration", title: "Robot Inspiration（找靈感）", summary: "流水線智能體。搜尋資訊、收集參考資料。" },
@@ -880,11 +677,13 @@ const yaoAgents: Product = {
             { slug: "keeper", title: "Keeper（ナレッジベース）", summary: "コンテンツの保存/検索、タグ分類、外部データインポート。" },
             { slug: "pm", title: "PM（プロジェクトマネージャー）", summary: "プロジェクト管理、タスク分解、チーム連携。" },
             { slug: "postman", title: "Postman（メールアシスタント）", summary: "メール作成、予約送信、テンプレート。" },
-            { slug: "scout", title: "Scout（市場リサーチ）", summary: "情報収集・分析、競合調査、レポート生成。" },
-            { slug: "website", title: "Website（ウェブサイト構築）", summary: "サイト構築、フォーム開発、ページデザイン。" },
-            { slug: "applet", title: "Applet（ミニアプリ）", summary: "Webウィジェット作成、VNCライブプレビュー。" },
-            { slug: "web-scraper", title: "Web Scraper（ウェブスクレイピング）", summary: "Webページのコンテンツ取得、データ抽出。" },
-            { slug: "report-writer", title: "Report Writer（レポート作成）", summary: "ロボットタイプ。タスクオーケストレーションで分析レポートを自動生成。" },
+            { slug: "insights", title: "Insights（データ分析）", summary: "データベース接続、スプレッドシート読み込み、EChartsダッシュボード構築、VNCライブプレビュー。" },
+            { slug: "scout", title: "Market Scout（マーケット情報）", summary: "購読フィードを自動取得、記事分類、市場インサイトを整理。" },
+            { slug: "slides", title: "Slides（スライド作成）", summary: "アウトラインや文書からHTML形式のプロスライドを生成し、PDFエクスポート。" },
+            { slug: "transformer", title: "Transformer（データ変換）", summary: "画像・PDF・JSON・CSVを構造化形式に変換、Vision LLM OCR対応。" },
+            { slug: "website", title: "Web Builder（ウェブサイト構築）", summary: "企業サイト・ランディングページ・フォームアプリ、Next.js + Tailwind、VNCプレビュー + SSHデプロイ。" },
+            { slug: "applet", title: "Applet Workshop（ミニアプリ）", summary: "Node.jsでビジュアルミニツールを素早く生成、VNCライブプレビュー。" },
+            { slug: "report-writer", title: "Report Writer（レポート作成）", summary: "ロボットタイプ。タスクオーケストレーションで構造化Markdownレポートを自動生成。" },
             { slug: "robot-host", title: "Robot Host（受付）", summary: "パイプラインエージェント。入力収集、ステータスフィードバック。" },
             { slug: "robot-goals", title: "Robot Goals（目標設定）", summary: "パイプラインエージェント。要件理解、実行可能な目標に分解。" },
             { slug: "robot-inspiration", title: "Robot Inspiration（インスピレーション）", summary: "パイプラインエージェント。情報検索、参考資料収集。" },
@@ -1264,6 +1063,7 @@ const general: Product = {
           pages: [
             { slug: "glossary", title: "Glossary", summary: "User-friendly explanations of key terms: AI Assistant, Robot, Agent, Pipeline, Hub, MCP, Tai Link, etc." },
             { slug: "faq", title: "FAQ", summary: "Common questions about installation, connectivity, agent usage, etc." },
+            { slug: "sandbox-images", title: "Sandbox Images", summary: "Complete reference for all Docker sandbox images: what each image includes, which agents use it, and how to pull or update them." },
             { slug: "shortcuts", title: "Keyboard Shortcuts", summary: "Complete keyboard shortcut reference." },
             { slug: "system-requirements", title: "System Requirements", summary: "Minimum specs for each platform." },
             { slug: "changelog", title: "Changelog", summary: "Version release notes and updates." },
@@ -1276,6 +1076,7 @@ const general: Product = {
           pages: [
             { slug: "glossary", title: "术语表", summary: "用户友好的术语解释：AI 助手、机器人、智能体、流水线、Hub、MCP、Tai Link 等。" },
             { slug: "faq", title: "常见问题", summary: "安装问题、连接问题、Agent 使用问题等。" },
+            { slug: "sandbox-images", title: "沙盒镜像", summary: "所有 Docker 沙盒镜像完整参考：各镜像包含的内容、适用 Agent、拉取与更新方法。" },
             { slug: "shortcuts", title: "快捷键", summary: "完整快捷键列表。" },
             { slug: "system-requirements", title: "系统要求", summary: "各平台最低配置。" },
             { slug: "changelog", title: "更新日志", summary: "版本更新内容。" },
@@ -1288,6 +1089,7 @@ const general: Product = {
           pages: [
             { slug: "glossary", title: "術語表", summary: "使用者友善的術語解釋。" },
             { slug: "faq", title: "常見問題", summary: "安裝、連線、Agent 使用等常見問題。" },
+            { slug: "sandbox-images", title: "沙盒映像", summary: "所有 Docker 沙盒映像完整參考：各映像內容、適用 Agent、拉取與更新方法。" },
             { slug: "shortcuts", title: "快捷鍵", summary: "完整快捷鍵列表。" },
             { slug: "system-requirements", title: "系統需求", summary: "各平台最低配置。" },
             { slug: "changelog", title: "更新日誌", summary: "版本更新內容。" },
@@ -1300,6 +1102,7 @@ const general: Product = {
           pages: [
             { slug: "glossary", title: "用語集", summary: "主要用語のわかりやすい説明。" },
             { slug: "faq", title: "よくある質問", summary: "インストール、接続、エージェント使用に関するFAQ。" },
+            { slug: "sandbox-images", title: "サンドボックスイメージ", summary: "全Dockerサンドボックスイメージの完全リファレンス：各イメージの内容、対応Agent、取得・更新方法。" },
             { slug: "shortcuts", title: "キーボードショートカット", summary: "完全なショートカットリファレンス。" },
             { slug: "system-requirements", title: "システム要件", summary: "各プラットフォームの最小スペック。" },
             { slug: "changelog", title: "変更履歴", summary: "バージョンリリースノートと更新情報。" },
@@ -1327,6 +1130,9 @@ function writeYaml(filePath: string, data: unknown) {
 }
 
 function writeMdx(filePath: string, slug: string, title: string, summary: string) {
+  // Skip if file already exists — never overwrite authored content
+  if (fs.existsSync(filePath)) return;
+
   const content = `---
 slug: ${slug}
 ---

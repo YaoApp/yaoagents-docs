@@ -1,0 +1,92 @@
+---
+slug: sandbox-images
+---
+
+# 沙盒映像
+
+Yao Agents 中的 AI Task Agent 執行於名為**沙盒映像**的 Docker 容器內。每個映像都是預先建置好的 Linux 環境，包含 Agent 完成工作所需的工具——檔案系統存取、瀏覽器、終端工具或完整桌面。
+
+本頁列出所有可用的沙盒映像、各映像的內容以及對應使用的 Agent。
+
+---
+
+## 可用映像
+
+| 映像 | 桌面 | SSH | 適用場景 |
+|------|------|-----|---------|
+| `tai-sandbox-claude` | — | — | 大多數 AI Expert（Postman、PM、Market Scout 等）|
+| `tai-sandbox-claude-ssh` | — | ✓ | 需要連線遠端伺服器的 Agent |
+| `tai-sandbox-claude-desktop-lite` | 輕量 | — | 不需要完整桌面的瀏覽器任務 |
+| `tai-sandbox-claude-desktop-lite-ssh` | 輕量 | ✓ | 瀏覽器任務 + 遠端伺服器存取 |
+| `tai-sandbox-claude-desktop` | 完整（XFCE）| — | Applet Workshop |
+| `tai-sandbox-claude-desktop-ssh` | 完整（XFCE）| ✓ | Web Builder（建置、預覽、SSH 部署）|
+
+所有映像均支援 `linux/amd64` 與 `linux/arm64`。
+
+---
+
+## 各 Agent 使用的映像
+
+| Agent | 映像 |
+|-------|------|
+| General Assistant | `tai-sandbox-claude` |
+| Keeper | `tai-sandbox-claude` |
+| Insights | `tai-sandbox-claude` |
+| Project Manager | `tai-sandbox-claude` |
+| Postman | `tai-sandbox-claude` |
+| Market Scout | `tai-sandbox-claude` |
+| Slides | `tai-sandbox-claude` |
+| Transformer | `tai-sandbox-claude` |
+| Report Writer | `tai-sandbox-claude` |
+| Applet Workshop | `tai-sandbox-claude-desktop` |
+| Web Builder | `tai-sandbox-claude-desktop-ssh` |
+
+Robot Pipeline Agent（Robot Host、Goals、Inspiration、Tasks、Validation、Delivery）使用與其執行任務相同的映像，通常為 `tai-sandbox-claude`。
+
+---
+
+## 拉取所有映像
+
+在終端機執行以下指令，一次拉取所有映像：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+docker pull yaoapp/tai-sandbox-claude-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
+```
+
+若只使用純文字 Agent 且不執行 Robot，僅需基礎映像即可：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+---
+
+## 更新映像
+
+重新拉取即可更新至最新版本，Docker 只會下載有變更的層：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+---
+
+## 常見問題
+
+**啟動 Agent 時顯示「找不到映像」**
+確認 Docker Desktop 正在執行，然後拉取所需映像。
+
+**Agent 啟動但行為異常**
+本機映像可能已過期，拉取最新版本後重新啟動 Agent。
+
+**磁碟空間不足**
+每個映像約佔 1–4 GB。如需釋放空間，移除不用的映像：
+
+```bash
+docker rmi yaoapp/tai-sandbox-claude-desktop:latest
+```

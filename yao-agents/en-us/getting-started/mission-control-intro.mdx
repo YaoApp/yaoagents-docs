@@ -4,4 +4,76 @@ slug: mission-control-intro
 
 # Mission Control: Orchestrate Automation
 
-Core concept 2. You are the commander — assemble a team of experts, define the workflow, and let them collaborate automatically.
+Mission Control is where you turn one-off tasks into automated workflows. Instead of prompting an expert every morning, you set up a Robot — and it does the work on its own, on schedule, every time.
+
+> You're the commander. Assemble a team, set the goal, let them run.
+
+## The difference between an AI Expert and a Robot (Task Agent)
+
+An AI Expert is human-driven — you start the conversation, it works, you get the result. A Robot (Task Agent) can run the same way when you assign it a task manually, but it can also run on its own — triggered by a schedule, an event, or a Webhook — and deliver results without you watching.
+
+Mission Control is where you build and manage those Robots.
+
+![Mission Control — Robot list with active status](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+## How a Robot works
+
+Every Robot runs through a **Pipeline** — a sequence of stages, each handled by a specialist AI Task Agent:
+
+1. **Inspiration** — analyzes the context, duties, and available resources to generate an actionable brief
+2. **Goals** — converts the brief into strategic, high-level goals with clear deliverables
+3. **Tasks** — breaks goals into concrete executable tasks and assigns them to agents or tools
+4. **Validation** — checks each result against expected outputs and quality criteria
+5. **Delivery** — formats and sends the final output to the configured destination
+
+When you trigger a Robot manually, **Robot Host** steps in first — it has a short conversation with you to clarify the task goals, then hands off to the pipeline.
+
+Each stage comes with a default AI Task Agent that works well out of the box. If you need precise control over a specific stage, you can swap in a custom agent for that stage.
+
+![Pipeline execution in progress — stages running with real-time status](https://assets.yaoagents.com/en/mission/03-mission-running-en-$__THEME.png)
+
+## Creating your first Robot
+
+1. Open **Mission Control** from the sidebar
+2. Click **+ Add Task Agent**
+
+   ![Mission Control — Robot list with Add Task Agent button](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+3. In the **Basic** tab: give it a name, choose a workspace, set the work mode (**Autonomous** to run on a schedule, **On Demand** to trigger manually), and set who it reports to
+
+   ![Robot settings — Basic tab with name, workspace, work mode, and reports-to fields](https://assets.yaoagents.com/en/mission/02-mission-create-basic-en-$__THEME.png)
+
+4. In the **Identity** tab: describe its role and responsibilities, then assign the AI Experts and tools it needs. Click **Save Changes** when done, then run it from the Mission Control screen.
+
+   ![Robot settings — Identity tab with role description and resource assignment](https://assets.yaoagents.com/en/mission/02-mission-create-identity-en-$__THEME.png)
+
+   > 💡 Match the resources to the role. If the Robot is responsible for sending emails, give it access to Postman. If it needs to research the web, add the search tool. A clear role description with the right resources is what separates a Robot that works from one that doesn't.
+
+   > 💡 Not sure what to write? Click **Generate** — it will draft the role description based on the name you provided.
+
+## Scheduling and triggers
+
+Robots can run:
+
+- **On a fixed schedule** — hourly, daily, weekly, or any custom interval
+- **Continuously** — always running, like a background monitor
+- **Manually** — you kick it off when you need it, via the dashboard or a Webhook
+
+![Work schedule settings — hourly, daily, or continuous options](https://assets.yaoagents.com/en/mission/05-mission-schedule-en-$__THEME.png)
+
+## Integrations
+
+The **Integrations** tab connects a Robot to the outside world. There are two sections:
+
+**Messaging platforms** — paste credentials to connect the Robot to a messaging app. Supported platforms: WeChat, Telegram, Discord, DingTalk, Lark. Once connected, users can chat with the Robot directly from that platform.
+
+**API Access** — each Robot exposes an OpenAI-compatible Chat Completions endpoint. You can call it from any OpenAI SDK or tool to trigger the Robot programmatically.
+
+![Robot settings — Integrations tab with messaging platforms and API access](https://assets.yaoagents.com/en/mission/02-mission-create-integrations-en-$__THEME.png)
+
+## What's next
+
+- [What Is Mission Control](/docs/en-us/mission-control/what-is-mission-control) — a deeper look at how Robots, Pipelines, and Task Agents work together
+- [Creating a Robot](/docs/en-us/mission-control/creating-a-robot) — walk through setting up your first automation
+- [Scheduling & Triggers](/docs/en-us/mission-control/scheduling-and-triggers) — schedule options, continuous mode, and Webhook triggers
+- [Progress & Results](/docs/en-us/mission-control/progress-and-results) — monitor runs, read logs, and access deliverables

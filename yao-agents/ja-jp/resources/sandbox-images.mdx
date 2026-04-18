@@ -1,0 +1,92 @@
+---
+slug: sandbox-images
+---
+
+# サンドボックスイメージ
+
+Yao Agents の AI Task Agent は、**サンドボックスイメージ**と呼ばれる Docker コンテナ内で動作します。各イメージは事前に構築された Linux 環境で、エージェントが作業するために必要なツール（ファイルシステムアクセス、ブラウザ、ターミナルユーティリティ、またはフルデスクトップ）が含まれています。
+
+このページでは、利用可能なサンドボックスイメージ、各イメージの内容、対応するエージェントを一覧で確認できます。
+
+---
+
+## 利用可能なイメージ
+
+| イメージ | デスクトップ | SSH | 主な用途 |
+|---------|------------|-----|---------|
+| `tai-sandbox-claude` | — | — | ほとんどの AI Expert（Postman、PM、Market Scout など）|
+| `tai-sandbox-claude-ssh` | — | ✓ | リモートサーバーへの接続が必要なエージェント |
+| `tai-sandbox-claude-desktop-lite` | 軽量 | — | フルデスクトップ不要のブラウザタスク |
+| `tai-sandbox-claude-desktop-lite-ssh` | 軽量 | ✓ | ブラウザタスク + リモートサーバーアクセス |
+| `tai-sandbox-claude-desktop` | フル（XFCE）| — | Applet Workshop |
+| `tai-sandbox-claude-desktop-ssh` | フル（XFCE）| ✓ | Web Builder（ビルド・プレビュー・SSHデプロイ）|
+
+すべてのイメージは `linux/amd64` と `linux/arm64` に対応しています。
+
+---
+
+## 各エージェントが使用するイメージ
+
+| エージェント | イメージ |
+|------------|---------|
+| General Assistant | `tai-sandbox-claude` |
+| Keeper | `tai-sandbox-claude` |
+| Insights | `tai-sandbox-claude` |
+| Project Manager | `tai-sandbox-claude` |
+| Postman | `tai-sandbox-claude` |
+| Market Scout | `tai-sandbox-claude` |
+| Slides | `tai-sandbox-claude` |
+| Transformer | `tai-sandbox-claude` |
+| Report Writer | `tai-sandbox-claude` |
+| Applet Workshop | `tai-sandbox-claude-desktop` |
+| Web Builder | `tai-sandbox-claude-desktop-ssh` |
+
+Robot パイプラインエージェント（Robot Host、Goals、Inspiration、Tasks、Validation、Delivery）は、実行するタスクと同じイメージを使用します（通常は `tai-sandbox-claude`）。
+
+---
+
+## 全イメージの取得
+
+ターミナルで以下を実行して、すべてのイメージを一度に取得できます：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+docker pull yaoapp/tai-sandbox-claude-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
+```
+
+テキストベースのエージェントのみ使用し、Robot を実行しない場合は、基本イメージだけで十分です：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+---
+
+## イメージの更新
+
+同じコマンドで再取得すると最新バージョンに更新されます。Docker は変更されたレイヤーのみをダウンロードします：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+---
+
+## トラブルシューティング
+
+**エージェント起動時に「イメージが見つかりません」と表示される**
+Docker Desktop が起動していることを確認し、必要なイメージを取得してください。
+
+**エージェントは起動するが動作がおかしい**
+ローカルイメージが古くなっている可能性があります。最新バージョンを取得してエージェントを再起動してください。
+
+**ディスク容量が不足している**
+各イメージは約 1〜4 GB です。不要なイメージを削除してディスク容量を解放できます：
+
+```bash
+docker rmi yaoapp/tai-sandbox-claude-desktop:latest
+```

@@ -1,0 +1,137 @@
+---
+slug: sandbox-images
+---
+
+# Sandbox Images
+
+AI Task Agents in Yao Agents run inside Docker containers called **sandbox images**. Each image is a pre-built Linux environment with the tools an agent needs to do its work — file system access, a browser, terminal utilities, or a full desktop.
+
+This page lists all available sandbox images, what's inside each one, and which agents use them.
+
+---
+
+## Available images
+
+| Image | Desktop | SSH | Best for |
+|-------|---------|-----|---------|
+| `tai-sandbox-claude` | — | — | Most AI Experts (Postman, PM, Market Scout, etc.) |
+| `tai-sandbox-claude-ssh` | — | ✓ | Agents that connect to remote servers |
+| `tai-sandbox-claude-desktop-lite` | Lightweight | — | Browser-based tasks without a full desktop |
+| `tai-sandbox-claude-desktop-lite-ssh` | Lightweight | ✓ | Browser tasks + remote server access |
+| `tai-sandbox-claude-desktop` | Full (XFCE) | — | Applet Workshop |
+| `tai-sandbox-claude-desktop-ssh` | Full (XFCE) | ✓ | Web Builder (build, preview, SSH deploy) |
+
+All images support both `linux/amd64` and `linux/arm64`.
+
+---
+
+## What's inside each image
+
+### `tai-sandbox-claude` — Base sandbox
+
+The default environment for most agents. Includes:
+
+- Python 3, Node.js, Bash
+- Common CLI tools (curl, wget, jq, git)
+- File system read/write access
+- Network access (HTTP/HTTPS)
+
+No desktop or display output. Ideal for text-based tasks: writing, data processing, email, API calls.
+
+### `tai-sandbox-claude-ssh` — Base + SSH
+
+Everything in the base sandbox, plus an SSH client for connecting to remote servers. Used by agents that need to run commands on external machines.
+
+### `tai-sandbox-claude-desktop-lite` — Lightweight desktop
+
+A minimal desktop environment with a browser (Chromium). Used when an agent needs to render web pages or interact with a UI, but a full XFCE desktop isn't required.
+
+Includes everything in the base sandbox, plus:
+- Chromium browser
+- VNC server (for live preview in Yao Agents)
+
+### `tai-sandbox-claude-desktop-lite-ssh` — Lightweight desktop + SSH
+
+Same as the lightweight desktop image, with an SSH client added.
+
+### `tai-sandbox-claude-desktop` — Full desktop
+
+A complete XFCE desktop environment. Used by Applet Workshop to preview and interact with mini-apps in real time.
+
+Includes everything in the lightweight desktop image, plus:
+- Full XFCE desktop
+- Additional desktop utilities
+
+### `tai-sandbox-claude-desktop-ssh` — Full desktop + SSH
+
+Everything in the full desktop image, plus an SSH client. Used by Web Builder to build, preview, and deploy websites over SSH.
+
+---
+
+## Which image does each agent use?
+
+| Agent | Image |
+|-------|-------|
+| General Assistant | `tai-sandbox-claude` |
+| Keeper | `tai-sandbox-claude` |
+| Insights | `tai-sandbox-claude` |
+| Project Manager | `tai-sandbox-claude` |
+| Postman | `tai-sandbox-claude` |
+| Market Scout | `tai-sandbox-claude` |
+| Slides | `tai-sandbox-claude` |
+| Transformer | `tai-sandbox-claude` |
+| Report Writer | `tai-sandbox-claude` |
+| Applet Workshop | `tai-sandbox-claude-desktop` |
+| Web Builder | `tai-sandbox-claude-desktop-ssh` |
+
+Robot pipeline agents (Robot Host, Goals, Inspiration, Tasks, Validation, Delivery) use the same image as the task they are executing — typically `tai-sandbox-claude`.
+
+---
+
+## Pull all images
+
+To pull every image at once, run the following in your terminal:
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+docker pull yaoapp/tai-sandbox-claude-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
+```
+
+If you only use text-based agents and don't run Robots, the base image is all you need:
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+---
+
+## Update images
+
+Pull the latest version of any image the same way you pulled it originally:
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+Docker will download only the layers that have changed.
+
+---
+
+## Troubleshooting
+
+**"Image not found" when starting an agent**
+Make sure Docker Desktop is running, then pull the required image.
+
+**Agent starts but behaves unexpectedly**
+Your local image may be outdated. Pull the latest version and restart the agent.
+
+**Disk space**
+Each image is roughly 1–4 GB. If you're running low on disk space, remove images you don't use:
+
+```bash
+docker rmi yaoapp/tai-sandbox-claude-desktop:latest
+```

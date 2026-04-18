@@ -2,6 +2,78 @@
 slug: mission-control-intro
 ---
 
-# ミッションコントロール：自動化のオーケストレーション
+# Mission Control：自動化を編成する
 
-コアコンセプト 2。あなたが指揮者です。専門家チームを編成し、ワークフローを定義して自動連携させます。
+Mission Control は、一回限りのタスクを自動化ワークフローに変える場所です。毎朝手動で質問する代わりに Robot を設定すれば、スケジュール通り、自動で、確実に仕事を完了させます。
+
+> あなたは司令官。チームを編成し、目標を設定し、動かしてください。
+
+## AI Expert と Robot（Task Agent）の違い
+
+AI Expert は人間が動かします——あなたが会話を始め、Expert が働き、結果が返ってきます。Robot（Task Agent）は同じように手動でタスクを受け取って実行することもできますが、スケジュール・イベント・Webhook をトリガーに自律的に動くこともできます——あなたが見ていなくても結果を届けます。
+
+Mission Control は、この Robot を構築・管理する場所です。
+
+![Mission Control — アクティブ状態の Robot リスト](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+## Robot の仕組み
+
+すべての Robot は **Pipeline** を実行します——一連のステージで構成され、各ステージを専門の AI Task Agent が担当します：
+
+1. **Inspiration** — コンテキスト・職責・利用可能なリソースを分析し、実行可能なブリーフを生成
+2. **Goals** — ブリーフを明確な成果物を持つ戦略的目標に変換
+3. **Tasks** — 目標を具体的な実行可能タスクに分解し、Agent やツールに割り当て
+4. **Validation** — 期待される出力と品質基準に対して各結果を検証
+5. **Delivery** — 最終出力をフォーマットし、設定された宛先に送信
+
+Robot を手動でトリガーすると、**Robot Host** が最初に介入します——タスクの目標を確認するための短い会話をした後、Pipeline に引き渡します。
+
+各ステージにはデフォルトの AI Task Agent が用意されており、すぐに使えます。特定のステージを精密に制御したい場合は、そのステージをカスタムエージェントに置き換えることもできます。
+
+![Pipeline 実行中 — 各ステージのリアルタイムステータス表示](https://assets.yaoagents.com/en/mission/03-mission-running-en-$__THEME.png)
+
+## 最初の Robot を作る
+
+1. サイドバーから **Mission Control** を開く
+2. **+ Add Task Agent** をクリック
+
+   ![Mission Control — Add Task Agent ボタンがある Robot リスト](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+3. **Basic** タブで：名前を付け、ワークスペースを選び、作業モードを設定（**Autonomous** でスケジュール実行、**On Demand** で手動トリガー）し、レポート先を設定
+
+   ![Robot 設定 — Basic タブ：名前・ワークスペース・作業モード・レポート先フィールド](https://assets.yaoagents.com/en/mission/02-mission-create-basic-en-$__THEME.png)
+
+4. **Identity** タブで：役割と責任を説明し、必要な AI Expert とツールを割り当てます。完了したら **Save Changes** をクリックし、Mission Control 画面から実行します。
+
+   ![Robot 設定 — Identity タブ：役割説明とリソース割り当て](https://assets.yaoagents.com/en/mission/02-mission-create-identity-en-$__THEME.png)
+
+   > 💡 リソースを役割に合わせましょう。Robot がメール送信を担当するなら Postman を、ウェブ調査が必要なら検索ツールを割り当てます。明確な役割説明と適切なリソースの組み合わせが、Robot が正しく機能するかどうかを左右します。
+
+   > 💡 何を書けばいいか分からない？**Generate** をクリックすれば、入力した名前をもとに役割説明の下書きを自動生成します。
+
+## スケジュールとトリガー
+
+Robot は以下の方法で実行できます：
+
+- **固定スケジュール** — 毎時・毎日・毎週、またはカスタム間隔
+- **継続的** — 常時稼働、バックグラウンドモニターのように動作
+- **手動** — ダッシュボードまたは Webhook から必要なときに起動
+
+![作業スケジュール設定 — 毎時・毎日・継続的オプション](https://assets.yaoagents.com/en/mission/05-mission-schedule-en-$__THEME.png)
+
+## インテグレーション
+
+**Integrations** タブで Robot を外の世界に接続します。2 つのセクションがあります：
+
+**メッセージングプラットフォーム** — 認証情報を貼り付けて Robot をメッセージアプリに接続します。対応プラットフォーム：WeChat・Telegram・Discord・DingTalk・Lark。接続後、ユーザーはそのプラットフォームから直接 Robot とチャットできます。
+
+**API アクセス** — 各 Robot は OpenAI 互換の Chat Completions エンドポイントを公開しています。任意の OpenAI SDK やツールからこれを呼び出して、プログラム的に Robot をトリガーできます。
+
+![Robot 設定 — Integrations タブ：メッセージングプラットフォームと API アクセス](https://assets.yaoagents.com/en/mission/02-mission-create-integrations-en-$__THEME.png)
+
+## 次のステップ
+
+- [Mission Control とは](/docs/ja-jp/mission-control/what-is-mission-control) — Robot・Pipeline・Task Agent の連携を深く理解する
+- [Robot を作る](/docs/ja-jp/mission-control/creating-a-robot) — 最初の自動化をステップごとに設定
+- [スケジュールとトリガー](/docs/ja-jp/mission-control/scheduling-and-triggers) — スケジュールオプション・継続モード・Webhook トリガー
+- [進捗と結果](/docs/ja-jp/mission-control/progress-and-results) — 実行の監視・ログの確認・成果物の取得

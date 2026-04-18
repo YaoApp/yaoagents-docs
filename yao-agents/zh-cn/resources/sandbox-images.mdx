@@ -1,0 +1,92 @@
+---
+slug: sandbox-images
+---
+
+# 沙盒镜像
+
+Yao Agents 中的 AI Task Agent 运行在名为**沙盒镜像**的 Docker 容器内。每个镜像都是预构建好的 Linux 环境，包含 Agent 完成工作所需的工具——文件系统访问、浏览器、终端工具或完整桌面。
+
+本页列出所有可用的沙盒镜像、各镜像的内容以及对应的使用 Agent。
+
+---
+
+## 可用镜像
+
+| 镜像 | 桌面 | SSH | 适用场景 |
+|------|------|-----|---------|
+| `tai-sandbox-claude` | — | — | 大多数 AI Expert（Postman、PM、Market Scout 等）|
+| `tai-sandbox-claude-ssh` | — | ✓ | 需要连接远程服务器的 Agent |
+| `tai-sandbox-claude-desktop-lite` | 轻量 | — | 不需要完整桌面的浏览器任务 |
+| `tai-sandbox-claude-desktop-lite-ssh` | 轻量 | ✓ | 浏览器任务 + 远程服务器访问 |
+| `tai-sandbox-claude-desktop` | 完整（XFCE）| — | Applet Workshop |
+| `tai-sandbox-claude-desktop-ssh` | 完整（XFCE）| ✓ | Web Builder（构建、预览、SSH 部署）|
+
+所有镜像均支持 `linux/amd64` 和 `linux/arm64`。
+
+---
+
+## 各 Agent 使用的镜像
+
+| Agent | 镜像 |
+|-------|------|
+| General Assistant | `tai-sandbox-claude` |
+| Keeper | `tai-sandbox-claude` |
+| Insights | `tai-sandbox-claude` |
+| Project Manager | `tai-sandbox-claude` |
+| Postman | `tai-sandbox-claude` |
+| Market Scout | `tai-sandbox-claude` |
+| Slides | `tai-sandbox-claude` |
+| Transformer | `tai-sandbox-claude` |
+| Report Writer | `tai-sandbox-claude` |
+| Applet Workshop | `tai-sandbox-claude-desktop` |
+| Web Builder | `tai-sandbox-claude-desktop-ssh` |
+
+Robot Pipeline Agent（Robot Host、Goals、Inspiration、Tasks、Validation、Delivery）使用与其执行任务相同的镜像，通常为 `tai-sandbox-claude`。
+
+---
+
+## 拉取所有镜像
+
+在终端运行以下命令，一次性拉取全部镜像：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+docker pull yaoapp/tai-sandbox-claude-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
+docker pull yaoapp/tai-sandbox-claude-desktop:latest
+docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
+```
+
+如果你只使用纯文本类 Agent、不运行 Robot，只需要基础镜像：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+---
+
+## 更新镜像
+
+重新拉取即可更新到最新版本，Docker 只会下载变更的层：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+---
+
+## 常见问题
+
+**启动 Agent 时提示"镜像未找到"**
+确认 Docker Desktop 正在运行，然后拉取所需镜像。
+
+**Agent 启动但行为异常**
+本地镜像可能已过期，拉取最新版本后重启 Agent。
+
+**磁盘空间不足**
+每个镜像约占 1–4 GB。如需释放空间，删除不用的镜像：
+
+```bash
+docker rmi yaoapp/tai-sandbox-claude-desktop:latest
+```

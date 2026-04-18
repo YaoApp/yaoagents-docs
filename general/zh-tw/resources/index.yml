@@ -8,6 +8,9 @@ pages:
   - slug: faq
     title: 常見問題
     summary: 安裝、連線、Agent 使用等常見問題。
+  - slug: sandbox-images
+    title: 沙盒映像
+    summary: 所有 Docker 沙盒映像完整參考：各映像內容、適用 Agent、拉取與更新方法。
   - slug: shortcuts
     title: 快捷鍵
     summary: 完整快捷鍵列表。

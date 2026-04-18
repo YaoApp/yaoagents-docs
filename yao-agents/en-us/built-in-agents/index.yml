@@ -14,21 +14,27 @@ pages:
   - slug: postman
     title: Postman
     summary: Email assistant. Draft emails, scheduled sending, email templates.
+  - slug: insights
+    title: Insights
+    summary: Data analyst. Connect to databases, read spreadsheets, build ECharts dashboards with live VNC preview.
   - slug: scout
-    title: Scout
-    summary: Market researcher. Information collection, competitive analysis, report generation.
+    title: Market Scout
+    summary: Market intelligence. Monitor subscription feeds, classify articles, organize insights.
+  - slug: slides
+    title: Slides
+    summary: Slide deck builder. Turn outlines or documents into themed HTML presentations, export to PDF.
+  - slug: transformer
+    title: Transformer
+    summary: Data structuring expert. Convert images, PDFs, JSON, and CSV into structured formats via Vision LLM.
   - slug: website
-    title: Website
-    summary: Website builder. Site construction, form development, page design.
+    title: Web Builder
+    summary: Website builder. Corporate sites, landing pages, forms — Next.js + Tailwind, VNC preview, SSH deploy.
   - slug: applet
-    title: Applet
-    summary: Mini-app builder. Create web widgets with live VNC preview.
-  - slug: web-scraper
-    title: Web Scraper
-    summary: Web content collector. Scrape web pages and extract structured data.
+    title: Applet Workshop
+    summary: Mini-app builder. Rapidly generate visual tools with Node.js, live VNC preview.
   - slug: report-writer
     title: Report Writer
-    summary: Report-writing robot (used in Mission Control). Auto-generates analysis reports, data formatting.
+    summary: Report-writing robot (used in Mission Control). Auto-generates structured Markdown analysis reports.
   - slug: robot-host
     title: Robot Host
     summary: "Pipeline agent — Intake stage. Human-machine intermediary: collects input, reports status, confirms decisions."

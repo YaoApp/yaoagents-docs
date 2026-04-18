@@ -1,0 +1,82 @@
+---
+slug: ai-experts-intro
+---
+
+# AI Expert：找對專家
+
+Yao Agents 內建 30+ AI Expert，每一個都為特定工作精調過。把它們想像成隨叫隨到的專家——找對人做對事，結果比問通才好得多。
+
+## AI Expert 怎麼運作
+
+每個 Expert 都有明確的角色、專屬工具集和一套工作方式。開啟對話，你就是在和那位專家說話——不是對著一個空白聊天框。
+
+幾個具體例子：
+
+- **Insights** 連接你的資料庫或試算表，執行分析，渲染出可互動的 ECharts 看板——含即時 VNC 預覽。
+- **Slides** 把大綱或文件轉成帶主題的簡報，匯出為 PDF——拿去就能用。
+- **Applet Workshop** 根據描述搭建一個可執行的小應用——右側螢幕即時顯示執行效果。
+- **Web Builder** 生成完整的 Next.js 站台，透過 VNC 預覽，再用 SSH 部署到你的伺服器——一次對話，全程搞定。
+- **Keeper** 儲存網頁、擷取關鍵內容、加標籤、寫入知識庫——不用複製貼上。
+
+這些能力都是開箱即用的，無需設定。
+
+![AI Expert 面板 — 瀏覽並選擇 30+ 內建專家](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
+
+## 找對專家
+
+在主畫面開啟 **AI Experts** 面板，專家依分類排列——用篩選標籤依類型瀏覽，或依名稱、關鍵字搜尋。
+
+**不確定找誰？直接問 Yao Agents。**
+
+清單頂部的 **Yao Agents** 是智慧調度入口——簡單問題它直接處理，複雜任務它會調度合適的專家來完成工作。不知道從哪裡開始的時候，直接描述你需要什麼，它來安排。
+
+![Yao Agents expert — 描述需求，自動路由到合適的專家](https://assets.yaoagents.com/en/chat/02-chat-conversation-en-$__THEME.png)
+
+清楚自己要做什麼時，直接找專家：
+
+- **寫報告** → Report Writer
+- **挖市場資訊** → Market Scout
+- **分析資料** → Insights
+- **做工具或小應用** → Applet Workshop
+- **發郵件／收郵件** → Postman
+- **儲存內容備查** → Keeper
+
+**需要定期重複的任務？用 Mission Control。** 與其每次重複對話，不如設定一個 Robot 自動執行。→ [Mission Control：編排自動化](/docs/zh-tw/getting-started/mission-control-intro)
+
+## 全部內建專家
+
+| 專家 | 能做什麼 | 最適合 | 詳情 |
+|------|---------|--------|------|
+| **Yao Agents** | 智慧調度入口——簡單任務直接處理，複雜任務分配給專家 | 不確定從哪裡開始時 | [查看](/docs/zh-tw/built-in-agents/general) |
+| **General Assistant** | 多面手——程式開發、調研、寫作、自動化一手包 | 沒有固定流程的開放性任務 | [查看](/docs/zh-tw/built-in-agents/general) |
+| **Keeper** | 知識中樞——儲存、整理、檢索網頁、筆記和檔案 | 建立個人知識庫 | [查看](/docs/zh-tw/built-in-agents/keeper) |
+| **Insights** | 資料分析師——連接資料庫、讀試算表、構建 ECharts 看板 | 資料分析與視覺化 | [查看](/docs/zh-tw/built-in-agents/insights) |
+| **Project Manager** | 掃描郵件和檔案，建立結構化專案並產生日誌和報告 | 跨郵件和檔案的專案追蹤 | [查看](/docs/zh-tw/built-in-agents/pm) |
+| **Postman** | 透過 SMTP/IMAP 發送和接收郵件，支援 HTML 和回覆串 | 郵件自動化 | [查看](/docs/zh-tw/built-in-agents/postman) |
+| **Market Scout** | 監控訂閱來源、擷取內容、分類並存檔市場動態 | 市場調研和競品追蹤 | [查看](/docs/zh-tw/built-in-agents/scout) |
+| **Slides** | 將大綱或文件轉為帶主題的簡報，匯出 PDF | 簡報和報告 | [查看](/docs/zh-tw/built-in-agents/slides) |
+| **Transformer** | 用 Vision LLM 將圖片、PDF、JSON、CSV 轉換為結構化格式 | 文件解析和資料轉換 | [查看](/docs/zh-tw/built-in-agents/transformer) |
+| **Applet Workshop** | 用 Node.js 構建可視化小工具，透過 VNC 即時預覽 | 快速工具和互動式實用程式 | [查看](/docs/zh-tw/built-in-agents/applet) |
+| **Web Builder** | 用 Next.js + Tailwind 構建網站和表單應用，SSH 部署 | 網站、登陸頁和表單 | [查看](/docs/zh-tw/built-in-agents/website) |
+| **Report Writer** | 自動產生結構化 Markdown 分析報告（用於 Mission Control）| Mission Control 中的自動報告 | [查看](/docs/zh-tw/built-in-agents/report-writer) |
+
+## 工作區
+
+每個 Expert 都執行在自己的持久化沙盒中。建立或上傳的檔案在對話間保留——下次開啟，從上次離開的地方繼續。
+
+要管理工作區，點擊右上角導覽列中的 **Workspaces**。從這裡可以建立多個工作區並在它們之間切換——當你同時有多個專案、需要隔離檔案和情境時非常有用。你也可以在任意對話底部的輸入區域直接切換工作區。
+
+![工作區選擇器 — 從對話底部切換專案](https://assets.yaoagents.com/en/tai/04-tai-workspace-select-en-$__THEME.png)
+
+## 切換模型
+
+預設情況下，每個 Expert 使用你設定的主要模型。可以在對話底部的模型選擇器中隨時切換。
+
+![模型選擇器，顯示 Claude、DeepSeek、GPT、Kimi 等選項](https://assets.yaoagents.com/en/chat/08-chat-model-picker-en-$__THEME.png)
+
+> 💡 不同模型各有所長。Claude 擅長寫作和細膩推理；GPT-4o 覆蓋面廣、穩定可靠；DeepSeek 在高頻或分析類任務上性價比更高。
+
+## 下一步
+
+- [Mission Control：編排自動化](/docs/zh-tw/getting-started/mission-control-intro) — 從一次性對話邁向自主任務
+- [內建 Agent](/docs/zh-tw/built-in-agents/general) — 每個預裝專家的詳細介紹

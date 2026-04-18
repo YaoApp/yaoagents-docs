@@ -1,0 +1,82 @@
+---
+slug: ai-experts-intro
+---
+
+# AI Expert：適切な専門家を選ぶ
+
+Yao Agents には 30 以上の AI Expert が内蔵されており、それぞれ特定の仕事に特化しています。呼べばすぐ来る専門家チームのようなもの——適切な人に適切な仕事を依頼すれば、万能型に何でも聞くより良い結果が得られます。
+
+## AI Expert の仕組み
+
+Expert にはそれぞれ明確な役割、専用のツールセット、独自の作業スタイルがあります。会話を開くと、その専門家と話しているのです——空のチャット画面ではありません。
+
+いくつか具体的な例を挙げます：
+
+- **Insights** はデータベースや表計算シートに接続し、分析を実行し、インタラクティブな ECharts ダッシュボードを描画します——ライブ VNC プレビュー付き。
+- **Slides** はアウトラインや文書をテーマ付きスライドデッキに変換し、PDF にエクスポートします——そのまま発表に使えます。
+- **Applet Workshop** は説明文から動作するミニアプリを作り、画面右側でリアルタイムに動いているのを確認できます。
+- **Web Builder** は Next.js サイト全体を生成し、VNC でプレビューし、SSH 経由でサーバーにデプロイします——一つの会話で最初から最後まで完結。
+- **Keeper** はウェブページを保存し、キーコンテンツを抽出し、タグを付け、知識ベースに追加します——コピー＆ペーストは不要。
+
+これらはすべてすぐに使えます。設定は不要です。
+
+![AI Expert パネル — 30 以上の内蔵エキスパートを閲覧・選択](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
+
+## 適切な専門家を選ぶ
+
+ホーム画面から **AI Experts** パネルを開きます。Expert はカテゴリ別に整理されています——フィルタータブでタイプ別に絞り込んだり、名前やトピックで検索したりできます。
+
+**どこから始めればいいか迷ったら？Yao Agents に聞いてみてください。**
+
+リスト上部の **Yao Agents** はスマートルーターです——シンプルな質問は直接処理し、複雑なタスクは適切な専門家エージェントに振って作業を完了させます。どのエキスパートが自分のタスクに合うか分からないときは、やりたいことを説明するだけで、あとはお任せで大丈夫です。
+
+![Yao Agents expert — 必要なことを伝えれば、適切な専門家にルーティングされる](https://assets.yaoagents.com/en/chat/02-chat-conversation-en-$__THEME.png)
+
+何をしたいか分かっている場合は、直接専門家に向かってください：
+
+- **レポートを書く** → Report Writer
+- **市場情報を調べる** → Market Scout
+- **データを分析する** → Insights
+- **ツールやミニアプリを作る** → Applet Workshop
+- **メールを送受信する** → Postman
+- **後で参照するために保存する** → Keeper
+
+**定期的に繰り返すタスク？Mission Control を使いましょう。** 毎回会話を繰り返す代わりに、Robot を設定して自動実行させてください。→ [Mission Control：自動化を編成する](/docs/ja-jp/getting-started/mission-control-intro)
+
+## すべての内蔵エキスパート
+
+| エキスパート | できること | 最適な用途 | 詳細 |
+|------------|---------|----------|------|
+| **Yao Agents** | スマートルーター——簡単なタスクは直接処理し、複雑なものは専門家に振る | どこから始めるか迷ったとき | [見る](/docs/ja-jp/built-in-agents/general) |
+| **General Assistant** | 万能アシスタント——コーディング・リサーチ・ライティング・自動化を幅広くカバー | 決まったワークフローがない柔軟なタスク | [見る](/docs/ja-jp/built-in-agents/general) |
+| **Keeper** | 知識ハブ——ウェブページ・ノート・ファイルの保存・整理・検索 | 個人の知識ベースを作る | [見る](/docs/ja-jp/built-in-agents/keeper) |
+| **Insights** | データアナリスト——データベース接続・表計算読み込み・ECharts ダッシュボード構築 | データ分析と可視化 | [見る](/docs/ja-jp/built-in-agents/insights) |
+| **Project Manager** | メールやファイルをスキャンし、ログとレポートを含む構造化プロジェクトを構築 | メールとファイルにまたがるプロジェクト管理 | [見る](/docs/ja-jp/built-in-agents/pm) |
+| **Postman** | SMTP/IMAP 経由でメールを送受信、HTML サポートとスレッド返信対応 | メール自動化 | [見る](/docs/ja-jp/built-in-agents/postman) |
+| **Market Scout** | 購読ソースを監視し、コンテンツを取得・分類してアーカイブ | 市場調査と競合追跡 | [見る](/docs/ja-jp/built-in-agents/scout) |
+| **Slides** | アウトラインや文書をテーマ付きスライドデッキに変換し PDF エクスポート | プレゼンとレポート | [見る](/docs/ja-jp/built-in-agents/slides) |
+| **Transformer** | Vision LLM で画像・PDF・JSON・CSV を構造化フォーマットに変換 | ドキュメント解析とデータ変換 | [見る](/docs/ja-jp/built-in-agents/transformer) |
+| **Applet Workshop** | Node.js で視覚的なミニツールを構築し VNC でリアルタイムプレビュー | クイックツールとインタラクティブユーティリティ | [見る](/docs/ja-jp/built-in-agents/applet) |
+| **Web Builder** | Next.js + Tailwind でウェブサイトやフォームアプリを構築し SSH デプロイ | ウェブサイト・LP・フォーム | [見る](/docs/ja-jp/built-in-agents/website) |
+| **Report Writer** | 構造化 Markdown 分析レポートを自動生成（Mission Control 内で使用）| Robot パイプライン内の自動レポーティング | [見る](/docs/ja-jp/built-in-agents/report-writer) |
+
+## ワークスペース
+
+各 Expert はそれぞれの永続的なサンドボックス内で動作します。作成またはアップロードしたファイルは会話をまたいで保持されます——次に開いたとき、前回の続きから始められます。
+
+ワークスペースを管理するには、右上のナビゲーションバーの **Workspaces** をクリックします。そこから複数のワークスペースを作成して切り替えることができます——別々のプロジェクトに取り組んでいて、ファイルとコンテキストを分けておきたいときに便利です。任意の会話の下部にある入力エリアからも直接ワークスペースを切り替えることができます。
+
+![ワークスペースセレクター — チャット下部からプロジェクトを切り替える](https://assets.yaoagents.com/en/tai/04-tai-workspace-select-en-$__THEME.png)
+
+## モデルの切り替え
+
+デフォルトでは、各エキスパートはプライマリとして設定したモデルを使用します。チャット下部のモデルピッカーで会話中いつでも切り替えられます。
+
+![Claude・DeepSeek・GPT・Kimi などのオプションを表示するモデルピッカー](https://assets.yaoagents.com/en/chat/08-chat-model-picker-en-$__THEME.png)
+
+> 💡 モデルによって得意分野が異なります。Claude はライティングと細やかな推論が得意です。GPT-4o は幅広いタスクに安定して対応します。DeepSeek は大量処理や分析作業でコストパフォーマンスが高いです。
+
+## 次のステップ
+
+- [Mission Control：自動化を編成する](/docs/ja-jp/getting-started/mission-control-intro) — 一回限りの会話から自律タスクへ
+- [内蔵 Agent](/docs/ja-jp/built-in-agents/general) — すべてのプリインストール済みエキスパートの詳細プロフィール

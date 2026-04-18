@@ -14,21 +14,27 @@ pages:
   - slug: postman
     title: Postman（メールアシスタント）
     summary: メール作成、予約送信、テンプレート。
+  - slug: insights
+    title: Insights（データ分析）
+    summary: データベース接続、スプレッドシート読み込み、EChartsダッシュボード構築、VNCライブプレビュー。
   - slug: scout
-    title: Scout（市場リサーチ）
-    summary: 情報収集・分析、競合調査、レポート生成。
+    title: Market Scout（マーケット情報）
+    summary: 購読フィードを自動取得、記事分類、市場インサイトを整理。
+  - slug: slides
+    title: Slides（スライド作成）
+    summary: アウトラインや文書からHTML形式のプロスライドを生成し、PDFエクスポート。
+  - slug: transformer
+    title: Transformer（データ変換）
+    summary: 画像・PDF・JSON・CSVを構造化形式に変換、Vision LLM OCR対応。
   - slug: website
-    title: Website（ウェブサイト構築）
-    summary: サイト構築、フォーム開発、ページデザイン。
+    title: Web Builder（ウェブサイト構築）
+    summary: 企業サイト・ランディングページ・フォームアプリ、Next.js + Tailwind、VNCプレビュー + SSHデプロイ。
   - slug: applet
-    title: Applet（ミニアプリ）
-    summary: Webウィジェット作成、VNCライブプレビュー。
-  - slug: web-scraper
-    title: Web Scraper（ウェブスクレイピング）
-    summary: Webページのコンテンツ取得、データ抽出。
+    title: Applet Workshop（ミニアプリ）
+    summary: Node.jsでビジュアルミニツールを素早く生成、VNCライブプレビュー。
   - slug: report-writer
     title: Report Writer（レポート作成）
-    summary: ロボットタイプ。タスクオーケストレーションで分析レポートを自動生成。
+    summary: ロボットタイプ。タスクオーケストレーションで構造化Markdownレポートを自動生成。
   - slug: robot-host
     title: Robot Host（受付）
     summary: パイプラインエージェント。入力収集、ステータスフィードバック。

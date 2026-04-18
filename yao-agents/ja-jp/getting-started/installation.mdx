@@ -4,4 +4,189 @@ slug: installation
 
 # インストール
 
-macOS / Windows / Linux でダウンロードしてインストール。
+約10分で Yao Agents をマシン上で動かせます。
+
+## インストールするもの
+
+| コンポーネント | 役割 | 必須 |
+|-------------|------|------|
+| **Yao Engine** | すべてを動かすローカルサーバー | 必須 |
+| **Yao Agents** | 日常的に使うクライアントアプリ | 必須 |
+| **Tai Link** | 他のデバイスを接続し、AI がそこで動けるようにする | 任意 |
+
+インストール順：Yao Engine → Yao Agents → 必要に応じて Tai Link。
+
+---
+
+## ステップ 1 — Yao Engine をインストール
+
+Yao Engine はシステムの中核です。他のすべてがここに接続します。プラットフォームによって手順が異なります。
+
+### macOS
+
+[yaoagents.com/download](https://yaoagents.com/download) から Yao Engine インストーラーをダウンロードして実行してください。
+
+| アーキテクチャ | 対象 |
+|-------------|------|
+| Apple Silicon (arm64) | M1 / M2 / M3 / M4 Mac |
+| Intel (x86_64) | 旧型 Mac |
+
+1. **Yao Engine をインストール** — インストーラーを実行して Yao Engine を起動します。エンジンのステータスウィンドウが表示されます。
+
+   ![Yao Engine 起動中 — Application タブにステータスとサーバーアドレスが表示](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+2. **サーバーを起動** — エンジンウィンドウの **Start Server** をクリックします。起動したら **Visit** をクリックして、ブラウザでウェルカムページを開き、正常に動作していることを確認してください。
+
+   ![ブラウザに表示された Yao Engine ウェルカムページ](https://assets.yaoagents.com/en/website/02-web-welcome-en-$__THEME.png)
+
+3. **Docker Desktop をインストール** — [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) からダウンロードしてインストールします。
+
+4. **サンドボックスイメージをプル**：
+   ```bash
+   docker pull yaoapp/tai-sandbox-claude:latest
+   docker pull yaoapp/tai-sandbox-claude-ssh:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
+   ```
+
+### Windows
+
+Windows では Yao Engine は WSL2 環境内で動作します。まず環境を整えてから Yao Engine をインストールしてください。
+
+1. **WSL2 を有効にして Ubuntu をインストール** — PowerShell を管理者として開き、以下を実行します：
+   ```powershell
+   wsl --install
+   ```
+   プロンプトに従って再起動し、Ubuntu アプリを開いて初期設定（ユーザー名とパスワード）を完了してください。
+
+2. **Docker Desktop をインストール** — [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) からダウンロードしてインストールします。**Docker Desktop → Settings → Resources → WSL Integration** で WSL2 統合を有効にしてください。
+
+3. **サンドボックスイメージをプル**：
+   ```bash
+   docker pull yaoapp/tai-sandbox-claude:latest
+   docker pull yaoapp/tai-sandbox-claude-ssh:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop:latest
+   docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
+   ```
+
+4. **Yao Engine をインストール** — [yaoagents.com/download](https://yaoagents.com/download) から Windows インストーラーをダウンロードして実行します。Yao Engine を起動するとステータスウィンドウが表示されます。
+
+   ![Yao Engine 起動中（Windows）](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Yao+Engine+on+Windows)
+
+5. **サーバーを起動** — **Start Server** をクリックし、次に **Visit** をクリックしてブラウザでウェルカムページを開き、正常に動作していることを確認してください。
+
+   ![ブラウザに表示された Yao Engine ウェルカムページ](https://assets.yaoagents.com/en/website/02-web-welcome-en-$__THEME.png)
+
+### Linux
+
+Linux へのインストールは開発者およびセルフホスト向けです。Yao Engine ドキュメントサイトの完全なガイドをご参照ください：
+
+[Yao Engine ドキュメント → yaoapps.com/docs](https://yaoapps.com/docs)
+
+---
+
+### サンドボックスイメージ
+
+各サンドボックスイメージは Docker コンテナで、AI Task Agent がその中で動作します。必要なものだけプルしてください。
+
+| イメージ | デスクトップ | SSH | 使用 Agent |
+|--------|-----------|-----|-----------|
+| `tai-sandbox-claude` | — | — | Postman・PM・Market Scout など大多数のAgent |
+| `tai-sandbox-claude-ssh` | — | ✓ | リモートサーバーへの接続が必要な Agent |
+| `tai-sandbox-claude-desktop-lite` | 軽量 | — | フルデスクトップ不要のブラウザタスク |
+| `tai-sandbox-claude-desktop-lite-ssh` | 軽量 | ✓ | 同上、リモートサーバーアクセスも対応 |
+| `tai-sandbox-claude-desktop` | フル（XFCE） | — | Applet Workshop |
+| `tai-sandbox-claude-desktop-ssh` | フル（XFCE） | ✓ | Web Builder（ビルド・テスト・デプロイ）|
+
+すべてのイメージは `linux/amd64` と `linux/arm64` に対応しています。→ [サンドボックスイメージリファレンス](/docs/ja-jp/resources/sandbox-images)
+
+---
+
+## ステップ 2 — Yao Agents をインストール
+
+Yao Agents はクライアントアプリで、毎日使うインターフェースです。
+
+[yaoagents.com/download](https://yaoagents.com/download) からお使いのプラットフォーム向けインストーラーをダウンロードして実行してください。
+
+> 💡 macOS のビルドで迷ったら：Apple Silicon = M1/M2/M3/M4、Intel = 旧型 Mac。
+
+Yao Agents を初めて開いたら、Yao Engine を追加します：
+
+1. **Settings → Engine** を開く
+2. サーバーアドレスを入力 — Yao Engine が同じマシンで動いている場合、デフォルトは `http://localhost:5099`
+3. **Connect** をクリック — 接続成功後、ステータスが緑に変わります
+
+![Yao Agents 設定 — Engine タブ、サーバーアドレス入力欄](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Settings+%E2%86%92+Engine)
+
+接続完了後、サインインが求められます。デフォルトの認証情報を使用してください：
+
+- **メールアドレス：** `root@yaoagents.com`
+- **パスワード：** `Yao123++`
+
+> 💡 初回ログイン後、**Settings → Account** でパスワードを変更してください。
+
+![Yao Agents ログイン画面](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Login+screen)
+
+サインイン後、ホーム画面に移動します。
+
+![Yao Agents ホーム画面 — 空のチャット、すぐに始められます](https://assets.yaoagents.com/en/chat/01-chat-empty-en-$__THEME.png)
+
+---
+
+## ステップ 3 — AI モデルに接続
+
+Yao Agents が動くには AI モデルとの接続が必要です。一番手軽なのは **Yao Agents サービス** を使う方法です——チームが管理するホスト型 API で、サインインするだけで使えます。
+
+### オプション A — Yao Agents サービス（推奨）
+
+1. [yaoagents.com](https://yaoagents.com) にアクセスしてサインイン
+2. **API Keys** ページから API キーをコピー
+
+   ![Yao Agents コンソール — API Keys ページ](https://assets.yaoagents.com/en/console/02-console-keys-en-$__THEME.png)
+
+3. Yao Engine の **Models** タブにキーを貼り付け
+
+   ![Yao Engine — Models タブ、API キー入力欄](https://assets.yaoagents.com/en/engine/03-engine-models-en-$__THEME.png)
+
+Claude・GPT-4o・DeepSeek などのモデルに対応——従量課金制でサブスクリプション不要。
+
+### オプション B — 自前のキーを使う（BYOK）
+
+自分の LLM アカウントを使いたい場合は、Yao Engine → **Models** でカスタム API エンドポイントとキーを設定してください。Anthropic・OpenAI・DeepSeek・Ollama（ローカル）など、OpenAI 互換のプロバイダーであれば何でも対応しています。
+
+> 💡 **どちらを選べばいい？** まずは Yao Agents サービスを試してみてください——最も早く動かせる方法です。Yao Engine → Models からいつでも BYOK に切り替えられます。
+
+モデルの接続が完了したら、作業を始める準備ができています。
+
+---
+
+## Tai Link — 他のデバイスを接続
+
+AI を別のマシンで動かしたいですか？予備のノートPC・サーバー・VM・コンテナなど、リモートデバイスに Tai Link をインストールするだけ。接続後、AI チームがそのデバイス上で動作し、あなたの画面は自由なままです。
+
+[最初のデバイスを接続する →](/docs/ja-jp/tai-link/connect-first-device)
+
+---
+
+## 次のステップ
+
+- [AI Expert：適切な専門家を選ぶ](/docs/ja-jp/getting-started/ai-experts-intro) — タスクに合った専門家を選択
+- [Mission Control：自動化を編成する](/docs/ja-jp/getting-started/mission-control-intro) — 最初の Robot を設定
+- [最初のデバイスを接続する](/docs/ja-jp/tai-link/connect-first-device) — AI を他のマシンで動かす
+
+---
+
+## トラブルシューティング
+
+**Yao Agents に「Engine not running」と表示される**
+Yao Engine が起動・実行中であることを確認してください。メニューバーのエンジンアイコンをクリックしてステータスを確認します。起動しない場合、ポート 5099 が他のプロセスに使われていないか確認してください。
+
+**Robot 実行時に「Docker not found」エラーが出る**
+[Docker Desktop](https://www.docker.com/products/docker-desktop/) をインストールして、実行中であることを確認してください。Windows の場合は先に WSL2 を設定してください。
+
+**Yao Agents がリモートエンジンに接続できない**
+Engine が別のサーバー上で動いている場合、Yao Agents の **Settings → Engine** にサーバーアドレスを入力してください。

@@ -8,9 +8,9 @@ pages:
   - slug: installation
     title: 安装
     summary: 在 macOS / Windows / Linux 上下载安装，像装普通 App 一样简单。
-  - slug: ai-assistants-intro
-    title: AI 助手：找专家干活
-    summary: 核心概念 1。每个 AI 助手是一个领域专家。如何选择合适的助手、如何描述你的需求、如何获得最佳结果。
+  - slug: ai-experts-intro
+    title: AI 专家：找对人，事半功倍
+    summary: 核心概念 1。每个 AI 专家都是对应领域的专才。如何选对专家、如何描述需求、如何获得最佳结果。
   - slug: mission-control-intro
     title: 任务控制中心：编排自动化
     summary: 核心概念 2。你来编排——拉一组专家组成团队，定义流程，让它们自动协作完成。

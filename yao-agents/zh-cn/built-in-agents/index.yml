@@ -14,21 +14,27 @@ pages:
   - slug: postman
     title: Postman（邮件助手）
     summary: 邮件撰写、定时发送、邮件模板。
+  - slug: insights
+    title: Insights（数据分析）
+    summary: 连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。
   - slug: scout
-    title: Scout（市场调研）
-    summary: 信息收集与分析、竞品调研、报告生成。
+    title: Market Scout（市场情报）
+    summary: 自动读取订阅源、抓取最新内容、分类归档市场洞察。
+  - slug: slides
+    title: Slides（幻灯片制作）
+    summary: 从大纲或文档生成专业 HTML 演示稿并导出 PDF。
+  - slug: transformer
+    title: Transformer（数据转换）
+    summary: 将图片、PDF、JSON、CSV 转换为结构化格式，支持 Vision LLM OCR。
   - slug: website
-    title: Website（网站构建）
-    summary: 网站搭建、表单开发、页面设计。
+    title: Web Builder（网站构建）
+    summary: 企业官网、落地页、表单应用，Next.js + Tailwind，VNC 预览 + SSH 部署。
   - slug: applet
-    title: Applet（小工具开发）
-    summary: 创建 Web 小工具、VNC 实时预览。
-  - slug: web-scraper
-    title: Web Scraper（网页采集）
-    summary: 网页内容抓取、数据提取。
+    title: Applet Workshop（小工具开发）
+    summary: 快速生成可视化 mini-tool，Node.js + VNC 实时预览。
   - slug: report-writer
     title: Report Writer（报告撰写）
-    summary: 机器人类型。在任务编排中自动生成分析报告、数据整理、格式化输出。
+    summary: 机器人类型。在任务编排中自动生成结构化 Markdown 分析报告。
   - slug: robot-host
     title: Robot Host（接单）
     summary: 流水线智能体。人机交互中介、接收输入、反馈状态。

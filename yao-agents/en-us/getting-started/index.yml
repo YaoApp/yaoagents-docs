@@ -8,9 +8,9 @@ pages:
   - slug: installation
     title: Installation
     summary: Download and install on macOS, Windows, or Linux — as easy as installing any app.
-  - slug: ai-assistants-intro
-    title: "AI Assistants: Find an Expert"
-    summary: Core concept 1. Each AI assistant is a domain expert. Learn how to pick the right one, describe your needs, and get the best results.
+  - slug: ai-experts-intro
+    title: "AI Experts: Find the Right One"
+    summary: Core concept 1. Each AI Expert is a domain specialist. Learn how to pick the right one, describe your needs, and get the best results.
   - slug: mission-control-intro
     title: "Mission Control: Orchestrate Automation"
     summary: Core concept 2. You are the commander — assemble a team of experts, define the workflow, and let them collaborate automatically.

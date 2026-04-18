@@ -2,6 +2,78 @@
 slug: mission-control-intro
 ---
 
-# 任務控制中心：編排自動化
+# Mission Control：編排自動化
 
-核心概念 2。你來編排——拉一組專家組成團隊，定義流程，讓它們自動協作完成。
+Mission Control 是你把一次性任務變成自動化工作流程的地方。不用每天早上手動提問，只需設定一個 Robot——它會按時、自動、獨立地完成工作。
+
+> 你是指揮官。組建團隊，設定目標，讓它們運轉起來。
+
+## AI Expert 和 Robot（Task Agent）的差異
+
+AI Expert 由人驅動——你發起對話，它工作，你拿結果。Robot（Task Agent）可以同樣地手動接收任務、執行工作，也可以完全自主執行——由計畫、事件或 Webhook 觸發，無需你在旁邊守候。
+
+Mission Control 就是你構建和管理這些 Robot 的地方。
+
+![Mission Control — 顯示活躍狀態的 Robot 清單](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+## Robot 如何運作
+
+每個 Robot 都會執行一條 **Pipeline**——一系列階段，每個階段由專屬的 AI Task Agent 負責：
+
+1. **Inspiration** — 分析背景、職責和可用資源，產生可操作的任務簡報
+2. **Goals** — 將簡報轉化為有明確交付物的策略性目標
+3. **Tasks** — 將目標拆解為具體的可執行任務，分配給對應的 Agent 或工具
+4. **Validation** — 對照預期輸出和品質標準檢驗每個結果
+5. **Delivery** — 格式化最終輸出並傳送到設定好的目標位址
+
+手動觸發 Robot 時，**Robot Host** 會先介入——它會與你簡短對話，確認任務目標，然後再移交給 Pipeline。
+
+每個階段都配有開箱即用的預設 AI Task Agent。如果你需要精確控制某個特定階段，可以將該階段替換為自訂 Agent。
+
+![Pipeline 執行中 — 各階段即時顯示狀態](https://assets.yaoagents.com/en/mission/03-mission-running-en-$__THEME.png)
+
+## 建立你的第一個 Robot
+
+1. 從側邊欄開啟 **Mission Control**
+2. 點擊 **+ Add Task Agent**
+
+   ![Mission Control — 含有 Add Task Agent 按鈕的 Robot 清單](https://assets.yaoagents.com/en/mission/01-mission-list-en-$__THEME.png)
+
+3. 在 **Basic** 標籤頁：填寫名稱、選擇工作區、設定工作模式（**Autonomous** 按計畫自動執行，**On Demand** 手動觸發），並設定匯報對象
+
+   ![Robot 設定 — Basic 標籤頁，含名稱、工作區、工作模式和匯報對象欄位](https://assets.yaoagents.com/en/mission/02-mission-create-basic-en-$__THEME.png)
+
+4. 在 **Identity** 標籤頁：描述其角色和職責，然後分配它所需的 AI Expert 和工具。完成後點擊 **Save Changes**，然後從 Mission Control 主畫面啟動執行。
+
+   ![Robot 設定 — Identity 標籤頁，含角色描述和資源分配](https://assets.yaoagents.com/en/mission/02-mission-create-identity-en-$__THEME.png)
+
+   > 💡 讓資源與角色匹配。如果 Robot 負責發郵件，就給它 Postman 的權限；如果需要上網調研，就新增搜尋工具。清晰的職責描述配上合適的資源，是 Robot 能不能好好工作的關鍵。
+
+   > 💡 不知道怎麼寫？點擊 **Generate**——它會根據你填寫的名稱自動草擬角色描述。
+
+## 計畫與觸發
+
+Robot 可以透過以下方式執行：
+
+- **固定計畫** — 每小時、每天、每週，或任意自訂間隔
+- **持續執行** — 始終在線，像背景監控一樣
+- **手動觸發** — 需要時從控制台或透過 Webhook 手動啟動
+
+![工作計畫設定 — 每小時、每天或持續執行選項](https://assets.yaoagents.com/en/mission/05-mission-schedule-en-$__THEME.png)
+
+## 整合
+
+**Integrations** 標籤頁將 Robot 與外部世界連接起來。分為兩個部分：
+
+**訊息平台** — 貼上憑證，將 Robot 接入訊息應用程式。支援的平台：微信、Telegram、Discord、釘釘、飛書。接入後，使用者可以直接在該平台與 Robot 對話。
+
+**API 存取** — 每個 Robot 都公開一個相容 OpenAI 介面的 Chat Completions 端點，可以從任何 OpenAI SDK 或工具中呼叫，以程式方式觸發 Robot。
+
+![Robot 設定 — Integrations 標籤頁，顯示訊息平台和 API 存取](https://assets.yaoagents.com/en/mission/02-mission-create-integrations-en-$__THEME.png)
+
+## 下一步
+
+- [Mission Control 是什麼](/docs/zh-tw/mission-control/what-is-mission-control) — 深入了解 Robot、Pipeline 和 Task Agent 如何協同工作
+- [建立 Robot](/docs/zh-tw/mission-control/creating-a-robot) — 一步步設定你的第一個自動化
+- [計畫與觸發](/docs/zh-tw/mission-control/scheduling-and-triggers) — 計畫選項、持續模式和 Webhook 觸發
+- [進度與結果](/docs/zh-tw/mission-control/progress-and-results) — 監控執行、查看日誌、取得交付物

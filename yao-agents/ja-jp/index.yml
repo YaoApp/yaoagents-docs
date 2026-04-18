@@ -3,11 +3,8 @@ title: Yao Agents
 summary: 製品ユーザーマニュアル——デバイスに Yao Agents をインストール・設定・利用する。
 sections:
   - getting-started
-  - ai-assistants
   - mission-control
   - built-in-agents
   - agent-hub
   - integrations
   - settings
-  - tai-link
-  - resources
