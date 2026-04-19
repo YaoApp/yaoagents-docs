@@ -4,4 +4,121 @@ slug: mcp-tools
 
 # MCP Tools
 
-Connect external MCP servers to extend the tools available to assistants.
+MCP (Model Context Protocol) lets AI Experts and robots call external tools — web search, code runners, databases, APIs — without you writing any integration code. Each MCP server you connect becomes a set of tools that every assistant in Yao Agents can use.
+
+---
+
+## How it works
+
+MCP tools are configured as `.mcp.yao` files in the `mcps/` directory of your application folder. When Yao Engine starts it loads all MCP files and makes their tools available to every AI Expert and robot.
+
+Yao Agents supports four ways to connect an external MCP server:
+
+| Transport | When to use |
+|-----------|-------------|
+| `http` | The MCP server exposes a standard HTTP endpoint (most common for cloud services) |
+| `sse` | The server uses Server-Sent Events (older MCP deployments) |
+| `stdio` | The server is a local process you start via command line |
+| `process` | The MCP server is implemented as a Yao script — no external process needed (for developers) |
+
+---
+
+## Connecting an HTTP MCP server
+
+The simplest case: point Yao at an existing MCP-compatible HTTP endpoint.
+
+Create a file in `mcps/` — for example `mcps/my-server.mcp.yao`:
+
+```json
+{
+  "label": "My MCP Server",
+  "description": "What this server does",
+  "transport": "http",
+  "url": "https://my-mcp-server.example.com/mcp",
+  "authorization_token": "Bearer sk-...",
+  "timeout": "30s"
+}
+```
+
+Restart Yao Engine. The tools exposed by that server appear automatically in every AI Expert and robot.
+
+### HTTP connector fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `label` | ✓ | Display name shown in the UI |
+| `description` | | Brief description of what this server provides |
+| `transport` | ✓ | `"http"` |
+| `url` | ✓ | Full URL of the MCP endpoint (e.g. `https://example.com/mcp`) |
+| `authorization_token` | | Bearer token or API key sent in the `Authorization` header |
+| `timeout` | | Request timeout. Accepts `30s`, `5m`, `1h` format. Default: `30s` |
+| `tags` | | Array of tags for filtering in the UI |
+| `enable_sampling` | | Allow the server to request LLM completions from Yao (default: `false`) |
+| `enable_roots` | | Share workspace root list with the server (default: `false`) |
+
+### Example
+
+```json
+{
+  "label": "Weather API",
+  "description": "Get current weather and forecasts for any location",
+  "tags": ["weather", "api"],
+  "transport": "http",
+  "url": "https://weather-mcp.example.com/mcp",
+  "authorization_token": "Bearer $ENV.WEATHER_API_KEY",
+  "timeout": "15s"
+}
+```
+
+---
+
+## Connecting a stdio MCP server
+
+Use `stdio` when the MCP server is a local binary or script launched by Yao on demand.
+
+```json
+{
+  "label": "Local Python Tool",
+  "description": "Runs a local Python MCP server",
+  "transport": "stdio",
+  "command": "python3",
+  "arguments": ["/path/to/mcp_server.py"],
+  "env": {
+    "API_KEY": "$ENV.MY_API_KEY"
+  },
+  "timeout": "60s"
+}
+```
+
+### stdio-specific fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `command` | ✓ | Executable to run (e.g. `python3`, `node`, `npx`) |
+| `arguments` | | Array of arguments passed to the command |
+| `env` | | Environment variables for the child process. Supports `$ENV.VAR` substitution. |
+
+---
+
+## Applying changes
+
+After adding or editing an `.mcp.yao` file, restart Yao Engine for the change to take effect.
+
+---
+
+## Built-in MCP servers
+
+Yao Agents ships with two built-in MCP servers (using `process` transport — no external server needed):
+
+| Server | Tools | Description |
+|--------|-------|-------------|
+| Web Tools | `search`, `fetch_html`, `fetch_markdown` | Search the web and fetch page content |
+| Image Generation | `generate`, `list_models` | Generate images from text prompts |
+
+These are enabled automatically and do not require any configuration.
+
+---
+
+## Advanced: custom MCP servers
+
+Building your own MCP server with Yao scripting, `process` transport, tool/resource/prompt mapping, and SSE — see the [Yao Developer Docs → MCP Tools](https://yaoapps.com/docs/documentation/en-us/ai-agent-system/mcp-tools) for the full reference.

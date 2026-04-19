@@ -2,6 +2,123 @@
 slug: mcp-tools
 ---
 
-# MCPツール
+# MCP ツール
 
-外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。
+MCP（Model Context Protocol）を使うと、AI エキスパートとロボットが外部ツール——ウェブ検索・コード実行・データベース・API——を呼び出せるようになります。インテグレーションコードは一切不要です。接続した MCP サーバーは Yao Agents のすべてのアシスタントが使えるツールセットになります。
+
+---
+
+## 仕組み
+
+MCP ツールはアプリケーションディレクトリ内の `mcps/` フォルダに `.mcp.yao` ファイルとして設定します。Yao Engine の起動時にすべての MCP ファイルが読み込まれ、各ツールがすべての AI エキスパートとロボットで利用可能になります。
+
+Yao Agents は外部 MCP サーバーへの接続方式を 4 種類サポートします：
+
+| トランスポート | 使用場面 |
+|-------------|---------|
+| `http` | MCP サーバーが標準 HTTP エンドポイントを公開している場合（クラウドサービスで最も一般的）|
+| `sse` | サーバーが Server-Sent Events を使用している場合（旧来の MCP デプロイ）|
+| `stdio` | サーバーがコマンドラインで起動するローカルプロセスの場合 |
+| `process` | MCP サーバーを Yao スクリプトとして実装する場合——外部プロセス不要（開発者向け）|
+
+---
+
+## HTTP MCP サーバーに接続する
+
+最もシンプルな方法：既存の MCP 互換 HTTP エンドポイントに Yao を向けます。
+
+`mcps/` に新しいファイルを作成します——例：`mcps/my-server.mcp.yao`：
+
+```json
+{
+  "label": "My MCP Server",
+  "description": "このサーバーが提供する機能の説明",
+  "transport": "http",
+  "url": "https://my-mcp-server.example.com/mcp",
+  "authorization_token": "Bearer sk-...",
+  "timeout": "30s"
+}
+```
+
+Yao Engine を再起動すると、そのサーバーが公開しているツールがすべての AI エキスパートとロボットに自動的に表示されます。
+
+### HTTP コネクターのフィールド
+
+| フィールド | 必須 | 説明 |
+|-----------|------|------|
+| `label` | ✓ | UI に表示される名前 |
+| `description` | | このサーバーが提供する機能の簡単な説明 |
+| `transport` | ✓ | `"http"` |
+| `url` | ✓ | MCP エンドポイントの完全な URL（例：`https://example.com/mcp`）|
+| `authorization_token` | | `Authorization` ヘッダーに送信する Bearer トークンまたは API キー |
+| `timeout` | | リクエストのタイムアウト。`30s`・`5m`・`1h` 形式を使用。デフォルト：`30s` |
+| `tags` | | UI でのフィルタリング用タグの配列 |
+| `enable_sampling` | | サーバーが Yao に LLM 補完をリクエストできるようにする（デフォルト：`false`）|
+| `enable_roots` | | ワークスペースのルートディレクトリ一覧をサーバーと共有する（デフォルト：`false`）|
+
+### 例
+
+```json
+{
+  "label": "天気 API",
+  "description": "任意の場所の現在の天気と予報を取得",
+  "tags": ["weather", "api"],
+  "transport": "http",
+  "url": "https://weather-mcp.example.com/mcp",
+  "authorization_token": "Bearer $ENV.WEATHER_API_KEY",
+  "timeout": "15s"
+}
+```
+
+---
+
+## stdio MCP サーバーに接続する
+
+MCP サーバーが Yao によってオンデマンドで起動されるローカルのバイナリやスクリプトの場合は `stdio` を使います。
+
+```json
+{
+  "label": "ローカル Python ツール",
+  "description": "ローカルの Python MCP サーバーを起動",
+  "transport": "stdio",
+  "command": "python3",
+  "arguments": ["/path/to/mcp_server.py"],
+  "env": {
+    "API_KEY": "$ENV.MY_API_KEY"
+  },
+  "timeout": "60s"
+}
+```
+
+### stdio 専用フィールド
+
+| フィールド | 必須 | 説明 |
+|-----------|------|------|
+| `command` | ✓ | 実行する実行ファイル（例：`python3`・`node`・`npx`）|
+| `arguments` | | コマンドに渡す引数の配列 |
+| `env` | | 子プロセスの環境変数。`$ENV.変数名` の置換をサポート。 |
+
+---
+
+## 設定を反映する
+
+`.mcp.yao` ファイルを追加・変更したら、Yao Engine を再起動して変更を反映させてください。
+
+---
+
+## 組み込み MCP サーバー
+
+Yao Agents には 2 つの MCP サーバーが同梱されています（`process` トランスポートを使用——外部サーバーは不要）：
+
+| サーバー | ツール | 説明 |
+|---------|-------|------|
+| Web Tools | `search`・`fetch_html`・`fetch_markdown` | ウェブ検索とページコンテンツの取得 |
+| Image Generation | `generate`・`list_models` | テキストプロンプトから画像を生成 |
+
+これらは自動的に有効になり、設定は不要です。
+
+---
+
+## 上級者向け：カスタム MCP サーバー
+
+Yao スクリプトを使った独自 MCP サーバーの構築、`process` トランスポート、ツール/リソース/プロンプトのマッピング、SSE については [Yao 開発者ドキュメント → MCP ツール](https://yaoapps.com/docs/documentation/en-us/ai-agent-system/mcp-tools)（開発者向け）を参照してください。

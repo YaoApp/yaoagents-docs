@@ -4,4 +4,185 @@ slug: env-vars
 
 # Environment Variables
 
-Set and manage environment variables that control Yao Agents runtime behavior.
+Yao Engine is configured through a `.env` file located in your **application directory**. You can find a direct link to this file inside the Yao Engine app — click the **Application** tab and look for the **Open Config** or path link next to the app folder.
+
+![Yao Engine — Application tab showing the app directory link](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+> All variables are optional unless marked **required**. Commented-out lines (`#`) show available options — uncomment and fill in the value to enable them.
+
+---
+
+## Core Server
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `YAO_ENV` | `development` | Runtime mode. Use `production` for deployed instances. |
+| `YAO_HOST` | `0.0.0.0` | Address the server listens on. |
+| `YAO_PORT` | `5099` | HTTP port for the Yao Engine API and web UI. |
+| `YAO_LOG` | `./logs/application.log` | Path to the application log file. |
+| `YAO_LOG_MODE` | `TEXT` | Log format: `TEXT` (human-readable) or `JSON` (structured). |
+| `YAO_GRPC_HOST` | `internal` | gRPC host address (used by Tai Link and internal services). |
+| `YAO_GRPC_PORT` | `9099` | gRPC port. |
+
+---
+
+## Database
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `YAO_DB_DRIVER` | `sqlite3` | Database driver: `sqlite3`, `mysql`, or `postgres`. |
+| `YAO_DB_PRIMARY` | `./db/yaoagents.db` | Connection string. For SQLite, a file path. For MySQL/Postgres, a DSN. |
+| `YAO_SESSION_STORE` | `file` | Session storage backend: `file` or `redis`. |
+| `YAO_SESSION_FILE` | `./db/.session` | Path to the session file (only used when `YAO_SESSION_STORE=file`). |
+
+**MySQL example:**
+```
+YAO_DB_DRIVER="mysql"
+YAO_DB_PRIMARY="user:password@tcp(127.0.0.1:3306)/yaoagents?charset=utf8mb4&parseTime=True&loc=Local"
+```
+
+**PostgreSQL example:**
+```
+YAO_DB_DRIVER="postgres"
+YAO_DB_PRIMARY="host=127.0.0.1 port=5432 user=postgres password=yourpassword dbname=yaoagents sslmode=disable TimeZone=UTC"
+```
+
+---
+
+## Authentication & OAuth
+
+| Variable | Description |
+|----------|-------------|
+| `YAO_CLIENT_ID` | OAuth client ID for the built-in OpenAPI. Auto-generated if not set. |
+| `AFTER_LOGIN_SUCCESS_URL` | Redirect path after a successful login (e.g. `/dashboard/assistants`). |
+| `AFTER_LOGIN_FAILURE_URL` | Redirect path after a failed login. |
+| `APP_BASE_URL` | Public base URL of your instance (e.g. `https://example.com`). Used in email links and invitations. No trailing slash. |
+
+---
+
+## AI Model Connectors
+
+Connectors are defined in `/connectors/**/*.conn.yao`. The variables below supply the credentials each connector reads via `$ENV`.
+
+### Default / Thinking / Vision / Voice
+
+| Variable | Description |
+|----------|-------------|
+| `DEFAULT_CONNECTOR` | Name of the default connector (e.g. `default`). |
+| `VISION_CONNECTOR` | Connector used for vision tasks. Falls back to `DEFAULT_CONNECTOR`. |
+| `VOICE_CONNECTOR` | Connector used for speech-to-text. Falls back to `DEFAULT_CONNECTOR`. |
+| `DEFAULT_CONNECTOR_HOST` | API base URL for the default connector. |
+| `DEFAULT_CONNECTOR_KEY` | API key for the default connector. |
+| `DEFAULT_CONNECTOR_MODEL` | Model name (e.g. `gpt-4o`, `kimi-k2.5`). |
+| `VISION_CONNECTOR_HOST` | API base URL for the vision connector. |
+| `VISION_CONNECTOR_KEY` | API key for the vision connector. |
+| `VISION_CONNECTOR_MODEL` | Model name for vision tasks (e.g. `gpt-4o-mini`). |
+| `VOICE_CONNECTOR_HOST` | API base URL for the voice connector. |
+| `VOICE_CONNECTOR_KEY` | API key for the voice connector. |
+| `VOICE_CONNECTOR_MODEL` | Model name for voice tasks (e.g. `whisper-1`). |
+
+### Yao Agents Service
+
+The managed API service hosted by the Yao Agents team. Sign in at [yaoagents.com](https://yaoagents.com) and copy your API key.
+
+| Variable | Description |
+|----------|-------------|
+| `YAO_AGENTS_HOST` | API endpoint for the Yao Agents service. |
+| `YAO_AGENTS_KEY` | Your Yao Agents API key (`sk-...`). |
+
+### Cloud Providers
+
+Uncomment the relevant block and paste your key.
+
+| Variable | Provider | Notes |
+|----------|----------|-------|
+| `ANTHROPIC_API_KEY` | Anthropic | claude-opus-4.5, claude-sonnet-4.5, haiku-3.0, haiku-4.5 |
+| `MOONSHOT_API_KEY` | Moonshot / Kimi | kimi-k2, kimi-k2.5, kimi-k2.5-code, kimi-k2.5-thinking — [platform.moonshot.cn](https://platform.moonshot.cn) |
+| `MOONSHOT_PROXY` | Moonshot / Kimi | Custom base URL (default: `https://api.moonshot.cn/v1`) |
+| `GOOGLE_API_KEY` | Google | gemini-2.5-pro, gemini-3-flash |
+| `XAI_API_KEY` | xAI | grok-4 |
+| `DEEPSEEK_API_KEY` | DeepSeek | deepseek-chat, deepseek-reasoner |
+| `META_API_KEY` | Meta | llama-4-maverick |
+| `MISTRAL_API_KEY` | Mistral | mistral-large-3 |
+
+### MaaS Platforms
+
+| Variable | Platform | Notes |
+|----------|----------|-------|
+| `AZURE_OPENAI_API_KEY` | Azure OpenAI | Also set `AZURE_OPENAI_ENDPOINT` |
+| `AZURE_OPENAI_ENDPOINT` | Azure OpenAI | e.g. `https://your-resource.openai.azure.com/openai/v1` |
+| `GROQ_API_KEY` | Groq | Fast inference — llama-4-maverick |
+| `TOGETHER_API_KEY` | Together AI | llama-4-maverick, deepseek-r1 |
+| `FIREWORKS_API_KEY` | Fireworks AI | llama-4-maverick |
+| `OPENROUTER_API_KEY` | OpenRouter | Multi-provider gateway |
+| `SILICONFLOW_API_KEY` | SiliconFlow | China MaaS — deepseek-v3, qwen-2.5-72b |
+| `VOLCENGINE_API_KEY` | Volcengine / ByteDance Ark | China MaaS — doubao-1.5-pro, deepseek, glm, qwen |
+| `VOLCENGINE_PROXY` | Volcengine | Base URL (e.g. `https://ark.cn-beijing.volces.com/api/v3/`) |
+
+### Local Inference (Ollama)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OLLAMA_HOST` | `http://127.0.0.1:11434/v1/` | Ollama OpenAI-compatible endpoint. Use a trailing slash to prevent auto-appending `/v1`. |
+
+---
+
+## Messaging Services
+
+### Email
+
+| Variable | Description |
+|----------|-------------|
+| `SMTP_HOST` | SMTP server hostname (e.g. `smtp.gmail.com`). |
+| `SMTP_PORT` | SMTP port (`465` for SSL, `587` for TLS). |
+| `SMTP_USERNAME` | SMTP login username. |
+| `SMTP_PASSWORD` | SMTP password or app password. |
+| `SMTP_FROM` | Sender display name and address (e.g. `YaoAgents <noreply@example.com>`). |
+| `MAILGUN_DOMAIN` | Mailgun sending domain. |
+| `MAILGUN_API_KEY` | Mailgun API key (starts with `key-`). |
+| `MAILGUN_FROM` | Mailgun sender address. |
+
+### SMS / WhatsApp (Twilio)
+
+| Variable | Description |
+|----------|-------------|
+| `TWILIO_ACCOUNT_SID` | Twilio Account SID (starts with `AC`). |
+| `TWILIO_AUTH_TOKEN` | Twilio Auth Token. |
+| `TWILIO_FROM_PHONE` | Twilio phone number for SMS (e.g. `+1234567890`). |
+| `TWILIO_FROM_EMAIL` | SendGrid sender email for email delivery via Twilio. |
+| `TWILIO_SENDGRID_API_KEY` | SendGrid API key. |
+
+### AI Member Email Domains
+
+| Variable | Example | Description |
+|----------|---------|-------------|
+| `ROBOT_EMAIL_DOMAIN` | `ai.example.com` | Domain for robot email addresses. |
+| `STAFF_EMAIL_DOMAIN` | `staff.example.com` | Domain for staff/agent email addresses. |
+
+---
+
+## Web Search
+
+| Variable | Description |
+|----------|-------------|
+| `SERPER_API_KEY` | Serper (Google Search API) key — [serper.dev](https://serper.dev). Enables Agent web search. |
+
+---
+
+## Third-Party OAuth Providers
+
+Enable social sign-in by setting a client ID and secret for each provider.
+
+| Variable | Provider | Where to get it |
+|----------|----------|----------------|
+| `GITHUBUSER_CLIENT_ID` / `GITHUBUSER_CLIENT_SECRET` | GitHub | [github.com/settings/developers](https://github.com/settings/developers) |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google | [console.cloud.google.com](https://console.cloud.google.com/apis/credentials) |
+| `GOOGLE_DEVICE_CLIENT_ID` | Google | Device Flow client for TV / limited-input devices |
+| `APPLE_SERVICE_ID` / `APPLE_TEAM_ID` / `APPLE_KEY_ID` / `APPLE_PRIVATE_KEY_PATH` | Apple | [developer.apple.com](https://developer.apple.com/account/resources/identifiers) — key file relative to `openapi/certs/` |
+| `MICROSOFT_CLIENT_ID` / `MICROSOFT_CLIENT_SECRET` | Microsoft | [portal.azure.com](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps) |
+
+---
+
+## Applying Changes
+
+After editing `.env`, restart Yao Engine for the changes to take effect — click **Restart** in the engine status window, or stop and start the process again.

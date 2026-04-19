@@ -4,4 +4,121 @@ slug: mcp-tools
 
 # MCP 工具
 
-連接外部 MCP 伺服器，擴展助手可用的工具。
+MCP（Model Context Protocol）讓 AI 專家和機器人能夠呼叫外部工具——網路搜尋、程式碼執行器、資料庫、API——無需你撰寫任何整合程式碼。連接的每台 MCP 伺服器都會成為 Yao Agents 中所有 AI 助手可用的工具集。
+
+---
+
+## 運作原理
+
+MCP 工具以 `.mcp.yao` 檔案的形式設定，存放在應用程式目錄下的 `mcps/` 目錄中。Yao Engine 啟動時會載入所有 MCP 檔案，並將其工具提供給每位 AI 專家和機器人使用。
+
+Yao Agents 支援四種連接外部 MCP 伺服器的方式：
+
+| 傳輸方式 | 適用場景 |
+|---------|---------|
+| `http` | MCP 伺服器提供標準 HTTP 端點（雲端服務最常見）|
+| `sse` | 伺服器使用 Server-Sent Events（較早期的 MCP 部署）|
+| `stdio` | 伺服器是透過命令列啟動的本地程序 |
+| `process` | MCP 伺服器以 Yao 腳本實作，不需要外部程序（供開發者使用）|
+
+---
+
+## 連接 HTTP MCP 伺服器
+
+最簡單的方式：將 Yao 指向一個現有的 MCP 相容 HTTP 端點。
+
+在 `mcps/` 目錄下建立檔案，例如 `mcps/my-server.mcp.yao`：
+
+```json
+{
+  "label": "我的 MCP 伺服器",
+  "description": "這台伺服器的功能描述",
+  "transport": "http",
+  "url": "https://my-mcp-server.example.com/mcp",
+  "authorization_token": "Bearer sk-...",
+  "timeout": "30s"
+}
+```
+
+重新啟動 Yao Engine，該伺服器提供的工具會自動出現在每位 AI 專家和機器人中。
+
+### HTTP 連接欄位說明
+
+| 欄位 | 必填 | 說明 |
+|------|------|------|
+| `label` | ✓ | UI 中顯示的名稱 |
+| `description` | | 簡要描述這台伺服器提供的功能 |
+| `transport` | ✓ | `"http"` |
+| `url` | ✓ | MCP 端點完整 URL（如 `https://example.com/mcp`）|
+| `authorization_token` | | Bearer token 或 API 金鑰，發送到 `Authorization` 請求標頭 |
+| `timeout` | | 請求逾時時間，支援 `30s`、`5m`、`1h` 格式，預設 `30s` |
+| `tags` | | 標籤陣列，用於在 UI 中篩選 |
+| `enable_sampling` | | 允許伺服器向 Yao 發起 LLM 補全請求（預設 `false`）|
+| `enable_roots` | | 與伺服器共享工作區根目錄清單（預設 `false`）|
+
+### 範例
+
+```json
+{
+  "label": "天氣 API",
+  "description": "取得任意地點的當前天氣和預報",
+  "tags": ["weather", "api"],
+  "transport": "http",
+  "url": "https://weather-mcp.example.com/mcp",
+  "authorization_token": "Bearer $ENV.WEATHER_API_KEY",
+  "timeout": "15s"
+}
+```
+
+---
+
+## 連接 stdio MCP 伺服器
+
+當 MCP 伺服器是由 Yao 依需求啟動的本地二進位檔案或腳本時，使用 `stdio`。
+
+```json
+{
+  "label": "本地 Python 工具",
+  "description": "執行本地 Python MCP 伺服器",
+  "transport": "stdio",
+  "command": "python3",
+  "arguments": ["/path/to/mcp_server.py"],
+  "env": {
+    "API_KEY": "$ENV.MY_API_KEY"
+  },
+  "timeout": "60s"
+}
+```
+
+### stdio 專用欄位
+
+| 欄位 | 必填 | 說明 |
+|------|------|------|
+| `command` | ✓ | 要執行的程式（如 `python3`、`node`、`npx`）|
+| `arguments` | | 傳遞給命令的參數陣列 |
+| `env` | | 子程序的環境變數，支援 `$ENV.變數名稱` 替換 |
+
+---
+
+## 套用設定變更
+
+新增或修改 `.mcp.yao` 檔案後，重新啟動 Yao Engine 使變更生效。
+
+---
+
+## 內建 MCP 伺服器
+
+Yao Agents 內建兩個 MCP 伺服器（使用 `process` 傳輸，不需要外部伺服器）：
+
+| 伺服器 | 工具 | 說明 |
+|-------|------|------|
+| Web Tools | `search`、`fetch_html`、`fetch_markdown` | 網路搜尋和網頁內容擷取 |
+| Image Generation | `generate`、`list_models` | 從文字提示產生圖像 |
+
+這兩個伺服器自動啟用，無需任何設定。
+
+---
+
+## 進階：自訂 MCP 伺服器
+
+若需要使用 Yao 腳本建立自己的 MCP 伺服器，包括 `process` 傳輸、工具/資源/提示映射和 SSE——請參閱 [Yao 開發者文件 → MCP 工具](https://yaoapps.com/docs/documentation/en-us/ai-agent-system/mcp-tools)（供開發者使用）。

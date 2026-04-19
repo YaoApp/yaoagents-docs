@@ -4,4 +4,315 @@ slug: ai-models
 
 # AI 模型
 
-配置 AI 连接器：OpenAI / Claude / 本地模型等。
+Yao Agents 中的 AI 模型以**连接器文件**（`.conn.yao`）的形式配置，存放在应用目录下的 `connectors/` 目录中。每个文件定义一个模型——包括类型、凭证和能力。
+
+随 Yao Agents 内置的四个连接器通过 `.env` 中的环境变量读取配置，常见场景下无需直接编辑连接器文件。只有在添加新服务商或精细调整模型行为时，才需要创建或修改连接器文件。
+
+---
+
+## 连接器文件格式
+
+连接器文件是一个 JSON 文件，包含三个字段：
+
+```json
+{
+  "label": "UI 中显示的名称",
+  "type": "openai",
+  "options": {
+    "host": "https://api.example.com",
+    "model": "model-name",
+    "key": "sk-...",
+    "max_tokens": 16384,
+    "temperature": 0.6,
+    "thinking": { "type": "disabled" },
+    "capabilities": {
+      "vision": true,
+      "tool_calls": true,
+      "reasoning": false,
+      "streaming": true,
+      "json": true,
+      "multimodal": true
+    }
+  }
+}
+```
+
+### `type`
+
+| 值 | 协议 | 适用场景 |
+|----|------|---------|
+| `openai` | OpenAI Chat Completions | OpenAI、DeepSeek、Kimi、Qwen、Ollama，以及任何 OpenAI 兼容端点 |
+| `anthropic` | Anthropic Messages API | 直接通过 Anthropic API 调用的 Claude 模型 |
+
+> **提示：** 大多数第三方服务商都提供 OpenAI 兼容端点。使用 `type: "openai"`，将 `host` 指向服务商的基础 URL 即可。
+
+### `options`
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `host` | 字符串 | API 基础 URL。以 `/` 结尾时原样使用；否则自动在请求路径前加 `/v1`。 |
+| `model` | 字符串 | 传给 API 的模型标识（如 `gpt-4o`、`claude-sonnet-4-5-20250929`）。 |
+| `key` | 字符串 | API 密钥。可用 `$ENV.变量名` 从 `.env` 读取。 |
+| `max_tokens` | 整数 | 响应最大 token 数。 |
+| `temperature` | 浮点数 | 采样温度。不支持此参数的推理模型请省略。 |
+| `thinking` | 对象 | Thinking / 推理模式配置（见下文）。 |
+| `capabilities` | 对象 | 告知 Yao 该模型支持哪些功能（见下文）。 |
+| `azure` | 字符串 | 使用 Azure OpenAI 端点时设为 `"true"`。 |
+| `version` | 字符串 | Anthropic API 版本请求头，默认 `"2023-06-01"`（仅 anthropic 类型）。 |
+
+#### `thinking`
+
+控制扩展推理 / thinking 模式。
+
+| 值 | 效果 |
+|----|------|
+| `{ "type": "disabled" }` | 关闭 thinking。 |
+| `{ "type": "enabled" }` | 始终开启 thinking。 |
+| `{ "type": "adaptive" }` | 模型根据问题自行决定是否 thinking。 |
+| `{ "type": "enabled", "budget_tokens": 10000 }` | 开启 thinking 并设置 token 预算（Anthropic 模型）。 |
+
+#### `capabilities`
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `vision` | bool 或 `"openai"` / `"claude"` | 图像输入支持。`"openai"` 使用 `image_url` 格式；`"claude"` 使用 base64 格式。 |
+| `tool_calls` | bool | 函数 / 工具调用支持。 |
+| `reasoning` | bool | 扩展推理 / 思维链输出。 |
+| `streaming` | bool | 流式响应支持（Server-Sent Events）。 |
+| `json` | bool | JSON 模式支持。 |
+| `multimodal` | bool | 通用多模态输入（图像、文件）。 |
+| `audio` | bool | 音频理解。 |
+| `stt` | bool | 语音转文字（Whisper 风格转录）。 |
+
+Yao 会根据常见模型名称自动推断合理的默认值，对于主流模型可以省略 `capabilities`。使用自定义或私有模型时建议显式设置。
+
+---
+
+## 内置连接器
+
+以下四个文件随 Yao Agents 内置，从 `.env` 读取配置。
+
+### `default` — 均衡
+
+大多数 AI 专家和机器人使用的主连接器。
+
+```json
+{
+  "label": "Balanced",
+  "type": "openai",
+  "options": {
+    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
+    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
+    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
+    "max_tokens": 16384,
+    "temperature": 0.6,
+    "thinking": { "type": "disabled" }
+  }
+}
+```
+
+`.env` 变量：`DEFAULT_CONNECTOR_HOST`、`DEFAULT_CONNECTOR_MODEL`、`DEFAULT_CONNECTOR_KEY`
+
+### `thinking` — 深度思考
+
+与 `default` 共用同一端点，但启用了自适应 thinking——用于机器人或专家需要深度推理的场景。
+
+```json
+{
+  "label": "Deep Think",
+  "type": "openai",
+  "options": {
+    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
+    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
+    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
+    "max_tokens": 16384,
+    "thinking": { "type": "adaptive" }
+  }
+}
+```
+
+### `vision` — 视觉
+
+处理图像分析任务，未单独配置时回退到 `DEFAULT_CONNECTOR_*`。
+
+```json
+{
+  "label": "Vision",
+  "type": "openai",
+  "options": {
+    "host": "$ENV.VISION_CONNECTOR_HOST",
+    "model": "$ENV.VISION_CONNECTOR_MODEL",
+    "key": "$ENV.VISION_CONNECTOR_KEY",
+    "max_tokens": 16384
+  }
+}
+```
+
+`.env` 变量：`VISION_CONNECTOR_HOST`、`VISION_CONNECTOR_MODEL`、`VISION_CONNECTOR_KEY`
+
+### `whisper-1` — 语音转文字
+
+转录音频输入。
+
+```json
+{
+  "label": "Whisper-1",
+  "type": "openai",
+  "options": {
+    "model": "$ENV.VOICE_CONNECTOR_MODEL",
+    "key": "$ENV.VOICE_CONNECTOR_KEY",
+    "host": "$ENV.VOICE_CONNECTOR_HOST",
+    "capabilities": { "stt": true }
+  }
+}
+```
+
+`.env` 变量：`VOICE_CONNECTOR_HOST`、`VOICE_CONNECTOR_MODEL`、`VOICE_CONNECTOR_KEY`
+
+---
+
+## 添加连接器
+
+1. 在 `connectors/` 下（或子目录如 `connectors/openai/`）创建一个 `.conn.yao` 文件。
+2. 填写 `type`、`options`，以及可选的 `capabilities`。
+3. 重启 Yao Engine。新连接器会出现在所有机器人和 AI 专家的连接器选择器中。
+
+### 示例：OpenAI GPT-4o
+
+```json
+{
+  "label": "GPT-4o",
+  "type": "openai",
+  "options": {
+    "model": "gpt-4o",
+    "key": "$ENV.OPENAI_API_KEY",
+    "host": "https://api.openai.com",
+    "max_tokens": 16384,
+    "capabilities": {
+      "vision": "openai",
+      "tool_calls": true,
+      "streaming": true,
+      "json": true,
+      "multimodal": true
+    }
+  }
+}
+```
+
+### 示例：Anthropic Claude Sonnet（直连 API）
+
+```json
+{
+  "label": "Claude Sonnet 4.5",
+  "type": "anthropic",
+  "options": {
+    "model": "claude-sonnet-4-5-20250929",
+    "key": "$ENV.ANTHROPIC_API_KEY",
+    "capabilities": {
+      "vision": "claude",
+      "tool_calls": true,
+      "streaming": true,
+      "json": true,
+      "multimodal": true
+    }
+  }
+}
+```
+
+### 示例：Claude 开启扩展 thinking
+
+```json
+{
+  "label": "Claude Sonnet 4.5 Thinking",
+  "type": "anthropic",
+  "options": {
+    "model": "claude-sonnet-4-5-20250929",
+    "key": "$ENV.ANTHROPIC_API_KEY",
+    "thinking": { "type": "enabled", "budget_tokens": 10000 },
+    "capabilities": {
+      "vision": "claude",
+      "tool_calls": true,
+      "reasoning": true,
+      "streaming": true,
+      "json": true,
+      "multimodal": true
+    }
+  }
+}
+```
+
+### 示例：DeepSeek R1（推理模型）
+
+```json
+{
+  "label": "DeepSeek R1",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-r1",
+    "key": "$ENV.DEEPSEEK_API_KEY",
+    "host": "https://api.deepseek.com",
+    "capabilities": {
+      "reasoning": true,
+      "streaming": true
+    }
+  }
+}
+```
+
+### 示例：通过 Ollama 使用本地模型
+
+```json
+{
+  "label": "Llama 3.3（本地）",
+  "type": "openai",
+  "options": {
+    "model": "llama3.3",
+    "key": "ollama",
+    "host": "http://127.0.0.1:11434/v1/",
+    "capabilities": {
+      "tool_calls": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+> `host` 以 `/` 结尾，Yao 会原样使用，不再追加 `/v1`。
+
+### 示例：火山引擎 / 字节跳动方舟
+
+```json
+{
+  "label": "豆包 Seed 1.6 Flash",
+  "type": "openai",
+  "options": {
+    "model": "$ENV.VOLCENGINE_DOUBAO_SEED_1_6_FLASH",
+    "key": "$ENV.VOLCENGINE_API_KEY",
+    "host": "https://ark.cn-beijing.volces.com/api/v3/",
+    "capabilities": {
+      "vision": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+---
+
+## `host` URL 规则
+
+| `host` 值 | `/chat/completions` 的完整 URL |
+|---|---|
+| `https://api.openai.com` | `https://api.openai.com/v1/chat/completions` |
+| `https://api.openai.com/` | `https://api.openai.com/chat/completions` |
+| `https://my-proxy.example.com/openai/v1/` | `https://my-proxy.example.com/openai/v1/chat/completions` |
+
+**规则：** `host` 以 `/` 结尾时原样使用；否则在每个端点路径前自动加 `/v1`。
+
+---
+
+## 应用配置变更
+
+添加或修改连接器文件后，重启 Yao Engine 使变更生效。

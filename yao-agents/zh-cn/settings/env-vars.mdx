@@ -4,4 +4,185 @@ slug: env-vars
 
 # 环境变量
 
-设置和管理控制 Yao Agents 运行时行为的环境变量。
+Yao Engine 通过位于**应用目录**下的 `.env` 文件进行配置。在 Yao Engine 应用的 **Application（应用）** 标签页中，你可以找到直接跳转到该文件的链接。
+
+![Yao Engine — Application 标签页，显示应用目录链接](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+> 除非特别标注**必填**，所有变量均为可选。注释掉的行（`#` 开头）表示可用选项——去掉注释并填写值即可启用。
+
+---
+
+## 核心服务器
+
+| 变量 | 默认值 | 说明 |
+|------|-------|------|
+| `YAO_ENV` | `development` | 运行模式。部署实例时使用 `production`。 |
+| `YAO_HOST` | `0.0.0.0` | 服务器监听地址。 |
+| `YAO_PORT` | `5099` | Yao Engine API 和 Web UI 的 HTTP 端口。 |
+| `YAO_LOG` | `./logs/application.log` | 应用日志文件路径。 |
+| `YAO_LOG_MODE` | `TEXT` | 日志格式：`TEXT`（人类可读）或 `JSON`（结构化）。 |
+| `YAO_GRPC_HOST` | `internal` | gRPC 主机地址（供 Tai Link 和内部服务使用）。 |
+| `YAO_GRPC_PORT` | `9099` | gRPC 端口。 |
+
+---
+
+## 数据库
+
+| 变量 | 默认值 | 说明 |
+|------|-------|------|
+| `YAO_DB_DRIVER` | `sqlite3` | 数据库驱动：`sqlite3`、`mysql` 或 `postgres`。 |
+| `YAO_DB_PRIMARY` | `./db/yaoagents.db` | 连接字符串。SQLite 填写文件路径，MySQL/Postgres 填写 DSN。 |
+| `YAO_SESSION_STORE` | `file` | 会话存储后端：`file` 或 `redis`。 |
+| `YAO_SESSION_FILE` | `./db/.session` | 会话文件路径（仅在 `YAO_SESSION_STORE=file` 时使用）。 |
+
+**MySQL 示例：**
+```
+YAO_DB_DRIVER="mysql"
+YAO_DB_PRIMARY="user:password@tcp(127.0.0.1:3306)/yaoagents?charset=utf8mb4&parseTime=True&loc=Local"
+```
+
+**PostgreSQL 示例：**
+```
+YAO_DB_DRIVER="postgres"
+YAO_DB_PRIMARY="host=127.0.0.1 port=5432 user=postgres password=yourpassword dbname=yaoagents sslmode=disable TimeZone=UTC"
+```
+
+---
+
+## 认证与 OAuth
+
+| 变量 | 说明 |
+|------|------|
+| `YAO_CLIENT_ID` | 内置 OpenAPI 的 OAuth 客户端 ID，未设置时自动生成。 |
+| `AFTER_LOGIN_SUCCESS_URL` | 登录成功后的跳转路径（如 `/dashboard/assistants`）。 |
+| `AFTER_LOGIN_FAILURE_URL` | 登录失败后的跳转路径。 |
+| `APP_BASE_URL` | 实例的公网基础 URL（如 `https://example.com`）。用于邮件链接和邀请，不加尾部斜杠。 |
+
+---
+
+## AI 模型连接器
+
+连接器定义在 `/connectors/**/*.conn.yao` 中，下列变量通过 `$ENV` 向连接器提供凭证。
+
+### 默认 / 思考 / 视觉 / 语音
+
+| 变量 | 说明 |
+|------|------|
+| `DEFAULT_CONNECTOR` | 默认连接器名称（如 `default`）。 |
+| `VISION_CONNECTOR` | 视觉任务使用的连接器，回退到 `DEFAULT_CONNECTOR`。 |
+| `VOICE_CONNECTOR` | 语音转文字使用的连接器，回退到 `DEFAULT_CONNECTOR`。 |
+| `DEFAULT_CONNECTOR_HOST` | 默认连接器的 API 基础 URL。 |
+| `DEFAULT_CONNECTOR_KEY` | 默认连接器的 API 密钥。 |
+| `DEFAULT_CONNECTOR_MODEL` | 模型名称（如 `gpt-4o`、`kimi-k2.5`）。 |
+| `VISION_CONNECTOR_HOST` | 视觉连接器的 API 基础 URL。 |
+| `VISION_CONNECTOR_KEY` | 视觉连接器的 API 密钥。 |
+| `VISION_CONNECTOR_MODEL` | 视觉任务的模型名称（如 `gpt-4o-mini`）。 |
+| `VOICE_CONNECTOR_HOST` | 语音连接器的 API 基础 URL。 |
+| `VOICE_CONNECTOR_KEY` | 语音连接器的 API 密钥。 |
+| `VOICE_CONNECTOR_MODEL` | 语音任务的模型名称（如 `whisper-1`）。 |
+
+### Yao Agents 服务
+
+团队托管的 API 服务。在 [yaoagents.com](https://yaoagents.com) 登录后复制 API 密钥。
+
+| 变量 | 说明 |
+|------|------|
+| `YAO_AGENTS_HOST` | Yao Agents 服务的 API 端点。 |
+| `YAO_AGENTS_KEY` | 你的 Yao Agents API 密钥（`sk-...`）。 |
+
+### 云服务商
+
+取消注释对应行并填写密钥即可启用。
+
+| 变量 | 服务商 | 备注 |
+|------|-------|------|
+| `ANTHROPIC_API_KEY` | Anthropic | claude-opus-4.5、claude-sonnet-4.5、haiku-3.0、haiku-4.5 |
+| `MOONSHOT_API_KEY` | Moonshot / Kimi | kimi-k2、kimi-k2.5、kimi-k2.5-code、kimi-k2.5-thinking — [platform.moonshot.cn](https://platform.moonshot.cn) |
+| `MOONSHOT_PROXY` | Moonshot / Kimi | 自定义基础 URL（默认 `https://api.moonshot.cn/v1`）|
+| `GOOGLE_API_KEY` | Google | gemini-2.5-pro、gemini-3-flash |
+| `XAI_API_KEY` | xAI | grok-4 |
+| `DEEPSEEK_API_KEY` | DeepSeek | deepseek-chat、deepseek-reasoner |
+| `META_API_KEY` | Meta | llama-4-maverick |
+| `MISTRAL_API_KEY` | Mistral | mistral-large-3 |
+
+### MaaS 平台
+
+| 变量 | 平台 | 备注 |
+|------|------|------|
+| `AZURE_OPENAI_API_KEY` | Azure OpenAI | 同时设置 `AZURE_OPENAI_ENDPOINT` |
+| `AZURE_OPENAI_ENDPOINT` | Azure OpenAI | 如 `https://your-resource.openai.azure.com/openai/v1` |
+| `GROQ_API_KEY` | Groq | 高速推理 — llama-4-maverick |
+| `TOGETHER_API_KEY` | Together AI | llama-4-maverick、deepseek-r1 |
+| `FIREWORKS_API_KEY` | Fireworks AI | llama-4-maverick |
+| `OPENROUTER_API_KEY` | OpenRouter | 多服务商网关 |
+| `SILICONFLOW_API_KEY` | SiliconFlow | 国内 MaaS — deepseek-v3、qwen-2.5-72b |
+| `VOLCENGINE_API_KEY` | 火山引擎 / 字节跳动方舟 | 国内 MaaS — 豆包-1.5-pro、deepseek、glm、qwen |
+| `VOLCENGINE_PROXY` | 火山引擎 | 基础 URL（如 `https://ark.cn-beijing.volces.com/api/v3/`）|
+
+### 本地推理（Ollama）
+
+| 变量 | 默认值 | 说明 |
+|------|-------|------|
+| `OLLAMA_HOST` | `http://127.0.0.1:11434/v1/` | Ollama 的 OpenAI 兼容接口。使用尾部斜杠以防止自动追加 `/v1`。 |
+
+---
+
+## 消息服务
+
+### 邮件
+
+| 变量 | 说明 |
+|------|------|
+| `SMTP_HOST` | SMTP 服务器主机名（如 `smtp.gmail.com`）。 |
+| `SMTP_PORT` | SMTP 端口（`465` 用于 SSL，`587` 用于 TLS）。 |
+| `SMTP_USERNAME` | SMTP 登录用户名。 |
+| `SMTP_PASSWORD` | SMTP 密码或应用专用密码。 |
+| `SMTP_FROM` | 发件人显示名和地址（如 `YaoAgents <noreply@example.com>`）。 |
+| `MAILGUN_DOMAIN` | Mailgun 发送域名。 |
+| `MAILGUN_API_KEY` | Mailgun API 密钥（以 `key-` 开头）。 |
+| `MAILGUN_FROM` | Mailgun 发件地址。 |
+
+### 短信 / WhatsApp（Twilio）
+
+| 变量 | 说明 |
+|------|------|
+| `TWILIO_ACCOUNT_SID` | Twilio 账户 SID（以 `AC` 开头）。 |
+| `TWILIO_AUTH_TOKEN` | Twilio Auth Token。 |
+| `TWILIO_FROM_PHONE` | 用于发送短信的 Twilio 手机号（如 `+1234567890`）。 |
+| `TWILIO_FROM_EMAIL` | 通过 Twilio 发送邮件的 SendGrid 发件地址。 |
+| `TWILIO_SENDGRID_API_KEY` | SendGrid API 密钥。 |
+
+### AI 成员邮件域名
+
+| 变量 | 示例 | 说明 |
+|------|------|------|
+| `ROBOT_EMAIL_DOMAIN` | `ai.example.com` | 机器人邮件地址的域名。 |
+| `STAFF_EMAIL_DOMAIN` | `staff.example.com` | 员工/专家邮件地址的域名。 |
+
+---
+
+## 网络搜索
+
+| 变量 | 说明 |
+|------|------|
+| `SERPER_API_KEY` | Serper（Google Search API）密钥 — [serper.dev](https://serper.dev)。启用 Agent 网络搜索功能。 |
+
+---
+
+## 第三方 OAuth 服务商
+
+为每个服务商设置客户端 ID 和密钥即可启用社交登录。
+
+| 变量 | 服务商 | 获取位置 |
+|------|-------|---------|
+| `GITHUBUSER_CLIENT_ID` / `GITHUBUSER_CLIENT_SECRET` | GitHub | [github.com/settings/developers](https://github.com/settings/developers) |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google | [console.cloud.google.com](https://console.cloud.google.com/apis/credentials) |
+| `GOOGLE_DEVICE_CLIENT_ID` | Google | 设备流客户端，用于电视/有限输入设备 |
+| `APPLE_SERVICE_ID` / `APPLE_TEAM_ID` / `APPLE_KEY_ID` / `APPLE_PRIVATE_KEY_PATH` | Apple | [developer.apple.com](https://developer.apple.com/account/resources/identifiers) — 密钥文件相对于 `openapi/certs/` |
+| `MICROSOFT_CLIENT_ID` / `MICROSOFT_CLIENT_SECRET` | Microsoft | [portal.azure.com](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps) |
+
+---
+
+## 应用配置修改后
+
+编辑 `.env` 后，需要重启 Yao Engine 使配置生效——在引擎状态窗口点击**重启**，或手动停止再启动进程。

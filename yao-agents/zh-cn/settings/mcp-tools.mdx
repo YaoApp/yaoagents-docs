@@ -4,4 +4,121 @@ slug: mcp-tools
 
 # MCP 工具
 
-连接外部 MCP 服务器，扩展助手可用的工具。
+MCP（Model Context Protocol）让 AI 专家和机器人能够调用外部工具——网络搜索、代码运行器、数据库、API——无需你编写任何集成代码。连接的每台 MCP 服务器都会成为 Yao Agents 中所有 AI 助手可用的工具集。
+
+---
+
+## 工作原理
+
+MCP 工具以 `.mcp.yao` 文件的形式配置，存放在应用目录下的 `mcps/` 目录中。Yao Engine 启动时会加载所有 MCP 文件，并将其工具提供给每位 AI 专家和机器人使用。
+
+Yao Agents 支持四种连接外部 MCP 服务器的方式：
+
+| 传输方式 | 适用场景 |
+|---------|---------|
+| `http` | MCP 服务器提供标准 HTTP 端点（云服务最常见）|
+| `sse` | 服务器使用 Server-Sent Events（较早的 MCP 部署）|
+| `stdio` | 服务器是通过命令行启动的本地进程 |
+| `process` | MCP 服务器以 Yao 脚本实现，无需外部进程（供开发者使用）|
+
+---
+
+## 连接 HTTP MCP 服务器
+
+最简单的方式：将 Yao 指向一个现有的 MCP 兼容 HTTP 端点。
+
+在 `mcps/` 目录下创建文件，例如 `mcps/my-server.mcp.yao`：
+
+```json
+{
+  "label": "我的 MCP 服务器",
+  "description": "这台服务器的功能描述",
+  "transport": "http",
+  "url": "https://my-mcp-server.example.com/mcp",
+  "authorization_token": "Bearer sk-...",
+  "timeout": "30s"
+}
+```
+
+重启 Yao Engine，该服务器提供的工具会自动出现在每位 AI 专家和机器人中。
+
+### HTTP 连接字段说明
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `label` | ✓ | UI 中显示的名称 |
+| `description` | | 简要描述这台服务器提供的功能 |
+| `transport` | ✓ | `"http"` |
+| `url` | ✓ | MCP 端点完整 URL（如 `https://example.com/mcp`）|
+| `authorization_token` | | Bearer token 或 API 密钥，发送到 `Authorization` 请求头 |
+| `timeout` | | 请求超时时间，支持 `30s`、`5m`、`1h` 格式，默认 `30s` |
+| `tags` | | 标签数组，用于在 UI 中筛选 |
+| `enable_sampling` | | 允许服务器向 Yao 发起 LLM 补全请求（默认 `false`）|
+| `enable_roots` | | 与服务器共享工作区根目录列表（默认 `false`）|
+
+### 示例
+
+```json
+{
+  "label": "天气 API",
+  "description": "获取任意地点的当前天气和预报",
+  "tags": ["weather", "api"],
+  "transport": "http",
+  "url": "https://weather-mcp.example.com/mcp",
+  "authorization_token": "Bearer $ENV.WEATHER_API_KEY",
+  "timeout": "15s"
+}
+```
+
+---
+
+## 连接 stdio MCP 服务器
+
+当 MCP 服务器是由 Yao 按需启动的本地二进制文件或脚本时，使用 `stdio`。
+
+```json
+{
+  "label": "本地 Python 工具",
+  "description": "运行本地 Python MCP 服务器",
+  "transport": "stdio",
+  "command": "python3",
+  "arguments": ["/path/to/mcp_server.py"],
+  "env": {
+    "API_KEY": "$ENV.MY_API_KEY"
+  },
+  "timeout": "60s"
+}
+```
+
+### stdio 专用字段
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `command` | ✓ | 要运行的可执行文件（如 `python3`、`node`、`npx`）|
+| `arguments` | | 传递给命令的参数数组 |
+| `env` | | 子进程的环境变量，支持 `$ENV.变量名` 替换 |
+
+---
+
+## 应用配置变更
+
+添加或修改 `.mcp.yao` 文件后，重启 Yao Engine 使变更生效。
+
+---
+
+## 内置 MCP 服务器
+
+Yao Agents 内置两个 MCP 服务器（使用 `process` 传输，无需外部服务器）：
+
+| 服务器 | 工具 | 说明 |
+|-------|------|------|
+| Web Tools | `search`、`fetch_html`、`fetch_markdown` | 网络搜索和网页内容抓取 |
+| Image Generation | `generate`、`list_models` | 从文本提示生成图像 |
+
+这两个服务器自动启用，无需任何配置。
+
+---
+
+## 高级：自定义 MCP 服务器
+
+如果需要使用 Yao 脚本构建自己的 MCP 服务器，包括 `process` 传输、工具/资源/提示映射和 SSE——请参阅 [Yao 开发者文档 → MCP 工具](https://yaoapps.com/docs/documentation/en-us/ai-agent-system/mcp-tools)（供开发者使用）。
