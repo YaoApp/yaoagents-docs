@@ -119,7 +119,7 @@ const yaoAgents: Product = {
               slug: "whats-next",
               title: "What's Next",
               summary:
-                "Brief overview of advanced capabilities: Tai Link, Integrations, Agent Hub. One-sentence intro + links.",
+                "Brief overview of advanced capabilities: Tai Link, Integrations, Yao Agents Hub. One-sentence intro + links.",
             },
           ],
         },
@@ -155,7 +155,7 @@ const yaoAgents: Product = {
               slug: "whats-next",
               title: "更进一步",
               summary:
-                "产品还有更多能力：Tai Link 连接多设备、集成接入 IM / API、Agent Hub 扩展新助手。",
+                "产品还有更多能力：Tai Link 连接多设备、集成接入 IM / API、Yao Agents Hub 扩展新助手。",
             },
           ],
         },
@@ -191,7 +191,7 @@ const yaoAgents: Product = {
               slug: "whats-next",
               title: "更進一步",
               summary:
-                "產品還有更多能力：Tai Link 連接多裝置、整合接入 IM / API、Agent Hub 擴展新助手。",
+                "產品還有更多能力：Tai Link 連接多裝置、整合接入 IM / API、Yao Agents Hub 擴展新助手。",
             },
           ],
         },
@@ -228,7 +228,7 @@ const yaoAgents: Product = {
               slug: "whats-next",
               title: "次のステップ",
               summary:
-                "さらなる機能の概要：Tai Link、統合、Agent Hub。各機能の一行紹介とリンク。",
+                "さらなる機能の概要：Tai Link、統合、Yao Agents Hub。各機能の一行紹介とリンク。",
             },
           ],
         },
@@ -438,7 +438,234 @@ const yaoAgents: Product = {
       },
     },
 
-    // ── D. Built-in Agents ──
+    // ── D. Yao Agents Hub ──
+    {
+      slug: "agent-hub",
+      locales: {
+        "en-us": {
+          title: "Yao Agents Hub",
+          summary:
+            "Extend capabilities: install ready-made agents or create your own.",
+          pages: [
+            {
+              slug: "hub-overview",
+              title: "Hub Overview",
+              summary: "What is Yao Agents Hub, browsing and discovering agents.",
+            },
+            {
+              slug: "custom-assistants",
+              title: "Custom AI Experts",
+              summary:
+                "Ways to add new AI Experts: Yao Agents Hub, AI dev expert, build with code, or explore third-party ecosystems.",
+            },
+          ],
+        },
+        "zh-cn": {
+          title: "Yao Agents Hub",
+          summary: "扩展 Agent 能力：安装现成的，或自己创建。",
+          pages: [
+            {
+              slug: "hub-overview",
+              title: "Hub 概览",
+              summary: "什么是 Yao Agents Hub、浏览与发现。",
+            },
+            {
+              slug: "custom-assistants",
+              title: "自定义 AI 专家",
+              summary:
+                "添加新 AI 专家的几种方式：Yao Agents Hub 安装、AI 开发专家创建、编写代码、探索第三方生态。",
+            },
+          ],
+        },
+        "zh-tw": {
+          title: "Yao Agents Hub",
+          summary: "擴展 Agent 能力：安裝現成的，或自己建立。",
+          pages: [
+            { slug: "hub-overview", title: "Hub 概覽", summary: "什麼是 Yao Agents Hub、瀏覽與發現。" },
+            { slug: "custom-assistants", title: "自訂 AI 專家", summary: "新增 AI 專家的幾種方式：Yao Agents Hub 安裝、AI 開發專家建立、撰寫程式碼、探索第三方生態。" },
+          ],
+        },
+        "ja-jp": {
+          title: "Yao Agents Hub",
+          summary: "機能拡張：既製エージェントのインストールまたは自作。",
+          pages: [
+            { slug: "hub-overview", title: "Hub 概要", summary: "Yao Agents Hubとは、エージェントの閲覧と発見。" },
+            { slug: "custom-assistants", title: "カスタムAIエキスパート", summary: "AIエキスパートを追加する方法：Yao Agents Hub、AI開発エキスパート、コーディング、サードパーティエコシステム。" },
+          ],
+        },
+      },
+    },
+
+    // ── E. Integrations ──
+    {
+      slug: "integrations",
+      locales: {
+        "en-us": {
+          title: "Integrations",
+          summary:
+            "Outbound: connect to IM platforms and APIs. Inbound: connect AI models and MCP tools.",
+          pages: [
+            {
+              slug: "chat-platforms",
+              title: "Chat Platforms (IM)",
+              summary:
+                "Bind assistants/robots to Slack, WeChat, DingTalk, Feishu, Telegram, Discord.",
+            },
+            {
+              slug: "api-direct-connect",
+              title: "API Direct Connect",
+              summary:
+                "OpenAI-compatible Chat Completion protocol. Call your agents from any OpenAI-compatible tool.",
+            },
+            {
+              slug: "api-keys",
+              title: "API Keys",
+              summary:
+                "Generate and manage API keys for authenticating external calls to Yao Agents.",
+            },
+            {
+              slug: "ai-models",
+              title: "AI Models",
+              summary:
+                "Configure AI connectors: OpenAI, Claude, local models, etc.",
+            },
+            {
+              slug: "mcp-tools",
+              title: "MCP Tools",
+              summary:
+                "Connect external MCP servers to extend the tools available to assistants.",
+            },
+          ],
+        },
+        "zh-cn": {
+          title: "集成",
+          summary:
+            "向外：接入 IM 平台和 API；向内：连接 AI 模型和 MCP 工具。",
+          pages: [
+            {
+              slug: "chat-platforms",
+              title: "聊天平台 (IM)",
+              summary:
+                "将助手/机器人绑定到 Slack、微信、钉钉、飞书、Telegram、Discord。",
+            },
+            {
+              slug: "api-direct-connect",
+              title: "API 直连",
+              summary:
+                "兼容 OpenAI Chat Completion 协议，从任何 OpenAI 兼容工具调用你的 Agent。",
+            },
+            {
+              slug: "api-keys",
+              title: "API 密钥",
+              summary:
+                "生成和管理 API Key，用于外部调用 Yao Agents 接口的认证。",
+            },
+            {
+              slug: "ai-models",
+              title: "AI 模型",
+              summary:
+                "配置 AI 连接器：OpenAI / Claude / 本地模型等。",
+            },
+            {
+              slug: "mcp-tools",
+              title: "MCP 工具",
+              summary: "连接外部 MCP 服务器，扩展助手可用的工具。",
+            },
+          ],
+        },
+        "zh-tw": {
+          title: "整合",
+          summary: "向外：接入 IM 平台和 API；向內：連接 AI 模型和 MCP 工具。",
+          pages: [
+            { slug: "chat-platforms", title: "聊天平台 (IM)", summary: "將助手/機器人綁定到 Slack、微信、釘釘、飛書、Telegram、Discord。" },
+            { slug: "api-direct-connect", title: "API 直連", summary: "相容 OpenAI Chat Completion 協定，從任何相容工具呼叫你的 Agent。" },
+            { slug: "api-keys", title: "API 金鑰", summary: "產生和管理 API Key，用於外部呼叫 Yao Agents 介面的認證。" },
+            { slug: "ai-models", title: "AI 模型", summary: "設定 AI 連接器：OpenAI / Claude / 本地模型等。" },
+            { slug: "mcp-tools", title: "MCP 工具", summary: "連接外部 MCP 伺服器，擴展助手可用的工具。" },
+          ],
+        },
+        "ja-jp": {
+          title: "統合",
+          summary: "外向き：IMプラットフォームとAPIに接続。内向き：AIモデルとMCPツールに接続。",
+          pages: [
+            { slug: "chat-platforms", title: "チャットプラットフォーム (IM)", summary: "アシスタント/ロボットをSlack、WeChat、DingTalk、Feishu、Telegram、Discordにバインド。" },
+            { slug: "api-direct-connect", title: "API直接接続", summary: "OpenAI互換Chat Completionプロトコル。任意のツールからエージェントを呼び出し。" },
+            { slug: "api-keys", title: "APIキー", summary: "外部からYao Agentsを呼び出すためのAPIキーの生成と管理。" },
+            { slug: "ai-models", title: "AIモデル", summary: "AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。" },
+            { slug: "mcp-tools", title: "MCPツール", summary: "外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。" },
+          ],
+        },
+      },
+    },
+
+    // ── F. Tai Link ──
+    {
+      slug: "tai-link",
+      locales: {
+        "en-us": {
+          title: "Tai Link",
+          summary: "Device connectivity guide — connect your devices and let agents work across them.",
+          pages: [
+            { slug: "what-is-tai-link", title: "What Is Tai Link", summary: "Product positioning: let agents control your other devices." },
+            { slug: "installation", title: "Installation", summary: "Install the Tai Link client on each platform." },
+            { slug: "connect-first-device", title: "Connect Your First Device", summary: "Scan QR code or enter pairing code to complete the connection." },
+            { slug: "device-management", title: "Device Management", summary: "View device list, online status, naming." },
+            { slug: "remote-operations", title: "Remote Operations", summary: "Control remote devices through agents." },
+            { slug: "file-sync", title: "File Sync", summary: "Sync files between devices." },
+            { slug: "remote-desktop", title: "Remote Desktop", summary: "VNC remote viewing and control." },
+            { slug: "security-and-privacy", title: "Security & Privacy", summary: "Connection encryption, authorization management, disconnect devices." },
+            { slug: "tunnel-mode", title: "Tunnel Mode", summary: "NAT traversal, no port forwarding required." },
+          ],
+        },
+        "zh-cn": {
+          title: "Tai Link",
+          summary: "设备连接指南——连接你的设备，让 Agent 跨设备工作。",
+          pages: [
+            { slug: "what-is-tai-link", title: "什么是 Tai Link", summary: "产品定位：让 Agent 控制你的其他设备。" },
+            { slug: "installation", title: "安装", summary: "在各平台安装 Tai Link 客户端。" },
+            { slug: "connect-first-device", title: "连接第一台设备", summary: "扫描二维码或输入配对码完成连接。" },
+            { slug: "device-management", title: "设备管理", summary: "查看设备列表、在线状态、设备命名。" },
+            { slug: "remote-operations", title: "远程操作", summary: "通过 Agent 控制远程设备。" },
+            { slug: "file-sync", title: "文件同步", summary: "在设备之间同步文件。" },
+            { slug: "remote-desktop", title: "远程桌面", summary: "VNC 远程查看和控制。" },
+            { slug: "security-and-privacy", title: "安全与隐私", summary: "连接加密、授权管理、断开设备。" },
+            { slug: "tunnel-mode", title: "隧道模式", summary: "NAT 穿透，无需端口转发。" },
+          ],
+        },
+        "zh-tw": {
+          title: "Tai Link",
+          summary: "裝置連線指南——連接你的裝置，讓 Agent 跨裝置工作。",
+          pages: [
+            { slug: "what-is-tai-link", title: "什麼是 Tai Link", summary: "產品定位：讓 Agent 控制你的其他裝置。" },
+            { slug: "installation", title: "安裝", summary: "在各平台安裝 Tai Link 客戶端。" },
+            { slug: "connect-first-device", title: "連接第一台裝置", summary: "掃描 QR Code 或輸入配對碼完成連線。" },
+            { slug: "device-management", title: "裝置管理", summary: "查看裝置列表、線上狀態、裝置命名。" },
+            { slug: "remote-operations", title: "遠端操作", summary: "透過 Agent 控制遠端裝置。" },
+            { slug: "file-sync", title: "檔案同步", summary: "在裝置之間同步檔案。" },
+            { slug: "remote-desktop", title: "遠端桌面", summary: "VNC 遠端查看與控制。" },
+            { slug: "security-and-privacy", title: "安全與隱私", summary: "連線加密、授權管理、斷開裝置。" },
+            { slug: "tunnel-mode", title: "隧道模式", summary: "NAT 穿透，無需連接埠轉發。" },
+          ],
+        },
+        "ja-jp": {
+          title: "Tai Link",
+          summary: "デバイス接続ガイド——デバイスを接続してエージェントをクロスデバイスで動作させる。",
+          pages: [
+            { slug: "what-is-tai-link", title: "Tai Linkとは", summary: "製品の位置づけ：エージェントが他のデバイスを制御。" },
+            { slug: "installation", title: "インストール", summary: "各プラットフォームにTai Linkクライアントをインストール。" },
+            { slug: "connect-first-device", title: "最初のデバイスを接続", summary: "QRコードスキャンまたはペアリングコード入力で接続完了。" },
+            { slug: "device-management", title: "デバイス管理", summary: "デバイスリスト、オンライン状態、デバイス名の管理。" },
+            { slug: "remote-operations", title: "リモート操作", summary: "エージェントを通じてリモートデバイスを制御。" },
+            { slug: "file-sync", title: "ファイル同期", summary: "デバイス間でファイルを同期。" },
+            { slug: "remote-desktop", title: "リモートデスクトップ", summary: "VNCリモート表示と制御。" },
+            { slug: "security-and-privacy", title: "セキュリティとプライバシー", summary: "接続暗号化、認証管理、デバイスの切断。" },
+            { slug: "tunnel-mode", title: "トンネルモード", summary: "NATトラバーサル、ポート転送不要。" },
+          ],
+        },
+      },
+    },
+
+    // ── G. Built-in Agents ──
     {
       slug: "built-in-agents",
       locales: {
@@ -695,235 +922,44 @@ const yaoAgents: Product = {
       },
     },
 
-    // ── E. Agent Hub ──
-    {
-      slug: "agent-hub",
-      locales: {
-        "en-us": {
-          title: "Agent Hub",
-          summary:
-            "Extend capabilities: install ready-made agents or create your own.",
-          pages: [
-            {
-              slug: "hub-overview",
-              title: "Hub Overview",
-              summary: "What is Agent Hub, browsing and discovering agents.",
-            },
-            {
-              slug: "custom-assistants",
-              title: "Custom AI Assistants",
-              summary:
-                "Four ways to get new assistants (easiest first): AI dev assistant, Hub install, OpenClaw Hub, or coding via yaoapps.com.",
-            },
-            {
-              slug: "managing-agents",
-              title: "Managing Agents",
-              summary:
-                "View installed agents, update, uninstall (built-in agents cannot be uninstalled).",
-            },
-            {
-              slug: "agent-configuration",
-              title: "Agent Configuration",
-              summary:
-                "Modify parameters, behavior, and permissions of installed agents.",
-            },
-          ],
-        },
-        "zh-cn": {
-          title: "Agent 生态",
-          summary: "扩展 Agent 能力：安装现成的，或自己创建。",
-          pages: [
-            {
-              slug: "hub-overview",
-              title: "Hub 概览",
-              summary: "什么是 Agent Hub、浏览与发现。",
-            },
-            {
-              slug: "custom-assistants",
-              title: "自定义 AI 助手",
-              summary:
-                "四种方式获取新助手（由易到难）：AI 开发助手对话式创建、Hub 一键安装、OpenClaw Hub、编程开发。",
-            },
-            {
-              slug: "managing-agents",
-              title: "管理 Agent",
-              summary:
-                "查看已安装、更新、卸载（内置 Agent 不可卸载）。",
-            },
-            {
-              slug: "agent-configuration",
-              title: "Agent 配置",
-              summary: "修改已安装 Agent 的参数、行为、权限。",
-            },
-          ],
-        },
-        "zh-tw": {
-          title: "Agent 生態",
-          summary: "擴展 Agent 能力：安裝現成的，或自己建立。",
-          pages: [
-            { slug: "hub-overview", title: "Hub 概覽", summary: "什麼是 Agent Hub、瀏覽與發現。" },
-            { slug: "custom-assistants", title: "自訂 AI 助手", summary: "四種方式取得新助手（由易到難）：AI 開發助手、Hub 一鍵安裝、OpenClaw Hub、程式開發。" },
-            { slug: "managing-agents", title: "管理 Agent", summary: "查看已安裝、更新、解除安裝（內建 Agent 不可解除安裝）。" },
-            { slug: "agent-configuration", title: "Agent 設定", summary: "修改已安裝 Agent 的參數、行為、權限。" },
-          ],
-        },
-        "ja-jp": {
-          title: "Agent Hub",
-          summary: "機能拡張：既製エージェントのインストールまたは自作。",
-          pages: [
-            { slug: "hub-overview", title: "Hub 概要", summary: "Agent Hubとは、エージェントの閲覧と発見。" },
-            { slug: "custom-assistants", title: "カスタムAIアシスタント", summary: "新しいアシスタントを入手する4つの方法。AI開発アシスタント、Hubインストール、OpenClaw Hub、コーディング。" },
-            { slug: "managing-agents", title: "エージェント管理", summary: "インストール済みの確認、更新、アンインストール。" },
-            { slug: "agent-configuration", title: "エージェント設定", summary: "インストール済みエージェントのパラメータ、動作、権限を変更。" },
-          ],
-        },
-      },
-    },
-
-    // ── F. Integrations ──
-    {
-      slug: "integrations",
-      locales: {
-        "en-us": {
-          title: "Integrations",
-          summary:
-            "Outbound: connect to IM platforms and APIs. Inbound: connect AI models and MCP tools.",
-          pages: [
-            {
-              slug: "chat-platforms",
-              title: "Chat Platforms (IM)",
-              summary:
-                "Bind assistants/robots to Slack, WeChat, DingTalk, Feishu, Telegram, Discord.",
-            },
-            {
-              slug: "api-direct-connect",
-              title: "API Direct Connect",
-              summary:
-                "OpenAI-compatible Chat Completion protocol. Call your agents from any OpenAI-compatible tool.",
-            },
-            {
-              slug: "api-keys",
-              title: "API Keys",
-              summary:
-                "Generate and manage API keys for authenticating external calls to Yao Agents.",
-            },
-            {
-              slug: "ai-models",
-              title: "AI Models",
-              summary:
-                "Configure AI connectors: OpenAI, Claude, local models, etc.",
-            },
-            {
-              slug: "mcp-tools",
-              title: "MCP Tools",
-              summary:
-                "Connect external MCP servers to extend the tools available to assistants.",
-            },
-          ],
-        },
-        "zh-cn": {
-          title: "集成",
-          summary:
-            "向外：接入 IM 平台和 API；向内：连接 AI 模型和 MCP 工具。",
-          pages: [
-            {
-              slug: "chat-platforms",
-              title: "聊天平台 (IM)",
-              summary:
-                "将助手/机器人绑定到 Slack、微信、钉钉、飞书、Telegram、Discord。",
-            },
-            {
-              slug: "api-direct-connect",
-              title: "API 直连",
-              summary:
-                "兼容 OpenAI Chat Completion 协议，从任何 OpenAI 兼容工具调用你的 Agent。",
-            },
-            {
-              slug: "api-keys",
-              title: "API 密钥",
-              summary:
-                "生成和管理 API Key，用于外部调用 Yao Agents 接口的认证。",
-            },
-            {
-              slug: "ai-models",
-              title: "AI 模型",
-              summary:
-                "配置 AI 连接器：OpenAI / Claude / 本地模型等。",
-            },
-            {
-              slug: "mcp-tools",
-              title: "MCP 工具",
-              summary: "连接外部 MCP 服务器，扩展助手可用的工具。",
-            },
-          ],
-        },
-        "zh-tw": {
-          title: "整合",
-          summary: "向外：接入 IM 平台和 API；向內：連接 AI 模型和 MCP 工具。",
-          pages: [
-            { slug: "chat-platforms", title: "聊天平台 (IM)", summary: "將助手/機器人綁定到 Slack、微信、釘釘、飛書、Telegram、Discord。" },
-            { slug: "api-direct-connect", title: "API 直連", summary: "相容 OpenAI Chat Completion 協定，從任何相容工具呼叫你的 Agent。" },
-            { slug: "api-keys", title: "API 金鑰", summary: "產生和管理 API Key，用於外部呼叫 Yao Agents 介面的認證。" },
-            { slug: "ai-models", title: "AI 模型", summary: "設定 AI 連接器：OpenAI / Claude / 本地模型等。" },
-            { slug: "mcp-tools", title: "MCP 工具", summary: "連接外部 MCP 伺服器，擴展助手可用的工具。" },
-          ],
-        },
-        "ja-jp": {
-          title: "統合",
-          summary: "外向き：IMプラットフォームとAPIに接続。内向き：AIモデルとMCPツールに接続。",
-          pages: [
-            { slug: "chat-platforms", title: "チャットプラットフォーム (IM)", summary: "アシスタント/ロボットをSlack、WeChat、DingTalk、Feishu、Telegram、Discordにバインド。" },
-            { slug: "api-direct-connect", title: "API直接接続", summary: "OpenAI互換Chat Completionプロトコル。任意のツールからエージェントを呼び出し。" },
-            { slug: "api-keys", title: "APIキー", summary: "外部からYao Agentsを呼び出すためのAPIキーの生成と管理。" },
-            { slug: "ai-models", title: "AIモデル", summary: "AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。" },
-            { slug: "mcp-tools", title: "MCPツール", summary: "外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。" },
-          ],
-        },
-      },
-    },
-
-    // ── G. Settings ──
+    // ── H. Settings ──
     {
       slug: "settings",
       locales: {
         "en-us": {
           title: "Settings",
-          summary: "Personalize your Yao Agents experience.",
+          summary: "Configure environment variables, AI models, and MCP tools.",
           pages: [
-            { slug: "general-settings", title: "General Settings", summary: "Language, theme, startup behavior." },
-            { slug: "account", title: "Account", summary: "Login, profile, security." },
-            { slug: "data-management", title: "Data Management", summary: "Export conversations, backup data, clear cache." },
-            { slug: "advanced-settings", title: "Advanced Settings", summary: "Proxy, storage path, performance options." },
+            { slug: "env-vars", title: "Environment Variables", summary: "Set and manage environment variables that control Yao Agents runtime behavior." },
+            { slug: "ai-models", title: "AI Models", summary: "Configure AI connectors: OpenAI, Claude, local models, etc." },
+            { slug: "mcp-tools", title: "MCP Tools", summary: "Connect external MCP servers to extend the tools available to assistants." },
           ],
         },
         "zh-cn": {
           title: "设置",
-          summary: "个性化配置。",
+          summary: "配置环境变量、AI 模型和 MCP 工具。",
           pages: [
-            { slug: "general-settings", title: "通用设置", summary: "语言、主题、启动行为。" },
-            { slug: "account", title: "账户", summary: "登录、个人信息、安全。" },
-            { slug: "data-management", title: "数据管理", summary: "导出对话、备份数据、清除缓存。" },
-            { slug: "advanced-settings", title: "高级设置", summary: "代理网络、存储路径、性能选项。" },
+            { slug: "env-vars", title: "环境变量", summary: "设置和管理控制 Yao Agents 运行时行为的环境变量。" },
+            { slug: "ai-models", title: "AI 模型", summary: "配置 AI 连接器：OpenAI / Claude / 本地模型等。" },
+            { slug: "mcp-tools", title: "MCP 工具", summary: "连接外部 MCP 服务器，扩展助手可用的工具。" },
           ],
         },
         "zh-tw": {
           title: "設定",
-          summary: "個人化設定。",
+          summary: "設定環境變數、AI 模型和 MCP 工具。",
           pages: [
-            { slug: "general-settings", title: "通用設定", summary: "語言、主題、啟動行為。" },
-            { slug: "account", title: "帳戶", summary: "登入、個人資訊、安全。" },
-            { slug: "data-management", title: "資料管理", summary: "匯出對話、備份資料、清除快取。" },
-            { slug: "advanced-settings", title: "進階設定", summary: "代理網路、儲存路徑、效能選項。" },
+            { slug: "env-vars", title: "環境變數", summary: "設定和管理控制 Yao Agents 執行時行為的環境變數。" },
+            { slug: "ai-models", title: "AI 模型", summary: "設定 AI 連接器：OpenAI / Claude / 本地模型等。" },
+            { slug: "mcp-tools", title: "MCP 工具", summary: "連接外部 MCP 伺服器，擴展助手可用的工具。" },
           ],
         },
         "ja-jp": {
           title: "設定",
-          summary: "パーソナライズ設定。",
+          summary: "環境変数、AIモデル、MCPツールの設定。",
           pages: [
-            { slug: "general-settings", title: "一般設定", summary: "言語、テーマ、起動動作。" },
-            { slug: "account", title: "アカウント", summary: "ログイン、プロフィール、セキュリティ。" },
-            { slug: "data-management", title: "データ管理", summary: "会話のエクスポート、バックアップ、キャッシュクリア。" },
-            { slug: "advanced-settings", title: "詳細設定", summary: "プロキシ、ストレージパス、パフォーマンスオプション。" },
+            { slug: "env-vars", title: "環境変数", summary: "Yao Agentsの実行時動作を制御する環境変数を設定・管理。" },
+            { slug: "ai-models", title: "AIモデル", summary: "AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。" },
+            { slug: "mcp-tools", title: "MCPツール", summary: "外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。" },
           ],
         },
       },

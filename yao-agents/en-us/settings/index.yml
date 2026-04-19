@@ -1,16 +1,13 @@
 slug: settings
 title: Settings
-summary: Personalize your Yao Agents experience.
+summary: Configure environment variables, AI models, and MCP tools.
 pages:
-  - slug: general-settings
-    title: General Settings
-    summary: Language, theme, startup behavior.
-  - slug: account
-    title: Account
-    summary: Login, profile, security.
-  - slug: data-management
-    title: Data Management
-    summary: Export conversations, backup data, clear cache.
-  - slug: advanced-settings
-    title: Advanced Settings
-    summary: Proxy, storage path, performance options.
+  - slug: env-vars
+    title: Environment Variables
+    summary: Set and manage environment variables that control Yao Agents runtime behavior.
+  - slug: ai-models
+    title: AI Models
+    summary: "Configure AI connectors: OpenAI, Claude, local models, etc."
+  - slug: mcp-tools
+    title: MCP Tools
+    summary: Connect external MCP servers to extend the tools available to assistants.

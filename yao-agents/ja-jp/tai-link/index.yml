@@ -1,6 +1,6 @@
 slug: tai-link
 title: Tai Link
-summary: デバイス接続ガイド — デバイスを接続し、エージェントがデバイス間で連携。
+summary: デバイス接続ガイド——デバイスを接続してエージェントをクロスデバイスで動作させる。
 pages:
   - slug: what-is-tai-link
     title: Tai Linkとは
@@ -13,19 +13,19 @@ pages:
     summary: QRコードスキャンまたはペアリングコード入力で接続完了。
   - slug: device-management
     title: デバイス管理
-    summary: デバイス一覧、オンライン状態、命名。
+    summary: デバイスリスト、オンライン状態、デバイス名の管理。
   - slug: remote-operations
     title: リモート操作
-    summary: エージェント経由でリモートデバイスを操作。
+    summary: エージェントを通じてリモートデバイスを制御。
   - slug: file-sync
     title: ファイル同期
-    summary: デバイス間のファイル同期。
+    summary: デバイス間でファイルを同期。
   - slug: remote-desktop
     title: リモートデスクトップ
-    summary: VNCリモート表示と操作。
+    summary: VNCリモート表示と制御。
   - slug: security-and-privacy
     title: セキュリティとプライバシー
-    summary: 接続暗号化、認可管理、デバイス切断。
+    summary: 接続暗号化、認証管理、デバイスの切断。
   - slug: tunnel-mode
     title: トンネルモード
-    summary: NATトラバーサル、ポートフォワーディング不要。
+    summary: NATトラバーサル、ポート転送不要。

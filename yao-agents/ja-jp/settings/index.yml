@@ -1,16 +1,13 @@
 slug: settings
 title: 設定
-summary: パーソナライズ設定。
+summary: 環境変数、AIモデル、MCPツールの設定。
 pages:
-  - slug: general-settings
-    title: 一般設定
-    summary: 言語、テーマ、起動動作。
-  - slug: account
-    title: アカウント
-    summary: ログイン、プロフィール、セキュリティ。
-  - slug: data-management
-    title: データ管理
-    summary: 会話のエクスポート、バックアップ、キャッシュクリア。
-  - slug: advanced-settings
-    title: 詳細設定
-    summary: プロキシ、ストレージパス、パフォーマンスオプション。
+  - slug: env-vars
+    title: 環境変数
+    summary: Yao Agentsの実行時動作を制御する環境変数を設定・管理。
+  - slug: ai-models
+    title: AIモデル
+    summary: AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。
+  - slug: mcp-tools
+    title: MCPツール
+    summary: 外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。

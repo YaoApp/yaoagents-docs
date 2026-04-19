@@ -1,16 +1,10 @@
 slug: agent-hub
-title: Agent 生態
+title: Yao Agents Hub
 summary: 擴展 Agent 能力：安裝現成的，或自己建立。
 pages:
   - slug: hub-overview
     title: Hub 概覽
-    summary: 什麼是 Agent Hub、瀏覽與發現。
+    summary: 什麼是 Yao Agents Hub、瀏覽與發現。
   - slug: custom-assistants
-    title: 自訂 AI 助手
-    summary: 四種方式取得新助手（由易到難）：AI 開發助手、Hub 一鍵安裝、OpenClaw Hub、程式開發。
-  - slug: managing-agents
-    title: 管理 Agent
-    summary: 查看已安裝、更新、解除安裝（內建 Agent 不可解除安裝）。
-  - slug: agent-configuration
-    title: Agent 設定
-    summary: 修改已安裝 Agent 的參數、行為、權限。
+    title: 自訂 AI 專家
+    summary: 新增 AI 專家的幾種方式：Yao Agents Hub 安裝、AI 開發專家建立、撰寫程式碼、探索第三方生態。

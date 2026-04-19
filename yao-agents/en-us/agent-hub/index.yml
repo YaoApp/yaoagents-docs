@@ -1,16 +1,10 @@
 slug: agent-hub
-title: Agent Hub
+title: Yao Agents Hub
 summary: "Extend capabilities: install ready-made agents or create your own."
 pages:
   - slug: hub-overview
     title: Hub Overview
-    summary: What is Agent Hub, browsing and discovering agents.
+    summary: What is Yao Agents Hub, browsing and discovering agents.
   - slug: custom-assistants
-    title: Custom AI Assistants
-    summary: "Four ways to get new assistants (easiest first): AI dev assistant, Hub install, OpenClaw Hub, or coding via yaoapps.com."
-  - slug: managing-agents
-    title: Managing Agents
-    summary: View installed agents, update, uninstall (built-in agents cannot be uninstalled).
-  - slug: agent-configuration
-    title: Agent Configuration
-    summary: Modify parameters, behavior, and permissions of installed agents.
+    title: Custom AI Experts
+    summary: "Ways to add new AI Experts: Yao Agents Hub, AI dev expert, build with code, or explore third-party ecosystems."

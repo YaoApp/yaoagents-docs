@@ -1,6 +1,6 @@
 slug: tai-link
 title: Tai Link
-summary: 裝置連接指南 — 連接你的裝置，讓 Agent 跨裝置工作。
+summary: 裝置連線指南——連接你的裝置，讓 Agent 跨裝置工作。
 pages:
   - slug: what-is-tai-link
     title: 什麼是 Tai Link
@@ -10,22 +10,22 @@ pages:
     summary: 在各平台安裝 Tai Link 客戶端。
   - slug: connect-first-device
     title: 連接第一台裝置
-    summary: 掃碼/輸入配對碼，完成連接。
+    summary: 掃描 QR Code 或輸入配對碼完成連線。
   - slug: device-management
     title: 裝置管理
-    summary: 查看裝置清單、線上狀態、命名。
+    summary: 查看裝置列表、線上狀態、裝置命名。
   - slug: remote-operations
     title: 遠端操作
-    summary: 透過 Agent 操控遠端裝置。
+    summary: 透過 Agent 控制遠端裝置。
   - slug: file-sync
     title: 檔案同步
-    summary: 裝置間檔案同步。
+    summary: 在裝置之間同步檔案。
   - slug: remote-desktop
     title: 遠端桌面
     summary: VNC 遠端查看與控制。
   - slug: security-and-privacy
     title: 安全與隱私
-    summary: 連線加密、授權管理、中斷裝置。
+    summary: 連線加密、授權管理、斷開裝置。
   - slug: tunnel-mode
     title: 隧道模式
-    summary: NAT 穿透，無需端口轉發。
+    summary: NAT 穿透，無需連接埠轉發。

@@ -4,7 +4,8 @@ summary: 产品使用手册——在你的设备上安装、配置和使用 Yao 
 sections:
   - getting-started
   - mission-control
-  - built-in-agents
   - agent-hub
   - integrations
+  - tai-link
+  - built-in-agents
   - settings
