@@ -4,4 +4,70 @@ slug: connect-first-device
 
 # Connect Your First Device
 
-Scan QR code or enter pairing code to complete the connection.
+Pair a remote machine with your Yao Agents instance so agents can start working on it.
+
+## Before you start
+
+- Tai Link is [installed](/docs/en-us/tai-link/installation) on the remote machine.
+- The remote machine can reach your Yao Agents server over the network.
+
+## Step 1 — Start Tai Link
+
+On the remote machine, start the Tai Link server pointing to your Yao instance:
+
+```bash
+tai server http://<YOUR_YAO_SERVER>:5099
+```
+
+Tai Link attempts to register immediately. If this is the first time, it opens an OAuth device flow — a URL and a one-time code are printed in the terminal.
+
+## Step 2 — Authorize
+
+Open the URL in any browser and enter the device code shown in the terminal. Sign in with your Yao Agents account to authorize the connection.
+
+![Tai Link — Pairing screen](https://assets.yaoagents.com/en/tai/05-tai-connect-en-$__THEME.png)
+
+Once authorized, the terminal shows:
+
+```
+Login successful!
+  Client ID:  ...
+  Machine ID: ...
+  Server:     http://<YOUR_YAO_SERVER>:5099
+```
+
+Tai Link saves the credentials locally and uses refresh tokens for future sessions — you won't need to log in again unless you explicitly run `tai logout`.
+
+## Step 3 — Confirm in Yao Agents
+
+Switch to the Yao Agents UI. Open the **Tai Link** panel and you should see the new device listed as **Online**.
+
+![Tai Link — Device connected](https://assets.yaoagents.com/en/tai/05-tai-connect-done-en-$__THEME.png)
+
+The device card shows:
+
+- **Display name** — set via `--display-name` or `config.yml`; defaults to the hostname.
+- **Status** — Online / Offline.
+- **Capabilities** — Docker, K8s, VNC, Host Exec (depending on what Tai Link detected at startup).
+
+## Step 4 — Test the connection
+
+The quickest way to confirm everything works: open the device detail, click **Remote Desktop**, and you should see the remote screen in the VNC viewer.
+
+Alternatively, ask an AI Expert to run a task — for example, ask General Assistant to "list the files in /tmp on my remote server". It should route the command through Tai Link automatically.
+
+## Troubleshooting
+
+**Device doesn't appear in the Tai Link panel.**
+Check that the remote machine can reach the Yao server. Verify no firewall blocks outbound connections on the gRPC port (default 9900). Look at the Tai Link terminal for error messages.
+
+**"Login failed" or "token refresh" errors.**
+Run `tai logout` followed by `tai login --server http://<YOUR_YAO_SERVER>:5099` to re-authenticate manually.
+
+**Device shows "Offline" even though Tai Link is running.**
+The tunnel may have disconnected. Tai Link reconnects automatically with exponential backoff (2 seconds → up to 2 minutes). Check network connectivity and wait a moment.
+
+## What's next
+
+- [Device management](/docs/en-us/tai-link/device-management) — rename, organize, and monitor devices
+- [Remote desktop](/docs/en-us/tai-link/remote-desktop) — watch agents work in real time

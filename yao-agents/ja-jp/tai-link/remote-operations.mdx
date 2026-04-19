@@ -4,4 +4,67 @@ slug: remote-operations
 
 # リモート操作
 
-エージェント経由でリモートデバイスを操作。
+Tai Link でデバイスを接続すると、AI エキスパートやロボットがそのデバイス上でタスクを実行できるようになります——コードのビルド、データ処理、ウェブ閲覧——すべてあなたの手を借りずに。
+
+## Agent がリモートデバイスを使う仕組み
+
+どのデバイスを使うかを Agent に指定する必要はありません。Agent が作業環境（Node.js の実行、Docker コンテナの作成、ブラウザの起動など）を必要とするとき、Yao Agents が自動的に利用可能な Tai Link デバイスにタスクをルーティングします。
+
+内部の処理フロー：
+
+1. Yao が gRPC トンネル経由で Tai Link に **"open" コマンド**を送信します。
+2. Tai Link がターゲット（Docker コンテナ・K8s Pod・ホスト自体）を解決します。
+3. 双方向データチャネルが Agent とリモートプロセスをブリッジします。
+
+## コンテナサンドボックス
+
+リモートデバイスに Docker がある場合、Agent はタスクごとに独立したコンテナを作成します：
+
+- **副作用なし。** 各タスクにクリーンな環境が用意されます。
+- **フルスタック。** コンテナにはデスクトップ（VNC）・Shell・Node.js・Python・ブラウザが含まれます。
+- **自動クリーンアップ。** タスク完了後にコンテナが削除されます（設定可能）。
+
+Tai Link は起動時に Docker デーモンを自動検出し、Yao にプロキシ API を公開します。追加設定は不要です。
+
+## Host Exec
+
+システムサービスの管理・ハードウェアセンサーの読み取り・コンテナにないツールの実行など、ホスト OS への直接アクセスが必要なタスクには **Host Exec** を使います。
+
+Host Exec はデフォルトで無効です。起動時に有効にします：
+
+```bash
+tai server --host-exec http://<YOUR_YAO_SERVER>:5099
+```
+
+または `config.yml` で設定します：
+
+```yaml
+host_exec:
+  enabled: true
+  allowed_commands:
+    - ls
+    - cat
+    - python3
+  allowed_dirs:
+    - /home/projects
+  denied_dirs:
+    - /etc
+    - /root
+```
+
+> ⚠️ Host Exec は Tai Link プロセスの権限でコマンドを実行します。許可リストを使って Agent の操作範囲を制限してください。
+
+## Kubernetes
+
+リモートデバイスが Kubernetes クラスターにアクセスできる場合、Tai Link は自動的に検出して K8s API をプロキシします。Agent は Pod の作成・ジョブの実行・ログの取得をすべて同じトンネル経由で行えます。
+
+クラスター内自動検出では不十分な場合、kubeconfig のパスを指定してください：
+
+```bash
+tai server --kubeconfig ~/.kube/config http://<YOUR_YAO_SERVER>:5099
+```
+
+## 次のステップ
+
+- [ファイル同期](/docs/ja-jp/tai-link/file-sync) — リモートワークスペースへのファイル転送と結果の取得
+- [リモートデスクトップ](/docs/ja-jp/tai-link/remote-desktop) — Agent の作業をリアルタイムで確認する

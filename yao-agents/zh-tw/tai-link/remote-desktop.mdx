@@ -4,4 +4,57 @@ slug: remote-desktop
 
 # 遠端桌面
 
-VNC 遠端查看與控制。
+即時觀看 Agent 工作，或自己接管滑鼠和鍵盤——全部透過 Yao Agents 介面內建的 VNC 檢視器完成，無需額外安裝任何軟體。
+
+## 開啟遠端桌面工作階段
+
+1. 進入 Yao Agents 的 **Tai Link** 面板。
+2. 點擊你想查看的裝置。
+3. 點擊**遠端桌面**（或裝置卡片上的 VNC 圖示）。
+
+VNC 檢視器直接在 Yao Agents 內開啟，無需安裝外部 VNC 客戶端。
+
+![Tai Link — VNC 遠端桌面](https://assets.yaoagents.com/en/tai/03-tai-vnc-en-$__THEME.png)
+
+## 你能看到什麼
+
+檢視器顯示遠端裝置的完整桌面（若 Agent 在 Docker 沙箱中工作，則顯示容器的桌面）。你可以：
+
+- **觀看** Agent 即時建構網站、分析資料或執行測試。
+- **接管控制** — 點擊進入檢視器，使用你的滑鼠和鍵盤操作。Agent 在你控制期間暫停互動。
+- **自適應大小** — 檢視器會自動縮放以適配瀏覽器視窗。
+
+## 運作原理
+
+Tai Link 內建一個 **VNC 路由器**，將 WebSocket 連線（來自你的瀏覽器）橋接到遠端裝置或容器內執行的原始 TCP VNC 伺服器。
+
+URL 格式為 `/vnc/{containerID}/ws`。當 Agent 啟動一個帶桌面（埠 5900）的容器時，VNC 路由器會自動偵測並連接它。
+
+要存取**宿主機的 VNC**（實體螢幕），啟動時開啟：
+
+```bash
+tai server --host-vnc-port 5900 http://<你的_YAO_伺服器>:5099
+```
+
+或在 `config.yml` 中：
+
+```yaml
+upstream:
+  host_vnc_port: 5900
+```
+
+## 常見問題
+
+**VNC 檢視器顯示空白畫面。**
+容器或宿主機內的 VNC 伺服器可能尚未啟動。等待幾秒——Agent 通常需要一點時間啟動桌面環境。
+
+**顯示「Failed to connect to VNC server」。**
+Tai Link 無法存取目標的 5900 埠。使用 Docker 時，確認容器已暴露 5900 埠；連接宿主機時，確認 VNC 伺服器（如 x11vnc 或 TigerVNC）正在執行。
+
+**畫面卡頓或延遲。**
+VNC 效能取決於瀏覽器到 Yao 伺服器，以及 Yao 到 Tai Link 裝置之間的網路頻寬。網路較慢時會有一定延遲。
+
+## 下一步
+
+- [檔案同步](/docs/zh-tw/tai-link/file-sync) — 向遠端工作區傳輸檔案
+- [安全與隱私](/docs/zh-tw/tai-link/security-and-privacy) — 連線加密與存取控制

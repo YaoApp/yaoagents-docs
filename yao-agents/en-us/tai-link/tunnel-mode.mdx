@@ -4,4 +4,77 @@ slug: tunnel-mode
 
 # Tunnel Mode
 
-NAT traversal, no port forwarding required.
+Tai Link connects to Yao through a **persistent gRPC tunnel** — no port forwarding, no static IP, no VPN. The remote machine can sit behind a home router and still be fully reachable.
+
+## How it works
+
+When Tai Link starts, it dials **outbound** to the Yao gRPC address (e.g. `yao.example.com:9900`). The connection stays open as a long-lived bidirectional stream:
+
+1. **Register** — Tai Link sends its node ID, machine ID, version, port layout, and capabilities (Docker, K8s, VNC, Host Exec).
+2. **Yao acknowledges** and assigns a `tai_id` — the permanent identifier for this device.
+3. **Heartbeats** — Tai Link sends a ping every 30 seconds. If no pong arrives within 90 seconds, the tunnel is torn down and a new one is established.
+4. **On-demand channels** — When Yao needs to reach a service on the remote device (VNC, Docker API, HTTP), it sends an "open" command over the control stream. Tai Link opens a local TCP connection and bridges data bidirectionally through a dedicated gRPC Forward stream.
+
+Because Tai Link initiates the connection (outbound), NAT routers treat it as a regular client connection — no inbound port rules needed.
+
+## Direct mode
+
+If the remote device is on the same network as Yao — or has a public IP — you can skip the tunnel and use **direct mode**:
+
+```bash
+tai server --direct http://<YOUR_YAO_SERVER>:5099
+```
+
+In direct mode, Tai Link registers via HTTP and exposes its services on local ports. Yao connects directly to these ports instead of tunneling. This reduces latency and is useful for LAN deployments.
+
+Default ports in direct mode:
+
+| Service | Default address |
+|---------|----------------|
+| gRPC (volume, gateway) | `127.0.0.1:19100` |
+| HTTP proxy | `127.0.0.1:8099` |
+| VNC router | (assigned dynamically) |
+| Docker proxy | (assigned dynamically) |
+| K8s proxy | (assigned dynamically) |
+
+To expose services on all network interfaces (needed for Yao to reach them):
+
+```bash
+tai server --direct --internal auto http://<YOUR_YAO_SERVER>:5099
+```
+
+`--internal auto` discovers all private IPs on the machine and binds to them.
+
+## Reconnection
+
+If the tunnel drops (network hiccup, Yao restart), Tai Link reconnects automatically:
+
+- Initial retry: 2 seconds
+- Exponential backoff: doubles each attempt, up to 2 minutes
+- On successful reconnection, backoff resets to 2 seconds
+
+Credentials are refreshed automatically during reconnection. A fresh registration message is sent each time so Yao has up-to-date port and capability information.
+
+## CLI reference
+
+```bash
+tai server [flags] <YAO_SERVER_URL>
+```
+
+| Flag | Env var | Description |
+|------|---------|-------------|
+| `--direct` | `TAI_DIRECT` | Use HTTP registration instead of gRPC tunnel |
+| `--grpc` | — | gRPC listen address (default `127.0.0.1:19100`) |
+| `--http` | — | HTTP proxy listen address (default `127.0.0.1:8099`) |
+| `--vnc` | — | VNC router listen address |
+| `--internal` | `TAI_INTERNAL` | Extra bind IPs (`auto` or comma-separated) |
+| `--node-id` | `TAI_NODE_ID` | Custom node identifier |
+| `--display-name` | `TAI_DISPLAY_NAME` | Display name in the Yao UI |
+| `--config` | — | Path to YAML config file |
+| `--data` | `TAI_DATA_DIR` | Workspace storage root (default `/data/volumes`) |
+| `--log-level` | `TAI_LOG_LEVEL` | `debug` / `info` / `warn` / `error` |
+
+## What's next
+
+- [Security & privacy](/docs/en-us/tai-link/security-and-privacy) — encryption and access control
+- [What is Tai Link](/docs/en-us/tai-link/what-is-tai-link) — overview and architecture

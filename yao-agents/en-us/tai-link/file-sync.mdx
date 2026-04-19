@@ -4,4 +4,62 @@ slug: file-sync
 
 # File Sync
 
-Sync files between devices.
+Push files to a remote workspace, let agents process them, then pull results back. Sync is incremental — only changed files are transferred.
+
+## How it works
+
+Each sync session targets a **workspace** on the remote device — a directory under Tai Link's data root (default `/data/volumes`). Yao manages workspaces automatically when agents need file access.
+
+The sync protocol runs over gRPC in two directions:
+
+- **Push** — Yao sends a file manifest, Tai Link diffs it against local state, requests only the missing or changed files, and writes them to disk.
+- **Pull** — Tai Link scans the workspace, compares against the manifest Yao provides, and streams back any files that are new or modified.
+
+Files are compressed in transit and split into 256 KB chunks to keep memory usage low, even for large projects.
+
+## Workspaces
+
+Open a device in the Tai Link panel and click **Workspaces** to see all active workspaces.
+
+![Tai Link — Workspace file browser](https://assets.yaoagents.com/en/tai/04-tai-workspace-files-en-$__THEME.png)
+
+Each workspace card shows:
+
+- Workspace ID (usually matches the agent session)
+- File count and total size
+- Last sync timestamp
+
+Click a workspace to browse its files, preview documents, or download individual items.
+
+![Tai Link — File preview](https://assets.yaoagents.com/en/tai/04-tai-workspace-file-preview-en-$__THEME.png)
+
+## Exclude patterns
+
+Some files should never be synced — `node_modules`, `.git`, build artifacts. Configure excludes in `config.yml`:
+
+```yaml
+sync:
+  exclude:
+    - "node_modules"
+    - ".git"
+    - "__pycache__"
+    - "*.pyc"
+```
+
+Excludes apply to all workspaces on that device.
+
+## Manual sync
+
+Agents handle sync automatically. You rarely need to trigger it yourself, but if you do:
+
+- **Push** happens whenever an agent starts a new task that requires files on the remote device.
+- **Pull** happens when the agent retrieves results (reports, built artifacts, exported data).
+
+The sync status is visible in the workspace detail — "Syncing…" or "Up to date".
+
+![Tai Link — File sync progress](https://assets.yaoagents.com/en/tai/04-tai-workspace-file-sync-en-$__THEME.png)
+
+## What's next
+
+- [Remote desktop](/docs/en-us/tai-link/remote-desktop) — watch and control the remote screen
+- [Security & privacy](/docs/en-us/tai-link/security-and-privacy) — how data stays on your devices

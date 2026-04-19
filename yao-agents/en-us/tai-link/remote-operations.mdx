@@ -4,4 +4,67 @@ slug: remote-operations
 
 # Remote Operations
 
-Control remote devices through agents.
+Once a device is connected through Tai Link, your AI Experts and Robots can run tasks on it — building code, processing data, browsing the web — without you lifting a finger.
+
+## How agents use remote devices
+
+You don't need to tell agents *which* device to use. When an agent needs a working environment (e.g. to run Node.js, spin up a Docker container, or open a browser), Yao Agents automatically routes the task to an available Tai Link device.
+
+Behind the scenes:
+
+1. Yao sends an **"open" command** through the gRPC tunnel to Tai Link.
+2. Tai Link resolves the target — a Docker container, a K8s pod, or the host itself.
+3. A bidirectional data channel bridges the agent to the remote process.
+
+## Container sandboxes
+
+When Docker is available on the remote device, agents create isolated containers for each task. This means:
+
+- **No side effects.** Each task gets a clean environment.
+- **Full stack.** Containers include a desktop (VNC), a shell, Node.js, Python, and a browser — everything an agent might need.
+- **Auto-cleanup.** Containers are removed when the task finishes (configurable).
+
+Tai Link auto-detects the Docker daemon at startup and exposes a proxy API to Yao. No extra configuration needed.
+
+## Host execution
+
+For tasks that need direct access to the host OS — managing system services, reading hardware sensors, or running tools not available inside containers — Tai Link supports **Host Exec**.
+
+Host Exec is disabled by default. Enable it at startup:
+
+```bash
+tai server --host-exec http://<YOUR_YAO_SERVER>:5099
+```
+
+Or in `config.yml`:
+
+```yaml
+host_exec:
+  enabled: true
+  allowed_commands:
+    - ls
+    - cat
+    - python3
+  allowed_dirs:
+    - /home/projects
+  denied_dirs:
+    - /etc
+    - /root
+```
+
+> ⚠️ Host Exec runs commands with the privileges of the Tai Link process. Use the allowlist to restrict what agents can do.
+
+## Kubernetes
+
+If the remote device has access to a Kubernetes cluster, Tai Link detects it and proxies the K8s API. Agents can create pods, run jobs, and pull logs — all through the same tunnel.
+
+Provide a kubeconfig path if in-cluster detection isn't enough:
+
+```bash
+tai server --kubeconfig ~/.kube/config http://<YOUR_YAO_SERVER>:5099
+```
+
+## What's next
+
+- [File sync](/docs/en-us/tai-link/file-sync) — transfer files to and from remote workspaces
+- [Remote desktop](/docs/en-us/tai-link/remote-desktop) — watch agents work in real time

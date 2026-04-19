@@ -4,4 +4,57 @@ slug: remote-desktop
 
 # Remote Desktop
 
-VNC remote viewing and control.
+Watch your agents work in real time, or take over the mouse and keyboard yourself — all through a built-in VNC viewer in the Yao Agents UI.
+
+## Open a remote desktop session
+
+1. Go to the **Tai Link** panel in Yao Agents.
+2. Click the device you want to view.
+3. Click **Remote Desktop** (or the VNC icon on the device card).
+
+The VNC viewer opens inside Yao Agents — no external VNC client needed.
+
+![Tai Link — VNC remote desktop](https://assets.yaoagents.com/en/tai/03-tai-vnc-en-$__THEME.png)
+
+## What you see
+
+The viewer shows the full desktop of the remote device (or the container desktop if the agent is working inside a Docker sandbox). You can:
+
+- **Watch** an agent build a website, analyze data, or run tests in real time.
+- **Take over** — click into the viewer and use your mouse and keyboard. The agent pauses interaction while you have control.
+- **Resize** — the viewer scales to fit your browser window.
+
+## How it works behind the scenes
+
+Tai Link includes a **VNC Router** that bridges WebSocket connections (from your browser) to raw TCP VNC servers running on the remote device or inside containers.
+
+The URL pattern is `/vnc/{containerID}/ws`. When an agent starts a container with a desktop (port 5900), the VNC Router automatically discovers and connects to it.
+
+For **host-level VNC** (the physical screen), enable it at startup:
+
+```bash
+tai server --host-vnc-port 5900 http://<YOUR_YAO_SERVER>:5099
+```
+
+Or in `config.yml`:
+
+```yaml
+upstream:
+  host_vnc_port: 5900
+```
+
+## Troubleshooting
+
+**VNC viewer shows a blank screen.**
+The VNC server inside the container or on the host may not have started yet. Wait a few seconds — agents typically need a moment to boot the desktop environment.
+
+**"Failed to connect to VNC server."**
+Tai Link couldn't reach port 5900 on the target. If using Docker, make sure the container exposes port 5900. If connecting to the host, verify a VNC server (like x11vnc or TigerVNC) is running.
+
+**Laggy or slow display.**
+VNC performance depends on network bandwidth between your browser and the Yao server, and between Yao and the Tai Link device. On slow connections, expect some delay.
+
+## What's next
+
+- [File sync](/docs/en-us/tai-link/file-sync) — transfer files to remote workspaces
+- [Security & privacy](/docs/en-us/tai-link/security-and-privacy) — connection encryption and access control

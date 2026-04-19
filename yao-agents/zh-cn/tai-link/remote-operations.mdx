@@ -4,4 +4,67 @@ slug: remote-operations
 
 # 远程操作
 
-通过 Agent 操控远程设备。
+一旦设备通过 Tai Link 连接，你的 AI 专家和机器人就能在上面执行任务——构建代码、处理数据、浏览网页——全程不需要你动手。
+
+## Agent 如何使用远程设备
+
+你不需要告诉 Agent 用哪台设备。当 Agent 需要工作环境（例如运行 Node.js、创建 Docker 容器、打开浏览器）时，Yao Agents 会自动将任务路由到一台可用的 Tai Link 设备。
+
+背后的工作流程：
+
+1. Yao 通过 gRPC 隧道向 Tai Link 发送 **"open" 指令**。
+2. Tai Link 解析目标——Docker 容器、K8s Pod，或宿主机本身。
+3. 一条双向数据通道将 Agent 与远程进程桥接起来。
+
+## 容器沙箱
+
+当远程设备上有 Docker 时，Agent 会为每个任务创建独立的容器。这意味着：
+
+- **无副作用。** 每个任务都有干净的环境。
+- **完整技术栈。** 容器内置桌面（VNC）、Shell、Node.js、Python 和浏览器——Agent 可能需要的一切。
+- **自动清理。** 任务完成后容器会被移除（可配置）。
+
+Tai Link 启动时自动检测 Docker 守护进程并向 Yao 暴露代理 API，无需额外配置。
+
+## 宿主机执行
+
+对于需要直接访问宿主操作系统的任务——管理系统服务、读取硬件传感器、运行容器内没有的工具——Tai Link 支持 **Host Exec**。
+
+Host Exec 默认关闭，启动时手动开启：
+
+```bash
+tai server --host-exec http://<你的_YAO_服务器>:5099
+```
+
+或在 `config.yml` 中配置：
+
+```yaml
+host_exec:
+  enabled: true
+  allowed_commands:
+    - ls
+    - cat
+    - python3
+  allowed_dirs:
+    - /home/projects
+  denied_dirs:
+    - /etc
+    - /root
+```
+
+> ⚠️ Host Exec 以 Tai Link 进程的权限运行命令。请使用白名单限制 Agent 的操作范围。
+
+## Kubernetes
+
+如果远程设备能访问 Kubernetes 集群，Tai Link 会自动检测并代理 K8s API。Agent 可以创建 Pod、运行 Job、拉取日志——全部通过同一条隧道完成。
+
+如果集群内自动检测不够用，可以指定 kubeconfig 路径：
+
+```bash
+tai server --kubeconfig ~/.kube/config http://<你的_YAO_服务器>:5099
+```
+
+## 下一步
+
+- [文件同步](/docs/zh-cn/tai-link/file-sync) — 向远程工作区传输文件并取回结果
+- [远程桌面](/docs/zh-cn/tai-link/remote-desktop) — 实时观看 Agent 工作

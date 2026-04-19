@@ -4,4 +4,80 @@ slug: security-and-privacy
 
 # Security & Privacy
 
-Connection encryption, authorization management, disconnect devices.
+Tai Link is designed around one principle: **your data stays on your devices**. Nothing is routed through third-party servers — the connection runs directly between Tai Link and your Yao Agents instance.
+
+## Authentication
+
+Tai Link authenticates with Yao using **OAuth 2.0 device flow**:
+
+1. On first start, Tai Link generates a unique client ID and machine ID.
+2. You authorize the device through a browser (one-time step).
+3. Tai Link receives access and refresh tokens, stored locally in a credentials file.
+4. Tokens are refreshed automatically — you don't need to log in again.
+
+To revoke access at any time:
+
+```bash
+tai logout
+```
+
+This deletes the local credentials and revokes the token on the Yao server.
+
+## Encrypted tunnel
+
+All communication between Tai Link and Yao travels through a gRPC channel. Traffic includes:
+
+- Control messages (register, heartbeat, open channel commands)
+- Data channels (file sync, VNC, container proxy)
+- Bearer tokens in every RPC for authentication
+
+In production deployments, enable TLS on the Yao gRPC endpoint to encrypt all traffic end-to-end.
+
+## Host Exec security
+
+Host Exec — the ability to run commands directly on the remote OS — is **disabled by default**. When enabled, a configurable policy controls what's allowed:
+
+```yaml
+host_exec:
+  enabled: true
+  allowed_commands:
+    - ls
+    - cat
+    - python3
+    - node
+  allowed_dirs:
+    - /home/projects
+    - /data
+  denied_dirs:
+    - /etc
+    - /root
+    - /var
+```
+
+| Policy field | Purpose |
+|-------------|---------|
+| `allowed_commands` | Whitelist of executables the agent can run |
+| `allowed_dirs` | Directories the agent can read/write |
+| `denied_dirs` | Directories explicitly blocked, even if a parent is allowed |
+| `full_access` | Bypasses all restrictions — use only for trusted, isolated machines |
+
+> ⚠️ Tai Link runs commands with its own process privileges. On shared machines, run Tai Link under a dedicated user account with limited permissions.
+
+## Data isolation
+
+- **File sync** stores files in a local directory (`/data/volumes` by default). Files never leave the device unless you explicitly pull them back.
+- **Containers** run in Docker or K8s with standard isolation. Each agent session gets its own container.
+- **VNC** streams pixels over WebSocket — no screen recordings are stored anywhere.
+
+## Disconnect a device
+
+To take a device offline immediately:
+
+1. Stop the Tai Link process (`Ctrl+C` or `docker stop tai`).
+2. Run `tai logout` to remove stored credentials.
+3. The device shows as **Offline** in Yao Agents and can no longer receive commands.
+
+## What's next
+
+- [Tunnel mode](/docs/en-us/tai-link/tunnel-mode) — how NAT traversal works
+- [Installation](/docs/en-us/tai-link/installation) — deployment best practices

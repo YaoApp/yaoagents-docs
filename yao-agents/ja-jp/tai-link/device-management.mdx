@@ -4,4 +4,63 @@ slug: device-management
 
 # デバイス管理
 
-デバイス一覧、オンライン状態、命名。
+Yao Agents で Tai Link を通じて接続されたすべてのデバイスを確認・名前変更・監視します。
+
+## デバイス一覧
+
+Yao Agents の **Tai Link** パネルを開くと、登録済みの各デバイスがカードとして表示されます：
+
+| フィールド | 説明 |
+|-----------|------|
+| 表示名 | ホスト名、または `--display-name` / `config.yml` で設定した名前 |
+| ステータス | **オンライン**（緑）または**オフライン**（グレー）|
+| OS / アーキテクチャ | オペレーティングシステムと CPU アーキテクチャ（例：linux/amd64、darwin/arm64）|
+| バージョン | Tai Link のビルドバージョン |
+| 機能 | Docker・K8s・VNC・Host Exec のアイコン——起動時に検出された機能のみ表示 |
+
+![Tai Link — デバイス一覧](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+## デバイス詳細
+
+デバイスカードをクリックすると詳細ページが開き、以下の操作ができます：
+
+- **リモートデスクトップ** — そのデバイスへの VNC セッションを開く。
+- **ワークスペース** — ファイル同期ワークスペースを参照・管理する。
+- 接続ログと実行時情報を確認する。
+
+![Tai Link — デバイス詳細](https://assets.yaoagents.com/en/tai/02-tai-device-detail-en-$__THEME.png)
+
+## デバイス名を変更する
+
+Tai Link 起動時に表示名を設定します：
+
+```bash
+tai server --display-name "ビルドサーバー" http://<YOUR_YAO_SERVER>:5099
+```
+
+または `config.yml` で設定します：
+
+```yaml
+yao:
+  display_name: "ビルドサーバー"
+```
+
+次の登録ハートビート後に Yao Agents へ反映されます。
+
+## デバイスを削除する
+
+デバイスをオフラインにするには：
+
+1. リモートマシンで Tai Link を停止します（`Ctrl+C` または Docker コンテナを停止）。
+2. UI のデバイスステータスが**オフライン**に変わります。
+
+リモートマシンから認証情報を完全に削除するには：
+
+```bash
+tai logout
+```
+
+## 次のステップ
+
+- [リモート操作](/docs/ja-jp/tai-link/remote-operations) — リモートデバイスで Agent にタスクを実行させる
+- [ファイル同期](/docs/ja-jp/tai-link/file-sync) — ローカルとリモートデバイス間でファイルを転送する

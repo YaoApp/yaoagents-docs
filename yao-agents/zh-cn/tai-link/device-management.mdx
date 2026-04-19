@@ -4,4 +4,63 @@ slug: device-management
 
 # 设备管理
 
-查看设备列表、在线状态、命名。
+在 Yao Agents 中查看、重命名并监控所有通过 Tai Link 连接的设备。
+
+## 设备列表
+
+打开 Yao Agents 的 **Tai Link** 面板，每台已注册的设备显示为一张卡片，包含：
+
+| 字段 | 说明 |
+|------|------|
+| 显示名称 | 主机名，或通过 `--display-name` / `config.yml` 设置的名称 |
+| 状态 | **在线**（绿色）或**离线**（灰色）|
+| 系统 / 架构 | 操作系统和 CPU 架构（如 linux/amd64、darwin/arm64）|
+| 版本 | Tai Link 构建版本 |
+| 功能 | Docker、K8s、VNC、Host Exec 的图标——仅显示启动时检测到的功能 |
+
+![Tai Link — 设备列表](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+## 设备详情
+
+点击设备卡片进入详情页，你可以：
+
+- **远程桌面** — 打开到该设备的 VNC 会话。
+- **工作区** — 浏览并管理文件同步工作区。
+- 查看连接日志和运行时信息。
+
+![Tai Link — 设备详情](https://assets.yaoagents.com/en/tai/02-tai-device-detail-en-$__THEME.png)
+
+## 重命名设备
+
+启动 Tai Link 时设置显示名称：
+
+```bash
+tai server --display-name "构建服务器" http://<你的_YAO_服务器>:5099
+```
+
+或在 `config.yml` 中设置：
+
+```yaml
+yao:
+  display_name: "构建服务器"
+```
+
+名称会在下一次注册心跳后同步到 Yao Agents。
+
+## 移除设备
+
+断开设备连接：
+
+1. 在远程机器上停止 Tai Link（`Ctrl+C` 或停止 Docker 容器）。
+2. 设备状态在界面中变为**离线**。
+
+彻底删除远程机器上的凭证：
+
+```bash
+tai logout
+```
+
+## 下一步
+
+- [远程操作](/docs/zh-cn/tai-link/remote-operations) — 让 Agent 在远程设备上执行任务
+- [文件同步](/docs/zh-cn/tai-link/file-sync) — 在本机与远程设备之间传输文件

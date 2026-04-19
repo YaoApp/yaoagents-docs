@@ -2,6 +2,85 @@
 slug: installation
 ---
 
-# Installation
+# Install Tai Link
 
-Install the Tai Link client on each platform.
+Install the Tai Link server on the machine you want your agents to work on. The whole process takes about five minutes.
+
+## Before you start
+
+- A running Yao Agents instance (local or cloud) that the remote machine can reach over the network.
+- The remote machine runs **macOS, Linux, or Windows** (x86-64 or ARM64).
+
+## Download
+
+Go to [yaoagents.com/download](/download) and download the Tai Link installer for your platform.
+
+| Platform | File |
+|----------|------|
+| macOS (Apple Silicon) | `tai-darwin-arm64` |
+| macOS (Intel) | `tai-darwin-amd64` |
+| Linux (x86-64) | `tai-linux-amd64` |
+| Linux (ARM64) | `tai-linux-arm64` |
+| Windows (x86-64) | `tai-windows-amd64.exe` |
+
+After downloading, place the binary in a directory on your PATH.
+
+**macOS / Linux:**
+
+```bash
+chmod +x tai-*
+sudo mv tai-* /usr/local/bin/tai
+```
+
+**Windows:**
+
+Move the `.exe` to a folder in your system PATH, or run it directly from the download location.
+
+## Start the server
+
+Point Tai Link to your Yao Agents instance:
+
+```bash
+tai server http://<YOUR_YAO_SERVER>:5099
+```
+
+Replace `<YOUR_YAO_SERVER>` with the IP or hostname of the machine running Yao Agents.
+
+## Config file (optional)
+
+For production deployments, create a `config.yml` instead of passing flags:
+
+```yaml
+yao:
+  server: "http://<YOUR_YAO_SERVER>:5099"
+  display_name: "Office Server"
+
+data: /data/volumes
+
+log:
+  level: info
+  file: logs/tai.log
+```
+
+Then start with:
+
+```bash
+tai server --config config.yml
+```
+
+Tai Link searches for `config.yml` in the current directory and `/etc/tai/config.yml` by default.
+
+## Verify the installation
+
+After starting, you should see:
+
+```
+tai server ready
+```
+
+If your Yao server is reachable, Tai Link will automatically authenticate and register. Check the Yao Agents UI — the device should appear in the Tai Link panel within a few seconds.
+
+## What's next
+
+- [Connect your first device](/docs/en-us/tai-link/connect-first-device) — authenticate and pair
+- [Tunnel mode](/docs/en-us/tai-link/tunnel-mode) — how NAT traversal works behind the scenes

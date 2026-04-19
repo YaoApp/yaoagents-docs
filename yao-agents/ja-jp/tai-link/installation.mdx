@@ -2,6 +2,85 @@
 slug: installation
 ---
 
-# インストール
+# Tai Link をインストールする
 
-各プラットフォームにTai Linkクライアントをインストール。
+Agent に作業させたいマシンに Tai Link サーバーをインストールします。所要時間は約 5 分です。
+
+## はじめる前に
+
+- 稼働中の Yao Agents インスタンス（ローカルまたはクラウド）があり、リモートマシンがネットワーク経由でアクセスできること。
+- リモートマシンが **macOS・Linux・Windows**（x86-64 または ARM64）で動作していること。
+
+## ダウンロード
+
+[yaoagents.com/download](/download) にアクセスし、お使いのプラットフォーム向けの Tai Link をダウンロードしてください。
+
+| プラットフォーム | ファイル名 |
+|----------------|-----------|
+| macOS（Apple Silicon）| `tai-darwin-arm64` |
+| macOS（Intel）| `tai-darwin-amd64` |
+| Linux（x86-64）| `tai-linux-amd64` |
+| Linux（ARM64）| `tai-linux-arm64` |
+| Windows（x86-64）| `tai-windows-amd64.exe` |
+
+ダウンロード後、バイナリを PATH の通ったディレクトリに配置します。
+
+**macOS / Linux：**
+
+```bash
+chmod +x tai-*
+sudo mv tai-* /usr/local/bin/tai
+```
+
+**Windows：**
+
+`.exe` をシステム PATH 内のフォルダに移動するか、ダウンロードした場所から直接実行してください。
+
+## サーバーを起動する
+
+Yao Agents インスタンスのアドレスを指定して Tai Link を起動します：
+
+```bash
+tai server http://<YOUR_YAO_SERVER>:5099
+```
+
+`<YOUR_YAO_SERVER>` は Yao Agents が動作しているマシンの IP またはホスト名に置き換えてください。
+
+## 設定ファイル（任意）
+
+本番環境では、フラグの代わりに `config.yml` を作成することをお勧めします：
+
+```yaml
+yao:
+  server: "http://<YOUR_YAO_SERVER>:5099"
+  display_name: "オフィスサーバー"
+
+data: /data/volumes
+
+log:
+  level: info
+  file: logs/tai.log
+```
+
+設定ファイルで起動するには：
+
+```bash
+tai server --config config.yml
+```
+
+Tai Link はカレントディレクトリと `/etc/tai/config.yml` を自動的に探索します。
+
+## インストールの確認
+
+起動後、ターミナルに以下が表示されます：
+
+```
+tai server ready
+```
+
+Yao サーバーに到達できれば、Tai Link は自動的に認証・登録を行います。Yao Agents の UI を確認してください——数秒以内に Tai Link パネルにデバイスが表示されます。
+
+## 次のステップ
+
+- [最初のデバイスを接続する](/docs/ja-jp/tai-link/connect-first-device) — 認証とペアリングを完了する
+- [トンネルモード](/docs/ja-jp/tai-link/tunnel-mode) — NAT トラバーサルの仕組みを理解する

@@ -2,6 +2,85 @@
 slug: installation
 ---
 
-# 安装
+# 安装 Tai Link
 
-在各平台安装 Tai Link 客户端。
+在你想让 Agent 工作的那台机器上安装 Tai Link 服务端，整个过程大约五分钟。
+
+## 开始之前
+
+- 已有一个运行中的 Yao Agents 实例（本地或云端），远程机器能通过网络访问到它。
+- 远程机器运行 **macOS、Linux 或 Windows**（x86-64 或 ARM64）。
+
+## 下载
+
+前往 [yaoagents.com/download](/download) 下载适合你平台的 Tai Link 安装包。
+
+| 平台 | 文件名 |
+|------|--------|
+| macOS（Apple Silicon）| `tai-darwin-arm64` |
+| macOS（Intel）| `tai-darwin-amd64` |
+| Linux（x86-64）| `tai-linux-amd64` |
+| Linux（ARM64）| `tai-linux-arm64` |
+| Windows（x86-64）| `tai-windows-amd64.exe` |
+
+下载后将二进制文件放到 PATH 中。
+
+**macOS / Linux：**
+
+```bash
+chmod +x tai-*
+sudo mv tai-* /usr/local/bin/tai
+```
+
+**Windows：**
+
+将 `.exe` 移动到系统 PATH 下的目录，或直接从下载位置运行。
+
+## 启动服务端
+
+指定 Yao Agents 实例地址启动 Tai Link：
+
+```bash
+tai server http://<你的_YAO_服务器>:5099
+```
+
+将 `<你的_YAO_服务器>` 替换为运行 Yao Agents 的机器 IP 或主机名。
+
+## 配置文件（可选）
+
+在生产环境中，建议创建 `config.yml` 代替命令行参数：
+
+```yaml
+yao:
+  server: "http://<你的_YAO_服务器>:5099"
+  display_name: "办公室服务器"
+
+data: /data/volumes
+
+log:
+  level: info
+  file: logs/tai.log
+```
+
+然后以配置文件启动：
+
+```bash
+tai server --config config.yml
+```
+
+Tai Link 默认在当前目录和 `/etc/tai/config.yml` 查找配置文件。
+
+## 验证安装
+
+启动后，终端应显示：
+
+```
+tai server ready
+```
+
+如果 Yao 服务器可达，Tai Link 会自动完成认证和注册。切换到 Yao Agents 界面——设备应在几秒内出现在 Tai Link 面板中。
+
+## 下一步
+
+- [连接第一台设备](/docs/zh-cn/tai-link/connect-first-device) — 完成授权和配对
+- [隧道模式](/docs/zh-cn/tai-link/tunnel-mode) — 了解 NAT 穿透的工作原理

@@ -4,4 +4,62 @@ slug: file-sync
 
 # 檔案同步
 
-裝置間檔案同步。
+將檔案推送到遠端工作區，讓 Agent 處理後再拉回結果。同步是增量的——只傳輸有變化的檔案。
+
+## 運作原理
+
+每次同步工作階段都指向遠端裝置上的一個**工作區**——Tai Link 資料根目錄（預設 `/data/volumes`）下的一個目錄。Yao 在 Agent 需要存取檔案時自動管理工作區。
+
+同步協定透過 gRPC 雙向執行：
+
+- **推送（Push）** — Yao 發送檔案清單，Tai Link 與本地狀態做差異比較，只請求缺失或變更的檔案，寫入磁碟。
+- **拉取（Pull）** — Tai Link 掃描工作區，與 Yao 提供的清單比對，將新增或修改的檔案串流回傳。
+
+檔案在傳輸中壓縮，並分割為 256 KB 的資料區塊，即使大型專案也能保持低記憶體佔用。
+
+## 工作區
+
+在 Tai Link 面板中開啟一台裝置，點擊**工作區**查看所有活躍的工作區。
+
+![Tai Link — 工作區檔案瀏覽器](https://assets.yaoagents.com/en/tai/04-tai-workspace-files-en-$__THEME.png)
+
+每個工作區卡片顯示：
+
+- 工作區 ID（通常與 Agent 工作階段一致）
+- 檔案數量和總大小
+- 最後同步時間
+
+點擊工作區可瀏覽檔案、預覽文件或下載單個檔案。
+
+![Tai Link — 檔案預覽](https://assets.yaoagents.com/en/tai/04-tai-workspace-file-preview-en-$__THEME.png)
+
+## 排除規則
+
+有些檔案不應被同步——`node_modules`、`.git`、建構產物。在 `config.yml` 中設定排除規則：
+
+```yaml
+sync:
+  exclude:
+    - "node_modules"
+    - ".git"
+    - "__pycache__"
+    - "*.pyc"
+```
+
+排除規則對該裝置上的所有工作區生效。
+
+## 手動同步
+
+Agent 會自動處理同步，你通常不需要手動觸發，但了解機制有助於排除問題：
+
+- **推送**發生在 Agent 開始需要遠端裝置檔案的新任務時。
+- **拉取**發生在 Agent 取回結果（報告、建構產物、匯出資料）時。
+
+工作區詳情中可以看到同步狀態——「同步中...」或「已是最新」。
+
+![Tai Link — 檔案同步進度](https://assets.yaoagents.com/en/tai/04-tai-workspace-file-sync-en-$__THEME.png)
+
+## 下一步
+
+- [遠端桌面](/docs/zh-tw/tai-link/remote-desktop) — 觀看並控制遠端螢幕
+- [安全與隱私](/docs/zh-tw/tai-link/security-and-privacy) — 資料如何留在你的裝置上

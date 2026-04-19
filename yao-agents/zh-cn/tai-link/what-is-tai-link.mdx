@@ -4,4 +4,40 @@ slug: what-is-tai-link
 
 # 什么是 Tai Link
 
-产品定位：让 Agent 控制你的其他设备。
+Tai Link 让你的 AI 专家和机器人在**另一台电脑**上工作，而你继续用自己的那台。把它装到一台空闲的机器上——Windows、macOS 或 Linux 都行——Yao Agents 就会在那台机器上跑代码、构建项目、处理文件，全程不需要你动手。
+
+> 你的电脑还是你的，AI 工作在别处。
+
+## 为什么需要 Tai Link
+
+Tai Link 把 AI 的工作移到另一台设备上——家里的服务器、云虚拟机，甚至一台放在角落里的旧笔记本——让你的主机保持自由。
+
+- **不被打扰。** Agent 在远程设备上运行，你的屏幕、CPU、工作流——一切照旧。
+- **完整桌面权限。** Agent 拥有真实的屏幕（通过 VNC）、真实的文件系统和真实的 Shell。
+- **多台设备。** 连多少台都行，每台都会显示在设备列表里，随时接受任务。
+
+## Tai Link 能做什么
+
+- **远程桌面** — 通过内置 VNC 实时观看 Agent 工作，或者自己接管鼠标和键盘。
+- **文件同步** — 把项目文件推送到远程工作区，让 Agent 处理，再把结果拉回来。增量同步保持传输速度。
+- **Docker & Kubernetes** — Tai Link 自动检测容器运行时并代理其 API，Agent 可以随时创建隔离的沙箱环境。
+- **Host Exec** — 不需要容器隔离时，直接在宿主操作系统上执行命令（需手动开启，支持安全策略配置）。
+- **MCP 桥接** — 把容器内运行的 MCP 工具服务器暴露给 Yao Agents，任何工具都只需一跳 gRPC。
+
+## 工作原理
+
+Tai Link 是一个轻量服务端（单个 Go 二进制），运行在远程设备上。启动后，它通过安全的 gRPC 隧道向 Yao Agents 注册：
+
+1. **Tai Link** 启动，通过 OAuth 2.0 设备授权流与 Yao 完成认证。
+2. 建立**持久 gRPC 隧道**——无需端口转发，无需固定 IP。
+3. Yao 通过隧道发送指令：「打开 VNC 通道」「同步这些文件」「运行这个容器」。
+4. Tai Link 在本地执行并将结果流式返回。
+
+隧道自动穿透 NAT，远程机器哪怕在家用路由器后面也能被连接到。
+
+![Tai Link — 设备列表](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+## 下一步
+
+- [安装](/docs/zh-cn/tai-link/installation) — 在远程设备上安装 Tai Link
+- [连接第一台设备](/docs/zh-cn/tai-link/connect-first-device) — 配对并开始工作

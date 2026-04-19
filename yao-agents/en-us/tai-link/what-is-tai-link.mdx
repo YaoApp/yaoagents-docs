@@ -4,4 +4,40 @@ slug: what-is-tai-link
 
 # What Is Tai Link
 
-Product positioning: let agents control your other devices.
+Tai Link lets your AI Experts and Robots work on **other computers** while you keep using your own. Install it on a spare machine — Windows, macOS, or Linux — and Yao Agents takes over from there: running code, building projects, browsing the web, and managing files, all without touching your keyboard.
+
+> Your computer stays yours. The AI works somewhere else.
+
+## Why Tai Link matters
+
+Tai Link moves AI work to a separate device — a home server, a cloud VM, or even an old laptop sitting in a closet — so your main computer stays free for you.
+
+- **No interruptions.** Agents operate on the remote device. Your screen, your CPU, your workflow — untouched.
+- **Full desktop access.** Agents get a real screen (via VNC), a real file system, and a real shell.
+- **Multiple devices.** Connect as many machines as you need. Each one shows up in your device list, ready to accept tasks.
+
+## What Tai Link can do
+
+- **Remote Desktop** — Watch agents work in real time through a built-in VNC viewer, or take over the mouse and keyboard yourself.
+- **File Sync** — Push project files to a remote workspace, let agents process them, then pull results back. Incremental sync keeps transfers fast.
+- **Docker & Kubernetes** — Tai Link auto-detects container runtimes and proxies their APIs, so agents can spin up sandboxed environments on the fly.
+- **Host Exec** — Run commands directly on the host OS when container isolation isn't needed (opt-in, with a configurable security policy).
+- **MCP Bridge** — Expose MCP tool servers running inside containers back to Yao Agents, so any tool is one gRPC hop away.
+
+## How it works
+
+Tai Link is a lightweight server (a single Go binary) that runs on the remote device. When it starts, it registers with your Yao Agents instance through a secure gRPC tunnel:
+
+1. **Tai Link** starts and authenticates with Yao via OAuth 2.0 device flow.
+2. A **persistent gRPC tunnel** is established — no port forwarding or static IP needed.
+3. Yao sends commands through the tunnel: "open a VNC channel", "sync these files", "run this container".
+4. Tai Link executes locally and streams results back.
+
+The tunnel punches through NAT automatically, so your remote machine can sit behind a home router and still be reachable.
+
+![Tai Link — Device list](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+## What's Next
+
+- [Installation](/docs/en-us/tai-link/installation) — install Tai Link on your remote device
+- [Connect your first device](/docs/en-us/tai-link/connect-first-device) — pair and start working

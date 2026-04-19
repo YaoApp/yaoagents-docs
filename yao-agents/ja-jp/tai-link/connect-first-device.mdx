@@ -2,6 +2,72 @@
 slug: connect-first-device
 ---
 
-# 最初のデバイスを接続
+# 最初のデバイスを接続する
 
-QRコードスキャンまたはペアリングコード入力で接続完了。
+リモートマシンを Yao Agents インスタンスとペアリングして、Agent が作業できるようにします。
+
+## はじめる前に
+
+- リモートマシンに [Tai Link がインストール済み](/docs/ja-jp/tai-link/installation)であること。
+- リモートマシンが Yao Agents サーバーにネットワーク経由でアクセスできること。
+
+## ステップ 1 — Tai Link を起動する
+
+リモートマシンで、Yao インスタンスのアドレスを指定して Tai Link を起動します：
+
+```bash
+tai server http://<YOUR_YAO_SERVER>:5099
+```
+
+Tai Link はすぐに登録を試みます。初回起動時は OAuth デバイス認証フローが開始され、URL とワンタイムコードがターミナルに表示されます。
+
+## ステップ 2 — 認証する
+
+ターミナルに表示された URL をブラウザで開き、コードを入力して Yao Agents アカウントでサインインし、接続を承認します。
+
+![Tai Link — ペアリング画面](https://assets.yaoagents.com/en/tai/05-tai-connect-en-$__THEME.png)
+
+承認が完了すると、ターミナルに以下が表示されます：
+
+```
+Login successful!
+  Client ID:  ...
+  Machine ID: ...
+  Server:     http://<YOUR_YAO_SERVER>:5099
+```
+
+Tai Link は認証情報をローカルに保存し、リフレッシュトークンで自動的に更新します。`tai logout` を実行しない限り、再ログインは不要です。
+
+## ステップ 3 — Yao Agents で確認する
+
+Yao Agents の UI に切り替えて **Tai Link** パネルを開くと、新しいデバイスが**オンライン**として表示されます。
+
+![Tai Link — デバイス接続完了](https://assets.yaoagents.com/en/tai/05-tai-connect-done-en-$__THEME.png)
+
+デバイスカードに表示される情報：
+
+- **表示名** — `--display-name` または `config.yml` で設定、デフォルトはホスト名。
+- **ステータス** — オンライン / オフライン。
+- **機能** — Docker・K8s・VNC・Host Exec のアイコン（起動時に検出された機能のみ表示）。
+
+## ステップ 4 — 接続をテストする
+
+最も手軽な確認方法：デバイス詳細を開いて**リモートデスクトップ**をクリックします。VNC ビューアーにリモートの画面が表示されれば成功です。
+
+AI エキスパートにタスクを依頼して確認することもできます——たとえば General Assistant に「リモートサーバーの /tmp ディレクトリのファイルを一覧表示して」と頼むと、Tai Link を通じて自動的にコマンドがルーティングされます。
+
+## トラブルシューティング
+
+**Tai Link パネルにデバイスが表示されない。**
+リモートマシンが Yao サーバーに到達できるか確認してください。ファイアウォールが gRPC ポート（デフォルト 9900）のアウトバウンド接続をブロックしていないか確認し、Tai Link のターミナルにエラーメッセージがないかチェックしてください。
+
+**「Login failed」または「token refresh」エラーが出る。**
+`tai logout` を実行してから `tai login --server http://<YOUR_YAO_SERVER>:5099` を実行し、手動で再認証してください。
+
+**Tai Link が動いているのにデバイスが「オフライン」と表示される。**
+トンネルが切断されている可能性があります。Tai Link は指数バックオフで自動再接続します（2 秒〜最大 2 分）。ネットワーク接続を確認して少し待ってみてください。
+
+## 次のステップ
+
+- [デバイス管理](/docs/ja-jp/tai-link/device-management) — デバイスの名前変更・整理・監視
+- [リモートデスクトップ](/docs/ja-jp/tai-link/remote-desktop) — Agent の作業をリアルタイムで確認する

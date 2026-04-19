@@ -4,4 +4,70 @@ slug: connect-first-device
 
 # 连接第一台设备
 
-扫码/输入配对码，完成连接。
+将远程机器与你的 Yao Agents 实例配对，让 Agent 开始在上面工作。
+
+## 开始之前
+
+- 已在远程机器上[安装 Tai Link](/docs/zh-cn/tai-link/installation)。
+- 远程机器能通过网络访问你的 Yao Agents 服务器。
+
+## 第一步 — 启动 Tai Link
+
+在远程机器上，指定 Yao 实例地址启动 Tai Link：
+
+```bash
+tai server http://<你的_YAO_服务器>:5099
+```
+
+Tai Link 会立即尝试注册。如果是首次启动，会开启 OAuth 设备授权流程——终端中会打印出一个 URL 和一次性验证码。
+
+## 第二步 — 授权
+
+在任意浏览器中打开终端显示的 URL，输入验证码，用你的 Yao Agents 账号登录完成授权。
+
+![Tai Link — 配对界面](https://assets.yaoagents.com/en/tai/05-tai-connect-en-$__THEME.png)
+
+授权成功后，终端显示：
+
+```
+Login successful!
+  Client ID:  ...
+  Machine ID: ...
+  Server:     http://<你的_YAO_服务器>:5099
+```
+
+Tai Link 将凭证保存在本地，之后自动使用刷新令牌续期——除非你主动执行 `tai logout`，否则不需要重新登录。
+
+## 第三步 — 在 Yao Agents 中确认
+
+切换到 Yao Agents 界面，打开 **Tai Link** 面板，新设备应显示为 **在线**。
+
+![Tai Link — 设备已连接](https://assets.yaoagents.com/en/tai/05-tai-connect-done-en-$__THEME.png)
+
+设备卡片显示：
+
+- **显示名称** — 通过 `--display-name` 或 `config.yml` 设置，默认为主机名。
+- **状态** — 在线 / 离线。
+- **能力** — Docker、K8s、VNC、Host Exec 的图标（取决于 Tai Link 启动时检测到的功能）。
+
+## 第四步 — 测试连接
+
+最快的验证方式：打开设备详情，点击**远程桌面**，你应该能在 VNC 查看器里看到远程屏幕。
+
+也可以让 AI 专家执行一个任务——比如让 General Assistant「列出远程服务器上 /tmp 目录的文件」，它会自动通过 Tai Link 路由命令。
+
+## 常见问题
+
+**设备没有出现在 Tai Link 面板。**
+检查远程机器是否能访问 Yao 服务器，确认防火墙没有阻断 gRPC 端口（默认 9900）的出站连接。查看 Tai Link 终端的错误信息。
+
+**出现「Login failed」或「token refresh」错误。**
+执行 `tai logout`，然后重新运行 `tai login --server http://<你的_YAO_服务器>:5099` 手动重新认证。
+
+**设备显示「离线」但 Tai Link 正在运行。**
+隧道可能断开了，Tai Link 会以指数退避方式自动重连（2 秒到最长 2 分钟）。检查网络连通性，稍等片刻。
+
+## 下一步
+
+- [设备管理](/docs/zh-cn/tai-link/device-management) — 重命名、组织和监控设备
+- [远程桌面](/docs/zh-cn/tai-link/remote-desktop) — 实时观看 Agent 工作

@@ -4,4 +4,80 @@ slug: security-and-privacy
 
 # 安全与隐私
 
-连接加密、授权管理、断开设备。
+Tai Link 的设计围绕一个核心原则：**你的数据留在你的设备上**。所有连接直接在 Tai Link 和你的 Yao Agents 实例之间建立，不经过任何第三方服务器。
+
+## 身份认证
+
+Tai Link 使用 **OAuth 2.0 设备授权流**向 Yao 认证：
+
+1. 首次启动时，Tai Link 生成唯一的客户端 ID 和机器 ID。
+2. 你通过浏览器授权设备（一次性操作）。
+3. Tai Link 收到访问令牌和刷新令牌，保存在本地凭证文件中。
+4. 令牌自动续期——无需重新登录。
+
+随时撤销访问权限：
+
+```bash
+tai logout
+```
+
+这会删除本地凭证，并在 Yao 服务器上撤销令牌。
+
+## 加密隧道
+
+Tai Link 与 Yao 之间的所有通信都通过 gRPC 通道传输，包括：
+
+- 控制消息（注册、心跳、打开通道指令）
+- 数据通道（文件同步、VNC、容器代理）
+- 每次 RPC 都携带 Bearer Token 进行身份验证
+
+在生产环境中，为 Yao gRPC 端点启用 TLS 可实现端到端加密。
+
+## Host Exec 安全策略
+
+Host Exec——直接在远程操作系统上运行命令的能力——**默认关闭**。开启后，可配置策略控制允许的操作：
+
+```yaml
+host_exec:
+  enabled: true
+  allowed_commands:
+    - ls
+    - cat
+    - python3
+    - node
+  allowed_dirs:
+    - /home/projects
+    - /data
+  denied_dirs:
+    - /etc
+    - /root
+    - /var
+```
+
+| 策略字段 | 作用 |
+|---------|------|
+| `allowed_commands` | Agent 可运行的可执行文件白名单 |
+| `allowed_dirs` | Agent 可读写的目录 |
+| `denied_dirs` | 明确禁止访问的目录，即使父目录已允许 |
+| `full_access` | 绕过所有限制——仅用于受信任的隔离机器 |
+
+> ⚠️ Tai Link 以自身进程的权限运行命令。在共享机器上，建议使用权限受限的专用用户账号运行 Tai Link。
+
+## 数据隔离
+
+- **文件同步**将文件存储在本地目录（默认 `/data/volumes`）。文件不会离开设备，除非你主动拉取。
+- **容器**在 Docker 或 K8s 中以标准隔离运行，每个 Agent 会话都有独立的容器。
+- **VNC** 通过 WebSocket 传输像素流——不会在任何地方存储屏幕录像。
+
+## 断开设备
+
+要立即将设备下线：
+
+1. 停止远程机器上的 Tai Link 进程（`Ctrl+C` 或 `docker stop tai`）。
+2. 运行 `tai logout` 删除凭证。
+3. 设备在 Yao Agents 中显示为**离线**，不再接收任何指令。
+
+## 下一步
+
+- [隧道模式](/docs/zh-cn/tai-link/tunnel-mode) — NAT 穿透的工作原理
+- [安装](/docs/zh-cn/tai-link/installation) — 生产环境部署建议

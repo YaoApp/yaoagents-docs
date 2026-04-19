@@ -4,4 +4,63 @@ slug: device-management
 
 # Device Management
 
-View device list, online status, naming.
+View, rename, and monitor all devices connected through Tai Link.
+
+## Device list
+
+Open the **Tai Link** panel in Yao Agents. Every registered device appears as a card showing:
+
+| Field | Description |
+|-------|-------------|
+| Display name | Hostname or the name you set via `--display-name` / `config.yml` |
+| Status | **Online** (green) or **Offline** (gray) |
+| OS / Arch | Operating system and CPU architecture (e.g. linux/amd64, darwin/arm64) |
+| Version | Tai Link build version |
+| Capabilities | Icons for Docker, K8s, VNC, Host Exec — only the features detected at startup |
+
+![Tai Link — Device list](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+## Device detail
+
+Click a device card to open its detail page. From here you can:
+
+- **Remote Desktop** — open a VNC session to the device.
+- **Workspaces** — browse and manage file sync workspaces.
+- View connection logs and runtime information.
+
+![Tai Link — Device detail](https://assets.yaoagents.com/en/tai/02-tai-device-detail-en-$__THEME.png)
+
+## Rename a device
+
+Set the display name when starting Tai Link:
+
+```bash
+tai server --display-name "Build Server" http://<YOUR_YAO_SERVER>:5099
+```
+
+Or in `config.yml`:
+
+```yaml
+yao:
+  display_name: "Build Server"
+```
+
+The name updates in Yao Agents after the next registration heartbeat.
+
+## Remove a device
+
+To disconnect a device:
+
+1. Stop Tai Link on the remote machine (`Ctrl+C` or stop the Docker container).
+2. The device status changes to **Offline** in the UI.
+
+To remove credentials from the remote machine entirely:
+
+```bash
+tai logout
+```
+
+## What's next
+
+- [Remote operations](/docs/en-us/tai-link/remote-operations) — run agent tasks on remote devices
+- [File sync](/docs/en-us/tai-link/file-sync) — transfer files between your machine and remote devices

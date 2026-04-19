@@ -4,4 +4,70 @@ slug: tunnel-mode
 
 # 隧道模式
 
-NAT 穿透，無需端口轉發。
+了解 Tai Link 如何穿透 NAT 和防火牆與 Yao 保持連線，以及如何針對內網場景調整行為。
+
+## 預設：gRPC 隧道
+
+Tai Link 啟動後立即向 Yao 的 gRPC 端點發起**對外連線**（預設埠 9900）。這表示：
+
+- **無需埠轉發。** 遠端機器無需開放任何入站埠。
+- **可穿透 NAT。** 家用路由器或 4G 網路後方的機器也能被連線。
+- **無需固定 IP。** 連線透過持久 gRPC 串流維持，斷線後自動重連。
+
+這個持久串流就是**隧道**。Yao 透過它向 Tai Link 發送指令，Tai Link 把結果串流回傳。
+
+### 重連邏輯
+
+若網路出現波動，Tai Link 會以指數退避自動重試：
+
+| 嘗試次數 | 等待時間 |
+|---------|---------|
+| 1 | 立即 |
+| 2 | 2 秒 |
+| 3 | 4 秒 |
+| 4 | 8 秒 |
+| 5+ | 最長 2 分鐘 |
+
+穩定連線恢復後，計數器重置。
+
+## 直連模式
+
+若 Tai Link 運行在和 Yao 同一區域網路內，可以跳過 gRPC 隧道，使用**直連模式**，減少一層網路跳轉。
+
+啟動時加入 `--direct-addr` 參數：
+
+```bash
+tai server --direct-addr 0.0.0.0:9910 http://<你的_YAO_伺服器>:5099
+```
+
+Tai Link 在指定埠監聽直連請求，Yao 注意到有 `direct_addr` 宣告後，會在可能的情況下優先使用直連，降級時才退回隧道。
+
+在 `config.yml` 中：
+
+```yaml
+direct:
+  addr: "0.0.0.0:9910"
+```
+
+> ⚠️ 直連模式會在 Tai Link 裝置上開啟一個監聽埠。請確保防火牆只允許 Yao 伺服器的 IP 存取該埠。
+
+## CLI 參數參考
+
+`tai server` 的常用參數：
+
+| 參數 | 預設值 | 說明 |
+|-----|-------|------|
+| `--config` | — | 設定檔路徑 |
+| `--display-name` | 主機名稱 | 顯示在 Yao Agents 中的名稱 |
+| `--data` | `./data` | 工作區資料根目錄 |
+| `--host-exec` | `false` | 啟用宿主機 Shell 存取 |
+| `--host-vnc-port` | — | 宿主機 VNC 監聽埠 |
+| `--direct-addr` | — | 開啟直連模式監聽位址 |
+| `--kubeconfig` | — | Kubernetes 設定檔路徑 |
+| `--log-level` | `info` | 日誌層級（debug、info、warn、error）|
+| `--log-file` | — | 輸出到檔案（預設寫入 stdout）|
+
+## 下一步
+
+- [安全與隱私](/docs/zh-tw/tai-link/security-and-privacy) — 認證與資料隔離
+- [遠端操作](/docs/zh-tw/tai-link/remote-operations) — Agent 如何使用隧道執行任務
