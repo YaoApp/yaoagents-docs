@@ -8,6 +8,9 @@ pages:
   - slug: faq
     title: 常見問題
     summary: 安裝、連線、Agent 使用等常見問題。
+  - slug: environment-variables
+    title: 環境變數
+    summary: 完整的 .env 設定變數參考——伺服器、資料庫、AI 連接器、訊息服務、OAuth 服務商等。
   - slug: sandbox-images
     title: 沙盒映像
     summary: 所有 Docker 沙盒映像完整參考：各映像內容、適用 Agent、拉取與更新方法。

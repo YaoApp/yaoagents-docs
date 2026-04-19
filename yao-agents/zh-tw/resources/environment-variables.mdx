@@ -1,0 +1,182 @@
+---
+slug: environment-variables
+---
+
+# 環境變數
+
+Yao Engine 透過位於**應用程式目錄**下的 `.env` 檔案進行設定。在 Yao Engine 應用程式的 **Application（應用程式）** 標籤頁中，你可以找到直接跳轉到該檔案的連結。
+
+![Yao Engine — Application 標籤頁，顯示應用程式目錄連結](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+> 除非特別標注**必填**，所有變數均為可選。注解掉的行（`#` 開頭）表示可用選項——去掉注解並填寫值即可啟用。
+
+---
+
+## 核心伺服器
+
+| 變數 | 預設值 | 說明 |
+|------|-------|------|
+| `YAO_ENV` | `development` | 執行模式。部署實例時使用 `production`。 |
+| `YAO_HOST` | `0.0.0.0` | 伺服器監聽位址。 |
+| `YAO_PORT` | `5099` | Yao Engine API 和 Web UI 的 HTTP 埠。 |
+| `YAO_LOG` | `./logs/application.log` | 應用程式日誌檔案路徑。 |
+| `YAO_LOG_MODE` | `TEXT` | 日誌格式：`TEXT`（人類可讀）或 `JSON`（結構化）。 |
+| `YAO_GRPC_HOST` | `internal` | gRPC 主機位址（供 Tai Link 和內部服務使用）。 |
+| `YAO_GRPC_PORT` | `9099` | gRPC 埠。 |
+
+---
+
+## 資料庫
+
+| 變數 | 預設值 | 說明 |
+|------|-------|------|
+| `YAO_DB_DRIVER` | `sqlite3` | 資料庫驅動：`sqlite3`、`mysql` 或 `postgres`。 |
+| `YAO_DB_PRIMARY` | `./db/yaoagents.db` | 連線字串。SQLite 填寫檔案路徑，MySQL/Postgres 填寫 DSN。 |
+| `YAO_SESSION_STORE` | `file` | 工作階段儲存後端：`file` 或 `redis`。 |
+| `YAO_SESSION_FILE` | `./db/.session` | 工作階段檔案路徑（僅在 `YAO_SESSION_STORE=file` 時使用）。 |
+
+**MySQL 範例：**
+```
+YAO_DB_DRIVER="mysql"
+YAO_DB_PRIMARY="user:password@tcp(127.0.0.1:3306)/yaoagents?charset=utf8mb4&parseTime=True&loc=Local"
+```
+
+---
+
+## 認證與 OAuth
+
+| 變數 | 說明 |
+|------|------|
+| `YAO_CLIENT_ID` | 內建 OpenAPI 的 OAuth 用戶端 ID，未設定時自動產生。 |
+| `AFTER_LOGIN_SUCCESS_URL` | 登入成功後的跳轉路徑（如 `/dashboard/assistants`）。 |
+| `AFTER_LOGIN_FAILURE_URL` | 登入失敗後的跳轉路徑。 |
+| `APP_BASE_URL` | 實例的公網基礎 URL（如 `https://example.com`）。用於電子郵件連結和邀請，不加尾部斜線。 |
+
+---
+
+## AI 模型連接器
+
+連接器定義在 `/connectors/**/*.conn.yao` 中，下列變數透過 `$ENV` 向連接器提供憑證。
+
+### 預設 / 思考 / 視覺 / 語音
+
+| 變數 | 說明 |
+|------|------|
+| `DEFAULT_CONNECTOR` | 預設連接器名稱（如 `default`）。 |
+| `VISION_CONNECTOR` | 視覺任務使用的連接器，退回到 `DEFAULT_CONNECTOR`。 |
+| `VOICE_CONNECTOR` | 語音轉文字使用的連接器，退回到 `DEFAULT_CONNECTOR`。 |
+| `DEFAULT_CONNECTOR_HOST` | 預設連接器的 API 基礎 URL。 |
+| `DEFAULT_CONNECTOR_KEY` | 預設連接器的 API 金鑰。 |
+| `DEFAULT_CONNECTOR_MODEL` | 模型名稱（如 `gpt-4o`、`kimi-k2.5`）。 |
+| `VISION_CONNECTOR_HOST` | 視覺連接器的 API 基礎 URL。 |
+| `VISION_CONNECTOR_KEY` | 視覺連接器的 API 金鑰。 |
+| `VISION_CONNECTOR_MODEL` | 視覺任務的模型名稱（如 `gpt-4o-mini`）。 |
+| `VOICE_CONNECTOR_HOST` | 語音連接器的 API 基礎 URL。 |
+| `VOICE_CONNECTOR_KEY` | 語音連接器的 API 金鑰。 |
+| `VOICE_CONNECTOR_MODEL` | 語音任務的模型名稱（如 `whisper-1`）。 |
+
+### Yao Agents 服務
+
+團隊托管的 API 服務。在 [yaoagents.com](https://yaoagents.com) 登入後複製 API 金鑰。
+
+| 變數 | 說明 |
+|------|------|
+| `YAO_AGENTS_HOST` | Yao Agents 服務的 API 端點。 |
+| `YAO_AGENTS_KEY` | 你的 Yao Agents API 金鑰（`sk-...`）。 |
+
+### 雲端服務商
+
+取消注解對應行並填寫金鑰即可啟用。
+
+| 變數 | 服務商 | 備註 |
+|------|-------|------|
+| `ANTHROPIC_API_KEY` | Anthropic | claude-opus-4.5、claude-sonnet-4.5、haiku-3.0、haiku-4.5 |
+| `MOONSHOT_API_KEY` | Moonshot / Kimi | kimi-k2、kimi-k2.5、kimi-k2.5-code、kimi-k2.5-thinking — [platform.moonshot.cn](https://platform.moonshot.cn) |
+| `MOONSHOT_PROXY` | Moonshot / Kimi | 自訂基礎 URL（預設 `https://api.moonshot.cn/v1`）|
+| `GOOGLE_API_KEY` | Google | gemini-2.5-pro、gemini-3-flash |
+| `XAI_API_KEY` | xAI | grok-4 |
+| `DEEPSEEK_API_KEY` | DeepSeek | deepseek-chat、deepseek-reasoner |
+| `META_API_KEY` | Meta | llama-4-maverick |
+| `MISTRAL_API_KEY` | Mistral | mistral-large-3 |
+
+### MaaS 平台
+
+| 變數 | 平台 | 備註 |
+|------|------|------|
+| `AZURE_OPENAI_API_KEY` | Azure OpenAI | 同時設定 `AZURE_OPENAI_ENDPOINT` |
+| `AZURE_OPENAI_ENDPOINT` | Azure OpenAI | 如 `https://your-resource.openai.azure.com/openai/v1` |
+| `GROQ_API_KEY` | Groq | 高速推理 — llama-4-maverick |
+| `TOGETHER_API_KEY` | Together AI | llama-4-maverick、deepseek-r1 |
+| `FIREWORKS_API_KEY` | Fireworks AI | llama-4-maverick |
+| `OPENROUTER_API_KEY` | OpenRouter | 多服務商閘道 |
+| `SILICONFLOW_API_KEY` | SiliconFlow | 國內 MaaS — deepseek-v3、qwen-2.5-72b |
+| `VOLCENGINE_API_KEY` | 火山引擎 / 字節跳動方舟 | 國內 MaaS — 豆包-1.5-pro、deepseek、glm、qwen |
+| `VOLCENGINE_PROXY` | 火山引擎 | 基礎 URL（如 `https://ark.cn-beijing.volces.com/api/v3/`）|
+
+### 本地推理（Ollama）
+
+| 變數 | 預設值 | 說明 |
+|------|-------|------|
+| `OLLAMA_HOST` | `http://127.0.0.1:11434/v1/` | Ollama 的 OpenAI 相容介面。使用尾部斜線以防止自動追加 `/v1`。 |
+
+---
+
+## 訊息服務
+
+### 電子郵件
+
+| 變數 | 說明 |
+|------|------|
+| `SMTP_HOST` | SMTP 伺服器主機名稱（如 `smtp.gmail.com`）。 |
+| `SMTP_PORT` | SMTP 埠（`465` 用於 SSL，`587` 用於 TLS）。 |
+| `SMTP_USERNAME` | SMTP 登入使用者名稱。 |
+| `SMTP_PASSWORD` | SMTP 密碼或應用程式專用密碼。 |
+| `SMTP_FROM` | 寄件人顯示名稱和地址（如 `YaoAgents <noreply@example.com>`）。 |
+| `MAILGUN_DOMAIN` | Mailgun 發送網域。 |
+| `MAILGUN_API_KEY` | Mailgun API 金鑰（以 `key-` 開頭）。 |
+| `MAILGUN_FROM` | Mailgun 寄件地址。 |
+
+### 簡訊 / WhatsApp（Twilio）
+
+| 變數 | 說明 |
+|------|------|
+| `TWILIO_ACCOUNT_SID` | Twilio 帳戶 SID（以 `AC` 開頭）。 |
+| `TWILIO_AUTH_TOKEN` | Twilio Auth Token。 |
+| `TWILIO_FROM_PHONE` | 用於發送簡訊的 Twilio 電話號碼（如 `+1234567890`）。 |
+| `TWILIO_FROM_EMAIL` | 透過 Twilio 發送電子郵件的 SendGrid 寄件地址。 |
+| `TWILIO_SENDGRID_API_KEY` | SendGrid API 金鑰。 |
+
+### AI 成員電子郵件網域
+
+| 變數 | 範例 | 說明 |
+|------|------|------|
+| `ROBOT_EMAIL_DOMAIN` | `ai.example.com` | 機器人電子郵件地址的網域。 |
+| `STAFF_EMAIL_DOMAIN` | `staff.example.com` | 員工/專家電子郵件地址的網域。 |
+
+---
+
+## 網路搜尋
+
+| 變數 | 說明 |
+|------|------|
+| `SERPER_API_KEY` | Serper（Google Search API）金鑰 — [serper.dev](https://serper.dev)。啟用 Agent 網路搜尋功能。 |
+
+---
+
+## 第三方 OAuth 服務商
+
+為每個服務商設定用戶端 ID 和密鑰即可啟用社群登入。
+
+| 變數 | 服務商 | 取得位置 |
+|------|-------|---------|
+| `GITHUBUSER_CLIENT_ID` / `GITHUBUSER_CLIENT_SECRET` | GitHub | [github.com/settings/developers](https://github.com/settings/developers) |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google | [console.cloud.google.com](https://console.cloud.google.com/apis/credentials) |
+| `GOOGLE_DEVICE_CLIENT_ID` | Google | 裝置流用戶端，用於電視/有限輸入裝置 |
+| `APPLE_SERVICE_ID` / `APPLE_TEAM_ID` / `APPLE_KEY_ID` / `APPLE_PRIVATE_KEY_PATH` | Apple | [developer.apple.com](https://developer.apple.com/account/resources/identifiers) — 金鑰檔案相對於 `openapi/certs/` |
+| `MICROSOFT_CLIENT_ID` / `MICROSOFT_CLIENT_SECRET` | Microsoft | [portal.azure.com](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps) |
+
+---
+
+## 套用設定變更
+
+編輯 `.env` 後，需要重新啟動 Yao Engine 使設定生效——在引擎狀態視窗點擊**重新啟動**，或手動停止再啟動程序。

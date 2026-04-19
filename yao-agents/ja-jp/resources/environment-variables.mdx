@@ -1,0 +1,182 @@
+---
+slug: environment-variables
+---
+
+# 環境変数
+
+Yao Engine は**アプリケーションディレクトリ**内の `.env` ファイルで設定します。Yao Engine アプリの **Application（アプリケーション）** タブにこのファイルへの直接リンクがあります。
+
+![Yao Engine — Application タブ（アプリディレクトリへのリンクを表示）](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+> **必須**と明示されていない限り、すべての変数は省略可能です。コメントアウトされた行（`#` 始まり）は利用可能なオプションを示しています——コメントを外して値を入力すると有効になります。
+
+---
+
+## コアサーバー
+
+| 変数 | デフォルト | 説明 |
+|------|-----------|------|
+| `YAO_ENV` | `development` | 実行モード。デプロイ済みインスタンスでは `production` を使用。 |
+| `YAO_HOST` | `0.0.0.0` | サーバーのリスニングアドレス。 |
+| `YAO_PORT` | `5099` | Yao Engine API および Web UI の HTTP ポート。 |
+| `YAO_LOG` | `./logs/application.log` | アプリケーションログファイルのパス。 |
+| `YAO_LOG_MODE` | `TEXT` | ログ形式：`TEXT`（人間が読みやすい）または `JSON`（構造化）。 |
+| `YAO_GRPC_HOST` | `internal` | gRPC ホストアドレス（Tai Link および内部サービスが使用）。 |
+| `YAO_GRPC_PORT` | `9099` | gRPC ポート。 |
+
+---
+
+## データベース
+
+| 変数 | デフォルト | 説明 |
+|------|-----------|------|
+| `YAO_DB_DRIVER` | `sqlite3` | データベースドライバー：`sqlite3`・`mysql`・`postgres`。 |
+| `YAO_DB_PRIMARY` | `./db/yaoagents.db` | 接続文字列。SQLite はファイルパス、MySQL/Postgres は DSN を指定。 |
+| `YAO_SESSION_STORE` | `file` | セッションストレージバックエンド：`file` または `redis`。 |
+| `YAO_SESSION_FILE` | `./db/.session` | セッションファイルのパス（`YAO_SESSION_STORE=file` 時のみ使用）。 |
+
+**MySQL の例：**
+```
+YAO_DB_DRIVER="mysql"
+YAO_DB_PRIMARY="user:password@tcp(127.0.0.1:3306)/yaoagents?charset=utf8mb4&parseTime=True&loc=Local"
+```
+
+---
+
+## 認証と OAuth
+
+| 変数 | 説明 |
+|------|------|
+| `YAO_CLIENT_ID` | 内蔵 OpenAPI の OAuth クライアント ID。未設定の場合は自動生成。 |
+| `AFTER_LOGIN_SUCCESS_URL` | ログイン成功後のリダイレクトパス（例：`/dashboard/assistants`）。 |
+| `AFTER_LOGIN_FAILURE_URL` | ログイン失敗後のリダイレクトパス。 |
+| `APP_BASE_URL` | インスタンスの公開ベース URL（例：`https://example.com`）。メールリンクや招待に使用。末尾スラッシュなし。 |
+
+---
+
+## AI モデルコネクター
+
+コネクターは `/connectors/**/*.conn.yao` で定義されます。以下の変数は `$ENV` を通じて各コネクターに認証情報を提供します。
+
+### デフォルト / 思考 / ビジョン / 音声
+
+| 変数 | 説明 |
+|------|------|
+| `DEFAULT_CONNECTOR` | デフォルトコネクター名（例：`default`）。 |
+| `VISION_CONNECTOR` | ビジョンタスクに使用するコネクター。`DEFAULT_CONNECTOR` にフォールバック。 |
+| `VOICE_CONNECTOR` | 音声認識に使用するコネクター。`DEFAULT_CONNECTOR` にフォールバック。 |
+| `DEFAULT_CONNECTOR_HOST` | デフォルトコネクターの API ベース URL。 |
+| `DEFAULT_CONNECTOR_KEY` | デフォルトコネクターの API キー。 |
+| `DEFAULT_CONNECTOR_MODEL` | モデル名（例：`gpt-4o`・`kimi-k2.5`）。 |
+| `VISION_CONNECTOR_HOST` | ビジョンコネクターの API ベース URL。 |
+| `VISION_CONNECTOR_KEY` | ビジョンコネクターの API キー。 |
+| `VISION_CONNECTOR_MODEL` | ビジョンタスクのモデル名（例：`gpt-4o-mini`）。 |
+| `VOICE_CONNECTOR_HOST` | 音声コネクターの API ベース URL。 |
+| `VOICE_CONNECTOR_KEY` | 音声コネクターの API キー。 |
+| `VOICE_CONNECTOR_MODEL` | 音声タスクのモデル名（例：`whisper-1`）。 |
+
+### Yao Agents サービス
+
+チームが運営するマネージド API サービス。[yaoagents.com](https://yaoagents.com) でサインインして API キーをコピーしてください。
+
+| 変数 | 説明 |
+|------|------|
+| `YAO_AGENTS_HOST` | Yao Agents サービスの API エンドポイント。 |
+| `YAO_AGENTS_KEY` | あなたの Yao Agents API キー（`sk-...`）。 |
+
+### クラウドプロバイダー
+
+該当する行のコメントを外してキーを入力すると有効になります。
+
+| 変数 | プロバイダー | メモ |
+|------|------------|------|
+| `ANTHROPIC_API_KEY` | Anthropic | claude-opus-4.5・claude-sonnet-4.5・haiku-3.0・haiku-4.5 |
+| `MOONSHOT_API_KEY` | Moonshot / Kimi | kimi-k2・kimi-k2.5・kimi-k2.5-code・kimi-k2.5-thinking — [platform.moonshot.cn](https://platform.moonshot.cn) |
+| `MOONSHOT_PROXY` | Moonshot / Kimi | カスタムベース URL（デフォルト：`https://api.moonshot.cn/v1`）|
+| `GOOGLE_API_KEY` | Google | gemini-2.5-pro・gemini-3-flash |
+| `XAI_API_KEY` | xAI | grok-4 |
+| `DEEPSEEK_API_KEY` | DeepSeek | deepseek-chat・deepseek-reasoner |
+| `META_API_KEY` | Meta | llama-4-maverick |
+| `MISTRAL_API_KEY` | Mistral | mistral-large-3 |
+
+### MaaS プラットフォーム
+
+| 変数 | プラットフォーム | メモ |
+|------|---------------|------|
+| `AZURE_OPENAI_API_KEY` | Azure OpenAI | `AZURE_OPENAI_ENDPOINT` も設定 |
+| `AZURE_OPENAI_ENDPOINT` | Azure OpenAI | 例：`https://your-resource.openai.azure.com/openai/v1` |
+| `GROQ_API_KEY` | Groq | 高速推論 — llama-4-maverick |
+| `TOGETHER_API_KEY` | Together AI | llama-4-maverick・deepseek-r1 |
+| `FIREWORKS_API_KEY` | Fireworks AI | llama-4-maverick |
+| `OPENROUTER_API_KEY` | OpenRouter | マルチプロバイダーゲートウェイ |
+| `SILICONFLOW_API_KEY` | SiliconFlow | 中国向け MaaS — deepseek-v3・qwen-2.5-72b |
+| `VOLCENGINE_API_KEY` | Volcengine / ByteDance Ark | 中国向け MaaS — 豆包-1.5-pro・deepseek・glm・qwen |
+| `VOLCENGINE_PROXY` | Volcengine | ベース URL（例：`https://ark.cn-beijing.volces.com/api/v3/`）|
+
+### ローカル推論（Ollama）
+
+| 変数 | デフォルト | 説明 |
+|------|-----------|------|
+| `OLLAMA_HOST` | `http://127.0.0.1:11434/v1/` | Ollama の OpenAI 互換エンドポイント。末尾スラッシュをつけて `/v1` の自動付加を防ぎます。 |
+
+---
+
+## メッセージサービス
+
+### メール
+
+| 変数 | 説明 |
+|------|------|
+| `SMTP_HOST` | SMTP サーバーのホスト名（例：`smtp.gmail.com`）。 |
+| `SMTP_PORT` | SMTP ポート（SSL は `465`、TLS は `587`）。 |
+| `SMTP_USERNAME` | SMTP ログインユーザー名。 |
+| `SMTP_PASSWORD` | SMTP パスワードまたはアプリパスワード。 |
+| `SMTP_FROM` | 送信者の表示名とアドレス（例：`YaoAgents <noreply@example.com>`）。 |
+| `MAILGUN_DOMAIN` | Mailgun 送信ドメイン。 |
+| `MAILGUN_API_KEY` | Mailgun API キー（`key-` から始まる）。 |
+| `MAILGUN_FROM` | Mailgun 送信者アドレス。 |
+
+### SMS / WhatsApp（Twilio）
+
+| 変数 | 説明 |
+|------|------|
+| `TWILIO_ACCOUNT_SID` | Twilio アカウント SID（`AC` から始まる）。 |
+| `TWILIO_AUTH_TOKEN` | Twilio Auth Token。 |
+| `TWILIO_FROM_PHONE` | SMS 送信用の Twilio 電話番号（例：`+1234567890`）。 |
+| `TWILIO_FROM_EMAIL` | Twilio 経由のメール送信用 SendGrid 差出人アドレス。 |
+| `TWILIO_SENDGRID_API_KEY` | SendGrid API キー。 |
+
+### AI メンバーのメールドメイン
+
+| 変数 | 例 | 説明 |
+|------|---|------|
+| `ROBOT_EMAIL_DOMAIN` | `ai.example.com` | ロボットのメールアドレスに使用するドメイン。 |
+| `STAFF_EMAIL_DOMAIN` | `staff.example.com` | スタッフ/エキスパートのメールアドレスに使用するドメイン。 |
+
+---
+
+## ウェブ検索
+
+| 変数 | 説明 |
+|------|------|
+| `SERPER_API_KEY` | Serper（Google Search API）キー — [serper.dev](https://serper.dev)。Agent のウェブ検索を有効にします。 |
+
+---
+
+## サードパーティ OAuth プロバイダー
+
+各プロバイダーのクライアント ID とシークレットを設定するとソーシャルログインが有効になります。
+
+| 変数 | プロバイダー | 取得場所 |
+|------|------------|---------|
+| `GITHUBUSER_CLIENT_ID` / `GITHUBUSER_CLIENT_SECRET` | GitHub | [github.com/settings/developers](https://github.com/settings/developers) |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google | [console.cloud.google.com](https://console.cloud.google.com/apis/credentials) |
+| `GOOGLE_DEVICE_CLIENT_ID` | Google | TV・入力制限デバイス向けのデバイスフロークライアント |
+| `APPLE_SERVICE_ID` / `APPLE_TEAM_ID` / `APPLE_KEY_ID` / `APPLE_PRIVATE_KEY_PATH` | Apple | [developer.apple.com](https://developer.apple.com/account/resources/identifiers) — キーファイルは `openapi/certs/` からの相対パス |
+| `MICROSOFT_CLIENT_ID` / `MICROSOFT_CLIENT_SECRET` | Microsoft | [portal.azure.com](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps) |
+
+---
+
+## 設定を反映する
+
+`.env` を編集したら Yao Engine を再起動して設定を反映させてください——エンジンのステータスウィンドウで**再起動**をクリックするか、プロセスを手動で停止してから起動し直してください。

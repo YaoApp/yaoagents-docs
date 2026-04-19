@@ -8,6 +8,9 @@ pages:
   - slug: faq
     title: よくある質問
     summary: インストール、接続、エージェント使用に関するFAQ。
+  - slug: environment-variables
+    title: 環境変数
+    summary: .env 設定変数の完全リファレンス——サーバー・データベース・AI コネクター・メッセージサービス・OAuth プロバイダーなど。
   - slug: sandbox-images
     title: サンドボックスイメージ
     summary: 全Dockerサンドボックスイメージの完全リファレンス：各イメージの内容、対応Agent、取得・更新方法。
