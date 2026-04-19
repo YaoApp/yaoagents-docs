@@ -1,0 +1,19 @@
+slug: chat-platforms
+title: チャットプラットフォーム (IM)
+summary: ロボットをメッセージングプラットフォームに接続。ユーザーは追加ソフトなしで会話できます。
+pages:
+  - slug: wechat
+    title: WeChat
+    summary: QRコードをスキャンしてWeChatに接続。ユーザーはWeChat上で直接ロボットと会話。
+  - slug: lark
+    title: Lark
+    summary: App ID + App SecretでLark（Feishu）ボットに接続。
+  - slug: dingtalk
+    title: DingTalk
+    summary: Client ID + Client SecretでDingTalk企業ボットに接続。
+  - slug: telegram
+    title: Telegram
+    summary: "@BotFatherからトークンを取得してTelegramボットに接続。"
+  - slug: discord
+    title: Discord
+    summary: Discord Developer PortalからDiscordボットに接続。

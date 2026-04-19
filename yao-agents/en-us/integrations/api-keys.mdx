@@ -4,4 +4,51 @@ slug: api-keys
 
 # API Keys
 
-Generate and manage API keys for authenticating external calls to Yao Agents.
+> **Enterprise plan only.** API key management requires an Enterprise subscription. [Learn more about Enterprise](/enterprise)
+
+Generate API keys to authenticate calls to your robots from external code, scripts, or integrations.
+
+## Before You Start
+
+API key management requires **Two-Factor Authentication (2FA)** to be enabled on your account. If 2FA is not set up, you'll be prompted to enable it before accessing this page.
+
+Go to **Settings → Security** to set up 2FA first.
+
+## Create an API Key
+
+1. Go to **Settings → API Keys**.
+2. Enter an optional name for the key (e.g. "Production", "CI/CD pipeline").
+3. Click **Create New Key**.
+4. Copy the key immediately — it will be partially masked after you leave the page.
+
+![Settings — API Keys page](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Settings+%E2%86%92+API+Keys)
+
+> ⚠️ The full key value is only shown once. Store it securely — treat it like a password.
+
+## Use the Key
+
+Pass the key in the `Authorization` header of every API request:
+
+```
+Authorization: Bearer <YOUR_API_KEY>
+```
+
+See [API Direct Connect](/docs/en-us/integrations/api-direct-connect) for full endpoint reference and code examples.
+
+## Manage Keys
+
+Each key shows:
+
+| Field | Description |
+|-------|-------------|
+| Name | Label you gave the key when creating it |
+| Key | Masked value (`sk-xxx...xxxx`) with copy and reveal buttons |
+| Status | `Active` or `Disabled` |
+| Created | Creation date |
+| Last Used | Last request date, or "Never" |
+
+To **delete** a key, click the delete icon on the key card and confirm. Deletion is immediate and irreversible — any code using that key will stop working.
+
+## What's Next
+
+- [API Direct Connect](/docs/en-us/integrations/api-direct-connect) — use the key to call your robots

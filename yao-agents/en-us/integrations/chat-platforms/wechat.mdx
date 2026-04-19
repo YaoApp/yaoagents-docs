@@ -1,0 +1,70 @@
+---
+slug: wechat
+---
+
+# Connect WeChat
+
+Connect your robot to WeChat so users can chat with it directly in the app — no extra software required on their end.
+
+WeChat integration works through the **ClawBot plugin**, an official Tencent channel plugin built into WeChat's plugin system. Once connected, the robot appears as a regular WeChat contact, and any user who adds it as a friend can start chatting immediately.
+
+## Before You Start
+
+- Your robot must already be created in Mission Control.
+- Prepare a dedicated WeChat account for the robot (a personal account is fine — no official account or mini-program needed).
+- Keep WeChat updated to the latest version on your phone (iOS and Android are both supported).
+- The Yao Agents server must stay online both during the scan and while the robot is running.
+
+## Step 1 — Open the Integration Panel
+
+1. In Mission Control, click the robot you want to connect.
+2. Go to the **Config → Integration** tab.
+3. Find the **WeChat** card and enable the toggle.
+
+![Mission Control — Integration panel, WeChat card](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+WeChat+card)
+
+## Step 2 — Scan to Connect
+
+Click **Scan to Connect** to open the QR code dialog in Mission Control.
+
+On the phone with the robot's WeChat account, open the ClawBot plugin:
+
+**Me → Settings → Plugins → WeChat ClawBot → Details**
+
+Inside the ClawBot plugin detail page, tap **Start Scan** and scan the QR code displayed in Mission Control.
+
+> 💡 The QR code expires in 3 minutes. Close the dialog and reopen it to refresh.
+
+**On first connection**, WeChat will ask you to authorize the ClawBot plugin for this account. Confirm the authorization to complete the connection.
+
+After a successful scan, the dialog closes automatically and the card shows **Connected** with the WeChat account name.
+
+## Step 3 — Save
+
+Click **Save** (the save button at the top of the config panel). The robot is now live on WeChat.
+
+Send a message to the WeChat account from any phone and the robot will reply.
+
+## Reconnecting
+
+If the connection drops (e.g. after a server restart), open the Integration panel and click **Reconnect** on the WeChat card to scan again.
+
+## Troubleshooting
+
+**"ClawBot plugin not installed" or "Feature not supported."**
+Your WeChat version is outdated. Update WeChat to the latest version and try again.
+
+**The "Connected" status never appears after scanning.**
+Make sure you are using WeChat iOS 8.0.70+ and have authorized the ClawBot plugin. Also confirm the account is not simultaneously logged in on another device.
+
+**The robot stops responding after a while.**
+The session may have timed out. Reconnect by scanning the QR code again. Keeping the Yao Agents server running continuously prevents interruptions.
+
+**"Already logged in on another device."**
+Sign out of that WeChat account on the other device first, then scan again.
+
+## What's Next
+
+- [Connect Telegram](/docs/en-us/integrations/chat-platforms/telegram)
+- [Connect Discord](/docs/en-us/integrations/chat-platforms/discord)
+- [API Direct Connect](/docs/en-us/integrations/api-direct-connect)

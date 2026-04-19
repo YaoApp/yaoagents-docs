@@ -1,0 +1,76 @@
+---
+slug: dingtalk
+---
+
+# 連接釘釘
+
+將機器人接入釘釘，讓組織內的員工直接在釘釘裡給它傳訊——群聊或單聊均可。
+
+你需要在釘釘開放平台建立一個企業內部應用機器人，複製憑證，貼上到這裡。
+
+## 開始之前
+
+- 機器人已在 Mission Control 中建立。
+- 擁有釘釘組織的管理員權限（用於建立企業內部應用）。
+
+## 第一步 — 建立釘釘應用
+
+1. 開啟 [釘釘開放平台](https://open.dingtalk.com/) 並用管理員帳號登入。
+2. 進入 **應用開發 → 企業內部應用 → 機器人**。
+3. 點擊 **建立應用**，填寫名稱和圖示，提交。
+4. 在應用詳情頁，進入 **憑證與基本資訊**，複製 **Client ID** 和 **Client Secret**。
+
+> 💡 Client Secret 請妥善保管，視同密碼處理。
+
+![釘釘開放平台 — 應用憑證頁面](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+DingTalk+app+credentials+page)
+
+## 第二步 — 設定訊息收發權限
+
+在釘釘應用詳情頁：
+
+1. 進入 **權限管理**。
+2. 開啟 **企業內機器人接收訊息** 和 **發送訊息** 權限。
+3. 如需審核，提交審核（企業內部應用通常自動核准）。
+
+## 第三步 — 在 Yao Agents 中填入憑證
+
+1. 在 Mission Control 中，開啟機器人的 **設定 → 整合** 面板。
+2. 展開 **釘釘** 卡片，將開關打開。
+3. 貼上第一步取得的 **Client ID** 和 **Client Secret**。
+4. 點擊 **驗證連接**——顯示綠色確認及應用名稱即表示成功。
+
+![機器人整合面板 — 釘釘卡片](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+DingTalk+card)
+
+## 第四步 — 在釘釘後台填寫 Webhook 地址
+
+回到釘釘應用詳情頁：
+
+1. 進入 **開發設定 → 訊息接收**。
+2. 將 **訊息接收模式** 設為 HTTP 模式。
+3. 填寫以下 Webhook 地址：
+   ```
+   https://<你的伺服器地址>/v1/agent/robots/<robot_id>/connector/dingtalk
+   ```
+   將 `<你的伺服器地址>` 替換為 Yao Agents 伺服器的公網地址，`<robot_id>` 替換為 Mission Control 中顯示的機器人 ID。
+4. 儲存。
+
+## 第五步 — 加入群聊或發起單聊
+
+在釘釘中，進入群聊設定，新增該機器人；或在通訊錄中搜尋機器人名稱，直接發起單聊。
+
+## 常見問題
+
+**驗證按鈕無法點擊（灰色）。**
+Client ID 和 Client Secret 均填寫後，驗證按鈕才會啟用。
+
+**驗證失敗，提示「憑證無效」。**
+確認複製的是 Client ID（非 App Key）和正確的 Client Secret。在釘釘後台重新產生 Secret 並重新貼上通常可解決。
+
+**傳訊息無回覆。**
+確認 Webhook 地址填寫正確，且 Yao Agents 伺服器可從公網存取（非 `localhost`）。
+
+## 下一步
+
+- [連接飛書](/docs/zh-tw/integrations/lark)
+- [連接微信](/docs/zh-tw/integrations/wechat)
+- [API 直連](/docs/zh-tw/integrations/api-direct-connect)

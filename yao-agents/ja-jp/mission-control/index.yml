@@ -1,6 +1,8 @@
 slug: mission-control
 title: ミッションコントロール
 summary: コア機能：専門家チームをオーケストレーションしてタスクを自動完了。
+children:
+  - execution-pipeline
 pages:
   - slug: what-is-mission-control
     title: ミッションコントロールとは
@@ -14,5 +16,3 @@ pages:
   - slug: scheduling-and-triggers
     title: スケジュールとトリガー
     summary: 定期実行、イベントトリガー、Webhook通知。
-children:
-  - execution-pipeline

@@ -1,0 +1,76 @@
+---
+slug: dingtalk
+---
+
+# DingTalkに接続する
+
+ロボットをDingTalkに接続すると、組織内の従業員がグループチャットまたは1対1で直接メッセージを送れます。
+
+DingTalkオープンプラットフォームで社内ボットアプリを作成し、認証情報をコピーしてここに貼り付けます。
+
+## 始める前に
+
+- ロボットがMission Controlで作成済みであること。
+- DingTalk組織の管理者アクセス権（社内アプリ作成のため）。
+
+## ステップ 1 — DingTalkアプリを作成する
+
+1. [DingTalkオープンプラットフォーム](https://open.dingtalk.com/) を開き、管理者アカウントでログインします。
+2. **アプリ開発 → 企業内部アプリ → ロボット** に移動します。
+3. **アプリを作成** をクリックし、名前とアイコンを入力して送信します。
+4. アプリダッシュボードで **認証情報と基本情報** に移動し、**Client ID** と **Client Secret** をコピーします。
+
+> 💡 Client Secretはパスワードと同様に厳重に管理してください。
+
+![DingTalkオープンプラットフォーム — アプリ認証情報ページ](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+DingTalk+app+credentials+page)
+
+## ステップ 2 — メッセージング権限を設定する
+
+DingTalkアプリダッシュボードで：
+
+1. **権限管理** に移動します。
+2. **企業内ロボットメッセージ受信** と **メッセージ送信** 権限を有効にします。
+3. 必要に応じてレビューを申請します（社内アプリは通常自動承認されます）。
+
+## ステップ 3 — Yao Agentsに認証情報を貼り付ける
+
+1. Mission Controlでロボットの **設定 → 統合** パネルを開きます。
+2. **DingTalk** カードを展開し、トグルを **オン** にします。
+3. ステップ1で取得した **Client ID** と **Client Secret** を貼り付けます。
+4. **接続を確認** をクリック——アプリ名が緑色で表示されれば成功です。
+
+![ロボット統合パネル — DingTalkカード](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+DingTalk+card)
+
+## ステップ 4 — DingTalkにWebhookエンドポイントを設定する
+
+DingTalkアプリダッシュボードに戻り：
+
+1. **開発設定 → メッセージ受信** に移動します。
+2. **メッセージ受信モード** をHTTPモードに設定します。
+3. 以下のWebhook URLを入力します：
+   ```
+   https://<Yao Agentsサーバーアドレス>/v1/agent/robots/<robot_id>/connector/dingtalk
+   ```
+   `<Yao Agentsサーバーアドレス>` をサーバーの公開URLに、`<robot_id>` をMission Controlに表示されているロボットIDに置き換えてください。
+4. 保存します。
+
+## ステップ 5 — グループチャットにボットを追加するか、ダイレクトメッセージを開始する
+
+DingTalkでグループチャットの設定を開き、ボットを追加します。またはディレクトリでボット名を検索してダイレクトメッセージを開始します。
+
+## トラブルシューティング
+
+**確認ボタンがグレーのままで押せない。**
+Client IDとClient Secretの両方を入力すると確認ボタンが有効になります。
+
+**「認証情報が無効」というエラーで確認に失敗する。**
+Client ID（App Keyではない）と正しいClient Secretをコピーしたか確認してください。DingTalkでSecretを再生成して貼り直すと解決することが多いです。
+
+**ボットにメッセージを送っても返答がない。**
+DingTalkのWebhook URLが正しいか、Yao AgentsサーバーがインターネットからアクセスできるURL（`localhost`ではない）かを確認してください。
+
+## 次のステップ
+
+- [Larkに接続する](/docs/ja-jp/integrations/lark)
+- [WeChatに接続する](/docs/ja-jp/integrations/wechat)
+- [API直接接続](/docs/ja-jp/integrations/api-direct-connect)

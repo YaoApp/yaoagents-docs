@@ -1,0 +1,85 @@
+---
+slug: lark
+---
+
+# 連接飛書
+
+將機器人接入飛書，讓團隊成員在通訊錄中找到它，直接傳訊對話。
+
+你需要在飛書開放平台建立應用機器人，授予訊息權限，再將 App ID 和 App Secret 貼到整合面板。
+
+## 開始之前
+
+- 機器人已在 Mission Control 中建立。
+- 擁有飛書組織的管理員權限（用於建立和發布應用）。
+
+## 第一步 — 建立飛書應用
+
+1. 開啟 [飛書開放平台](https://open.feishu.cn/)（海外版請訪問 [Lark Open Platform](https://open.larksuite.com/)）並登入。
+2. 進入 **開發者後台 → 建立企業自建應用**。
+3. 填寫應用名稱和說明，點擊 **確認建立**。
+4. 在應用詳情頁，進入 **憑證與基本資訊**，複製 **App ID** 和 **App Secret**。
+
+> 💡 App Secret 建立後只顯示一次，請立即複製並安全保存。
+
+![飛書開放平台 — 應用憑證頁面](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Lark+app+credentials+page)
+
+## 第二步 — 開啟機器人功能
+
+在應用詳情頁：
+
+1. 進入 **應用功能 → 機器人**。
+2. 開啟機器人功能。
+3. 可選：設定機器人的名稱和頭像，用戶在飛書中看到的就是這個。
+
+## 第三步 — 新增權限
+
+在應用詳情頁，進入 **權限管理**，新增以下權限：
+
+- `im:message` — 接收發給機器人的訊息
+- `im:message:send_as_bot` — 以機器人身份發送訊息
+
+## 第四步 — 在 Yao Agents 中填入憑證
+
+1. 在 Mission Control 中，開啟機器人的 **設定 → 整合** 面板。
+2. 展開 **飛書** 卡片，將開關打開。
+3. 貼上第一步取得的 **App ID** 和 **App Secret**。
+4. 點擊 **驗證連接**——顯示綠色確認及應用名稱即表示成功。
+
+![機器人整合面板 — 飛書卡片](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Lark+card)
+
+## 第五步 — 設定事件訂閱地址
+
+回到飛書開放平台，在應用詳情頁：
+
+1. 進入 **事件訂閱**。
+2. 將 **請求地址** 設為：
+   ```
+   https://<你的伺服器地址>/v1/agent/robots/<robot_id>/connector/feishu
+   ```
+   將 `<你的伺服器地址>` 替換為 Yao Agents 伺服器的公網地址，`<robot_id>` 替換為 Mission Control 中顯示的機器人 ID。
+3. 訂閱事件：**接收訊息（im.message.receive_v1）**。
+4. 儲存並驗證——飛書會向該地址發送測試請求以確認可達。
+
+## 第六步 — 發布應用
+
+進入 **版本管理與發布**，建立版本並提交審核（企業自建應用通常自動核准）。
+
+發布後，團隊成員即可在飛書通訊錄中找到機器人並直接傳訊。
+
+## 常見問題
+
+**驗證失敗。**
+確認 App ID 是以 `cli_` 開頭的長字串，而非 App Key。如需要，在後台重新產生 App Secret 後重試。
+
+**飛書 URL 驗證失敗。**
+Yao Agents 伺服器必須可從公網存取。本地測試時可使用內網穿透工具（如 ngrok）。
+
+**用戶在飛書中找不到機器人。**
+應用必須發布且對組織可見，成員才能在通訊錄中搜尋到。
+
+## 下一步
+
+- [連接釘釘](/docs/zh-tw/integrations/dingtalk)
+- [連接 Telegram](/docs/zh-tw/integrations/telegram)
+- [API 直連](/docs/zh-tw/integrations/api-direct-connect)

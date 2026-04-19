@@ -1,0 +1,59 @@
+---
+slug: telegram
+---
+
+# Connect Telegram
+
+Connect a robot to Telegram so anyone can message it via a Telegram bot handle. Takes about 5 minutes.
+
+You'll create a bot with @BotFather, copy the token, and paste it here.
+
+## Before You Start
+
+- Your robot must already be created in Mission Control.
+- A Telegram account to create the bot (any personal account works).
+- Your Yao Agents server must be reachable from the internet (Telegram delivers messages via webhook).
+
+## Step 1 — Create a bot with @BotFather
+
+1. Open Telegram and search for **@BotFather**.
+2. Start a chat and send `/newbot`.
+3. Follow the prompts: choose a display name (e.g. "My Work Robot"), then a username ending in `bot` (e.g. `my_work_robot_bot`).
+4. BotFather replies with your **Bot Token** — a string like `7123456789:AAHxxx...`.
+
+> 💡 Keep the token private. Anyone with the token can control your bot.
+
+![Telegram @BotFather — /newbot flow](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Telegram+%40BotFather+%2Fnewbot+conversation)
+
+## Step 2 — Paste the token into Yao Agents
+
+1. In Mission Control, open your robot's **Config → Integration** panel.
+2. Expand the **Telegram** card and toggle it **on**.
+3. Paste the **Bot Token** from @BotFather.
+4. *(Optional)* If you're using a self-hosted Telegram Bot API server, enter its address in **API Host**. Leave blank to use the default official API.
+5. Click **Verify** — a green confirmation with the bot's username means it's connected.
+
+![Robot Integration panel — Telegram card with token](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Telegram+card)
+
+## Step 3 — Save and test
+
+Click **Save**. Search for your bot's username in Telegram, start a chat, and send a message. The robot should reply.
+
+> 💡 In group chats, bots only receive messages when mentioned by username (e.g. `@my_work_robot_bot what's the status?`) unless you disable privacy mode in @BotFather with `/setprivacy → Disable`.
+
+## Troubleshooting
+
+**Verify fails with "Unauthorized".**
+The token is wrong or the bot was deleted. Go back to @BotFather, send `/mybots`, and copy the token again.
+
+**Bot doesn't reply in a group chat.**
+By default, Telegram bots in groups only receive messages when mentioned. Use `/setprivacy → Disable` in @BotFather to receive all group messages, or always mention the bot by username.
+
+**Webhook setup fails / messages not arriving.**
+Make sure your Yao Agents server URL is publicly accessible over HTTPS. Telegram requires a valid TLS certificate (self-signed is not accepted for webhooks).
+
+## What's Next
+
+- [Connect Discord](/docs/en-us/integrations/discord)
+- [Connect WeChat](/docs/en-us/integrations/wechat)
+- [API Direct Connect](/docs/en-us/integrations/api-direct-connect)

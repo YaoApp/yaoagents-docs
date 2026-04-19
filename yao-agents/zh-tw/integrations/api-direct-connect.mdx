@@ -4,4 +4,181 @@ slug: api-direct-connect
 
 # API 直連
 
-相容 OpenAI Chat Completion 協定，從任何相容工具呼叫你的 Agent。
+直接用程式碼呼叫機器人，無需開啟介面。兩個端點涵蓋完整使用流程：先透過對話確認目標，再觸發執行。
+
+介面相容 OpenAI 協定，任何 OpenAI SDK 開箱即用。
+
+## 開始之前
+
+- 機器人已在 Mission Control 中建立。
+- 需要 API Key——在 **設定 → API 金鑰** 中產生。
+- 記錄機器人的 **Robot ID**（即 `member_id`）——在 Mission Control 機器人設定頁可以找到。
+- 伺服器地址——訪問 `/.well-known/yao` 取得 `server_url` 欄位。
+
+## 端點說明
+
+### Chat Completions（對話端點）
+
+與機器人的 Host Agent 對話，確認任務目標後再觸發執行。相容 OpenAI 協定，支援串流輸出。
+
+```
+POST {server_url}/v1/agent/robots/{robot_id}/completions
+```
+
+**請求標頭**
+
+| Header | 值 |
+|--------|-----|
+| `Authorization` | `Bearer <你的 API Key>` |
+| `Content-Type` | `application/json` |
+
+**請求體**
+
+```json
+{
+  "messages": [{"role": "user", "content": "分析我們前 5 名競爭對手，產生一份報告"}],
+  "stream": true
+}
+```
+
+**HTTP (curl)**
+
+```bash
+curl https://your-server/v1/agent/robots/my-robot/completions \
+  -H "Authorization: Bearer $YAO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"messages": [{"role": "user", "content": "你好"}], "stream": true}'
+```
+
+**TypeScript**
+
+```typescript
+import OpenAI from 'openai'
+
+const client = new OpenAI({
+  baseURL: 'https://your-server/v1/agent/robots/my-robot',
+  apiKey: process.env.YAO_API_KEY,
+})
+
+const stream = await client.chat.completions.create({
+  model: 'default',
+  messages: [{ role: 'user', content: '分析我們前 5 名競爭對手' }],
+  stream: true,
+})
+```
+
+**Python**
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://your-server/v1/agent/robots/my-robot",
+    api_key=os.environ["YAO_API_KEY"],
+)
+
+stream = client.chat.completions.create(
+    model="default",
+    messages=[{"role": "user", "content": "分析我們前 5 名競爭對手"}],
+    stream=True,
+)
+```
+
+> 💡 Host Agent 會在對話中與你確認目標。確認後，任務交由執行管道處理，回應中會返回 `execution_id`。
+
+---
+
+### Execute（直接執行端點）
+
+跳過對話流程，直接以已確認的目標觸發機器人執行。適合系統已經明確要執行什麼任務的場景。
+
+```
+POST {server_url}/v1/agent/robots/{robot_id}/execute
+```
+
+**請求體欄位**
+
+| 欄位 | 類型 | 必填 | 說明 |
+|------|------|------|------|
+| `goals` | string | ✓ | 任務目標，用自然語言描述 |
+| `context` | object | — | 傳遞給執行管道的額外上下文（可選） |
+| `chat_id` | string | — | 關聯某個對話工作階段（可選） |
+
+**回應**
+
+```json
+{
+  "execution_id": "exec-abc123",
+  "status": "pending",
+  "message": "Execution started"
+}
+```
+
+**HTTP (curl)**
+
+```bash
+curl -X POST https://your-server/v1/agent/robots/my-robot/execute \
+  -H "Authorization: Bearer $YAO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "goals": "分析我們前 5 名競爭對手，產生 Markdown 報告",
+    "context": { "format": "markdown" },
+    "chat_id": "session-001"
+  }'
+```
+
+**TypeScript**
+
+```typescript
+const res = await fetch('https://your-server/v1/agent/robots/my-robot/execute', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${process.env.YAO_API_KEY}`,
+  },
+  body: JSON.stringify({
+    goals: '分析我們前 5 名競爭對手，產生 Markdown 報告',
+    context: { format: 'markdown' },
+    chat_id: 'session-001',
+  }),
+})
+const { execution_id, status } = await res.json()
+```
+
+**Python**
+
+```python
+import requests, os
+
+resp = requests.post(
+    "https://your-server/v1/agent/robots/my-robot/execute",
+    headers={"Authorization": f"Bearer {os.environ['YAO_API_KEY']}"},
+    json={
+        "goals": "分析我們前 5 名競爭對手，產生 Markdown 報告",
+        "context": {"format": "markdown"},
+        "chat_id": "session-001",
+    },
+)
+execution_id = resp.json()["execution_id"]
+```
+
+## 典型呼叫流程
+
+```
+你的程式碼                    Yao Agents
+──────────────────────────────────────────────
+POST /completions   →   Host Agent 確認目標
+                    ←   （串流回覆）
+POST /completions   →   使用者確認
+                    ←   返回 execution_id
+
+POST /execute       →   直接觸發執行
+                    ←   { execution_id, status: "pending" }
+```
+
+觸發執行後，可以在 Mission Control 中查看進度，或透過程式碼輪詢執行狀態。
+
+## 下一步
+
+- [API 金鑰](/docs/zh-tw/integrations/api-keys) — 產生呼叫所需的 Key
+- [Mission Control — 進度與結果](/docs/zh-tw/mission-control/progress-and-results) — 在介面中監控執行

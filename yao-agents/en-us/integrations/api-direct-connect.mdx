@@ -4,4 +4,181 @@ slug: api-direct-connect
 
 # API Direct Connect
 
-OpenAI-compatible Chat Completion protocol. Call your agents from any OpenAI-compatible tool.
+Call any robot directly from your own code — no UI needed. Two endpoints cover the full lifecycle: start a goal-setting conversation, then trigger execution.
+
+The API is OpenAI-compatible, so any OpenAI SDK works out of the box.
+
+## Before You Start
+
+- Your robot must already be created in Mission Control.
+- You need an API Key — get one from **Settings → API Keys**.
+- Note your robot's **Robot ID** (`member_id`) — visible in Mission Control on the robot's Config page.
+- Your Yao Agents server URL — find it at `/.well-known/yao` (`server_url` field).
+
+## Endpoints
+
+### Chat Completions
+
+Chat with the robot's Host Agent to confirm goals before execution starts. OpenAI-compatible — streaming supported.
+
+```
+POST {server_url}/v1/agent/robots/{robot_id}/completions
+```
+
+**Headers**
+
+| Header | Value |
+|--------|-------|
+| `Authorization` | `Bearer <YOUR_API_KEY>` |
+| `Content-Type` | `application/json` |
+
+**Request body**
+
+```json
+{
+  "messages": [{"role": "user", "content": "Analyze our top 5 competitors and write a report"}],
+  "stream": true
+}
+```
+
+**HTTP (curl)**
+
+```bash
+curl https://your-server/v1/agent/robots/my-robot/completions \
+  -H "Authorization: Bearer $YAO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"messages": [{"role": "user", "content": "Hello"}], "stream": true}'
+```
+
+**TypeScript**
+
+```typescript
+import OpenAI from 'openai'
+
+const client = new OpenAI({
+  baseURL: 'https://your-server/v1/agent/robots/my-robot',
+  apiKey: process.env.YAO_API_KEY,
+})
+
+const stream = await client.chat.completions.create({
+  model: 'default',
+  messages: [{ role: 'user', content: 'Analyze our top 5 competitors' }],
+  stream: true,
+})
+```
+
+**Python**
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://your-server/v1/agent/robots/my-robot",
+    api_key=os.environ["YAO_API_KEY"],
+)
+
+stream = client.chat.completions.create(
+    model="default",
+    messages=[{"role": "user", "content": "Analyze our top 5 competitors"}],
+    stream=True,
+)
+```
+
+> 💡 The Host Agent will clarify the goal with you in this conversation. Once confirmed, it hands off to execution — you'll receive an `execution_id` in the response.
+
+---
+
+### Execute
+
+Skip the chat flow and trigger a robot with pre-confirmed goals directly. Use this when your system already knows exactly what to run.
+
+```
+POST {server_url}/v1/agent/robots/{robot_id}/execute
+```
+
+**Request body**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `goals` | string | ✓ | The task goal, in plain language |
+| `context` | object | — | Optional extra context passed to the pipeline |
+| `chat_id` | string | — | Associate with a chat session |
+
+**Response**
+
+```json
+{
+  "execution_id": "exec-abc123",
+  "status": "pending",
+  "message": "Execution started"
+}
+```
+
+**HTTP (curl)**
+
+```bash
+curl -X POST https://your-server/v1/agent/robots/my-robot/execute \
+  -H "Authorization: Bearer $YAO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "goals": "Analyze our top 5 competitors and write a report",
+    "context": { "format": "markdown" },
+    "chat_id": "session-001"
+  }'
+```
+
+**TypeScript**
+
+```typescript
+const res = await fetch('https://your-server/v1/agent/robots/my-robot/execute', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${process.env.YAO_API_KEY}`,
+  },
+  body: JSON.stringify({
+    goals: 'Analyze our top 5 competitors and write a report',
+    context: { format: 'markdown' },
+    chat_id: 'session-001',
+  }),
+})
+const { execution_id, status } = await res.json()
+```
+
+**Python**
+
+```python
+import requests, os
+
+resp = requests.post(
+    "https://your-server/v1/agent/robots/my-robot/execute",
+    headers={"Authorization": f"Bearer {os.environ['YAO_API_KEY']}"},
+    json={
+        "goals": "Analyze our top 5 competitors and write a report",
+        "context": {"format": "markdown"},
+        "chat_id": "session-001",
+    },
+)
+execution_id = resp.json()["execution_id"]
+```
+
+## Typical Flow
+
+```
+Your code                    Yao Agents
+──────────────────────────────────────────────
+POST /completions   →   Host Agent clarifies goal
+                    ←   (streaming reply)
+POST /completions   →   User confirms
+                    ←   execution_id returned
+
+POST /execute       →   Execution starts immediately
+                    ←   { execution_id, status: "pending" }
+```
+
+After triggering execution, you can check progress via Mission Control or poll the execution status from your code.
+
+## What's Next
+
+- [API Keys](/docs/en-us/integrations/api-keys) — generate the key used above
+- [Mission Control — Progress & Results](/docs/en-us/mission-control/progress-and-results) — monitor execution in the UI

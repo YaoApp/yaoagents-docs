@@ -1,6 +1,8 @@
 slug: mission-control
 title: 任務控制中心
 summary: 核心功能之二：編排專家組自動協作完成任務。
+children:
+  - execution-pipeline
 pages:
   - slug: what-is-mission-control
     title: 什麼是任務控制中心
@@ -14,5 +16,3 @@ pages:
   - slug: scheduling-and-triggers
     title: 定時與觸發
     summary: 定時執行、事件觸發、Webhook 通知。
-children:
-  - execution-pipeline

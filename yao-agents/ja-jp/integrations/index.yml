@@ -1,19 +1,16 @@
 slug: integrations
 title: 統合
-summary: 外向き：IMプラットフォームとAPIに接続。内向き：AIモデルとMCPツールに接続。
+summary: ロボットをメッセージングプラットフォームとAPIに接続。
+children:
+  - chat-platforms
 pages:
   - slug: chat-platforms
     title: チャットプラットフォーム (IM)
-    summary: アシスタント/ロボットをSlack、WeChat、DingTalk、Feishu、Telegram、Discordにバインド。
+    summary: ロボットをメッセージングプラットフォームに接続。ユーザーは追加ソフトなしで会話できます。
+    children: chat-platforms
   - slug: api-direct-connect
     title: API直接接続
     summary: OpenAI互換Chat Completionプロトコル。任意のツールからエージェントを呼び出し。
   - slug: api-keys
     title: APIキー
     summary: 外部からYao Agentsを呼び出すためのAPIキーの生成と管理。
-  - slug: ai-models
-    title: AIモデル
-    summary: AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。
-  - slug: mcp-tools
-    title: MCPツール
-    summary: 外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。

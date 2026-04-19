@@ -1,0 +1,87 @@
+---
+slug: lark
+---
+
+# Connect Lark
+
+Connect a robot to Lark (Feishu) so team members can find it in the directory and message it directly.
+
+You'll create a Lark bot application, grant it the required permissions, and paste the App ID and App Secret into the robot's Integration panel.
+
+## Before You Start
+
+- Your robot must already be created in Mission Control.
+- You need admin access to your Lark organization (to create and publish an app).
+
+## Step 1 — Create a Lark app
+
+1. Open [Lark Open Platform](https://open.larksuite.com/) (or [Feishu Open Platform](https://open.feishu.cn/) for mainland China) and sign in.
+2. Go to **Developer Console → Create App → Custom App**.
+3. Fill in the app name and description, then click **Create**.
+4. In the app dashboard, go to **Credentials & Basic Info**. Copy the **App ID** and **App Secret**.
+
+> 💡 The App Secret is shown only once after creation. Copy it immediately and store it securely.
+
+![Lark Open Platform — App credentials page](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Lark+app+credentials+page)
+
+## Step 2 — Enable the bot feature
+
+In the app dashboard:
+
+1. Go to **Features → Bot**.
+2. Enable the bot feature.
+3. Optionally set a bot name and icon that users will see in Lark.
+
+## Step 3 — Add permissions
+
+In the app dashboard, go to **Permissions & Scopes** and add:
+
+- `im:message` — receive messages sent to the bot
+- `im:message:send_as_bot` — send messages as the bot
+
+> 💡 The exact permission names may differ between the Lark and Feishu consoles, but the concepts are the same.
+
+## Step 4 — Paste credentials into Yao Agents
+
+1. In Mission Control, open your robot's **Config → Integration** panel.
+2. Expand the **Lark** card and toggle it **on**.
+3. Paste the **App ID** and **App Secret** from Step 1.
+4. Click **Verify** — a green confirmation with the app name means the credentials are valid.
+
+![Robot Integration panel — Lark card with credentials](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Lark+card)
+
+## Step 5 — Configure the event subscription endpoint
+
+Back in the Lark app dashboard:
+
+1. Go to **Event Subscriptions**.
+2. Set the **Request URL** to:
+   ```
+   https://<your-yao-agents-server>/v1/agent/robots/<robot_id>/connector/feishu
+   ```
+   Replace `<your-yao-agents-server>` with your public server address and `<robot_id>` with the robot ID from Mission Control.
+3. Subscribe to the event: **Receive messages (im.message.receive_v1)**.
+4. Save and verify — Lark will send a test request to confirm the URL is reachable.
+
+## Step 6 — Publish the app
+
+Go to **App Release → Version Management** and create a version. Submit for review (internal apps in most organizations are auto-approved).
+
+Once published, team members can find the bot in the Lark directory and message it directly.
+
+## Troubleshooting
+
+**Verify button shows "Failed".**
+Check that the App ID is the long string starting with `cli_`, not the App Key. Regenerate the App Secret if needed.
+
+**Lark URL verification fails.**
+Your Yao Agents server must be reachable from the public internet. If running locally, use a tunneling tool (e.g. ngrok) for testing.
+
+**Users can't find the bot in Lark.**
+The app must be published and available to your organization before users can discover it in the directory.
+
+## What's Next
+
+- [Connect DingTalk](/docs/en-us/integrations/dingtalk)
+- [Connect Telegram](/docs/en-us/integrations/telegram)
+- [API Direct Connect](/docs/en-us/integrations/api-direct-connect)

@@ -1,0 +1,19 @@
+slug: chat-platforms
+title: 聊天平台 (IM)
+summary: 將機器人接入即時通訊平台，用戶無需安裝任何插件即可對話。
+pages:
+  - slug: wechat
+    title: 微信
+    summary: 掃碼連接微信，用戶直接在微信中與機器人對話。
+  - slug: lark
+    title: 飛書
+    summary: 透過 App ID + App Secret 接入飛書機器人。
+  - slug: dingtalk
+    title: 釘釘
+    summary: 透過 Client ID + Client Secret 接入釘釘企業機器人。
+  - slug: telegram
+    title: Telegram
+    summary: 透過 @BotFather 取得 Token 接入 Telegram Bot。
+  - slug: discord
+    title: Discord
+    summary: 從 Discord Developer Portal 接入 Discord Bot。

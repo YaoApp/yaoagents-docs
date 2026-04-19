@@ -1,0 +1,59 @@
+---
+slug: telegram
+---
+
+# 連接 Telegram
+
+將機器人接入 Telegram，任何人都可以透過 Telegram Bot 用戶名與它對話。約 5 分鐘完成設定。
+
+你需要透過 @BotFather 建立一個 Bot，複製 Token，貼到這裡。
+
+## 開始之前
+
+- 機器人已在 Mission Control 中建立。
+- 一個 Telegram 帳號（用於建立 Bot，任意個人帳號均可）。
+- Yao Agents 伺服器可從公網存取（Telegram 透過 Webhook 推送訊息）。
+
+## 第一步 — 透過 @BotFather 建立 Bot
+
+1. 開啟 Telegram，搜尋 **@BotFather**。
+2. 開始對話，發送 `/newbot`。
+3. 依提示操作：輸入顯示名稱（如「我的工作機器人」），再輸入以 `bot` 結尾的用戶名（如 `my_work_robot_bot`）。
+4. BotFather 回覆你的 **Bot Token**——格式類似 `7123456789:AAHxxx...`。
+
+> 💡 Token 請妥善保管，任何持有 Token 的人都可以控制你的 Bot。
+
+![Telegram @BotFather — /newbot 建立流程](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Telegram+%40BotFather+%2Fnewbot+conversation)
+
+## 第二步 — 在 Yao Agents 中填入 Token
+
+1. 在 Mission Control 中，開啟機器人的 **設定 → 整合** 面板。
+2. 展開 **Telegram** 卡片，將開關打開。
+3. 貼上第一步取得的 **Bot Token**。
+4. **（可選）** 如果使用自建的 Telegram Bot API 伺服器，在 **API Host** 中填寫其地址；否則留空使用官方 API。
+5. 點擊 **驗證連接**——顯示綠色確認及 Bot 用戶名即表示成功。
+
+![機器人整合面板 — Telegram 卡片](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Telegram+card)
+
+## 第三步 — 儲存並測試
+
+點擊 **儲存**。在 Telegram 中搜尋 Bot 用戶名，開始對話並傳送訊息，機器人應有回覆。
+
+> 💡 在群組中，Bot 預設只在被 @ 提及時才接收訊息。如需接收所有群組訊息，在 @BotFather 中使用 `/setprivacy → Disable` 關閉隱私模式。
+
+## 常見問題
+
+**驗證失敗，提示「Unauthorized」。**
+Token 有誤或 Bot 已被刪除。回到 @BotFather，發送 `/mybots` 重新複製 Token。
+
+**群組中 Bot 無回覆。**
+預設情況下 Bot 在群組中只有被 @ 時才接收訊息。使用 `/setprivacy → Disable` 可接收所有群組訊息，或每次提問時 @ Bot 用戶名。
+
+**Webhook 設定失敗 / 訊息未到達。**
+Yao Agents 伺服器必須可從公網透過 HTTPS 存取，且需有效的 TLS 憑證（Telegram Webhook 不支援自簽憑證）。
+
+## 下一步
+
+- [連接 Discord](/docs/zh-tw/integrations/discord)
+- [連接微信](/docs/zh-tw/integrations/wechat)
+- [API 直連](/docs/zh-tw/integrations/api-direct-connect)

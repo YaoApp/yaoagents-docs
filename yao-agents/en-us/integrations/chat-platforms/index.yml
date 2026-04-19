@@ -1,0 +1,19 @@
+slug: chat-platforms
+title: Chat Platforms (IM)
+summary: Connect robots to messaging platforms so users can chat without any extra software.
+pages:
+  - slug: telegram
+    title: Telegram
+    summary: Connect a Telegram Bot using a token from @BotFather.
+  - slug: discord
+    title: Discord
+    summary: Connect a Discord Bot from the Developer Portal.
+  - slug: wechat
+    title: WeChat
+    summary: Scan QR code to connect WeChat — users chat with the robot directly in WeChat.
+  - slug: lark
+    title: Lark
+    summary: Connect a Lark (Feishu) bot with App ID + App Secret.
+  - slug: dingtalk
+    title: DingTalk
+    summary: Connect a DingTalk enterprise bot with Client ID + Client Secret.

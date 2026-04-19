@@ -1,0 +1,72 @@
+---
+slug: discord
+---
+
+# 连接 Discord
+
+将机器人接入 Discord，服务器成员在任意频道 @ 它即可得到回复。
+
+你需要在 Discord Developer Portal 创建应用和 Bot，复制 Token，粘贴到这里。
+
+## 开始之前
+
+- 机器人已在 Mission Control 中创建。
+- 一个 Discord 账号，且拥有目标服务器的管理权限。
+- Yao Agents 服务器可从公网访问。
+
+## 第一步 — 创建 Discord 应用
+
+1. 打开 [Discord Developer Portal](https://discord.com/developers/applications) 并登录。
+2. 点击 **New Application**，输入名称，点击 **Create**。
+3. 在左侧导航中进入 **Bot**，点击 **Add Bot → Yes, do it!**。
+4. 在 **Token** 一栏点击 **Reset Token**，复制生成的 Token。
+
+> ⚠️ Token 离开此页面后将无法再次查看。请立即复制并安全保存。如遗失，需重新生成。
+
+![Discord Developer Portal — Bot Token 页面](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Discord+Developer+Portal+%E2%80%94+Bot+token+page)
+
+## 第二步 — 开启消息内容权限
+
+仍在 **Bot** 页面：
+
+1. 在 **Privileged Gateway Intents** 下，开启 **Message Content Intent**——Bot 需要此权限才能读取消息内容。
+2. 保存更改。
+
+## 第三步 — 邀请 Bot 加入服务器
+
+1. 进入 **OAuth2 → URL Generator**。
+2. 在 **Scopes** 中勾选 `bot`。
+3. 在 **Bot Permissions** 中至少勾选：**Send Messages**、**Read Message History**、**View Channels**。
+4. 复制生成的 URL，在浏览器中打开。
+5. 选择目标服务器，点击 **Authorize**。
+
+## 第四步 — 在 Yao Agents 中填写凭证
+
+1. 在 Mission Control 中，打开机器人的 **配置 → 集成** 面板。
+2. 展开 **Discord** 卡片，将开关打开。
+3. 粘贴第一步获取的 **Bot Token**。
+4. **（可选）** 粘贴 **Application ID**——在应用的 **General Information** 页面可以找到，用于注册斜杠命令。
+5. 点击 **验证连接**——显示绿色确认及 Bot 用户名即表示成功。
+
+![机器人集成面板 — Discord 卡片](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Discord+card)
+
+## 第五步 — 保存并测试
+
+点击 **保存**。在 Discord 服务器的任意频道中 @ 机器人（如 `@我的机器人 你好`），它应有回复。
+
+## 常见问题
+
+**验证失败，提示"401 Unauthorized"。**
+Token 无效。在 Developer Portal 重新生成 Token 后粘贴新值。
+
+**Bot 在线但无回复。**
+确认已开启 **Message Content Intent**（第二步）。没有此权限，Bot 无法读取消息正文。
+
+**Bot 邀请后在服务器中看不到。**
+确认邀请 URL 包含了 `bot` scope，且已授权给正确的服务器。
+
+## 下一步
+
+- [连接 Telegram](/docs/zh-cn/integrations/telegram)
+- [API 直连](/docs/zh-cn/integrations/api-direct-connect)
+- [Mission Control — 机器人概览](/docs/zh-cn/mission-control/robots)

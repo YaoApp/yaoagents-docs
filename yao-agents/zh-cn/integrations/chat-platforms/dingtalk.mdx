@@ -1,0 +1,76 @@
+---
+slug: dingtalk
+---
+
+# 连接钉钉
+
+将机器人接入钉钉，让组织内的员工直接在钉钉里给它发消息——群聊或单聊均可。
+
+你需要在钉钉开放平台创建一个企业内部应用机器人，复制凭证，粘贴到这里。
+
+## 开始之前
+
+- 机器人已在 Mission Control 中创建。
+- 拥有钉钉组织的管理员权限（用于创建企业内部应用）。
+
+## 第一步 — 创建钉钉应用
+
+1. 打开 [钉钉开放平台](https://open.dingtalk.com/) 并用管理员账号登录。
+2. 进入 **应用开发 → 企业内部应用 → 机器人**。
+3. 点击 **创建应用**，填写名称和图标，提交。
+4. 在应用详情页，进入 **凭证与基础信息**，复制 **Client ID** 和 **Client Secret**。
+
+> 💡 Client Secret 请妥善保管，视同密码处理。
+
+![钉钉开放平台 — 应用凭证页面](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+DingTalk+app+credentials+page)
+
+## 第二步 — 配置消息收发权限
+
+在钉钉应用详情页：
+
+1. 进入 **权限管理**。
+2. 开启 **企业内机器人接收消息** 和 **发送消息** 权限。
+3. 如需审批，提交审批（企业内部应用通常自动通过）。
+
+## 第三步 — 在 Yao Agents 中填写凭证
+
+1. 在 Mission Control 中，打开机器人的 **配置 → 集成** 面板。
+2. 展开 **钉钉** 卡片，将开关打开。
+3. 粘贴第一步获取的 **Client ID** 和 **Client Secret**。
+4. 点击 **验证连接**——显示绿色确认及应用名即表示成功。
+
+![机器人集成面板 — 钉钉卡片](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+DingTalk+card)
+
+## 第四步 — 在钉钉后台填写 Webhook 地址
+
+回到钉钉应用详情页：
+
+1. 进入 **开发配置 → 消息接收**。
+2. 将 **消息接收模式** 设为 HTTP 模式。
+3. 填写如下 Webhook 地址：
+   ```
+   https://<你的服务器地址>/v1/agent/robots/<robot_id>/connector/dingtalk
+   ```
+   将 `<你的服务器地址>` 替换为 Yao Agents 服务器的公网地址，`<robot_id>` 替换为 Mission Control 中显示的机器人 ID。
+4. 保存。
+
+## 第五步 — 添加机器人到群聊或发起单聊
+
+在钉钉中，进入群聊设置，添加该机器人；或在通讯录中搜索机器人名称，直接发起单聊。
+
+## 常见问题
+
+**验证按钮无法点击（灰色）。**
+Client ID 和 Client Secret 均填写后，验证按钮才会激活。
+
+**验证失败，提示"凭证无效"。**
+确认复制的是 Client ID（非 App Key）和正确的 Client Secret。在钉钉后台重新生成 Secret 并重新粘贴通常可解决。
+
+**发消息无回复。**
+确认 Webhook 地址填写正确，且 Yao Agents 服务器可从公网访问（非 `localhost`）。
+
+## 下一步
+
+- [连接飞书](/docs/zh-cn/integrations/lark)
+- [连接微信](/docs/zh-cn/integrations/wechat)
+- [API 直连](/docs/zh-cn/integrations/api-direct-connect)

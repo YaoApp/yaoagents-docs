@@ -4,4 +4,181 @@ slug: api-direct-connect
 
 # API直接接続
 
-OpenAI互換Chat Completionプロトコル。任意のツールからエージェントを呼び出し。
+UIを開かずにコードから直接ロボットを呼び出せます。2つのエンドポイントで完全なライフサイクルをカバーします：まず会話でゴールを確認し、次に実行をトリガーします。
+
+APIはOpenAI互換のため、OpenAI SDKがそのまま使えます。
+
+## 始める前に
+
+- ロボットがMission Controlで作成済みであること。
+- APIキーが必要です——**設定 → APIキー** で生成してください。
+- ロボットの **Robot ID**（`member_id`）を確認——Mission Controlのロボット設定ページで確認できます。
+- サーバーURL——`/.well-known/yao` にアクセスして `server_url` フィールドを取得します。
+
+## エンドポイント
+
+### Chat Completions（会話エンドポイント）
+
+ロボットのHost Agentと会話してゴールを確認してから実行を開始します。OpenAI互換でストリーミング対応です。
+
+```
+POST {server_url}/v1/agent/robots/{robot_id}/completions
+```
+
+**リクエストヘッダー**
+
+| Header | 値 |
+|--------|-----|
+| `Authorization` | `Bearer <APIキー>` |
+| `Content-Type` | `application/json` |
+
+**リクエストボディ**
+
+```json
+{
+  "messages": [{"role": "user", "content": "上位5社の競合他社を分析してレポートを作成して"}],
+  "stream": true
+}
+```
+
+**HTTP (curl)**
+
+```bash
+curl https://your-server/v1/agent/robots/my-robot/completions \
+  -H "Authorization: Bearer $YAO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"messages": [{"role": "user", "content": "こんにちは"}], "stream": true}'
+```
+
+**TypeScript**
+
+```typescript
+import OpenAI from 'openai'
+
+const client = new OpenAI({
+  baseURL: 'https://your-server/v1/agent/robots/my-robot',
+  apiKey: process.env.YAO_API_KEY,
+})
+
+const stream = await client.chat.completions.create({
+  model: 'default',
+  messages: [{ role: 'user', content: '上位5社の競合他社を分析して' }],
+  stream: true,
+})
+```
+
+**Python**
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://your-server/v1/agent/robots/my-robot",
+    api_key=os.environ["YAO_API_KEY"],
+)
+
+stream = client.chat.completions.create(
+    model="default",
+    messages=[{"role": "user", "content": "上位5社の競合他社を分析して"}],
+    stream=True,
+)
+```
+
+> 💡 Host Agentがゴールを確認する会話を行います。確認後、実行パイプラインに渡され、レスポンスに `execution_id` が返されます。
+
+---
+
+### Execute（直接実行エンドポイント）
+
+会話フローをスキップして、確認済みのゴールでロボットを直接トリガーします。実行内容が既に決まっているシステムに適しています。
+
+```
+POST {server_url}/v1/agent/robots/{robot_id}/execute
+```
+
+**リクエストボディフィールド**
+
+| フィールド | 型 | 必須 | 説明 |
+|-----------|-----|------|------|
+| `goals` | string | ✓ | タスクゴール（自然言語） |
+| `context` | object | — | パイプラインに渡す追加コンテキスト（任意） |
+| `chat_id` | string | — | チャットセッションとの関連付け（任意） |
+
+**レスポンス**
+
+```json
+{
+  "execution_id": "exec-abc123",
+  "status": "pending",
+  "message": "Execution started"
+}
+```
+
+**HTTP (curl)**
+
+```bash
+curl -X POST https://your-server/v1/agent/robots/my-robot/execute \
+  -H "Authorization: Bearer $YAO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "goals": "上位5社の競合他社を分析してMarkdownレポートを作成",
+    "context": { "format": "markdown" },
+    "chat_id": "session-001"
+  }'
+```
+
+**TypeScript**
+
+```typescript
+const res = await fetch('https://your-server/v1/agent/robots/my-robot/execute', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${process.env.YAO_API_KEY}`,
+  },
+  body: JSON.stringify({
+    goals: '上位5社の競合他社を分析してMarkdownレポートを作成',
+    context: { format: 'markdown' },
+    chat_id: 'session-001',
+  }),
+})
+const { execution_id, status } = await res.json()
+```
+
+**Python**
+
+```python
+import requests, os
+
+resp = requests.post(
+    "https://your-server/v1/agent/robots/my-robot/execute",
+    headers={"Authorization": f"Bearer {os.environ['YAO_API_KEY']}"},
+    json={
+        "goals": "上位5社の競合他社を分析してMarkdownレポートを作成",
+        "context": {"format": "markdown"},
+        "chat_id": "session-001",
+    },
+)
+execution_id = resp.json()["execution_id"]
+```
+
+## 典型的なフロー
+
+```
+あなたのコード                Yao Agents
+──────────────────────────────────────────────
+POST /completions   →   Host Agentがゴール確認
+                    ←   （ストリーミング返信）
+POST /completions   →   ユーザーが確認
+                    ←   execution_id返却
+
+POST /execute       →   直接実行トリガー
+                    ←   { execution_id, status: "pending" }
+```
+
+実行をトリガーした後、Mission Controlで進捗を確認するか、コードで実行ステータスをポーリングできます。
+
+## 次のステップ
+
+- [APIキー](/docs/ja-jp/integrations/api-keys) — 上記で使用するキーを生成
+- [Mission Control — 進捗と結果](/docs/ja-jp/mission-control/progress-and-results) — UIで実行を監視

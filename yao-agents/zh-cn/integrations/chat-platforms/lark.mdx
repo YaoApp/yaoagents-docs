@@ -1,0 +1,85 @@
+---
+slug: lark
+---
+
+# 连接飞书
+
+将机器人接入飞书，让团队成员在通讯录中找到它，直接发消息对话。
+
+你需要在飞书开放平台创建应用机器人，授予消息权限，再将 App ID 和 App Secret 粘贴到集成面板。
+
+## 开始之前
+
+- 机器人已在 Mission Control 中创建。
+- 拥有飞书组织的管理员权限（用于创建和发布应用）。
+
+## 第一步 — 创建飞书应用
+
+1. 打开 [飞书开放平台](https://open.feishu.cn/)（海外版访问 [Lark Open Platform](https://open.larksuite.com/)）并登录。
+2. 进入 **开发者后台 → 创建企业自建应用**。
+3. 填写应用名称和描述，点击 **确定创建**。
+4. 在应用详情页，进入 **凭证与基础信息**，复制 **App ID** 和 **App Secret**。
+
+> 💡 App Secret 创建后只显示一次，请立即复制并安全保存。
+
+![飞书开放平台 — 应用凭证页面](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Lark+app+credentials+page)
+
+## 第二步 — 开启机器人能力
+
+在应用详情页：
+
+1. 进入 **应用功能 → 机器人**。
+2. 开启机器人功能。
+3. 可选：设置机器人的名称和头像，用户在飞书中看到的就是这个。
+
+## 第三步 — 添加权限
+
+在应用详情页，进入 **权限管理**，添加以下权限：
+
+- `im:message` — 接收发给机器人的消息
+- `im:message:send_as_bot` — 以机器人身份发送消息
+
+## 第四步 — 在 Yao Agents 中填写凭证
+
+1. 在 Mission Control 中，打开机器人的 **配置 → 集成** 面板。
+2. 展开 **飞书** 卡片，将开关打开。
+3. 粘贴第一步获取的 **App ID** 和 **App Secret**。
+4. 点击 **验证连接**——显示绿色确认及应用名即表示成功。
+
+![机器人集成面板 — 飞书卡片](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Lark+card)
+
+## 第五步 — 配置事件订阅地址
+
+回到飞书开放平台，在应用详情页：
+
+1. 进入 **事件订阅**。
+2. 将 **请求地址** 设为：
+   ```
+   https://<你的服务器地址>/v1/agent/robots/<robot_id>/connector/feishu
+   ```
+   将 `<你的服务器地址>` 替换为 Yao Agents 服务器的公网地址，`<robot_id>` 替换为 Mission Control 中显示的机器人 ID。
+3. 订阅事件：**接收消息（im.message.receive_v1）**。
+4. 保存并验证——飞书会向该地址发送测试请求以确认可达。
+
+## 第六步 — 发布应用
+
+进入 **版本管理与发布**，创建版本并提交审核（企业自建应用通常自动通过）。
+
+发布后，团队成员即可在飞书通讯录中找到机器人并直接发消息。
+
+## 常见问题
+
+**验证失败。**
+确认 App ID 是以 `cli_` 开头的长字符串，而非 App Key。如需要，在后台重新生成 App Secret 后重试。
+
+**飞书 URL 验证失败。**
+Yao Agents 服务器必须可从公网访问。本地调试时可使用内网穿透工具（如 ngrok）。
+
+**用户在飞书中找不到机器人。**
+应用必须发布且对组织可见，成员才能在通讯录中搜索到。
+
+## 下一步
+
+- [连接钉钉](/docs/zh-cn/integrations/dingtalk)
+- [连接 Telegram](/docs/zh-cn/integrations/telegram)
+- [API 直连](/docs/zh-cn/integrations/api-direct-connect)

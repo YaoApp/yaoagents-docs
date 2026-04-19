@@ -1,0 +1,76 @@
+---
+slug: dingtalk
+---
+
+# Connect DingTalk
+
+Connect a robot to DingTalk so employees in your organization can send it messages — in a group chat or one-on-one.
+
+You'll create a DingTalk internal bot, copy its credentials, and paste them here.
+
+## Before You Start
+
+- Your robot must already be created in Mission Control.
+- You need admin access to your DingTalk organization (to create an internal application).
+
+## Step 1 — Create a DingTalk app
+
+1. Open [DingTalk Open Platform](https://open.dingtalk.com/) and sign in with your admin account.
+2. Go to **Application Development → Enterprise Internal App → Robot**.
+3. Click **Create App**, fill in the name and icon, and submit.
+4. In the app dashboard, go to **Credentials and Basic Info**. Copy the **Client ID** and **Client Secret**.
+
+> 💡 Keep the Client Secret private — treat it like a password.
+
+![DingTalk Open Platform — App credentials page](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+DingTalk+app+credentials+page)
+
+## Step 2 — Configure messaging permissions
+
+In the DingTalk app dashboard:
+
+1. Go to **Permission Management**.
+2. Enable **Robot Message Receiving** (企业内机器人接收消息) and **Send Messages** permissions.
+3. Submit for review if required (internal apps are usually auto-approved).
+
+## Step 3 — Paste credentials into Yao Agents
+
+1. In Mission Control, open your robot's **Config → Integration** panel.
+2. Expand the **DingTalk** card and toggle it **on**.
+3. Paste the **Client ID** and **Client Secret** from Step 1.
+4. Click **Verify** — you should see a green confirmation with the app name.
+
+![Robot Integration panel — DingTalk card with credentials](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+DingTalk+card)
+
+## Step 4 — Set the webhook endpoint in DingTalk
+
+Back in the DingTalk app dashboard:
+
+1. Go to **Development Configuration → Message Receiving**.
+2. Set the **Message Receive Mode** to HTTP mode.
+3. Enter the webhook URL:
+   ```
+   https://<your-yao-agents-server>/v1/agent/robots/<robot_id>/connector/dingtalk
+   ```
+   Replace `<your-yao-agents-server>` with your server's public URL and `<robot_id>` with the robot's ID shown in Mission Control.
+4. Save.
+
+## Step 5 — Add the bot to a group or start a direct chat
+
+In DingTalk, go to your group chat settings and add the bot. Or find the bot by name in the directory and send a direct message.
+
+## Troubleshooting
+
+**Verify button stays grey / disabled.**
+Both Client ID and Client Secret must be filled in before the Verify button activates.
+
+**Verification fails with "Invalid credentials".**
+Double-check that you copied the Client ID (not the App Key) and the correct Client Secret. Regenerating the secret in DingTalk and re-pasting usually fixes this.
+
+**Messages sent to the bot get no response.**
+Confirm the webhook URL in DingTalk is correct and that your Yao Agents server is publicly reachable from the internet (not just `localhost`).
+
+## What's Next
+
+- [Connect Lark](/docs/en-us/integrations/lark)
+- [Connect WeChat](/docs/en-us/integrations/wechat)
+- [API Direct Connect](/docs/en-us/integrations/api-direct-connect)

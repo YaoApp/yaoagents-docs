@@ -1,0 +1,72 @@
+---
+slug: discord
+---
+
+# Connect Discord
+
+Connect a robot to Discord so members of your server can mention it in any channel and get a response.
+
+You'll create a Discord application and bot, copy its token, and paste it here.
+
+## Before You Start
+
+- Your robot must already be created in Mission Control.
+- A Discord account with permission to manage the server you want to add the bot to.
+- Your Yao Agents server must be reachable from the internet.
+
+## Step 1 — Create a Discord application
+
+1. Open [Discord Developer Portal](https://discord.com/developers/applications) and sign in.
+2. Click **New Application**, give it a name, and click **Create**.
+3. In the left sidebar, go to **Bot** and click **Add Bot** → **Yes, do it!**
+4. Under **Token**, click **Reset Token** and copy the token.
+
+> ⚠️ Store the token securely — you won't be able to see it again after leaving this page. If lost, reset it.
+
+![Discord Developer Portal — Bot page with token](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Discord+Developer+Portal+%E2%80%94+Bot+token+page)
+
+## Step 2 — Set bot permissions
+
+Still on the **Bot** page:
+
+1. Under **Privileged Gateway Intents**, enable **Message Content Intent** — required to read message content.
+2. Save changes.
+
+## Step 3 — Invite the bot to your server
+
+1. Go to **OAuth2 → URL Generator**.
+2. Under **Scopes**, check `bot`.
+3. Under **Bot Permissions**, check at minimum: **Send Messages**, **Read Message History**, **View Channels**.
+4. Copy the generated URL and open it in a browser.
+5. Select the server and click **Authorize**.
+
+## Step 4 — Paste credentials into Yao Agents
+
+1. In Mission Control, open your robot's **Config → Integration** panel.
+2. Expand the **Discord** card and toggle it **on**.
+3. Paste the **Bot Token** from Step 1.
+4. *(Optional)* Paste the **Application ID** — found on the app's **General Information** page. Used for slash command registration if needed.
+5. Click **Verify** — a green confirmation with the bot's username means it's connected.
+
+![Robot Integration panel — Discord card with token](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Discord+card)
+
+## Step 5 — Save and test
+
+Click **Save**. Go to your Discord server, mention the bot in any channel (e.g. `@MyRobot hello`), and it should reply.
+
+## Troubleshooting
+
+**Verify fails with "401 Unauthorized".**
+The token is invalid. Reset the token in the Developer Portal and paste the new one.
+
+**Bot is online but doesn't respond to messages.**
+Check that **Message Content Intent** is enabled (Step 2). Without it, the bot cannot read message text.
+
+**Bot was invited but doesn't appear in the server.**
+Make sure the invite URL included the `bot` scope and that you authorized it for the correct server.
+
+## What's Next
+
+- [Connect Telegram](/docs/en-us/integrations/telegram)
+- [API Direct Connect](/docs/en-us/integrations/api-direct-connect)
+- [Mission Control — Robot overview](/docs/en-us/mission-control/robots)

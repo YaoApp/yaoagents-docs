@@ -35,6 +35,8 @@ interface Page {
   slug: string;
   title: string;
   summary: string;
+  /** If set, this page entry expands a sub-section directory instead of a single .mdx file */
+  children?: string;
 }
 
 interface Section {
@@ -197,8 +199,7 @@ const yaoAgents: Product = {
         },
         "ja-jp": {
           title: "はじめに",
-          summary:
-            "インストールから製品のコアを理解するまで、必読ガイド。",
+          summary: "インストールから製品のコアを理解するまで、必読ガイド。",
           pages: [
             {
               slug: "what-is-yao-agents",
@@ -342,8 +343,7 @@ const yaoAgents: Product = {
             {
               slug: "progress-and-results",
               title: "Progress & Results",
-              summary:
-                "Running status, logs, deliverables, pause and resume.",
+              summary: "Running status, logs, deliverables, pause and resume.",
             },
             {
               slug: "scheduling-and-triggers",
@@ -360,8 +360,7 @@ const yaoAgents: Product = {
             {
               slug: "what-is-mission-control",
               title: "什么是任务控制中心",
-              summary:
-                "核心理念：你是总指挥，编排一组专家完成一件事。",
+              summary: "核心理念：你是总指挥，编排一组专家完成一件事。",
             },
             {
               slug: "creating-a-robot",
@@ -387,8 +386,7 @@ const yaoAgents: Product = {
             {
               slug: "what-is-mission-control",
               title: "什麼是任務控制中心",
-              summary:
-                "核心理念：你是總指揮，編排一組專家完成一件事。",
+              summary: "核心理念：你是總指揮，編排一組專家完成一件事。",
             },
             {
               slug: "creating-a-robot",
@@ -450,7 +448,8 @@ const yaoAgents: Product = {
             {
               slug: "hub-overview",
               title: "Hub Overview",
-              summary: "What is Yao Agents Hub, browsing and discovering agents.",
+              summary:
+                "What is Yao Agents Hub, browsing and discovering agents.",
             },
             {
               slug: "custom-assistants",
@@ -481,118 +480,130 @@ const yaoAgents: Product = {
           title: "Yao Agents Hub",
           summary: "擴展 Agent 能力：安裝現成的，或自己建立。",
           pages: [
-            { slug: "hub-overview", title: "Hub 概覽", summary: "什麼是 Yao Agents Hub、瀏覽與發現。" },
-            { slug: "custom-assistants", title: "自訂 AI 專家", summary: "新增 AI 專家的幾種方式：Yao Agents Hub 安裝、AI 開發專家建立、撰寫程式碼、探索第三方生態。" },
+            {
+              slug: "hub-overview",
+              title: "Hub 概覽",
+              summary: "什麼是 Yao Agents Hub、瀏覽與發現。",
+            },
+            {
+              slug: "custom-assistants",
+              title: "自訂 AI 專家",
+              summary:
+                "新增 AI 專家的幾種方式：Yao Agents Hub 安裝、AI 開發專家建立、撰寫程式碼、探索第三方生態。",
+            },
           ],
         },
         "ja-jp": {
           title: "Yao Agents Hub",
           summary: "機能拡張：既製エージェントのインストールまたは自作。",
           pages: [
-            { slug: "hub-overview", title: "Hub 概要", summary: "Yao Agents Hubとは、エージェントの閲覧と発見。" },
-            { slug: "custom-assistants", title: "カスタムAIエキスパート", summary: "AIエキスパートを追加する方法：Yao Agents Hub、AI開発エキスパート、コーディング、サードパーティエコシステム。" },
+            {
+              slug: "hub-overview",
+              title: "Hub 概要",
+              summary: "Yao Agents Hubとは、エージェントの閲覧と発見。",
+            },
+            {
+              slug: "custom-assistants",
+              title: "カスタムAIエキスパート",
+              summary:
+                "AIエキスパートを追加する方法：Yao Agents Hub、AI開発エキスパート、コーディング、サードパーティエコシステム。",
+            },
           ],
         },
       },
     },
 
     // ── E. Integrations ──
+    // chat-platforms is a sub-section: referenced via page.children = "chat-platforms"
+    // This puts it first in the sidebar, above api-direct-connect and api-keys.
     {
       slug: "integrations",
+      children: [
+        {
+          slug: "chat-platforms",
+          locales: {
+            "en-us": {
+              title: "Chat Platforms (IM)",
+              summary: "Connect robots to messaging platforms so users can chat without any extra software.",
+              pages: [
+                { slug: "telegram", title: "Telegram", summary: "Connect a Telegram Bot using a token from @BotFather." },
+                { slug: "discord",  title: "Discord",  summary: "Connect a Discord Bot from the Developer Portal." },
+                { slug: "wechat",   title: "WeChat",   summary: "Scan QR code to connect WeChat — users chat with the robot directly in WeChat." },
+                { slug: "lark",     title: "Lark",     summary: "Connect a Lark (Feishu) bot with App ID + App Secret." },
+                { slug: "dingtalk", title: "DingTalk", summary: "Connect a DingTalk enterprise bot with Client ID + Client Secret." },
+              ],
+            },
+            "zh-cn": {
+              title: "聊天平台 (IM)",
+              summary: "将机器人接入即时通讯平台，用户无需安装任何插件即可对话。",
+              pages: [
+                { slug: "wechat",   title: "微信",     summary: "扫码连接微信，用户直接在微信中与机器人对话。" },
+                { slug: "lark",     title: "飞书",     summary: "通过 App ID + App Secret 接入飞书机器人。" },
+                { slug: "dingtalk", title: "钉钉",     summary: "通过 Client ID + Client Secret 接入钉钉企业机器人。" },
+                { slug: "telegram", title: "Telegram", summary: "通过 @BotFather 获取 Token 接入 Telegram Bot。" },
+                { slug: "discord",  title: "Discord",  summary: "从 Discord Developer Portal 接入 Discord Bot。" },
+              ],
+            },
+            "zh-tw": {
+              title: "聊天平台 (IM)",
+              summary: "將機器人接入即時通訊平台，用戶無需安裝任何插件即可對話。",
+              pages: [
+                { slug: "wechat",   title: "微信",     summary: "掃碼連接微信，用戶直接在微信中與機器人對話。" },
+                { slug: "lark",     title: "飛書",     summary: "透過 App ID + App Secret 接入飛書機器人。" },
+                { slug: "dingtalk", title: "釘釘",     summary: "透過 Client ID + Client Secret 接入釘釘企業機器人。" },
+                { slug: "telegram", title: "Telegram", summary: "透過 @BotFather 取得 Token 接入 Telegram Bot。" },
+                { slug: "discord",  title: "Discord",  summary: "從 Discord Developer Portal 接入 Discord Bot。" },
+              ],
+            },
+            "ja-jp": {
+              title: "チャットプラットフォーム (IM)",
+              summary: "ロボットをメッセージングプラットフォームに接続。ユーザーは追加ソフトなしで会話できます。",
+              pages: [
+                { slug: "wechat",   title: "WeChat",   summary: "QRコードをスキャンしてWeChatに接続。ユーザーはWeChat上で直接ロボットと会話。" },
+                { slug: "lark",     title: "Lark",     summary: "App ID + App SecretでLark（Feishu）ボットに接続。" },
+                { slug: "dingtalk", title: "DingTalk", summary: "Client ID + Client SecretでDingTalk企業ボットに接続。" },
+                { slug: "telegram", title: "Telegram", summary: "@BotFatherからトークンを取得してTelegramボットに接続。" },
+                { slug: "discord",  title: "Discord",  summary: "Discord Developer PortalからDiscordボットに接続。" },
+              ],
+            },
+          },
+        },
+      ],
       locales: {
         "en-us": {
           title: "Integrations",
-          summary:
-            "Outbound: connect to IM platforms and APIs. Inbound: connect AI models and MCP tools.",
+          summary: "Connect robots to messaging platforms and APIs.",
           pages: [
-            {
-              slug: "chat-platforms",
-              title: "Chat Platforms (IM)",
-              summary:
-                "Bind assistants/robots to Slack, WeChat, DingTalk, Feishu, Telegram, Discord.",
-            },
-            {
-              slug: "api-direct-connect",
-              title: "API Direct Connect",
-              summary:
-                "OpenAI-compatible Chat Completion protocol. Call your agents from any OpenAI-compatible tool.",
-            },
-            {
-              slug: "api-keys",
-              title: "API Keys",
-              summary:
-                "Generate and manage API keys for authenticating external calls to Yao Agents.",
-            },
-            {
-              slug: "ai-models",
-              title: "AI Models",
-              summary:
-                "Configure AI connectors: OpenAI, Claude, local models, etc.",
-            },
-            {
-              slug: "mcp-tools",
-              title: "MCP Tools",
-              summary:
-                "Connect external MCP servers to extend the tools available to assistants.",
-            },
+            { slug: "chat-platforms",     title: "Chat Platforms (IM)", summary: "Connect robots to messaging platforms so users can chat without any extra software.", children: "chat-platforms" },
+            { slug: "api-direct-connect", title: "API Direct Connect",  summary: "OpenAI-compatible Chat Completion protocol. Call your agents from any OpenAI-compatible tool." },
+            { slug: "api-keys",           title: "API Keys",            summary: "Generate and manage API keys for authenticating external calls to Yao Agents." },
           ],
         },
         "zh-cn": {
           title: "集成",
-          summary:
-            "向外：接入 IM 平台和 API；向内：连接 AI 模型和 MCP 工具。",
+          summary: "将机器人接入即时通讯平台和 API。",
           pages: [
-            {
-              slug: "chat-platforms",
-              title: "聊天平台 (IM)",
-              summary:
-                "将助手/机器人绑定到 Slack、微信、钉钉、飞书、Telegram、Discord。",
-            },
-            {
-              slug: "api-direct-connect",
-              title: "API 直连",
-              summary:
-                "兼容 OpenAI Chat Completion 协议，从任何 OpenAI 兼容工具调用你的 Agent。",
-            },
-            {
-              slug: "api-keys",
-              title: "API 密钥",
-              summary:
-                "生成和管理 API Key，用于外部调用 Yao Agents 接口的认证。",
-            },
-            {
-              slug: "ai-models",
-              title: "AI 模型",
-              summary:
-                "配置 AI 连接器：OpenAI / Claude / 本地模型等。",
-            },
-            {
-              slug: "mcp-tools",
-              title: "MCP 工具",
-              summary: "连接外部 MCP 服务器，扩展助手可用的工具。",
-            },
+            { slug: "chat-platforms",     title: "聊天平台 (IM)", summary: "将机器人接入即时通讯平台，用户无需安装任何插件即可对话。", children: "chat-platforms" },
+            { slug: "api-direct-connect", title: "API 直连",      summary: "兼容 OpenAI Chat Completion 协议，从任何 OpenAI 兼容工具调用你的 Agent。" },
+            { slug: "api-keys",           title: "API 密钥",      summary: "生成和管理 API Key，用于外部调用 Yao Agents 接口的认证。" },
           ],
         },
         "zh-tw": {
           title: "整合",
-          summary: "向外：接入 IM 平台和 API；向內：連接 AI 模型和 MCP 工具。",
+          summary: "將機器人接入即時通訊平台和 API。",
           pages: [
-            { slug: "chat-platforms", title: "聊天平台 (IM)", summary: "將助手/機器人綁定到 Slack、微信、釘釘、飛書、Telegram、Discord。" },
-            { slug: "api-direct-connect", title: "API 直連", summary: "相容 OpenAI Chat Completion 協定，從任何相容工具呼叫你的 Agent。" },
-            { slug: "api-keys", title: "API 金鑰", summary: "產生和管理 API Key，用於外部呼叫 Yao Agents 介面的認證。" },
-            { slug: "ai-models", title: "AI 模型", summary: "設定 AI 連接器：OpenAI / Claude / 本地模型等。" },
-            { slug: "mcp-tools", title: "MCP 工具", summary: "連接外部 MCP 伺服器，擴展助手可用的工具。" },
+            { slug: "chat-platforms",     title: "聊天平台 (IM)", summary: "將機器人接入即時通訊平台，用戶無需安裝任何插件即可對話。", children: "chat-platforms" },
+            { slug: "api-direct-connect", title: "API 直連",      summary: "相容 OpenAI Chat Completion 協定，從任何相容工具呼叫你的 Agent。" },
+            { slug: "api-keys",           title: "API 金鑰",      summary: "產生和管理 API Key，用於外部呼叫 Yao Agents 介面的認證。" },
           ],
         },
         "ja-jp": {
           title: "統合",
-          summary: "外向き：IMプラットフォームとAPIに接続。内向き：AIモデルとMCPツールに接続。",
+          summary: "ロボットをメッセージングプラットフォームとAPIに接続。",
           pages: [
-            { slug: "chat-platforms", title: "チャットプラットフォーム (IM)", summary: "アシスタント/ロボットをSlack、WeChat、DingTalk、Feishu、Telegram、Discordにバインド。" },
-            { slug: "api-direct-connect", title: "API直接接続", summary: "OpenAI互換Chat Completionプロトコル。任意のツールからエージェントを呼び出し。" },
-            { slug: "api-keys", title: "APIキー", summary: "外部からYao Agentsを呼び出すためのAPIキーの生成と管理。" },
-            { slug: "ai-models", title: "AIモデル", summary: "AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。" },
-            { slug: "mcp-tools", title: "MCPツール", summary: "外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。" },
+            { slug: "chat-platforms",     title: "チャットプラットフォーム (IM)", summary: "ロボットをメッセージングプラットフォームに接続。ユーザーは追加ソフトなしで会話できます。", children: "chat-platforms" },
+            { slug: "api-direct-connect", title: "API直接接続",                   summary: "OpenAI互換Chat Completionプロトコル。任意のツールからエージェントを呼び出し。" },
+            { slug: "api-keys",           title: "APIキー",                        summary: "外部からYao Agentsを呼び出すためのAPIキーの生成と管理。" },
           ],
         },
       },
@@ -604,62 +615,212 @@ const yaoAgents: Product = {
       locales: {
         "en-us": {
           title: "Tai Link",
-          summary: "Device connectivity guide — connect your devices and let agents work across them.",
+          summary:
+            "Device connectivity guide — connect your devices and let agents work across them.",
           pages: [
-            { slug: "what-is-tai-link", title: "What Is Tai Link", summary: "Product positioning: let agents control your other devices." },
-            { slug: "installation", title: "Installation", summary: "Install the Tai Link client on each platform." },
-            { slug: "connect-first-device", title: "Connect Your First Device", summary: "Scan QR code or enter pairing code to complete the connection." },
-            { slug: "device-management", title: "Device Management", summary: "View device list, online status, naming." },
-            { slug: "remote-operations", title: "Remote Operations", summary: "Control remote devices through agents." },
-            { slug: "file-sync", title: "File Sync", summary: "Sync files between devices." },
-            { slug: "remote-desktop", title: "Remote Desktop", summary: "VNC remote viewing and control." },
-            { slug: "security-and-privacy", title: "Security & Privacy", summary: "Connection encryption, authorization management, disconnect devices." },
-            { slug: "tunnel-mode", title: "Tunnel Mode", summary: "NAT traversal, no port forwarding required." },
+            {
+              slug: "what-is-tai-link",
+              title: "What Is Tai Link",
+              summary:
+                "Product positioning: let agents control your other devices.",
+            },
+            {
+              slug: "installation",
+              title: "Installation",
+              summary: "Install the Tai Link client on each platform.",
+            },
+            {
+              slug: "connect-first-device",
+              title: "Connect Your First Device",
+              summary:
+                "Scan QR code or enter pairing code to complete the connection.",
+            },
+            {
+              slug: "device-management",
+              title: "Device Management",
+              summary: "View device list, online status, naming.",
+            },
+            {
+              slug: "remote-operations",
+              title: "Remote Operations",
+              summary: "Control remote devices through agents.",
+            },
+            {
+              slug: "file-sync",
+              title: "File Sync",
+              summary: "Sync files between devices.",
+            },
+            {
+              slug: "remote-desktop",
+              title: "Remote Desktop",
+              summary: "VNC remote viewing and control.",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "Security & Privacy",
+              summary:
+                "Connection encryption, authorization management, disconnect devices.",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "Tunnel Mode",
+              summary: "NAT traversal, no port forwarding required.",
+            },
           ],
         },
         "zh-cn": {
           title: "Tai Link",
           summary: "设备连接指南——连接你的设备，让 Agent 跨设备工作。",
           pages: [
-            { slug: "what-is-tai-link", title: "什么是 Tai Link", summary: "产品定位：让 Agent 控制你的其他设备。" },
-            { slug: "installation", title: "安装", summary: "在各平台安装 Tai Link 客户端。" },
-            { slug: "connect-first-device", title: "连接第一台设备", summary: "扫描二维码或输入配对码完成连接。" },
-            { slug: "device-management", title: "设备管理", summary: "查看设备列表、在线状态、设备命名。" },
-            { slug: "remote-operations", title: "远程操作", summary: "通过 Agent 控制远程设备。" },
-            { slug: "file-sync", title: "文件同步", summary: "在设备之间同步文件。" },
-            { slug: "remote-desktop", title: "远程桌面", summary: "VNC 远程查看和控制。" },
-            { slug: "security-and-privacy", title: "安全与隐私", summary: "连接加密、授权管理、断开设备。" },
-            { slug: "tunnel-mode", title: "隧道模式", summary: "NAT 穿透，无需端口转发。" },
+            {
+              slug: "what-is-tai-link",
+              title: "什么是 Tai Link",
+              summary: "产品定位：让 Agent 控制你的其他设备。",
+            },
+            {
+              slug: "installation",
+              title: "安装",
+              summary: "在各平台安装 Tai Link 客户端。",
+            },
+            {
+              slug: "connect-first-device",
+              title: "连接第一台设备",
+              summary: "扫描二维码或输入配对码完成连接。",
+            },
+            {
+              slug: "device-management",
+              title: "设备管理",
+              summary: "查看设备列表、在线状态、设备命名。",
+            },
+            {
+              slug: "remote-operations",
+              title: "远程操作",
+              summary: "通过 Agent 控制远程设备。",
+            },
+            {
+              slug: "file-sync",
+              title: "文件同步",
+              summary: "在设备之间同步文件。",
+            },
+            {
+              slug: "remote-desktop",
+              title: "远程桌面",
+              summary: "VNC 远程查看和控制。",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "安全与隐私",
+              summary: "连接加密、授权管理、断开设备。",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "隧道模式",
+              summary: "NAT 穿透，无需端口转发。",
+            },
           ],
         },
         "zh-tw": {
           title: "Tai Link",
           summary: "裝置連線指南——連接你的裝置，讓 Agent 跨裝置工作。",
           pages: [
-            { slug: "what-is-tai-link", title: "什麼是 Tai Link", summary: "產品定位：讓 Agent 控制你的其他裝置。" },
-            { slug: "installation", title: "安裝", summary: "在各平台安裝 Tai Link 客戶端。" },
-            { slug: "connect-first-device", title: "連接第一台裝置", summary: "掃描 QR Code 或輸入配對碼完成連線。" },
-            { slug: "device-management", title: "裝置管理", summary: "查看裝置列表、線上狀態、裝置命名。" },
-            { slug: "remote-operations", title: "遠端操作", summary: "透過 Agent 控制遠端裝置。" },
-            { slug: "file-sync", title: "檔案同步", summary: "在裝置之間同步檔案。" },
-            { slug: "remote-desktop", title: "遠端桌面", summary: "VNC 遠端查看與控制。" },
-            { slug: "security-and-privacy", title: "安全與隱私", summary: "連線加密、授權管理、斷開裝置。" },
-            { slug: "tunnel-mode", title: "隧道模式", summary: "NAT 穿透，無需連接埠轉發。" },
+            {
+              slug: "what-is-tai-link",
+              title: "什麼是 Tai Link",
+              summary: "產品定位：讓 Agent 控制你的其他裝置。",
+            },
+            {
+              slug: "installation",
+              title: "安裝",
+              summary: "在各平台安裝 Tai Link 客戶端。",
+            },
+            {
+              slug: "connect-first-device",
+              title: "連接第一台裝置",
+              summary: "掃描 QR Code 或輸入配對碼完成連線。",
+            },
+            {
+              slug: "device-management",
+              title: "裝置管理",
+              summary: "查看裝置列表、線上狀態、裝置命名。",
+            },
+            {
+              slug: "remote-operations",
+              title: "遠端操作",
+              summary: "透過 Agent 控制遠端裝置。",
+            },
+            {
+              slug: "file-sync",
+              title: "檔案同步",
+              summary: "在裝置之間同步檔案。",
+            },
+            {
+              slug: "remote-desktop",
+              title: "遠端桌面",
+              summary: "VNC 遠端查看與控制。",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "安全與隱私",
+              summary: "連線加密、授權管理、斷開裝置。",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "隧道模式",
+              summary: "NAT 穿透，無需連接埠轉發。",
+            },
           ],
         },
         "ja-jp": {
           title: "Tai Link",
-          summary: "デバイス接続ガイド——デバイスを接続してエージェントをクロスデバイスで動作させる。",
+          summary:
+            "デバイス接続ガイド——デバイスを接続してエージェントをクロスデバイスで動作させる。",
           pages: [
-            { slug: "what-is-tai-link", title: "Tai Linkとは", summary: "製品の位置づけ：エージェントが他のデバイスを制御。" },
-            { slug: "installation", title: "インストール", summary: "各プラットフォームにTai Linkクライアントをインストール。" },
-            { slug: "connect-first-device", title: "最初のデバイスを接続", summary: "QRコードスキャンまたはペアリングコード入力で接続完了。" },
-            { slug: "device-management", title: "デバイス管理", summary: "デバイスリスト、オンライン状態、デバイス名の管理。" },
-            { slug: "remote-operations", title: "リモート操作", summary: "エージェントを通じてリモートデバイスを制御。" },
-            { slug: "file-sync", title: "ファイル同期", summary: "デバイス間でファイルを同期。" },
-            { slug: "remote-desktop", title: "リモートデスクトップ", summary: "VNCリモート表示と制御。" },
-            { slug: "security-and-privacy", title: "セキュリティとプライバシー", summary: "接続暗号化、認証管理、デバイスの切断。" },
-            { slug: "tunnel-mode", title: "トンネルモード", summary: "NATトラバーサル、ポート転送不要。" },
+            {
+              slug: "what-is-tai-link",
+              title: "Tai Linkとは",
+              summary: "製品の位置づけ：エージェントが他のデバイスを制御。",
+            },
+            {
+              slug: "installation",
+              title: "インストール",
+              summary:
+                "各プラットフォームにTai Linkクライアントをインストール。",
+            },
+            {
+              slug: "connect-first-device",
+              title: "最初のデバイスを接続",
+              summary: "QRコードスキャンまたはペアリングコード入力で接続完了。",
+            },
+            {
+              slug: "device-management",
+              title: "デバイス管理",
+              summary: "デバイスリスト、オンライン状態、デバイス名の管理。",
+            },
+            {
+              slug: "remote-operations",
+              title: "リモート操作",
+              summary: "エージェントを通じてリモートデバイスを制御。",
+            },
+            {
+              slug: "file-sync",
+              title: "ファイル同期",
+              summary: "デバイス間でファイルを同期。",
+            },
+            {
+              slug: "remote-desktop",
+              title: "リモートデスクトップ",
+              summary: "VNCリモート表示と制御。",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "セキュリティとプライバシー",
+              summary: "接続暗号化、認証管理、デバイスの切断。",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "トンネルモード",
+              summary: "NATトラバーサル、ポート転送不要。",
+            },
           ],
         },
       },
@@ -807,7 +968,8 @@ const yaoAgents: Product = {
             {
               slug: "insights",
               title: "Insights（数据分析）",
-              summary: "连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。",
+              summary:
+                "连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。",
             },
             {
               slug: "scout",
@@ -822,12 +984,14 @@ const yaoAgents: Product = {
             {
               slug: "transformer",
               title: "Transformer（数据转换）",
-              summary: "将图片、PDF、JSON、CSV 转换为结构化格式，支持 Vision LLM OCR。",
+              summary:
+                "将图片、PDF、JSON、CSV 转换为结构化格式，支持 Vision LLM OCR。",
             },
             {
               slug: "website",
               title: "Web Builder（网站构建）",
-              summary: "企业官网、落地页、表单应用，Next.js + Tailwind，VNC 预览 + SSH 部署。",
+              summary:
+                "企业官网、落地页、表单应用，Next.js + Tailwind，VNC 预览 + SSH 部署。",
             },
             {
               slug: "applet",
@@ -837,13 +1001,13 @@ const yaoAgents: Product = {
             {
               slug: "report-writer",
               title: "Report Writer（报告撰写）",
-              summary: "机器人类型。在任务编排中自动生成结构化 Markdown 分析报告。",
+              summary:
+                "机器人类型。在任务编排中自动生成结构化 Markdown 分析报告。",
             },
             {
               slug: "robot-host",
               title: "Robot Host（接单）",
-              summary:
-                "流水线智能体。人机交互中介、接收输入、反馈状态。",
+              summary: "流水线智能体。人机交互中介、接收输入、反馈状态。",
             },
             {
               slug: "robot-goals",
@@ -874,49 +1038,199 @@ const yaoAgents: Product = {
         },
         "zh-tw": {
           title: "內建智能體",
-          summary:
-            "所有隨產品預裝的智能體。每個有獨立詳情頁。",
+          summary: "所有隨產品預裝的智能體。每個有獨立詳情頁。",
           pages: [
-            { slug: "general", title: "General（通用助手）", summary: "日常問答、通用任務、新手首選。" },
-            { slug: "keeper", title: "Keeper（知識庫管理）", summary: "儲存/檢索內容、分類標籤、外部資料匯入。" },
-            { slug: "pm", title: "PM（專案經理）", summary: "專案管理、任務拆解與追蹤、團隊協作。" },
-            { slug: "postman", title: "Postman（郵件助手）", summary: "郵件撰寫、定時發送、郵件範本。" },
-            { slug: "insights", title: "Insights（資料分析）", summary: "連接資料庫、讀取表格、建構 ECharts 互動看板，VNC 即時預覽。" },
-            { slug: "scout", title: "Market Scout（市場情報）", summary: "自動讀取訂閱源、擷取最新內容、分類歸檔市場洞察。" },
-            { slug: "slides", title: "Slides（簡報製作）", summary: "從大綱或文件生成專業 HTML 簡報並匯出 PDF。" },
-            { slug: "transformer", title: "Transformer（資料轉換）", summary: "將圖片、PDF、JSON、CSV 轉換為結構化格式，支援 Vision LLM OCR。" },
-            { slug: "website", title: "Web Builder（網站建構）", summary: "企業官網、落地頁、表單應用，Next.js + Tailwind，VNC 預覽 + SSH 部署。" },
-            { slug: "applet", title: "Applet Workshop（小工具開發）", summary: "快速生成可視化 mini-tool，Node.js + VNC 即時預覽。" },
-            { slug: "report-writer", title: "Report Writer（報告撰寫）", summary: "機器人類型。在任務編排中自動生成結構化 Markdown 分析報告。" },
-            { slug: "robot-host", title: "Robot Host（接單）", summary: "流水線智能體。人機互動中介。" },
-            { slug: "robot-goals", title: "Robot Goals（定目標）", summary: "流水線智能體。理解需求、拆解為可執行目標。" },
-            { slug: "robot-inspiration", title: "Robot Inspiration（找靈感）", summary: "流水線智能體。搜尋資訊、收集參考資料。" },
-            { slug: "robot-tasks", title: "Robot Tasks（幹活）", summary: "流水線智能體。按目標逐步執行具體工作。" },
-            { slug: "robot-validation", title: "Robot Validation（驗收）", summary: "流水線智能體。驗證產出品質、發現問題。" },
-            { slug: "robot-delivery", title: "Robot Delivery（交付）", summary: "流水線智能體。整理最終成果、交付輸出。" },
+            {
+              slug: "general",
+              title: "General（通用助手）",
+              summary: "日常問答、通用任務、新手首選。",
+            },
+            {
+              slug: "keeper",
+              title: "Keeper（知識庫管理）",
+              summary: "儲存/檢索內容、分類標籤、外部資料匯入。",
+            },
+            {
+              slug: "pm",
+              title: "PM（專案經理）",
+              summary: "專案管理、任務拆解與追蹤、團隊協作。",
+            },
+            {
+              slug: "postman",
+              title: "Postman（郵件助手）",
+              summary: "郵件撰寫、定時發送、郵件範本。",
+            },
+            {
+              slug: "insights",
+              title: "Insights（資料分析）",
+              summary:
+                "連接資料庫、讀取表格、建構 ECharts 互動看板，VNC 即時預覽。",
+            },
+            {
+              slug: "scout",
+              title: "Market Scout（市場情報）",
+              summary: "自動讀取訂閱源、擷取最新內容、分類歸檔市場洞察。",
+            },
+            {
+              slug: "slides",
+              title: "Slides（簡報製作）",
+              summary: "從大綱或文件生成專業 HTML 簡報並匯出 PDF。",
+            },
+            {
+              slug: "transformer",
+              title: "Transformer（資料轉換）",
+              summary:
+                "將圖片、PDF、JSON、CSV 轉換為結構化格式，支援 Vision LLM OCR。",
+            },
+            {
+              slug: "website",
+              title: "Web Builder（網站建構）",
+              summary:
+                "企業官網、落地頁、表單應用，Next.js + Tailwind，VNC 預覽 + SSH 部署。",
+            },
+            {
+              slug: "applet",
+              title: "Applet Workshop（小工具開發）",
+              summary: "快速生成可視化 mini-tool，Node.js + VNC 即時預覽。",
+            },
+            {
+              slug: "report-writer",
+              title: "Report Writer（報告撰寫）",
+              summary:
+                "機器人類型。在任務編排中自動生成結構化 Markdown 分析報告。",
+            },
+            {
+              slug: "robot-host",
+              title: "Robot Host（接單）",
+              summary: "流水線智能體。人機互動中介。",
+            },
+            {
+              slug: "robot-goals",
+              title: "Robot Goals（定目標）",
+              summary: "流水線智能體。理解需求、拆解為可執行目標。",
+            },
+            {
+              slug: "robot-inspiration",
+              title: "Robot Inspiration（找靈感）",
+              summary: "流水線智能體。搜尋資訊、收集參考資料。",
+            },
+            {
+              slug: "robot-tasks",
+              title: "Robot Tasks（幹活）",
+              summary: "流水線智能體。按目標逐步執行具體工作。",
+            },
+            {
+              slug: "robot-validation",
+              title: "Robot Validation（驗收）",
+              summary: "流水線智能體。驗證產出品質、發現問題。",
+            },
+            {
+              slug: "robot-delivery",
+              title: "Robot Delivery（交付）",
+              summary: "流水線智能體。整理最終成果、交付輸出。",
+            },
           ],
         },
         "ja-jp": {
           title: "組み込みエージェント",
-          summary: "製品にプリインストールされた全エージェント。各詳細ページあり。",
+          summary:
+            "製品にプリインストールされた全エージェント。各詳細ページあり。",
           pages: [
-            { slug: "general", title: "General（汎用アシスタント）", summary: "日常Q&A、汎用タスク、初心者向け。" },
-            { slug: "keeper", title: "Keeper（ナレッジベース）", summary: "コンテンツの保存/検索、タグ分類、外部データインポート。" },
-            { slug: "pm", title: "PM（プロジェクトマネージャー）", summary: "プロジェクト管理、タスク分解、チーム連携。" },
-            { slug: "postman", title: "Postman（メールアシスタント）", summary: "メール作成、予約送信、テンプレート。" },
-            { slug: "insights", title: "Insights（データ分析）", summary: "データベース接続、スプレッドシート読み込み、EChartsダッシュボード構築、VNCライブプレビュー。" },
-            { slug: "scout", title: "Market Scout（マーケット情報）", summary: "購読フィードを自動取得、記事分類、市場インサイトを整理。" },
-            { slug: "slides", title: "Slides（スライド作成）", summary: "アウトラインや文書からHTML形式のプロスライドを生成し、PDFエクスポート。" },
-            { slug: "transformer", title: "Transformer（データ変換）", summary: "画像・PDF・JSON・CSVを構造化形式に変換、Vision LLM OCR対応。" },
-            { slug: "website", title: "Web Builder（ウェブサイト構築）", summary: "企業サイト・ランディングページ・フォームアプリ、Next.js + Tailwind、VNCプレビュー + SSHデプロイ。" },
-            { slug: "applet", title: "Applet Workshop（ミニアプリ）", summary: "Node.jsでビジュアルミニツールを素早く生成、VNCライブプレビュー。" },
-            { slug: "report-writer", title: "Report Writer（レポート作成）", summary: "ロボットタイプ。タスクオーケストレーションで構造化Markdownレポートを自動生成。" },
-            { slug: "robot-host", title: "Robot Host（受付）", summary: "パイプラインエージェント。入力収集、ステータスフィードバック。" },
-            { slug: "robot-goals", title: "Robot Goals（目標設定）", summary: "パイプラインエージェント。要件理解、実行可能な目標に分解。" },
-            { slug: "robot-inspiration", title: "Robot Inspiration（インスピレーション）", summary: "パイプラインエージェント。情報検索、参考資料収集。" },
-            { slug: "robot-tasks", title: "Robot Tasks（実行）", summary: "パイプラインエージェント。目標に沿って作業を実行。" },
-            { slug: "robot-validation", title: "Robot Validation（検証）", summary: "パイプラインエージェント。成果物の品質検証。" },
-            { slug: "robot-delivery", title: "Robot Delivery（納品）", summary: "パイプラインエージェント。最終成果物の整理・出力。" },
+            {
+              slug: "general",
+              title: "General（汎用アシスタント）",
+              summary: "日常Q&A、汎用タスク、初心者向け。",
+            },
+            {
+              slug: "keeper",
+              title: "Keeper（ナレッジベース）",
+              summary:
+                "コンテンツの保存/検索、タグ分類、外部データインポート。",
+            },
+            {
+              slug: "pm",
+              title: "PM（プロジェクトマネージャー）",
+              summary: "プロジェクト管理、タスク分解、チーム連携。",
+            },
+            {
+              slug: "postman",
+              title: "Postman（メールアシスタント）",
+              summary: "メール作成、予約送信、テンプレート。",
+            },
+            {
+              slug: "insights",
+              title: "Insights（データ分析）",
+              summary:
+                "データベース接続、スプレッドシート読み込み、EChartsダッシュボード構築、VNCライブプレビュー。",
+            },
+            {
+              slug: "scout",
+              title: "Market Scout（マーケット情報）",
+              summary:
+                "購読フィードを自動取得、記事分類、市場インサイトを整理。",
+            },
+            {
+              slug: "slides",
+              title: "Slides（スライド作成）",
+              summary:
+                "アウトラインや文書からHTML形式のプロスライドを生成し、PDFエクスポート。",
+            },
+            {
+              slug: "transformer",
+              title: "Transformer（データ変換）",
+              summary:
+                "画像・PDF・JSON・CSVを構造化形式に変換、Vision LLM OCR対応。",
+            },
+            {
+              slug: "website",
+              title: "Web Builder（ウェブサイト構築）",
+              summary:
+                "企業サイト・ランディングページ・フォームアプリ、Next.js + Tailwind、VNCプレビュー + SSHデプロイ。",
+            },
+            {
+              slug: "applet",
+              title: "Applet Workshop（ミニアプリ）",
+              summary:
+                "Node.jsでビジュアルミニツールを素早く生成、VNCライブプレビュー。",
+            },
+            {
+              slug: "report-writer",
+              title: "Report Writer（レポート作成）",
+              summary:
+                "ロボットタイプ。タスクオーケストレーションで構造化Markdownレポートを自動生成。",
+            },
+            {
+              slug: "robot-host",
+              title: "Robot Host（受付）",
+              summary:
+                "パイプラインエージェント。入力収集、ステータスフィードバック。",
+            },
+            {
+              slug: "robot-goals",
+              title: "Robot Goals（目標設定）",
+              summary:
+                "パイプラインエージェント。要件理解、実行可能な目標に分解。",
+            },
+            {
+              slug: "robot-inspiration",
+              title: "Robot Inspiration（インスピレーション）",
+              summary: "パイプラインエージェント。情報検索、参考資料収集。",
+            },
+            {
+              slug: "robot-tasks",
+              title: "Robot Tasks（実行）",
+              summary: "パイプラインエージェント。目標に沿って作業を実行。",
+            },
+            {
+              slug: "robot-validation",
+              title: "Robot Validation（検証）",
+              summary: "パイプラインエージェント。成果物の品質検証。",
+            },
+            {
+              slug: "robot-delivery",
+              title: "Robot Delivery（納品）",
+              summary: "パイプラインエージェント。最終成果物の整理・出力。",
+            },
           ],
         },
       },
@@ -930,36 +1244,89 @@ const yaoAgents: Product = {
           title: "Settings",
           summary: "Configure environment variables, AI models, and MCP tools.",
           pages: [
-            { slug: "env-vars", title: "Environment Variables", summary: "Set and manage environment variables that control Yao Agents runtime behavior." },
-            { slug: "ai-models", title: "AI Models", summary: "Configure AI connectors: OpenAI, Claude, local models, etc." },
-            { slug: "mcp-tools", title: "MCP Tools", summary: "Connect external MCP servers to extend the tools available to assistants." },
+            {
+              slug: "env-vars",
+              title: "Environment Variables",
+              summary:
+                "Set and manage environment variables that control Yao Agents runtime behavior.",
+            },
+            {
+              slug: "ai-models",
+              title: "AI Models",
+              summary:
+                "Configure AI connectors: OpenAI, Claude, local models, etc.",
+            },
+            {
+              slug: "mcp-tools",
+              title: "MCP Tools",
+              summary:
+                "Connect external MCP servers to extend the tools available to assistants.",
+            },
           ],
         },
         "zh-cn": {
           title: "设置",
           summary: "配置环境变量、AI 模型和 MCP 工具。",
           pages: [
-            { slug: "env-vars", title: "环境变量", summary: "设置和管理控制 Yao Agents 运行时行为的环境变量。" },
-            { slug: "ai-models", title: "AI 模型", summary: "配置 AI 连接器：OpenAI / Claude / 本地模型等。" },
-            { slug: "mcp-tools", title: "MCP 工具", summary: "连接外部 MCP 服务器，扩展助手可用的工具。" },
+            {
+              slug: "env-vars",
+              title: "环境变量",
+              summary: "设置和管理控制 Yao Agents 运行时行为的环境变量。",
+            },
+            {
+              slug: "ai-models",
+              title: "AI 模型",
+              summary: "配置 AI 连接器：OpenAI / Claude / 本地模型等。",
+            },
+            {
+              slug: "mcp-tools",
+              title: "MCP 工具",
+              summary: "连接外部 MCP 服务器，扩展助手可用的工具。",
+            },
           ],
         },
         "zh-tw": {
           title: "設定",
           summary: "設定環境變數、AI 模型和 MCP 工具。",
           pages: [
-            { slug: "env-vars", title: "環境變數", summary: "設定和管理控制 Yao Agents 執行時行為的環境變數。" },
-            { slug: "ai-models", title: "AI 模型", summary: "設定 AI 連接器：OpenAI / Claude / 本地模型等。" },
-            { slug: "mcp-tools", title: "MCP 工具", summary: "連接外部 MCP 伺服器，擴展助手可用的工具。" },
+            {
+              slug: "env-vars",
+              title: "環境變數",
+              summary: "設定和管理控制 Yao Agents 執行時行為的環境變數。",
+            },
+            {
+              slug: "ai-models",
+              title: "AI 模型",
+              summary: "設定 AI 連接器：OpenAI / Claude / 本地模型等。",
+            },
+            {
+              slug: "mcp-tools",
+              title: "MCP 工具",
+              summary: "連接外部 MCP 伺服器，擴展助手可用的工具。",
+            },
           ],
         },
         "ja-jp": {
           title: "設定",
           summary: "環境変数、AIモデル、MCPツールの設定。",
           pages: [
-            { slug: "env-vars", title: "環境変数", summary: "Yao Agentsの実行時動作を制御する環境変数を設定・管理。" },
-            { slug: "ai-models", title: "AIモデル", summary: "AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。" },
-            { slug: "mcp-tools", title: "MCPツール", summary: "外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。" },
+            {
+              slug: "env-vars",
+              title: "環境変数",
+              summary: "Yao Agentsの実行時動作を制御する環境変数を設定・管理。",
+            },
+            {
+              slug: "ai-models",
+              title: "AIモデル",
+              summary:
+                "AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。",
+            },
+            {
+              slug: "mcp-tools",
+              title: "MCPツール",
+              summary:
+                "外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。",
+            },
           ],
         },
       },
@@ -974,10 +1341,24 @@ const yaoAgents: Product = {
 const taiLink: Product = {
   slug: "tai-link",
   locales: {
-    "en-us": { title: "Tai Link", summary: "Device connectivity guide — connect your devices and let agents work across them." },
-    "zh-cn": { title: "Tai Link", summary: "设备连接指南——连接你的多台设备，让助手跨设备工作。" },
-    "zh-tw": { title: "Tai Link", summary: "裝置連接指南——連接你的多台裝置，讓助手跨裝置工作。" },
-    "ja-jp": { title: "Tai Link", summary: "デバイス接続ガイド——デバイスを接続し、エージェントがデバイス間で動作。" },
+    "en-us": {
+      title: "Tai Link",
+      summary:
+        "Device connectivity guide — connect your devices and let agents work across them.",
+    },
+    "zh-cn": {
+      title: "Tai Link",
+      summary: "设备连接指南——连接你的多台设备，让助手跨设备工作。",
+    },
+    "zh-tw": {
+      title: "Tai Link",
+      summary: "裝置連接指南——連接你的多台裝置，讓助手跨裝置工作。",
+    },
+    "ja-jp": {
+      title: "Tai Link",
+      summary:
+        "デバイス接続ガイド——デバイスを接続し、エージェントがデバイス間で動作。",
+    },
   },
   sections: [
     {
@@ -987,36 +1368,87 @@ const taiLink: Product = {
           title: "Getting Started",
           summary: "Install Tai Link and connect your first device.",
           pages: [
-            { slug: "what-is-tai-link", title: "What Is Tai Link", summary: "Product positioning: let agents control your other devices." },
-            { slug: "installation", title: "Installation", summary: "Install the Tai Link client on each platform." },
-            { slug: "connect-first-device", title: "Connect Your First Device", summary: "Scan QR code or enter pairing code to complete the connection." },
+            {
+              slug: "what-is-tai-link",
+              title: "What Is Tai Link",
+              summary:
+                "Product positioning: let agents control your other devices.",
+            },
+            {
+              slug: "installation",
+              title: "Installation",
+              summary: "Install the Tai Link client on each platform.",
+            },
+            {
+              slug: "connect-first-device",
+              title: "Connect Your First Device",
+              summary:
+                "Scan QR code or enter pairing code to complete the connection.",
+            },
           ],
         },
         "zh-cn": {
           title: "入门",
           summary: "安装 Tai Link 并连接第一台设备。",
           pages: [
-            { slug: "what-is-tai-link", title: "什么是 Tai Link", summary: "产品定位：让 Agent 控制你的其他设备。" },
-            { slug: "installation", title: "安装", summary: "在各平台安装 Tai Link 客户端。" },
-            { slug: "connect-first-device", title: "连接第一台设备", summary: "扫码/输入配对码，完成连接。" },
+            {
+              slug: "what-is-tai-link",
+              title: "什么是 Tai Link",
+              summary: "产品定位：让 Agent 控制你的其他设备。",
+            },
+            {
+              slug: "installation",
+              title: "安装",
+              summary: "在各平台安装 Tai Link 客户端。",
+            },
+            {
+              slug: "connect-first-device",
+              title: "连接第一台设备",
+              summary: "扫码/输入配对码，完成连接。",
+            },
           ],
         },
         "zh-tw": {
           title: "入門",
           summary: "安裝 Tai Link 並連接第一台裝置。",
           pages: [
-            { slug: "what-is-tai-link", title: "什麼是 Tai Link", summary: "產品定位：讓 Agent 控制你的其他裝置。" },
-            { slug: "installation", title: "安裝", summary: "在各平台安裝 Tai Link 客戶端。" },
-            { slug: "connect-first-device", title: "連接第一台裝置", summary: "掃碼/輸入配對碼，完成連接。" },
+            {
+              slug: "what-is-tai-link",
+              title: "什麼是 Tai Link",
+              summary: "產品定位：讓 Agent 控制你的其他裝置。",
+            },
+            {
+              slug: "installation",
+              title: "安裝",
+              summary: "在各平台安裝 Tai Link 客戶端。",
+            },
+            {
+              slug: "connect-first-device",
+              title: "連接第一台裝置",
+              summary: "掃碼/輸入配對碼，完成連接。",
+            },
           ],
         },
         "ja-jp": {
           title: "はじめに",
           summary: "Tai Linkをインストールし、最初のデバイスを接続。",
           pages: [
-            { slug: "what-is-tai-link", title: "Tai Linkとは", summary: "製品の位置づけ：エージェントが他のデバイスを制御。" },
-            { slug: "installation", title: "インストール", summary: "各プラットフォームにTai Linkクライアントをインストール。" },
-            { slug: "connect-first-device", title: "最初のデバイスを接続", summary: "QRコードスキャンまたはペアリングコード入力で接続完了。" },
+            {
+              slug: "what-is-tai-link",
+              title: "Tai Linkとは",
+              summary: "製品の位置づけ：エージェントが他のデバイスを制御。",
+            },
+            {
+              slug: "installation",
+              title: "インストール",
+              summary:
+                "各プラットフォームにTai Linkクライアントをインストール。",
+            },
+            {
+              slug: "connect-first-device",
+              title: "最初のデバイスを接続",
+              summary: "QRコードスキャンまたはペアリングコード入力で接続完了。",
+            },
           ],
         },
       },
@@ -1028,48 +1460,145 @@ const taiLink: Product = {
           title: "User Guide",
           summary: "Manage devices, remote operations, file sync, and more.",
           pages: [
-            { slug: "device-management", title: "Device Management", summary: "View device list, online status, naming." },
-            { slug: "remote-operations", title: "Remote Operations", summary: "Control remote devices through agents." },
-            { slug: "file-sync", title: "File Sync", summary: "Sync files between devices." },
-            { slug: "remote-desktop", title: "Remote Desktop", summary: "VNC remote viewing and control." },
-            { slug: "security-and-privacy", title: "Security & Privacy", summary: "Connection encryption, authorization management, disconnect devices." },
-            { slug: "tunnel-mode", title: "Tunnel Mode", summary: "NAT traversal, no port forwarding required." },
+            {
+              slug: "device-management",
+              title: "Device Management",
+              summary: "View device list, online status, naming.",
+            },
+            {
+              slug: "remote-operations",
+              title: "Remote Operations",
+              summary: "Control remote devices through agents.",
+            },
+            {
+              slug: "file-sync",
+              title: "File Sync",
+              summary: "Sync files between devices.",
+            },
+            {
+              slug: "remote-desktop",
+              title: "Remote Desktop",
+              summary: "VNC remote viewing and control.",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "Security & Privacy",
+              summary:
+                "Connection encryption, authorization management, disconnect devices.",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "Tunnel Mode",
+              summary: "NAT traversal, no port forwarding required.",
+            },
           ],
         },
         "zh-cn": {
           title: "使用指南",
           summary: "设备管理、远程操作、文件同步等。",
           pages: [
-            { slug: "device-management", title: "设备管理", summary: "查看设备列表、在线状态、命名。" },
-            { slug: "remote-operations", title: "远程操作", summary: "通过 Agent 操控远程设备。" },
-            { slug: "file-sync", title: "文件同步", summary: "设备间文件同步。" },
-            { slug: "remote-desktop", title: "远程桌面", summary: "VNC 远程查看与控制。" },
-            { slug: "security-and-privacy", title: "安全与隐私", summary: "连接加密、授权管理、断开设备。" },
-            { slug: "tunnel-mode", title: "隧道模式", summary: "NAT 穿透，无需端口转发。" },
+            {
+              slug: "device-management",
+              title: "设备管理",
+              summary: "查看设备列表、在线状态、命名。",
+            },
+            {
+              slug: "remote-operations",
+              title: "远程操作",
+              summary: "通过 Agent 操控远程设备。",
+            },
+            {
+              slug: "file-sync",
+              title: "文件同步",
+              summary: "设备间文件同步。",
+            },
+            {
+              slug: "remote-desktop",
+              title: "远程桌面",
+              summary: "VNC 远程查看与控制。",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "安全与隐私",
+              summary: "连接加密、授权管理、断开设备。",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "隧道模式",
+              summary: "NAT 穿透，无需端口转发。",
+            },
           ],
         },
         "zh-tw": {
           title: "使用指南",
           summary: "裝置管理、遠端操作、檔案同步等。",
           pages: [
-            { slug: "device-management", title: "裝置管理", summary: "查看裝置清單、線上狀態、命名。" },
-            { slug: "remote-operations", title: "遠端操作", summary: "透過 Agent 操控遠端裝置。" },
-            { slug: "file-sync", title: "檔案同步", summary: "裝置間檔案同步。" },
-            { slug: "remote-desktop", title: "遠端桌面", summary: "VNC 遠端查看與控制。" },
-            { slug: "security-and-privacy", title: "安全與隱私", summary: "連線加密、授權管理、中斷裝置。" },
-            { slug: "tunnel-mode", title: "隧道模式", summary: "NAT 穿透，無需端口轉發。" },
+            {
+              slug: "device-management",
+              title: "裝置管理",
+              summary: "查看裝置清單、線上狀態、命名。",
+            },
+            {
+              slug: "remote-operations",
+              title: "遠端操作",
+              summary: "透過 Agent 操控遠端裝置。",
+            },
+            {
+              slug: "file-sync",
+              title: "檔案同步",
+              summary: "裝置間檔案同步。",
+            },
+            {
+              slug: "remote-desktop",
+              title: "遠端桌面",
+              summary: "VNC 遠端查看與控制。",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "安全與隱私",
+              summary: "連線加密、授權管理、中斷裝置。",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "隧道模式",
+              summary: "NAT 穿透，無需端口轉發。",
+            },
           ],
         },
         "ja-jp": {
           title: "ユーザーガイド",
           summary: "デバイス管理、リモート操作、ファイル同期など。",
           pages: [
-            { slug: "device-management", title: "デバイス管理", summary: "デバイス一覧、オンライン状態、命名。" },
-            { slug: "remote-operations", title: "リモート操作", summary: "エージェント経由でリモートデバイスを操作。" },
-            { slug: "file-sync", title: "ファイル同期", summary: "デバイス間のファイル同期。" },
-            { slug: "remote-desktop", title: "リモートデスクトップ", summary: "VNCリモート表示と操作。" },
-            { slug: "security-and-privacy", title: "セキュリティとプライバシー", summary: "接続暗号化、認可管理、デバイス切断。" },
-            { slug: "tunnel-mode", title: "トンネルモード", summary: "NATトラバーサル、ポートフォワーディング不要。" },
+            {
+              slug: "device-management",
+              title: "デバイス管理",
+              summary: "デバイス一覧、オンライン状態、命名。",
+            },
+            {
+              slug: "remote-operations",
+              title: "リモート操作",
+              summary: "エージェント経由でリモートデバイスを操作。",
+            },
+            {
+              slug: "file-sync",
+              title: "ファイル同期",
+              summary: "デバイス間のファイル同期。",
+            },
+            {
+              slug: "remote-desktop",
+              title: "リモートデスクトップ",
+              summary: "VNCリモート表示と操作。",
+            },
+            {
+              slug: "security-and-privacy",
+              title: "セキュリティとプライバシー",
+              summary: "接続暗号化、認可管理、デバイス切断。",
+            },
+            {
+              slug: "tunnel-mode",
+              title: "トンネルモード",
+              summary: "NATトラバーサル、ポートフォワーディング不要。",
+            },
           ],
         },
       },
@@ -1084,10 +1613,22 @@ const taiLink: Product = {
 const general: Product = {
   slug: "general",
   locales: {
-    "en-us": { title: "General", summary: "Shared resources: glossary, FAQ, shortcuts, and more." },
-    "zh-cn": { title: "通用", summary: "共享资源：术语表、常见问题、快捷键等。" },
-    "zh-tw": { title: "通用", summary: "共享資源：術語表、常見問題、快捷鍵等。" },
-    "ja-jp": { title: "共通", summary: "共有リソース：用語集、FAQ、ショートカットなど。" },
+    "en-us": {
+      title: "General",
+      summary: "Shared resources: glossary, FAQ, shortcuts, and more.",
+    },
+    "zh-cn": {
+      title: "通用",
+      summary: "共享资源：术语表、常见问题、快捷键等。",
+    },
+    "zh-tw": {
+      title: "通用",
+      summary: "共享資源：術語表、常見問題、快捷鍵等。",
+    },
+    "ja-jp": {
+      title: "共通",
+      summary: "共有リソース：用語集、FAQ、ショートカットなど。",
+    },
   },
   sections: [
     {
@@ -1095,54 +1636,159 @@ const general: Product = {
       locales: {
         "en-us": {
           title: "Resources",
-          summary: "Glossary, FAQ, shortcuts, system requirements, changelog, community.",
+          summary:
+            "Glossary, FAQ, shortcuts, system requirements, changelog, community.",
           pages: [
-            { slug: "glossary", title: "Glossary", summary: "User-friendly explanations of key terms: AI Assistant, Robot, Agent, Pipeline, Hub, MCP, Tai Link, etc." },
-            { slug: "faq", title: "FAQ", summary: "Common questions about installation, connectivity, agent usage, etc." },
-            { slug: "sandbox-images", title: "Sandbox Images", summary: "Complete reference for all Docker sandbox images: what each image includes, which agents use it, and how to pull or update them." },
-            { slug: "shortcuts", title: "Keyboard Shortcuts", summary: "Complete keyboard shortcut reference." },
-            { slug: "system-requirements", title: "System Requirements", summary: "Minimum specs for each platform." },
-            { slug: "changelog", title: "Changelog", summary: "Version release notes and updates." },
-            { slug: "community", title: "Community", summary: "GitHub, Discord, feedback channels." },
+            {
+              slug: "glossary",
+              title: "Glossary",
+              summary:
+                "User-friendly explanations of key terms: AI Assistant, Robot, Agent, Pipeline, Hub, MCP, Tai Link, etc.",
+            },
+            {
+              slug: "faq",
+              title: "FAQ",
+              summary:
+                "Common questions about installation, connectivity, agent usage, etc.",
+            },
+            {
+              slug: "sandbox-images",
+              title: "Sandbox Images",
+              summary:
+                "Complete reference for all Docker sandbox images: what each image includes, which agents use it, and how to pull or update them.",
+            },
+            {
+              slug: "shortcuts",
+              title: "Keyboard Shortcuts",
+              summary: "Complete keyboard shortcut reference.",
+            },
+            {
+              slug: "system-requirements",
+              title: "System Requirements",
+              summary: "Minimum specs for each platform.",
+            },
+            {
+              slug: "changelog",
+              title: "Changelog",
+              summary: "Version release notes and updates.",
+            },
+            {
+              slug: "community",
+              title: "Community",
+              summary: "GitHub, Discord, feedback channels.",
+            },
           ],
         },
         "zh-cn": {
           title: "资源",
           summary: "术语表、常见问题、快捷键、系统要求、更新日志、社区。",
           pages: [
-            { slug: "glossary", title: "术语表", summary: "用户友好的术语解释：AI 助手、机器人、智能体、流水线、Hub、MCP、Tai Link 等。" },
-            { slug: "faq", title: "常见问题", summary: "安装问题、连接问题、Agent 使用问题等。" },
-            { slug: "sandbox-images", title: "沙盒镜像", summary: "所有 Docker 沙盒镜像完整参考：各镜像包含的内容、适用 Agent、拉取与更新方法。" },
+            {
+              slug: "glossary",
+              title: "术语表",
+              summary:
+                "用户友好的术语解释：AI 助手、机器人、智能体、流水线、Hub、MCP、Tai Link 等。",
+            },
+            {
+              slug: "faq",
+              title: "常见问题",
+              summary: "安装问题、连接问题、Agent 使用问题等。",
+            },
+            {
+              slug: "sandbox-images",
+              title: "沙盒镜像",
+              summary:
+                "所有 Docker 沙盒镜像完整参考：各镜像包含的内容、适用 Agent、拉取与更新方法。",
+            },
             { slug: "shortcuts", title: "快捷键", summary: "完整快捷键列表。" },
-            { slug: "system-requirements", title: "系统要求", summary: "各平台最低配置。" },
+            {
+              slug: "system-requirements",
+              title: "系统要求",
+              summary: "各平台最低配置。",
+            },
             { slug: "changelog", title: "更新日志", summary: "版本更新内容。" },
-            { slug: "community", title: "社区", summary: "GitHub、Discord、反馈渠道。" },
+            {
+              slug: "community",
+              title: "社区",
+              summary: "GitHub、Discord、反馈渠道。",
+            },
           ],
         },
         "zh-tw": {
           title: "資源",
           summary: "術語表、常見問題、快捷鍵、系統需求、更新日誌、社群。",
           pages: [
-            { slug: "glossary", title: "術語表", summary: "使用者友善的術語解釋。" },
-            { slug: "faq", title: "常見問題", summary: "安裝、連線、Agent 使用等常見問題。" },
-            { slug: "sandbox-images", title: "沙盒映像", summary: "所有 Docker 沙盒映像完整參考：各映像內容、適用 Agent、拉取與更新方法。" },
+            {
+              slug: "glossary",
+              title: "術語表",
+              summary: "使用者友善的術語解釋。",
+            },
+            {
+              slug: "faq",
+              title: "常見問題",
+              summary: "安裝、連線、Agent 使用等常見問題。",
+            },
+            {
+              slug: "sandbox-images",
+              title: "沙盒映像",
+              summary:
+                "所有 Docker 沙盒映像完整參考：各映像內容、適用 Agent、拉取與更新方法。",
+            },
             { slug: "shortcuts", title: "快捷鍵", summary: "完整快捷鍵列表。" },
-            { slug: "system-requirements", title: "系統需求", summary: "各平台最低配置。" },
+            {
+              slug: "system-requirements",
+              title: "系統需求",
+              summary: "各平台最低配置。",
+            },
             { slug: "changelog", title: "更新日誌", summary: "版本更新內容。" },
-            { slug: "community", title: "社群", summary: "GitHub、Discord、反饋管道。" },
+            {
+              slug: "community",
+              title: "社群",
+              summary: "GitHub、Discord、反饋管道。",
+            },
           ],
         },
         "ja-jp": {
           title: "リソース",
-          summary: "用語集、FAQ、ショートカット、システム要件、変更履歴、コミュニティ。",
+          summary:
+            "用語集、FAQ、ショートカット、システム要件、変更履歴、コミュニティ。",
           pages: [
-            { slug: "glossary", title: "用語集", summary: "主要用語のわかりやすい説明。" },
-            { slug: "faq", title: "よくある質問", summary: "インストール、接続、エージェント使用に関するFAQ。" },
-            { slug: "sandbox-images", title: "サンドボックスイメージ", summary: "全Dockerサンドボックスイメージの完全リファレンス：各イメージの内容、対応Agent、取得・更新方法。" },
-            { slug: "shortcuts", title: "キーボードショートカット", summary: "完全なショートカットリファレンス。" },
-            { slug: "system-requirements", title: "システム要件", summary: "各プラットフォームの最小スペック。" },
-            { slug: "changelog", title: "変更履歴", summary: "バージョンリリースノートと更新情報。" },
-            { slug: "community", title: "コミュニティ", summary: "GitHub、Discord、フィードバックチャンネル。" },
+            {
+              slug: "glossary",
+              title: "用語集",
+              summary: "主要用語のわかりやすい説明。",
+            },
+            {
+              slug: "faq",
+              title: "よくある質問",
+              summary: "インストール、接続、エージェント使用に関するFAQ。",
+            },
+            {
+              slug: "sandbox-images",
+              title: "サンドボックスイメージ",
+              summary:
+                "全Dockerサンドボックスイメージの完全リファレンス：各イメージの内容、対応Agent、取得・更新方法。",
+            },
+            {
+              slug: "shortcuts",
+              title: "キーボードショートカット",
+              summary: "完全なショートカットリファレンス。",
+            },
+            {
+              slug: "system-requirements",
+              title: "システム要件",
+              summary: "各プラットフォームの最小スペック。",
+            },
+            {
+              slug: "changelog",
+              title: "変更履歴",
+              summary: "バージョンリリースノートと更新情報。",
+            },
+            {
+              slug: "community",
+              title: "コミュニティ",
+              summary: "GitHub、Discord、フィードバックチャンネル。",
+            },
           ],
         },
       },
@@ -1165,7 +1811,12 @@ function writeYaml(filePath: string, data: unknown) {
   fs.writeFileSync(filePath, yaml.stringify(data, { lineWidth: 0 }));
 }
 
-function writeMdx(filePath: string, slug: string, title: string, summary: string) {
+function writeMdx(
+  filePath: string,
+  slug: string,
+  title: string,
+  summary: string,
+) {
   // Skip if file already exists — never overwrite authored content
   if (fs.existsSync(filePath)) return;
 
@@ -1193,16 +1844,16 @@ function generateSection(basePath: string, section: Section, locale: string) {
     summary: loc.summary,
   };
 
-  if (loc.pages.length > 0) {
-    indexData.pages = loc.pages.map((p) => ({
-      slug: p.slug,
-      title: p.title,
-      summary: p.summary,
-    }));
-  }
-
   if (section.children && section.children.length > 0) {
     indexData.children = section.children.map((c) => c.slug);
+  }
+
+  if (loc.pages.length > 0) {
+    indexData.pages = loc.pages.map((p) => {
+      const entry: Record<string, unknown> = { slug: p.slug, title: p.title, summary: p.summary };
+      if (p.children) entry.children = p.children;
+      return entry;
+    });
   }
 
   writeYaml(path.join(sectionDir, "index.yml"), indexData);
@@ -1212,7 +1863,7 @@ function generateSection(basePath: string, section: Section, locale: string) {
       path.join(sectionDir, `${page.slug}.mdx`),
       page.slug,
       page.title,
-      page.summary
+      page.summary,
     );
   }
 

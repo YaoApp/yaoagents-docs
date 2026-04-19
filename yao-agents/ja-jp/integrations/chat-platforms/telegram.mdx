@@ -1,0 +1,59 @@
+---
+slug: telegram
+---
+
+# Telegramに接続する
+
+ロボットをTelegramに接続すると、誰でもTelegramのBotユーザー名でメッセージを送れます。設定に約5分かかります。
+
+@BotFatherでBotを作成し、トークンをコピーしてここに貼り付けます。
+
+## 始める前に
+
+- ロボットがMission Controlで作成済みであること。
+- Telegramアカウント（Bot作成用。個人アカウントで可）。
+- Yao AgentsサーバーがインターネットからアクセスできるURL（TelegramはWebhookでメッセージを配信します）。
+
+## ステップ 1 — @BotFatherでBotを作成する
+
+1. Telegramを開き、**@BotFather** を検索します。
+2. チャットを開始して `/newbot` を送信します。
+3. プロンプトに従います：表示名（例：「My Work Robot」）を入力し、`bot` で終わるユーザー名（例：`my_work_robot_bot`）を入力します。
+4. BotFatherが **Bot Token** を返信します——`7123456789:AAHxxx...` のような文字列です。
+
+> 💡 トークンは厳重に管理してください。トークンを持つ人は誰でもBotを制御できます。
+
+![Telegram @BotFather — /newbot フロー](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Telegram+%40BotFather+%2Fnewbot+conversation)
+
+## ステップ 2 — Yao AgentsにトークンをY貼り付ける
+
+1. Mission Controlでロボットの **設定 → 統合** パネルを開きます。
+2. **Telegram** カードを展開し、トグルを **オン** にします。
+3. ステップ1で取得した **Bot Token** を貼り付けます。
+4. **（オプション）** 自己ホスト型のTelegram Bot APIサーバーを使用する場合は、**API Host** にそのアドレスを入力します。デフォルトの公式APIを使用する場合は空白のままにします。
+5. **接続を確認** をクリック——Botのユーザー名が緑色で表示されれば成功です。
+
+![ロボット統合パネル — Telegramカード](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Telegram+card)
+
+## ステップ 3 — 保存してテスト
+
+**保存** をクリックします。TelegramでBotのユーザー名を検索してチャットを開始し、メッセージを送信するとロボットが返答します。
+
+> 💡 グループチャットでは、BotはデフォルトでユーザーがBotのユーザー名を@メンションしたときのみメッセージを受信します。@BotFatherで `/setprivacy → Disable` を使用すると、すべてのグループメッセージを受信できます。
+
+## トラブルシューティング
+
+**「Unauthorized」エラーで確認に失敗する。**
+トークンが無効か、Botが削除されています。@BotFatherに戻り、`/mybots` を送信してトークンを再度コピーしてください。
+
+**グループチャットでBotが返答しない。**
+デフォルトでBotはグループ内で@メンションされたときのみメッセージを受信します。`/setprivacy → Disable` を使用するか、質問するたびにBotユーザー名を@メンションしてください。
+
+**Webhookのセットアップに失敗する / メッセージが届かない。**
+Yao AgentsサーバーはHTTPSでパブリックアクセスできるURLが必要です。TelegramはWebhookに有効なTLS証明書を要求します（自己署名証明書は不可）。
+
+## 次のステップ
+
+- [Discordに接続する](/docs/ja-jp/integrations/discord)
+- [WeChatに接続する](/docs/ja-jp/integrations/wechat)
+- [API直接接続](/docs/ja-jp/integrations/api-direct-connect)

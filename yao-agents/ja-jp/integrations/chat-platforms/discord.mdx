@@ -1,0 +1,72 @@
+---
+slug: discord
+---
+
+# Discordに接続する
+
+ロボットをDiscordに接続すると、サーバーメンバーがどのチャンネルでもBotを@メンションして返答を得られます。
+
+Discord Developer PortalでアプリとBotを作成し、トークンをコピーしてここに貼り付けます。
+
+## 始める前に
+
+- ロボットがMission Controlで作成済みであること。
+- 対象サーバーの管理権限を持つDiscordアカウント。
+- Yao AgentsサーバーがインターネットからアクセスできるURL。
+
+## ステップ 1 — Discordアプリを作成する
+
+1. [Discord Developer Portal](https://discord.com/developers/applications) を開いてログインします。
+2. **New Application** をクリックし、名前を入力して **Create** をクリックします。
+3. 左サイドバーで **Bot** に移動し、**Add Bot → Yes, do it!** をクリックします。
+4. **Token** セクションで **Reset Token** をクリックし、生成されたトークンをコピーします。
+
+> ⚠️ このページを離れるとトークンは再表示されません。すぐにコピーして安全に保管してください。紛失した場合はリセットが必要です。
+
+![Discord Developer Portal — BotトークンページE](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Discord+Developer+Portal+%E2%80%94+Bot+token+page)
+
+## ステップ 2 — メッセージコンテンツの権限を設定する
+
+**Bot** ページのまま：
+
+1. **Privileged Gateway Intents** で **Message Content Intent** を有効にします——Botがメッセージ内容を読むために必要です。
+2. 変更を保存します。
+
+## ステップ 3 — BotをサーバーにE招待する
+
+1. **OAuth2 → URL Generator** に移動します。
+2. **Scopes** で `bot` にチェックを入れます。
+3. **Bot Permissions** で最低限 **Send Messages**、**Read Message History**、**View Channels** にチェックを入れます。
+4. 生成されたURLをコピーしてブラウザで開きます。
+5. 対象サーバーを選択して **Authorize** をクリックします。
+
+## ステップ 4 — Yao Agentsに認証情報を貼り付ける
+
+1. Mission Controlでロボットの **設定 → 統合** パネルを開きます。
+2. **Discord** カードを展開し、トグルを **オン** にします。
+3. ステップ1で取得した **Bot Token** を貼り付けます。
+4. **（オプション）** **Application ID** を貼り付けます——アプリの **General Information** ページで確認できます。スラッシュコマンドの登録に使用します。
+5. **接続を確認** をクリック——Botのユーザー名が緑色で表示されれば成功です。
+
+![ロボット統合パネル — Discordカード](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Robot+Integration+panel+%E2%80%94+Discord+card)
+
+## ステップ 5 — 保存してテスト
+
+**保存** をクリックします。Discordサーバーの任意のチャンネルでBotを@メンション（例：`@MyRobot こんにちは`）すると、返答があります。
+
+## トラブルシューティング
+
+**「401 Unauthorized」エラーで確認に失敗する。**
+トークンが無効です。Developer Portalでトークンをリセットして新しいトークンを貼り付けてください。
+
+**Botがオンラインだが返答しない。**
+**Message Content Intent** が有効になっているか確認してください（ステップ2）。この権限がないとBotはメッセージ内容を読めません。
+
+**招待後にBotがサーバーに表示されない。**
+招待URLに `bot` スコープが含まれているか、正しいサーバーを承認したか確認してください。
+
+## 次のステップ
+
+- [Telegramに接続する](/docs/ja-jp/integrations/telegram)
+- [API直接接続](/docs/ja-jp/integrations/api-direct-connect)
+- [Mission Control — ロボット概要](/docs/ja-jp/mission-control/robots)
