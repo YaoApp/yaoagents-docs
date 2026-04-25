@@ -1,0 +1,8 @@
+articles:
+  - slug: introducing-yao-agents
+    title: "Yao Agents オープンベータ開始 — 眠ってるPCを叩き起こせ"
+    summary: "Yao Agents のオープンベータが始まりました。あなたのPCがAIチームに早変わり。ツール作成、サイト構築、データ分析、レポート作成、Tai Link で複数デバイスの連携まで。"
+    category: release
+    date: "2026-04-25"
+    author:
+      name: Yao Team

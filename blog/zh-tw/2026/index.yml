@@ -1,0 +1,8 @@
+articles:
+  - slug: introducing-yao-agents
+    title: "Yao Agents 公測開跑 — 叫你的舊電腦出來上班"
+    summary: "Yao Agents 公測開跑，把你的電腦變成 AI 團隊。隨手做工具、架網站、分析數據、寫報告，透過 Tai Link 還能串連多台裝置一起跑。"
+    category: release
+    date: "2026-04-25"
+    author:
+      name: Yao Team

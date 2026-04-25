@@ -1,0 +1,8 @@
+articles:
+  - slug: introducing-yao-agents
+    title: "Yao Agents Open Beta — Put Your Old Computer to Work"
+    summary: "Yao Agents is now in open beta. Turn your computers into an AI team. Build tools on the fly, spin up websites, analyze data, generate reports — and with Tai Link, put multiple machines to work together."
+    category: release
+    date: "2026-04-25"
+    author:
+      name: Yao Team

@@ -1,0 +1,8 @@
+articles:
+  - slug: introducing-yao-agents
+    title: "Yao Agents 公测开启 — 喊你旧电脑出来干活"
+    summary: "Yao Agents 公测开启，把你的电脑变成 AI 团队。随手造工具、搭网站、分析数据、写报告，通过 Tai Link 还能调动多台设备一起上。"
+    category: release
+    date: "2026-04-25"
+    author:
+      name: Yao Team
