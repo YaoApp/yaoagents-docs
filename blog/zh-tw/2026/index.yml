@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-v4-integration
+    title: "在 Yao Agents 中串接 DeepSeek V4"
+    summary: "DeepSeek V4 發布了，百萬上下文、Agent 能力大幅提升。這篇教學教你怎麼在 Yao Agents 裡接上 DeepSeek V4 Pro 和 V4 Flash。"
+    category: tutorial
+    date: "2026-04-25"
+    author:
+      name: Yao Team
+
   - slug: introducing-yao-agents
     title: "Yao Agents 公測開跑 — 叫你的舊電腦出來上班"
     summary: "Yao Agents 公測開跑，把你的電腦變成 AI 團隊。隨手做工具、架網站、分析數據、寫報告，透過 Tai Link 還能串連多台裝置一起跑。"

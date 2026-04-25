@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-v4-integration
+    title: "Setting Up DeepSeek V4 in Yao Agents"
+    summary: "DeepSeek V4 just dropped — 1M context window, massively improved Agent capabilities. Here's how to hook up DeepSeek V4 Pro and V4 Flash in Yao Agents."
+    category: tutorial
+    date: "2026-04-25"
+    author:
+      name: Yao Team
+
   - slug: introducing-yao-agents
     title: "Yao Agents Open Beta — Put Your Old Computer to Work"
     summary: "Yao Agents is now in open beta. Turn your computers into an AI team. Build tools on the fly, spin up websites, analyze data, generate reports — and with Tai Link, put multiple machines to work together."

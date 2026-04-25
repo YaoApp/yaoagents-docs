@@ -1,0 +1,224 @@
+---
+title: "Yao Agents で DeepSeek V4 を使う方法"
+description: "DeepSeek V4 がリリースされました。100万トークンのコンテキスト対応、Agent 性能も大幅アップ。この記事では、Yao Agents に DeepSeek V4 Pro と V4 Flash を接続する方法を紹介します。"
+published_at: "2026-04-25"
+authors:
+  - name: Yao Team
+---
+
+# Yao Agents で DeepSeek V4 を使う方法
+
+DeepSeek から [V4 シリーズ](https://api-docs.deepseek.com/news/news260424)がリリースされました。V4 Pro と V4 Flash の 2 モデルがあり、どちらも 100 万トークンのコンテキストに対応、Agent としての能力も大幅に向上しています。
+
+ここでは、Yao Agents に DeepSeek V4 をサクッと接続する手順を紹介します。
+
+## アプリケーションディレクトリを開く
+
+設定ファイルはすべて Yao Engine のアプリケーションディレクトリにあります。Yao Engine を開いて **Open Folder** をクリックすれば OK です。
+
+![Yao Engine — Open Folder をクリックしてアプリケーションディレクトリを開く](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+ディレクトリ構成はこんな感じです：
+
+```
+├── connectors/         ← 連接器(コネクタ)の設定ファイルはここ
+│   ├── default.conn.yao
+│   ├── thinking.conn.yao
+│   ├── vision.conn.yao
+│   └── deepseek/       ← このサブディレクトリを新規作成
+├── assistants/
+├── .env
+└── ...
+```
+
+## DeepSeek V4 コネクタを追加する
+
+`connectors/` の下に `deepseek/` ディレクトリを作り、以下の 4 ファイルを作成します。
+
+### V4 Pro（非思考モード）
+
+ファイル：`connectors/deepseek/v4-pro.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Pro",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-pro",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "disabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Pro Thinking（思考モード）
+
+ファイル：`connectors/deepseek/v4-pro-thinking.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Pro Thinking",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-pro",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "enabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "reasoning": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Flash（非思考モード）
+
+ファイル：`connectors/deepseek/v4-flash.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Flash",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-flash",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "disabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Flash Thinking（思考モード）
+
+ファイル：`connectors/deepseek/v4-flash-thinking.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Flash Thinking",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-flash",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "enabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "reasoning": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### 環境変数を設定する
+
+アプリケーションディレクトリにある `.env` ファイルに以下を追加します：
+
+```bash
+DEEPSEEK_V4_API_KEY=sk-your-deepseek-api-key
+DEEPSEEK_V4_PROXY=https://api.deepseek.com
+```
+
+API Key は [DeepSeek プラットフォーム](https://platform.deepseek.com/)から取得してください。
+
+追加したら Yao Engine を再起動すると、4 つの DeepSeek V4 コネクタが AI Expert と Robot のモデル選択リストに表示されます。
+
+## Sandbox で DeepSeek V4 を使う
+
+Yao Agents の Sandbox は `claude` と `opencode` の 2 種類の Runner に対応しており、DeepSeek V4 はどちらでも使えます。`sandbox.yao` は各エキスパートの設定ディレクトリ `assistants/<namespace>/<assistant-name>/sandbox.yao` にあります。
+
+### ビジョンモデルを指定する
+
+DeepSeek V4 は現時点で Vision（画像認識）に対応していませんが、Sandbox では画面キャプチャの解析が必要なタスクもあります。`opencode` Runner ではビジョン用のコネクタを別途指定できるので、`sandbox.yao` で以下のように設定します：
+
+```json
+{
+  "version": "2.0",
+  "computer": {
+    "image": "yaoapp/tai-sandbox-opencode:latest",
+    "memory": "2GB",
+    "cpus": 2,
+    "work_dir": "/workspace"
+  },
+  "runner": {
+    "name": "opencode",
+    "mode": "cli",
+    "options": {
+      "permission_mode": "bypassPermissions"
+    },
+    "connectors": {
+      "vision": "openai.gpt-4o-mini"
+    }
+  },
+  "lifecycle": "oneshot"
+}
+```
+
+ポイント：
+
+- `runner.name` を `"opencode"` に設定
+- `runner.connectors.vision` に Vision 対応モデルのコネクタ（例：`openai.gpt-4o-mini`）を指定 — スクリーンショット解析はこのモデルが担当し、それ以外のタスクは DeepSeek V4 が処理します
+
+### opencode Runner の Sandbox イメージ
+
+`opencode` Runner にはいくつかの Docker イメージが用意されています。用途に合わせて選んでください：
+
+| イメージ | デスクトップ | SSH | Yao 同梱 | ユースケース |
+|------|---------|-----|----------|---------|
+| `tai-sandbox-opencode` | — | — | — | コードタスクのみ。大半のケースはこれで OK |
+| `tai-sandbox-opencode-ssh` | — | ✓ | — | リモートサーバーへの接続が必要な場合 |
+| `tai-sandbox-opencode-desktop-lite` | ライト版 | — | — | ブラウザ操作が必要なタスク |
+| `tai-sandbox-opencode-desktop-lite-ssh` | ライト版 | ✓ | — | ブラウザ + リモートサーバー |
+| `tai-sandbox-opencode-desktop` | フル版 (XFCE) | — | — | Applet 系タスク |
+| `tai-sandbox-opencode-desktop-ssh` | フル版 (XFCE) | ✓ | — | サイト構築・デプロイ系タスク |
+| `tai-sandbox-opencode-yao` | — | ✓ | ✓ | Yao アプリ開発 |
+| `tai-sandbox-opencode-yao-desktop` | フル版 (XFCE) | ✓ | ✓ | Yao アプリ開発（デスクトップ付き） |
+| `tai-sandbox-opencode-yao-desktop-lite` | ライト版 | ✓ | ✓ | Yao アプリ開発（軽量デスクトップ） |
+
+イメージの取得：
+
+```bash
+docker pull yaoapp/tai-sandbox-opencode:latest
+```
+
+必要に応じて別のイメージ名に置き換えてください。すべてのイメージは `linux/amd64` と `linux/arm64` に対応しています。
+
+## V4 Pro と V4 Flash、どっちを使う？
+
+| | V4 Pro | V4 Flash |
+|---|--------|----------|
+| 推論能力 | トップクラス、クローズドモデルに匹敵 | Pro に迫る性能 |
+| Agent 能力 | オープンソース最強、複雑なタスクで優秀 | シンプルなタスクは Pro と同等、複雑なタスクではやや差あり |
+| 世界知識 | 豊富、Gemini-Pro-3.1 に次ぐレベル | やや弱め |
+| 速度とコスト | やや遅い、やや高い | より速い、より安い |
+| コンテキスト | 1M | 1M |
+
+おすすめの使い分け：複雑な Agent タスクには V4 Pro Thinking、日常的なタスクには V4 Flash で十分です。
+
+## 関連ドキュメント
+
+- [AI モデル設定ガイド](/docs/en-us/settings/ai-models) — コネクタファイルのフォーマット、環境変数、その他のサンプル
+- [DeepSeek V4 公式リリースノート](https://api-docs.deepseek.com/news/news260424) — V4 の技術詳細と API ドキュメント

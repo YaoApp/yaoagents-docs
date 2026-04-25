@@ -1,0 +1,224 @@
+---
+title: "在 Yao Agents 中接入 DeepSeek V4"
+description: "DeepSeek V4 发布了，百万上下文、Agent 能力大幅增强。这篇教程教你怎样在 Yao Agents 里接上 DeepSeek V4 Pro 和 V4 Flash。"
+published_at: "2026-04-25"
+authors:
+  - name: Yao Team
+---
+
+# 在 Yao Agents 中接入 DeepSeek V4
+
+DeepSeek 刚发布了 [V4 系列模型](https://api-docs.deepseek.com/zh-cn/news/news260424)，包括 V4 Pro 和 V4 Flash 两个版本，均支持百万上下文，Agent 能力大幅增强。
+
+下面介绍怎样在 Yao Agents 里快速接入 DeepSeek V4。
+
+## 找到应用目录
+
+所有配置文件都在 Yao Engine 的应用目录里。打开 Yao Engine，点击 **Open Folder** 就能看到。
+
+![Yao Engine — 点击 Open Folder 打开应用目录](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+打开后目录结构类似这样：
+
+```
+├── connectors/         ← 连接器配置文件放这里
+│   ├── default.conn.yao
+│   ├── thinking.conn.yao
+│   ├── vision.conn.yao
+│   └── deepseek/       ← 新建这个子目录
+├── assistants/
+├── .env
+└── ...
+```
+
+## 添加 DeepSeek V4 连接器
+
+在 `connectors/` 下新建 `deepseek/` 目录，然后创建以下四个文件。
+
+### V4 Pro（非思考模式）
+
+文件：`connectors/deepseek/v4-pro.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Pro",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-pro",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "disabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Pro Thinking（思考模式）
+
+文件：`connectors/deepseek/v4-pro-thinking.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Pro Thinking",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-pro",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "enabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "reasoning": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Flash（非思考模式）
+
+文件：`connectors/deepseek/v4-flash.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Flash",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-flash",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "disabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Flash Thinking（思考模式）
+
+文件：`connectors/deepseek/v4-flash-thinking.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Flash Thinking",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-flash",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "enabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "reasoning": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### 配置环境变量
+
+在应用目录下的 `.env` 文件中加上：
+
+```bash
+DEEPSEEK_V4_API_KEY=sk-your-deepseek-api-key
+DEEPSEEK_V4_PROXY=https://api.deepseek.com
+```
+
+API Key 在 [DeepSeek 平台](https://platform.deepseek.com/) 获取。
+
+添加完后重启 Yao Engine，四个 DeepSeek V4 连接器就会出现在 AI 专家和 Robot 的模型选择列表里。
+
+## 在 Sandbox 中使用 DeepSeek V4
+
+Yao Agents 的 Sandbox（沙箱）支持 `claude` 和 `opencode` 两种 Runner，DeepSeek V4 两种都可以用。`sandbox.yao` 在每个专家助手的配置目录下，路径为 `assistants/<namespace>/<assistant-name>/sandbox.yao`。
+
+### 指定视觉模型
+
+DeepSeek V4 目前不支持 Vision（图像理解），但 Sandbox 中有些任务需要分析屏幕截图。`opencode` Runner 支持自定义视觉连接器，可以在 `sandbox.yao` 中单独指定一个视觉模型：
+
+```json
+{
+  "version": "2.0",
+  "computer": {
+    "image": "yaoapp/tai-sandbox-opencode:latest",
+    "memory": "2GB",
+    "cpus": 2,
+    "work_dir": "/workspace"
+  },
+  "runner": {
+    "name": "opencode",
+    "mode": "cli",
+    "options": {
+      "permission_mode": "bypassPermissions"
+    },
+    "connectors": {
+      "vision": "openai.gpt-4o-mini"
+    }
+  },
+  "lifecycle": "oneshot"
+}
+```
+
+关键配置：
+
+- `runner.name` 设为 `"opencode"`
+- `runner.connectors.vision` 指定一个支持视觉的模型连接器（比如 `openai.gpt-4o-mini`），截图分析走这个模型，其他任务走 DeepSeek V4
+
+### opencode Runner 沙箱镜像
+
+`opencode` Runner 有一系列 Docker 镜像可选，根据场景选择：
+
+| 镜像 | 桌面环境 | SSH | 包含 Yao | 适用场景 |
+|------|---------|-----|----------|---------|
+| `tai-sandbox-opencode` | — | — | — | 纯代码任务，大多数场景 |
+| `tai-sandbox-opencode-ssh` | — | ✓ | — | 需要连远程服务器 |
+| `tai-sandbox-opencode-desktop-lite` | 轻量 | — | — | 需要浏览器的任务 |
+| `tai-sandbox-opencode-desktop-lite-ssh` | 轻量 | ✓ | — | 浏览器 + 远程服务器 |
+| `tai-sandbox-opencode-desktop` | 完整 (XFCE) | — | — | Applet 类任务 |
+| `tai-sandbox-opencode-desktop-ssh` | 完整 (XFCE) | ✓ | — | 建站、部署类任务 |
+| `tai-sandbox-opencode-yao` | — | ✓ | ✓ | Yao 应用开发 |
+| `tai-sandbox-opencode-yao-desktop` | 完整 (XFCE) | ✓ | ✓ | Yao 应用开发（带桌面） |
+| `tai-sandbox-opencode-yao-desktop-lite` | 轻量 | ✓ | ✓ | Yao 应用开发（轻量桌面） |
+
+拉取镜像：
+
+```bash
+docker pull yaoapp/tai-sandbox-opencode:latest
+```
+
+根据需要替换为其他镜像名。所有镜像均支持 `linux/amd64` 和 `linux/arm64`。
+
+## V4 Pro 还是 V4 Flash？
+
+| | V4 Pro | V4 Flash |
+|---|--------|----------|
+| 推理能力 | 顶级，比肩闭源模型 | 接近 Pro |
+| Agent 能力 | 开源最强，复杂任务表现优异 | 简单任务和 Pro 差不多，复杂任务有差距 |
+| 世界知识 | 丰富，仅次于 Gemini-Pro-3.1 | 相对弱一些 |
+| 速度和成本 | 较慢，较贵 | 更快，更便宜 |
+| 上下文 | 1M | 1M |
+
+建议：复杂的 Agent 任务用 V4 Pro Thinking，日常任务用 V4 Flash 就够了。
+
+## 相关文档
+
+- [AI 模型配置详解](/docs/zh-cn/settings/ai-models) — 连接器文件格式、环境变量、更多示例
+- [DeepSeek V4 官方发布说明](https://api-docs.deepseek.com/zh-cn/news/news260424) — V4 完整技术细节和 API 文档

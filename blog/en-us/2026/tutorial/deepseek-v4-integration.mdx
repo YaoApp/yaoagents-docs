@@ -1,0 +1,224 @@
+---
+title: "Setting Up DeepSeek V4 in Yao Agents"
+description: "DeepSeek V4 just dropped — 1M context window, massively improved Agent capabilities. Here's how to hook up DeepSeek V4 Pro and V4 Flash in Yao Agents."
+published_at: "2026-04-25"
+authors:
+  - name: Yao Team
+---
+
+# Setting Up DeepSeek V4 in Yao Agents
+
+DeepSeek just released the [V4 model family](https://api-docs.deepseek.com/news/news260424), featuring V4 Pro and V4 Flash. Both support a 1M context window and pack significantly stronger Agent capabilities.
+
+Let's get them running in Yao Agents.
+
+## Find Your App Directory
+
+All config files live in the Yao Engine app directory. Open Yao Engine and click **Open Folder** to get there.
+
+![Yao Engine — Click Open Folder to open the app directory](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
+
+You'll see a structure like this:
+
+```
+├── connectors/         ← Connector config files go here
+│   ├── default.conn.yao
+│   ├── thinking.conn.yao
+│   ├── vision.conn.yao
+│   └── deepseek/       ← Create this subdirectory
+├── assistants/
+├── .env
+└── ...
+```
+
+## Add the DeepSeek V4 Connectors
+
+Create a `deepseek/` directory under `connectors/`, then add these four files.
+
+### V4 Pro (Non-thinking Mode)
+
+File: `connectors/deepseek/v4-pro.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Pro",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-pro",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "disabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Pro Thinking (Thinking Mode)
+
+File: `connectors/deepseek/v4-pro-thinking.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Pro Thinking",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-pro",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "enabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "reasoning": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Flash (Non-thinking Mode)
+
+File: `connectors/deepseek/v4-flash.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Flash",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-flash",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "disabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### V4 Flash Thinking (Thinking Mode)
+
+File: `connectors/deepseek/v4-flash-thinking.conn.yao`
+
+```json
+{
+  "label": "DeepSeek V4 Flash Thinking",
+  "type": "openai",
+  "options": {
+    "model": "deepseek-v4-flash",
+    "key": "$ENV.DEEPSEEK_V4_API_KEY",
+    "proxy": "$ENV.DEEPSEEK_V4_PROXY",
+    "thinking": {
+      "type": "enabled"
+    },
+    "capabilities": {
+      "tool_calls": true,
+      "reasoning": true,
+      "streaming": true,
+      "json": true
+    }
+  }
+}
+```
+
+### Set Up Environment Variables
+
+Add the following to the `.env` file in your app directory:
+
+```bash
+DEEPSEEK_V4_API_KEY=sk-your-deepseek-api-key
+DEEPSEEK_V4_PROXY=https://api.deepseek.com
+```
+
+Grab your API key from the [DeepSeek platform](https://platform.deepseek.com/).
+
+Once you've added the files, restart Yao Engine. The four DeepSeek V4 connectors will show up in the model picker for both AI Expert and Robot.
+
+## Using DeepSeek V4 in the Sandbox
+
+Yao Agents Sandbox supports two Runners — `claude` and `opencode`. DeepSeek V4 works with both. The `sandbox.yao` file lives in each expert's configuration directory at `assistants/<namespace>/<assistant-name>/sandbox.yao`.
+
+### Specifying a Vision Model
+
+DeepSeek V4 doesn't support vision (image understanding) yet, but some Sandbox tasks need to analyze screenshots. The `opencode` Runner lets you set a separate vision connector in `sandbox.yao`:
+
+```json
+{
+  "version": "2.0",
+  "computer": {
+    "image": "yaoapp/tai-sandbox-opencode:latest",
+    "memory": "2GB",
+    "cpus": 2,
+    "work_dir": "/workspace"
+  },
+  "runner": {
+    "name": "opencode",
+    "mode": "cli",
+    "options": {
+      "permission_mode": "bypassPermissions"
+    },
+    "connectors": {
+      "vision": "openai.gpt-4o-mini"
+    }
+  },
+  "lifecycle": "oneshot"
+}
+```
+
+Key settings:
+
+- `runner.name` — set to `"opencode"`
+- `runner.connectors.vision` — point this to a vision-capable model connector (e.g. `openai.gpt-4o-mini`). Screenshots go through this model; everything else uses DeepSeek V4.
+
+### opencode Runner Docker Images
+
+The `opencode` Runner ships with several Docker images. Pick the one that fits your use case:
+
+| Image | Desktop | SSH | Includes Yao | Best For |
+|------|---------|-----|----------|---------|
+| `tai-sandbox-opencode` | — | — | — | Pure code tasks, most use cases |
+| `tai-sandbox-opencode-ssh` | — | ✓ | — | Remote server access |
+| `tai-sandbox-opencode-desktop-lite` | Lightweight | — | — | Tasks that need a browser |
+| `tai-sandbox-opencode-desktop-lite-ssh` | Lightweight | ✓ | — | Browser + remote server |
+| `tai-sandbox-opencode-desktop` | Full (XFCE) | — | — | Applet-style tasks |
+| `tai-sandbox-opencode-desktop-ssh` | Full (XFCE) | ✓ | — | Site building, deployment |
+| `tai-sandbox-opencode-yao` | — | ✓ | ✓ | Yao app development |
+| `tai-sandbox-opencode-yao-desktop` | Full (XFCE) | ✓ | ✓ | Yao app dev (with desktop) |
+| `tai-sandbox-opencode-yao-desktop-lite` | Lightweight | ✓ | ✓ | Yao app dev (lightweight desktop) |
+
+Pull an image:
+
+```bash
+docker pull yaoapp/tai-sandbox-opencode:latest
+```
+
+Swap in a different image name as needed. All images support both `linux/amd64` and `linux/arm64`.
+
+## V4 Pro vs. V4 Flash
+
+| | V4 Pro | V4 Flash |
+|---|--------|----------|
+| Reasoning | Top-tier, on par with closed-source models | Close to Pro |
+| Agent capability | Best in open-source, excels at complex tasks | Comparable to Pro on simple tasks, falls behind on complex ones |
+| World knowledge | Rich, second only to Gemini-Pro-3.1 | Somewhat weaker |
+| Speed & cost | Slower, pricier | Faster, cheaper |
+| Context window | 1M | 1M |
+
+Rule of thumb: use V4 Pro Thinking for complex Agent tasks, V4 Flash for everyday work.
+
+## Further Reading
+
+- [AI Model Configuration Guide](/docs/en-us/settings/ai-models) — Connector file format, environment variables, and more examples
+- [DeepSeek V4 Official Release Notes](https://api-docs.deepseek.com/news/news260424) — Full technical details and API docs

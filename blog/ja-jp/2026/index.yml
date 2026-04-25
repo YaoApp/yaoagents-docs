@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-v4-integration
+    title: "Yao Agents で DeepSeek V4 を使う方法"
+    summary: "DeepSeek V4 がリリースされました。100万トークンのコンテキスト対応、Agent 性能も大幅アップ。この記事では、Yao Agents に DeepSeek V4 Pro と V4 Flash を接続する方法を紹介します。"
+    category: tutorial
+    date: "2026-04-25"
+    author:
+      name: Yao Team
+
   - slug: introducing-yao-agents
     title: "Yao Agents オープンベータ開始 — 眠ってるPCを叩き起こせ"
     summary: "Yao Agents のオープンベータが始まりました。あなたのPCがAIチームに早変わり。ツール作成、サイト構築、データ分析、レポート作成、Tai Link で複数デバイスの連携まで。"
