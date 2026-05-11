@@ -20,9 +20,11 @@ authors:
 
 | 设置项 | 推荐配置 | 说明 |
 |--------|---------|------|
-| [模型](/docs/zh-cn/settings/ai-models) | DeepSeek V4 Pro | 配好 Default 模型 |
+| [模型](/docs/zh-cn/settings/ai-models) | DeepSeek (Anthropic) / DeepSeek V4 Pro | 配好 Default 模型 |
 | [搜索](/docs/zh-cn/settings/search-scrape) | Brightdata | 开启后才能联网查资料 |
 | [沙箱](/docs/zh-cn/settings/docker-setting) | `Transformer、Slides` 已下载 | 没有的话点一下下载 |
+
+> **注意**：DeepSeek 接口类型选 **Anthropic 兼容**。DeepSeek 不支持视觉，需要在模型设置里单独配一个 **Vision 模型**（如 GPT-4o Mini），否则涉及图片的功能无法使用。
 
 ![沙箱配置](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
 

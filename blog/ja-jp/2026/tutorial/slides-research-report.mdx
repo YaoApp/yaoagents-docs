@@ -20,9 +20,11 @@ authors:
 
 | 設定 | 推奨 | 説明 |
 |------|------|------|
-| [モデル](/docs/en-us/settings/ai-models) | DeepSeek V4 Pro | Default モデルに設定 |
+| [モデル](/docs/en-us/settings/ai-models) | DeepSeek (Anthropic) / DeepSeek V4 Pro | Default モデルに設定 |
 | [検索](/docs/en-us/settings/search-scrape) | Brightdata | ウェブ調査に必要 |
 | [サンドボックス](/docs/en-us/settings/docker-setting) | `Transformer、Slides` ダウンロード済み | 未ダウンロードならクリックして取得 |
+
+> **注意**：DeepSeek のインターフェースタイプは **Anthropic 互換** を選択してください。DeepSeek は Vision に非対応のため、モデル設定で別途 **Vision モデル**（例：GPT-4o Mini）を設定する必要があります。画像関連の機能が使えなくなります。
 
 ![サンドボックス設定](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
 
