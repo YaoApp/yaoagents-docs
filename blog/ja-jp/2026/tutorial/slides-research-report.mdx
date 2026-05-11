@@ -1,0 +1,71 @@
+---
+title: "Yao Agents でブランド調査スライドを作る"
+description: "Yao Agents で Labubu を調査し、ブランド調査スライドを生成。セットアップから完成品までの全手順。"
+published_at: "2026-05-12"
+authors:
+  - name: Yao Team
+---
+
+# Yao Agents でブランド調査スライドを作る
+
+![完成イメージ](https://assets.yaoagents.com/en/tutorials/04-ppt-result-en-$__THEME.png)
+
+この例では、Yao Agents に Labubu を調査させ、ブランド調査スライドを作ります。
+
+> **サンプル成果物** [PDF をダウンロード →](https://assets.yaoagents.com/en/demos/labubu-growth-path.pdf)
+
+## 準備
+
+まず3つの設定を確認します。
+
+| 設定 | 推奨 | 説明 |
+|------|------|------|
+| [モデル](/docs/en-us/settings/ai-models) | DeepSeek V4 Pro | Default モデルに設定 |
+| [検索](/docs/en-us/settings/search-scrape) | Brightdata | ウェブ調査に必要 |
+| [サンドボックス](/docs/en-us/settings/docker-setting) | `Transformer、Slides` ダウンロード済み | 未ダウンロードならクリックして取得 |
+
+![サンドボックス設定](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
+
+## ワークスペースを作る
+
+サイドバーからワークスペースを作成します。生成されたファイルはすべてここに保存されます。
+
+![ワークスペース作成](https://assets.yaoagents.com/en/tutorials/01-create-workspace-en-$__THEME.png)
+
+## メッセージを送る
+
+![チャット](https://assets.yaoagents.com/en/tutorials/02-chat-request-en-$__THEME.png)
+
+ワークスペースを選んで、チャットボックスで Yao Agents に伝えます：
+
+> Labubu の成長過程と世界的にヒットした理由を調べて、スライドにまとめて。6〜7ページ、Labubu のブランドに合うスタイルで。マーケティングチームに共有したい。
+
+あとは待つだけ。Yao Agents が Slides エキスパートにタスクを渡し、ウェブ検索・コンテンツ整理・スライド生成・PDF エクスポートまで自動で進めます。
+
+![作業中](https://assets.yaoagents.com/en/tutorials/03-slides-working-en-$__THEME.png)
+
+## 結果を見る
+
+完成したスライドはワークスペースにあります。そのままダウンロードできます。
+
+![作業ログ](https://assets.yaoagents.com/en/tutorials/05-work-log-en-$__THEME.png)
+
+ファイルをクリックしてプレビュー：
+
+![スライドプレビュー](https://assets.yaoagents.com/en/tutorials/04-ppt-result-en-$__THEME.png)
+
+作業ログでは全過程を確認できます — 何を検索し、何を書き、何回修正したか。
+
+---
+
+プロンプトを変えれば、こんなことも：
+
+> Labubu・Molly・Dimoo の3つの IP を比較して、競合分析スライドを作って。8ページくらい。
+
+> 2025年のデザイナートイ業界のトレンドと主要データをまとめて、業界レポートスライドにして。役員報告用。
+
+> 来週新製品の発表会がある。製品は XX、資料は添付ファイルを参照。発表会用スライドを10ページ、うちのブランドスタイルに合わせて作って。
+>
+> （チャットボックスのアップロードボタンから製品資料を添付）
+
+[Yao Agents をダウンロード](https://yaoagents.com/download)
