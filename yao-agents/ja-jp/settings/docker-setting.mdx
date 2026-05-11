@@ -1,0 +1,122 @@
+---
+slug: docker-setting
+---
+
+# サンドボックス
+
+Yao Agents の AI タスクエージェントは、隔離された Docker コンテナ内で実行されます。エージェントがタスク（コードの記述、Web ブラウジング、アプリの構築など）を実行するには、お使いのマシンに Docker がインストールされ、実行されている必要があります。
+
+![設定 — サンドボックス](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
+
+サンドボックス設定パネルには、Docker のステータスとダウンロード済みのサンドボックスイメージが表示されます。Docker がインストールされていない場合、Yao Agents がセットアップを案内します。
+
+## Docker Desktop のインストール
+
+### macOS
+
+1. [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) にアクセスし、**Download for Mac** をクリックします。
+   - M1/M2/M3/M4 Mac の場合は **Apple Silicon** を選択します。
+   - 旧型の Mac の場合は **Intel** を選択します。
+2. ダウンロードした `.dmg` ファイルを開きます。
+3. **Docker** を **Applications** にドラッグします。
+4. Applications から **Docker** を起動します。メニューバーに表示されます。
+5. Docker の起動が完了するまで待ちます（クジラアイコンのアニメーションが停止します）。
+6. ターミナルを開いて確認します：
+
+```bash
+docker --version
+```
+
+`Docker version 27.x.x` のように表示されれば成功です。
+
+### Windows
+
+1. **WSL 2** が有効になっていることを確認します：
+   - PowerShell を管理者として開き、以下を実行します：
+
+```powershell
+wsl --install
+```
+
+   - プロンプトが表示されたら、コンピュータを再起動します。
+
+2. [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) にアクセスし、**Download for Windows** をクリックします。
+3. インストーラーを実行します。セットアップ中は **Use WSL 2** にチェックを入れたままにします。
+4. インストール後、スタートメニューから **Docker Desktop** を起動します。
+5. Docker の起動が完了するまで待ちます（システムトレイのクジラアイコンのアニメーションが停止します）。
+6. PowerShell またはコマンドプロンプトを開いて確認します：
+
+```powershell
+docker --version
+```
+
+### Linux
+
+Linux では Docker Engine を直接インストールします：
+
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+```
+
+グループの変更を反映するためにログアウトしてから再度ログインし、確認します：
+
+```bash
+docker --version
+```
+
+詳しい手順は [Docker Engine 公式ドキュメント](https://docs.docker.com/engine/install/)を参照してください。
+
+## Yao Agents のサンドボックス設定
+
+Docker が実行されたら、Yao Agents で**設定 → サンドボックス**を開きます。パネルには以下が表示されます：
+
+| 項目 | 説明 |
+|------|------|
+| Docker Version | 検出された Docker のバージョン（例：`29.4.1`）。空欄の場合、Docker が実行されていません。 |
+| Sandbox Images | ダウンロード済みイメージの一覧とダウンロード状況。 |
+
+Yao Agents は Docker を自動的に検出します。バージョン番号が表示されていれば、準備完了です。
+
+## サンドボックスイメージのダウンロード
+
+各イメージの横にあるダウンロードボタンをクリックしてプルします。よく使われる 4 つのイメージは以下のとおりです：
+
+| イメージ | 用途 |
+|---------|------|
+| `tai-sandbox-claude` | ほとんどの AI エキスパート — テキストタスク、データ処理、メール、API コール。 |
+| `tai-sandbox-claude-desktop-lite` | ブラウザが必要なタスク（軽量版）。 |
+| `tai-sandbox-claude-desktop` | アプレットワークショップ、フルデスクトップ環境。 |
+| `tai-sandbox-claude-desktop-ssh` | Web Builder — SSH 経由でのビルド、プレビュー、デプロイ。 |
+
+テキストベースのエキスパートのみを使用する場合は、`tai-sandbox-claude` だけで十分です。必要に応じて追加のイメージをダウンロードしてください。
+
+ターミナルから手動でイメージをプルすることもできます：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+## 利用可能な全イメージ
+
+| イメージ | デスクトップ | SSH | 最適な用途 |
+|---------|------------|-----|-----------|
+| `tai-sandbox-claude` | — | — | ほとんどの AI エキスパート（テキストベースのタスク） |
+| `tai-sandbox-claude-ssh` | — | ✓ | リモートサーバーに接続するエージェント |
+| `tai-sandbox-claude-desktop-lite` | 軽量版 | — | ブラウザベースのタスク |
+| `tai-sandbox-claude-desktop-lite-ssh` | 軽量版 | ✓ | ブラウザ + リモートサーバー |
+| `tai-sandbox-claude-desktop` | フル (XFCE) | — | アプレットワークショップ |
+| `tai-sandbox-claude-desktop-ssh` | フル (XFCE) | ✓ | Web Builder（ビルド + デプロイ） |
+
+すべてのイメージは `linux/amd64` と `linux/arm64` の両方に対応しています。
+
+## トラブルシューティング
+
+**Docker が検出されない**
+Docker Desktop が実行されていることを確認してください。macOS ではメニューバーのクジラアイコン、Windows ではシステムトレイを確認してください。Docker を起動した後、Yao Agents を再起動してください。
+
+**イメージのダウンロードに失敗する**
+インターネット接続と空きディスク容量を確認してください。各イメージのサイズは約 1〜4 GB です。
+
+**エージェントが起動しない**
+まず必要なイメージをプルしてから、エージェントを再起動してください。**設定 → サンドボックス**でどのイメージがダウンロード済みか確認できます。

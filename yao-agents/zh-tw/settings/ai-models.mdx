@@ -2,317 +2,69 @@
 slug: ai-models
 ---
 
-# AI 模型
+# 模型設定
 
-Yao Agents 中的 AI 模型以**連接器檔案**（`.conn.yao`）的形式設定，存放在應用程式目錄下的 `connectors/` 目錄中。每個檔案定義一個模型——包括類型、憑證和功能。
+**模型設定**面板讓你為不同角色指派 AI 模型，以及新增模型供應商 — 全部透過圖形介面操作，無需手動編輯檔案。
 
-隨 Yao Agents 內建的四個連接器透過 `.env` 中的環境變數讀取設定，常見場景下無需直接編輯連接器檔案。只有在新增服務商或精細調整模型行為時，才需要建立或修改連接器檔案。
+![設定 — 模型設定](https://assets.yaoagents.com/en/settings/03-config-models-en-$__THEME.png)
 
----
+## 模型角色
 
-## 連接器檔案格式
+Yao Agents 採用角色式模型系統。每個角色有不同的用途，你可以為每個角色指派不同的模型（或供應商）：
 
-連接器檔案是一個 JSON 檔案，包含三個欄位：
+| 角色 | 用途 | 使用時機 |
+|------|------|----------|
+| **Default** | 通用任務 | 大多數對話、日常問答、內容產生。 |
+| **Heavy** | 複雜推理 | 深度分析、長篇規劃、多步驟問題解決。 |
+| **Light** | 快速簡單任務 | 快速回覆、分類、簡短摘要。 |
+| **Vision** | 圖像理解 | 讀取螢幕截圖、分析圖表、OCR 任務。 |
+| **Audio** | 語音轉文字 | 語音輸入轉錄。 |
+| **Embedding** | 文字嵌入 | 語意搜尋、文件相似度比對。 |
 
-```json
-{
-  "label": "UI 中顯示的名稱",
-  "type": "openai",
-  "options": {
-    "host": "https://api.example.com",
-    "model": "model-name",
-    "key": "sk-...",
-    "max_tokens": 16384,
-    "temperature": 0.6,
-    "thinking": { "type": "disabled" },
-    "capabilities": {
-      "vision": true,
-      "tool_calls": true,
-      "reasoning": false,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
+## 為角色指派模型
 
-### `type`
+1. 開啟**設定 → 模型設定**。
+2. 針對每個角色，從下拉選單中選擇模型。可用的模型來自你已設定的供應商。
+3. 點擊**儲存**。
 
-| 值 | 協定 | 適用場景 |
-|----|------|---------|
-| `openai` | OpenAI Chat Completions | OpenAI、DeepSeek、Kimi、Qwen、Ollama，以及任何 OpenAI 相容端點 |
-| `anthropic` | Anthropic Messages API | 直接透過 Anthropic API 呼叫的 Claude 模型 |
+![設定 — 模型角色指派](https://assets.yaoagents.com/en/settings/04-config-models-add-en-$__THEME.png)
 
-> **提示：** 大多數第三方服務商都提供 OpenAI 相容端點。使用 `type: "openai"`，將 `host` 指向服務商的基礎 URL 即可。
+如果你尚未新增任何供應商，請先使用[雲端服務](/docs/zh-tw/settings/cloud-service) — 無需額外設定即可使用所有角色。
 
-### `options`
+## 新增模型供應商
 
-| 欄位 | 類型 | 說明 |
-|------|------|------|
-| `host` | 字串 | API 基礎 URL。以 `/` 結尾時原樣使用；否則自動在請求路徑前加 `/v1`。 |
-| `model` | 字串 | 傳給 API 的模型識別碼（如 `gpt-4o`、`claude-sonnet-4-5-20250929`）。 |
-| `key` | 字串 | API 金鑰。可用 `$ENV.變數名稱` 從 `.env` 讀取。 |
-| `max_tokens` | 整數 | 回應最大 token 數。 |
-| `temperature` | 浮點數 | 採樣溫度。不支援此參數的推理模型請省略。 |
-| `thinking` | 物件 | Thinking / 推理模式設定（見下文）。 |
-| `capabilities` | 物件 | 告知 Yao 該模型支援哪些功能（見下文）。 |
-| `azure` | 字串 | 使用 Azure OpenAI 端點時設為 `"true"`。 |
-| `version` | 字串 | Anthropic API 版本請求標頭，預設 `"2023-06-01"`（僅 anthropic 類型）。 |
+若要使用來自 OpenAI、Anthropic、DeepSeek、Google 或任何 OpenAI 相容服務的模型：
 
-#### `thinking`
+1. 在模型設定頁面底部點擊**新增供應商**。
+2. 選擇供應商類型（OpenAI、Anthropic、DeepSeek、Google、Ollama 或 Custom）。
+3. 輸入所需資訊：
 
-控制擴展推理 / thinking 模式。
+| 欄位 | 說明 |
+|------|------|
+| Name | 此供應商的顯示名稱（例如「My OpenAI」）。 |
+| API Host | 供應商 API 的基礎 URL。已知供應商會自動填入。 |
+| API Key | 從供應商取得的 API Key。 |
+| Models | 要啟用的特定模型識別碼（例如 `gpt-4o`、`claude-sonnet-4-5-20250929`）。 |
 
-| 值 | 效果 |
-|----|------|
-| `{ "type": "disabled" }` | 關閉 thinking。 |
-| `{ "type": "enabled" }` | 始終開啟 thinking。 |
-| `{ "type": "adaptive" }` | 模型根據問題自行決定是否 thinking。 |
-| `{ "type": "enabled", "budget_tokens": 10000 }` | 開啟 thinking 並設定 token 預算（Anthropic 模型）。 |
+4. 點擊**儲存**。新模型會立即出現在角色下拉選單中。
 
-#### `capabilities`
+![設定 — 新增模型供應商](https://assets.yaoagents.com/en/settings/05-config-models-add-deepseek-en-$__THEME.png)
 
-| 欄位 | 類型 | 說明 |
-|------|------|------|
-| `vision` | bool 或 `"openai"` / `"claude"` | 圖像輸入支援。`"openai"` 使用 `image_url` 格式；`"claude"` 使用 base64 格式。 |
-| `tool_calls` | bool | 函式 / 工具呼叫支援。 |
-| `reasoning` | bool | 擴展推理 / 思維鏈輸出。 |
-| `streaming` | bool | 串流回應支援（Server-Sent Events）。 |
-| `json` | bool | JSON 模式支援。 |
-| `multimodal` | bool | 通用多模態輸入（圖像、檔案）。 |
-| `audio` | bool | 音訊理解。 |
-| `stt` | bool | 語音轉文字（Whisper 風格轉錄）。 |
+## 編輯或移除供應商
 
-Yao 會根據常見模型名稱自動推斷合理的預設值，對於主流模型可以省略 `capabilities`。使用自訂或私有模型時建議明確設定。
+點擊供應商卡片以編輯其設定。使用刪除按鈕移除供應商。移除供應商會取消所有使用該供應商模型的角色指派 — 你需要重新指派這些角色。
 
----
+## 支援的供應商
 
-## 內建連接器
+| 供應商 | 類型 | 備註 |
+|--------|------|------|
+| OpenAI | `openai` | GPT-4o、GPT-4.1、o3、o4-mini 等。 |
+| Anthropic | `anthropic` | Claude Opus 4、Claude Sonnet 4.5 等。 |
+| DeepSeek | `openai` | DeepSeek V4、R1 等。OpenAI 相容端點。 |
+| Google | `openai` | 透過 OpenAI 相容閘道使用 Gemini 模型。 |
+| Ollama | `openai` | 本地模型。將主機設定為 `http://127.0.0.1:11434/v1/`。 |
+| 任何 OpenAI 相容服務 | `openai` | vLLM、LiteLLM、Azure OpenAI、Groq、Together 等。 |
 
-以下四個檔案隨 Yao Agents 內建，從 `.env` 讀取設定。
+## 進階：手動建立連接器檔案
 
-### `default` — 均衡
-
-大多數 AI 專家和機器人使用的主要連接器。
-
-```json
-{
-  "label": "Balanced",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
-    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
-    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
-    "max_tokens": 16384,
-    "temperature": 0.6,
-    "thinking": { "type": "disabled" }
-  }
-}
-```
-
-`.env` 變數：`DEFAULT_CONNECTOR_HOST`、`DEFAULT_CONNECTOR_MODEL`、`DEFAULT_CONNECTOR_KEY`
-
-### `thinking` — 深度思考
-
-與 `default` 共用同一端點，但啟用了自適應 thinking——用於機器人或專家需要深度推理的場景。
-
-```json
-{
-  "label": "Deep Think",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
-    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
-    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
-    "max_tokens": 16384,
-    "thinking": { "type": "adaptive" }
-  }
-}
-```
-
-### `vision` — 視覺
-
-處理圖像分析任務，未單獨設定時退回到 `DEFAULT_CONNECTOR_*`。
-
-```json
-{
-  "label": "Vision",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.VISION_CONNECTOR_HOST",
-    "model": "$ENV.VISION_CONNECTOR_MODEL",
-    "key": "$ENV.VISION_CONNECTOR_KEY",
-    "max_tokens": 16384
-  }
-}
-```
-
-`.env` 變數：`VISION_CONNECTOR_HOST`、`VISION_CONNECTOR_MODEL`、`VISION_CONNECTOR_KEY`
-
-### `whisper-1` — 語音轉文字
-
-轉錄音訊輸入。
-
-```json
-{
-  "label": "Whisper-1",
-  "type": "openai",
-  "options": {
-    "model": "$ENV.VOICE_CONNECTOR_MODEL",
-    "key": "$ENV.VOICE_CONNECTOR_KEY",
-    "host": "$ENV.VOICE_CONNECTOR_HOST",
-    "capabilities": { "stt": true }
-  }
-}
-```
-
-`.env` 變數：`VOICE_CONNECTOR_HOST`、`VOICE_CONNECTOR_MODEL`、`VOICE_CONNECTOR_KEY`
-
----
-
-## 新增連接器
-
-1. 在 `connectors/` 下（或子目錄如 `connectors/openai/`）建立一個 `.conn.yao` 檔案。
-2. 填寫 `type`、`options`，以及選填的 `capabilities`。
-3. 重新啟動 Yao Engine。新連接器會出現在所有機器人和 AI 專家的連接器選擇器中。
-
-### 範例：OpenAI GPT-4o
-
-```json
-{
-  "label": "GPT-4o",
-  "type": "openai",
-  "options": {
-    "model": "gpt-4o",
-    "key": "$ENV.OPENAI_API_KEY",
-    "host": "https://api.openai.com",
-    "max_tokens": 16384,
-    "capabilities": {
-      "vision": "openai",
-      "tool_calls": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### 範例：Anthropic Claude Sonnet（直連 API）
-
-```json
-{
-  "label": "Claude Sonnet 4.5",
-  "type": "anthropic",
-  "options": {
-    "model": "claude-sonnet-4-5-20250929",
-    "key": "$ENV.ANTHROPIC_API_KEY",
-    "capabilities": {
-      "vision": "claude",
-      "tool_calls": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### 範例：Claude 開啟擴展 thinking
-
-```json
-{
-  "label": "Claude Sonnet 4.5 Thinking",
-  "type": "anthropic",
-  "options": {
-    "model": "claude-sonnet-4-5-20250929",
-    "key": "$ENV.ANTHROPIC_API_KEY",
-    "thinking": { "type": "enabled", "budget_tokens": 10000 },
-    "capabilities": {
-      "vision": "claude",
-      "tool_calls": true,
-      "reasoning": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### 範例：DeepSeek R1（推理模型）
-
-```json
-{
-  "label": "DeepSeek R1",
-  "type": "openai",
-  "options": {
-    "model": "deepseek-r1",
-    "key": "$ENV.DEEPSEEK_API_KEY",
-    "host": "https://api.deepseek.com",
-    "capabilities": {
-      "reasoning": true,
-      "streaming": true
-    }
-  }
-}
-```
-
-### 範例：透過 Ollama 使用本地模型
-
-```json
-{
-  "label": "Llama 3.3（本地）",
-  "type": "openai",
-  "options": {
-    "model": "llama3.3",
-    "key": "ollama",
-    "host": "http://127.0.0.1:11434/v1/",
-    "capabilities": {
-      "tool_calls": true,
-      "streaming": true,
-      "json": true
-    }
-  }
-}
-```
-
-> `host` 以 `/` 結尾，Yao 會原樣使用，不再追加 `/v1`。
-
-### 範例：火山引擎 / 字節跳動方舟
-
-```json
-{
-  "label": "豆包 Seed 1.6 Flash",
-  "type": "openai",
-  "options": {
-    "model": "$ENV.VOLCENGINE_DOUBAO_SEED_1_6_FLASH",
-    "key": "$ENV.VOLCENGINE_API_KEY",
-    "host": "https://ark.cn-beijing.volces.com/api/v3/",
-    "capabilities": {
-      "vision": true,
-      "streaming": true,
-      "json": true
-    }
-  }
-}
-```
-
----
-
-## `host` URL 規則
-
-| `host` 值 | `/chat/completions` 的完整 URL |
-|---|---|
-| `https://api.openai.com` | `https://api.openai.com/v1/chat/completions` |
-| `https://api.openai.com/` | `https://api.openai.com/chat/completions` |
-| `https://my-proxy.example.com/openai/v1/` | `https://my-proxy.example.com/openai/v1/chat/completions` |
-
-**規則：** `host` 以 `/` 結尾時原樣使用；否則在每個端點路徑前自動加 `/v1`。
-
----
-
-## 套用設定變更
-
-新增或修改連接器檔案後，重新啟動 Yao Engine 使變更生效。
+對於進階使用情境（自訂功能、思考模式設定、Azure 部署），你仍然可以手動建立連接器檔案。請參閱[環境變數](/docs/zh-tw/settings/env-vars)以了解底層 `.conn.yao` 檔案格式與目錄結構。

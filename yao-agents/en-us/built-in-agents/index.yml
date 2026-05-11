@@ -5,9 +5,6 @@ pages:
   - slug: general
     title: General
     summary: General-purpose assistant. Everyday Q&A, versatile tasks, best starting point for new users.
-  - slug: keeper
-    title: Keeper
-    summary: Knowledge base manager. Save/retrieve web pages, notes, files, bookmarks with tags and categories.
   - slug: pm
     title: PM
     summary: Project manager. Task breakdown, progress tracking, team coordination.

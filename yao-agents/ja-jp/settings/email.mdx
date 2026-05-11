@@ -1,0 +1,56 @@
+---
+slug: email
+---
+
+# メール
+
+**メール**パネルでSMTPを設定すると、AIエキスパート（Postmanなど）があなたの代わりにメールを送信できるようになります。未設定の場合、メール関連機能は使用できません。
+
+![設定 — メール / SMTP](https://assets.yaoagents.com/en/settings/09-config-email-en-$__THEME.png)
+
+## 設定項目
+
+| フィールド | 説明 |
+|-----------|------|
+| プロバイダー | プリセットを選択するか、カスタムを選択。 |
+| SMTPホスト | メールサーバーのアドレス。プリセット選択時に自動入力。 |
+| SMTPポート | ポート番号（TLSは通常587、SSLは通常465）。プリセット選択時に自動入力。 |
+| 暗号化 | SSLまたはTLS。プリセット選択時に自動入力。 |
+| ユーザー名 | メールアカウントのユーザー名（通常はメールアドレス全体）。 |
+| パスワード | メールパスワードまたはアプリ専用パスワード。 |
+| 送信者 | 受信者に表示される「差出人」アドレス。 |
+
+## 利用可能なプリセット
+
+| プロバイダー | ホスト | ポート | 暗号化 | 備考 |
+|-------------|--------|--------|--------|------|
+| Gmail | smtp.gmail.com | 465 | SSL | [アプリパスワード](https://myaccount.google.com/apppasswords)が必要（ログインパスワードではない）。 |
+| Yahoo Mail | smtp.mail.yahoo.com | 465 | SSL | [アカウントセキュリティ](https://login.yahoo.com/account/security)でアプリパスワードを生成。 |
+| SendGrid | smtp.sendgrid.net | 587 | TLS | ユーザー名は常に `apikey`、パスワードにAPI Keyを入力。 |
+| Mailgun | smtp.mailgun.org | 587 | TLS | [Mailgunダッシュボード](https://app.mailgun.com/)でSMTP認証情報を取得。 |
+| Amazon SES | email-smtp.us-east-1.amazonaws.com | 587 | TLS | [AWS SESコンソール](https://console.aws.amazon.com/ses/)でSMTP認証情報を作成（IAMキーではない）。 |
+| カスタム | （自分で入力） | 465 | SSL | SMTP サーバー情報を手動で入力。 |
+
+## Gmail設定
+
+Gmailは通常のパスワードではなく**アプリパスワード**が必要です：
+
+1. [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)にアクセス。
+2. アプリとして**メール**を選択し、デバイスタイプを選択。
+3. **生成**をクリックし、16文字のパスワードをコピー。
+4. Yao Agentsで**Gmail**を選択。
+5. Gmailアドレスを**ユーザー名**と**送信者**の両方に入力。
+6. アプリパスワードを**パスワード**フィールドに貼り付け。
+7. **保存**をクリック。
+
+## SendGrid設定
+
+1. **SendGrid**を選択。
+2. ユーザー名に `apikey` と入力。
+3. SendGrid API Keyを**パスワード**に貼り付け。
+4. 確認済みの送信者メールアドレスを入力。
+5. **保存**をクリック。
+
+## カスタムSMTP
+
+その他のメールサービスの場合は**カスタム**を選択し、すべてのフィールドを手動で入力してください。正しいSMTPホスト、ポート、暗号化方式についてはプロバイダーのドキュメントを参照してください。

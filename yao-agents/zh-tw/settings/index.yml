@@ -1,13 +1,25 @@
 slug: settings
 title: 設定
-summary: 設定環境變數、AI 模型和 MCP 工具。
+summary: 設定系統資訊、雲端服務、AI 模型、搜尋、沙箱、郵件和 MCP 工具。
 pages:
-  - slug: env-vars
-    title: 環境變數
-    summary: 設定和管理控制 Yao Agents 執行時行為的環境變數。
+  - slug: system-info
+    title: 系統資訊
+    summary: 檢視版本號和執行環境詳情。
+  - slug: cloud-service
+    title: 雲端服務
+    summary: 設定雲端服務區域、API 位址和驗證。
   - slug: ai-models
-    title: AI 模型
-    summary: 設定 AI 連接器：OpenAI / Claude / 本地模型等。
+    title: 模型設定
+    summary: 為不同角色指派模型，新增模型提供商。
+  - slug: search-scrape
+    title: 搜尋與擷取
+    summary: 設定網頁搜尋和內容擷取服務。
+  - slug: docker-setting
+    title: 沙箱
+    summary: 管理 Docker 和沙箱映像檔。
+  - slug: email
+    title: 郵件
+    summary: 設定 SMTP 郵件發送。
   - slug: mcp-tools
     title: MCP 工具
     summary: 連接外部 MCP 伺服器，擴展助手可用的工具。

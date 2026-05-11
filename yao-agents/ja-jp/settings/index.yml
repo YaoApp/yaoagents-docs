@@ -1,13 +1,25 @@
 slug: settings
 title: 設定
-summary: 環境変数、AIモデル、MCPツールの設定。
+summary: システム情報、クラウドサービス、AIモデル、検索、サンドボックス、メール、MCPツールの設定。
 pages:
-  - slug: env-vars
-    title: 環境変数
-    summary: Yao Agentsの実行時動作を制御する環境変数を設定・管理。
+  - slug: system-info
+    title: システム情報
+    summary: バージョン番号と実行環境の詳細を確認。
+  - slug: cloud-service
+    title: クラウドサービス
+    summary: クラウドサービスのリージョン、APIエンドポイント、認証を設定。
   - slug: ai-models
-    title: AIモデル
-    summary: AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。
+    title: モデル設定
+    summary: 各ロールにモデルを割り当て、プロバイダーを追加。
+  - slug: search-scrape
+    title: 検索とスクレイピング
+    summary: ウェブ検索とコンテンツ取得サービスを設定。
+  - slug: docker-setting
+    title: サンドボックス
+    summary: Dockerとサンドボックスイメージを管理。
+  - slug: email
+    title: メール
+    summary: SMTPメール送信を設定。
   - slug: mcp-tools
     title: MCPツール
-    summary: 外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。
+    summary: 外部MCPサーバーに接続し、アシスタントのツールを拡張。

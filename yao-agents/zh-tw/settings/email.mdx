@@ -1,0 +1,56 @@
+---
+slug: email
+---
+
+# 郵件
+
+**郵件**面板用於設定 SMTP，讓 AI 專家（如 Postman）可以代你發送郵件。未設定時，郵件相關功能將無法使用。
+
+![設定 — 郵件 / SMTP](https://assets.yaoagents.com/en/settings/09-config-email-en-$__THEME.png)
+
+## 設定項目
+
+| 欄位 | 說明 |
+|------|------|
+| 服務商 | 選擇預設服務商或自訂。 |
+| SMTP 位址 | 郵件伺服器位址，選擇預設後自動填入。 |
+| SMTP 連接埠 | 連接埠號（TLS 通常為 587，SSL 通常為 465），選擇預設後自動填入。 |
+| 加密方式 | SSL 或 TLS，選擇預設後自動填入。 |
+| 使用者名稱 | 郵箱帳號（通常是完整郵件地址）。 |
+| 密碼 | 郵箱密碼或應用程式專用密碼。 |
+| 寄件人 | 收件人看到的「寄件人」地址。 |
+
+## 可用預設
+
+| 服務商 | 位址 | 連接埠 | 加密 | 說明 |
+|--------|------|--------|------|------|
+| Gmail | smtp.gmail.com | 465 | SSL | 需使用[應用程式專用密碼](https://myaccount.google.com/apppasswords)，非登入密碼。 |
+| Yahoo Mail | smtp.mail.yahoo.com | 465 | SSL | 需從[帳號安全設定](https://login.yahoo.com/account/security)產生應用程式專用密碼。 |
+| SendGrid | smtp.sendgrid.net | 587 | TLS | 使用者名稱固定為 `apikey`，密碼填 API Key。 |
+| Mailgun | smtp.mailgun.org | 587 | TLS | 從 [Mailgun 控制台](https://app.mailgun.com/)取得 SMTP 憑證。 |
+| Amazon SES | email-smtp.us-east-1.amazonaws.com | 587 | TLS | 在 [AWS SES 控制台](https://console.aws.amazon.com/ses/)建立 SMTP 憑證，非 IAM 金鑰。 |
+| 自訂 | （自行填寫） | 465 | SSL | 手動輸入 SMTP 伺服器資訊。 |
+
+## Gmail 設定
+
+Gmail 需要**應用程式專用密碼**，而非一般登入密碼：
+
+1. 前往 [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)。
+2. 選擇**郵件**作為應用程式，選擇裝置類型。
+3. 點擊**產生**並複製 16 字元密碼。
+4. 在 Yao Agents 中選擇 **Gmail**。
+5. 輸入 Gmail 地址作為**使用者名稱**和**寄件人**。
+6. 貼上應用程式專用密碼到**密碼**欄位。
+7. 點擊**儲存**。
+
+## SendGrid 設定
+
+1. 選擇 **SendGrid**。
+2. 使用者名稱輸入 `apikey`。
+3. 貼上 SendGrid API Key 作為**密碼**。
+4. 輸入已驗證的寄件人地址。
+5. 點擊**儲存**。
+
+## 自訂 SMTP
+
+對於其他郵件服務商，選擇**自訂**並手動填寫所有欄位。請查閱服務商文件取得正確的 SMTP 位址、連接埠和加密方式。

@@ -1,0 +1,166 @@
+---
+slug: docker-setting
+---
+
+# 沙箱
+
+Yao Agents 中的 AI 任务型 Agent 运行在隔离的 Docker 容器内。在 Agent 执行任务（编写代码、浏览网页、构建应用等）之前，你需要在本机安装并运行 Docker。
+
+![设置 — 沙箱](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
+
+沙箱设置面板会显示你的 Docker 状态以及已下载的沙箱镜像。如果未安装 Docker，Yao Agents 会提示你进行安装。
+
+## 安装 Docker Desktop
+
+### macOS
+
+1. 前往 [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) 并点击 **Download for Mac**。
+   - 如果你使用的是 M1/M2/M3/M4 芯片的 Mac，选择 **Apple Silicon**。
+   - 较旧的 Mac 选择 **Intel**。
+2. 打开下载的 `.dmg` 文件。
+3. 将 **Docker** 拖到**应用程序**文件夹。
+4. 从应用程序中启动 **Docker**，它会出现在菜单栏中。
+5. 等待 Docker 完成启动（鲸鱼图标停止动画）。
+6. 打开终端并验证：
+
+```bash
+docker --version
+```
+
+你应该会看到类似 `Docker version 27.x.x` 的输出。
+
+### Windows
+
+1. 确保已启用 **WSL 2**：
+   - 以管理员身份打开 PowerShell 并运行：
+
+```powershell
+wsl --install
+```
+
+   - 如提示需要重启，请重启计算机。
+
+2. 前往 [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) 并点击 **Download for Windows**。
+3. 运行安装程序，安装过程中保持勾选 **Use WSL 2**。
+4. 安装完成后，从开始菜单启动 **Docker Desktop**。
+5. 等待 Docker 完成启动（系统托盘中的鲸鱼图标停止动画）。
+6. 打开 PowerShell 或命令提示符并验证：
+
+```powershell
+docker --version
+```
+
+### Linux
+
+在 Linux 上，直接安装 Docker Engine：
+
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+```
+
+注销并重新登录以使用户组更改生效，然后验证：
+
+```bash
+docker --version
+```
+
+如需详细说明，请参阅 [Docker Engine 官方文档](https://docs.docker.com/engine/install/)。
+
+## 配置国内镜像加速
+
+由于国内网络环境，直接拉取 Docker Hub 镜像可能很慢或失败。安装好 Docker 后，建议配置镜像加速。
+
+### Docker Desktop（macOS / Windows）
+
+1. 打开 Docker Desktop → **Settings** → **Docker Engine**。
+2. 在 JSON 配置中添加 `registry-mirrors` 字段：
+
+```json
+{
+  "registry-mirrors": [
+    "https://mirror.ccs.tencentyun.com",
+    "https://docker.xuanyuan.me",
+    "https://docker.1ms.run",
+    "http://docker.m.daocloud.io"
+  ]
+}
+```
+
+3. 点击 **Apply & Restart**。
+
+### Linux
+
+编辑或创建 `/etc/docker/daemon.json`：
+
+```bash
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json > /dev/null <<'EOF'
+{
+  "registry-mirrors": [
+    "https://mirror.ccs.tencentyun.com",
+    "https://docker.xuanyuan.me",
+    "https://docker.1ms.run",
+    "http://docker.m.daocloud.io"
+  ]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+配置完成后，`docker pull` 会自动通过镜像源加速下载。
+
+## Yao Agents 中的沙箱设置
+
+Docker 运行后，在 Yao Agents 中进入**设置 → 沙箱**。面板会显示：
+
+| 字段 | 说明 |
+|------|------|
+| Docker Version | 检测到的 Docker 版本（例如 `29.4.1`）。如果为空，说明 Docker 未运行。 |
+| Sandbox Images | 已下载镜像的列表及其下载状态。 |
+
+Yao Agents 会自动检测 Docker。如果显示了版本号，即表示一切就绪。
+
+## 下载沙箱镜像
+
+点击每个镜像旁边的下载按钮进行拉取。最常用的四个镜像如下：
+
+| 镜像 | 用途 |
+|------|------|
+| `tai-sandbox-claude` | 大多数 AI 专家 — 文本任务、数据处理、邮件、API 调用。 |
+| `tai-sandbox-claude-desktop-lite` | 需要浏览器的任务（轻量版）。 |
+| `tai-sandbox-claude-desktop` | 小程序工坊，完整桌面环境。 |
+| `tai-sandbox-claude-desktop-ssh` | Web Builder — 通过 SSH 构建、预览和部署。 |
+
+如果你只使用文本类专家，只需下载 `tai-sandbox-claude` 即可。其他镜像按需下载。
+
+你也可以从终端手动拉取镜像：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+## 全部可用镜像
+
+| 镜像 | 桌面环境 | SSH | 适用场景 |
+|------|----------|-----|----------|
+| `tai-sandbox-claude` | — | — | 大多数 AI 专家（文本类任务） |
+| `tai-sandbox-claude-ssh` | — | ✓ | 需要连接远程服务器的 Agent |
+| `tai-sandbox-claude-desktop-lite` | 轻量版 | — | 浏览器相关任务 |
+| `tai-sandbox-claude-desktop-lite-ssh` | 轻量版 | ✓ | 浏览器 + 远程服务器 |
+| `tai-sandbox-claude-desktop` | 完整版 (XFCE) | — | 小程序工坊 |
+| `tai-sandbox-claude-desktop-ssh` | 完整版 (XFCE) | ✓ | Web Builder（构建 + 部署） |
+
+所有镜像均支持 `linux/amd64` 和 `linux/arm64` 架构。
+
+## 常见问题
+
+**未检测到 Docker**
+确保 Docker Desktop 正在运行。macOS 上检查菜单栏中的鲸鱼图标，Windows 上检查系统托盘。启动 Docker 后重启 Yao Agents。
+
+**镜像下载失败**
+检查网络连接和可用磁盘空间。每个镜像大约 1–4 GB。
+
+**Agent 无法启动**
+请先拉取所需的镜像，然后重启 Agent。前往**设置 → 沙箱**查看已下载的镜像。

@@ -842,12 +842,6 @@ const yaoAgents: Product = {
                 "General-purpose assistant. Everyday Q&A, versatile tasks, best starting point for new users.",
             },
             {
-              slug: "keeper",
-              title: "Keeper",
-              summary:
-                "Knowledge base manager. Save/retrieve web pages, notes, files, bookmarks with tags and categories.",
-            },
-            {
               slug: "pm",
               title: "PM",
               summary:
@@ -950,12 +944,6 @@ const yaoAgents: Product = {
               summary: "日常问答、通用任务、新手首选。",
             },
             {
-              slug: "keeper",
-              title: "Keeper（知识库管理）",
-              summary:
-                "保存/检索内容（网页/笔记/文件/书签）、分类标签、外部数据导入。",
-            },
-            {
               slug: "pm",
               title: "PM（项目经理）",
               summary: "项目管理、任务拆解与跟踪、团队协作。",
@@ -1044,11 +1032,6 @@ const yaoAgents: Product = {
               slug: "general",
               title: "General（通用助手）",
               summary: "日常問答、通用任務、新手首選。",
-            },
-            {
-              slug: "keeper",
-              title: "Keeper（知識庫管理）",
-              summary: "儲存/檢索內容、分類標籤、外部資料匯入。",
             },
             {
               slug: "pm",
@@ -1140,12 +1123,6 @@ const yaoAgents: Product = {
               slug: "general",
               title: "General（汎用アシスタント）",
               summary: "日常Q&A、汎用タスク、初心者向け。",
-            },
-            {
-              slug: "keeper",
-              title: "Keeper（ナレッジベース）",
-              summary:
-                "コンテンツの保存/検索、タグ分類、外部データインポート。",
             },
             {
               slug: "pm",
@@ -1242,41 +1219,84 @@ const yaoAgents: Product = {
       locales: {
         "en-us": {
           title: "Settings",
-          summary: "Configure environment variables, AI models, and MCP tools.",
+          summary:
+            "Configure system, cloud service, AI models, search, sandbox, email, and MCP tools.",
           pages: [
             {
-              slug: "env-vars",
-              title: "Environment Variables",
+              slug: "system-info",
+              title: "System Info",
               summary:
-                "Set and manage environment variables that control Yao Agents runtime behavior.",
+                "View version numbers and runtime environment details.",
+            },
+            {
+              slug: "cloud-service",
+              title: "Cloud Service",
+              summary:
+                "Configure cloud service region, API endpoint, and authentication.",
             },
             {
               slug: "ai-models",
-              title: "AI Models",
+              title: "Model Configuration",
+              summary: "Assign models to roles and add providers.",
+            },
+            {
+              slug: "search-scrape",
+              title: "Search and Scrape",
               summary:
-                "Configure AI connectors: OpenAI, Claude, local models, etc.",
+                "Configure web search and scraping providers.",
+            },
+            {
+              slug: "docker-setting",
+              title: "Sandbox",
+              summary: "Manage Docker and sandbox images.",
+            },
+            {
+              slug: "email",
+              title: "Email",
+              summary: "Configure SMTP for email sending.",
             },
             {
               slug: "mcp-tools",
               title: "MCP Tools",
               summary:
-                "Connect external MCP servers to extend the tools available to assistants.",
+                "Connect external MCP servers to extend assistant capabilities.",
             },
           ],
         },
         "zh-cn": {
           title: "设置",
-          summary: "配置环境变量、AI 模型和 MCP 工具。",
+          summary:
+            "配置系统信息、云服务、AI 模型、搜索、沙箱、邮件和 MCP 工具。",
           pages: [
             {
-              slug: "env-vars",
-              title: "环境变量",
-              summary: "设置和管理控制 Yao Agents 运行时行为的环境变量。",
+              slug: "system-info",
+              title: "系统信息",
+              summary: "查看版本号和运行环境详情。",
+            },
+            {
+              slug: "cloud-service",
+              title: "云服务",
+              summary: "配置云服务区域、API 地址和认证。",
             },
             {
               slug: "ai-models",
-              title: "AI 模型",
-              summary: "配置 AI 连接器：OpenAI / Claude / 本地模型等。",
+              title: "模型配置",
+              summary: "为不同角色分配模型，添加模型提供商。",
+            },
+            {
+              slug: "search-scrape",
+              title: "搜索与抓取",
+              summary: "配置网页搜索和内容抓取服务。",
+            },
+            {
+              slug: "docker-setting",
+              title: "沙箱",
+              summary: "管理 Docker 和沙箱镜像。",
+            },
+            {
+              slug: "email",
+              title: "邮件",
+              summary: "配置 SMTP 邮件发送。",
             },
             {
               slug: "mcp-tools",
@@ -1287,17 +1307,38 @@ const yaoAgents: Product = {
         },
         "zh-tw": {
           title: "設定",
-          summary: "設定環境變數、AI 模型和 MCP 工具。",
+          summary:
+            "設定系統資訊、雲端服務、AI 模型、搜尋、沙箱、郵件和 MCP 工具。",
           pages: [
             {
-              slug: "env-vars",
-              title: "環境變數",
-              summary: "設定和管理控制 Yao Agents 執行時行為的環境變數。",
+              slug: "system-info",
+              title: "系統資訊",
+              summary: "檢視版本號和執行環境詳情。",
+            },
+            {
+              slug: "cloud-service",
+              title: "雲端服務",
+              summary: "設定雲端服務區域、API 位址和驗證。",
             },
             {
               slug: "ai-models",
-              title: "AI 模型",
-              summary: "設定 AI 連接器：OpenAI / Claude / 本地模型等。",
+              title: "模型設定",
+              summary: "為不同角色指派模型，新增模型提供商。",
+            },
+            {
+              slug: "search-scrape",
+              title: "搜尋與擷取",
+              summary: "設定網頁搜尋和內容擷取服務。",
+            },
+            {
+              slug: "docker-setting",
+              title: "沙箱",
+              summary: "管理 Docker 和沙箱映像檔。",
+            },
+            {
+              slug: "email",
+              title: "郵件",
+              summary: "設定 SMTP 郵件發送。",
             },
             {
               slug: "mcp-tools",
@@ -1308,24 +1349,45 @@ const yaoAgents: Product = {
         },
         "ja-jp": {
           title: "設定",
-          summary: "環境変数、AIモデル、MCPツールの設定。",
+          summary:
+            "システム情報、クラウドサービス、AIモデル、検索、サンドボックス、メール、MCPツールの設定。",
           pages: [
             {
-              slug: "env-vars",
-              title: "環境変数",
-              summary: "Yao Agentsの実行時動作を制御する環境変数を設定・管理。",
+              slug: "system-info",
+              title: "システム情報",
+              summary: "バージョン番号と実行環境の詳細を確認。",
+            },
+            {
+              slug: "cloud-service",
+              title: "クラウドサービス",
+              summary:
+                "クラウドサービスのリージョン、APIエンドポイント、認証を設定。",
             },
             {
               slug: "ai-models",
-              title: "AIモデル",
-              summary:
-                "AIコネクタの設定：OpenAI / Claude / ローカルモデルなど。",
+              title: "モデル設定",
+              summary: "各ロールにモデルを割り当て、プロバイダーを追加。",
+            },
+            {
+              slug: "search-scrape",
+              title: "検索とスクレイピング",
+              summary: "ウェブ検索とコンテンツ取得サービスを設定。",
+            },
+            {
+              slug: "docker-setting",
+              title: "サンドボックス",
+              summary: "Dockerとサンドボックスイメージを管理。",
+            },
+            {
+              slug: "email",
+              title: "メール",
+              summary: "SMTPメール送信を設定。",
             },
             {
               slug: "mcp-tools",
               title: "MCPツール",
               summary:
-                "外部MCPサーバーに接続し、アシスタントが使えるツールを拡張。",
+                "外部MCPサーバーに接続し、アシスタントのツールを拡張。",
             },
           ],
         },

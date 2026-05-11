@@ -2,319 +2,69 @@
 slug: ai-models
 ---
 
-# AI Models
+# Model Configuration
 
-AI models in Yao Agents are configured as **connector files** (`.conn.yao`) stored in the `connectors/` directory inside your application folder. Each file defines one model — its type, credentials, and capabilities.
+The **Model Configuration** panel lets you assign AI models to different roles and add new model providers — all through the GUI, no file editing required.
 
-The four built-in connectors that ship with Yao Agents use environment variables from `.env` so you don't have to edit the connector files directly for the common case. You only need to create or edit connector files when you want to add a new provider or fine-tune model behaviour.
+![Settings — Model Configuration](https://assets.yaoagents.com/en/settings/03-config-models-en-$__THEME.png)
 
----
+## Model roles
 
-## Connector file format
+Yao Agents uses a role-based model system. Each role serves a different purpose, and you can assign a different model (or provider) to each role:
 
-A connector file is a JSON file with three fields:
+| Role | Purpose | When it's used |
+|------|---------|----------------|
+| **Default** | General-purpose tasks | Most conversations, everyday Q&A, content generation. |
+| **Heavy** | Complex reasoning | Deep analysis, long planning, multi-step problem solving. |
+| **Light** | Fast, simple tasks | Quick replies, classification, short summaries. |
+| **Vision** | Image understanding | Reading screenshots, analyzing charts, OCR tasks. |
+| **Audio** | Speech-to-text | Voice input transcription. |
+| **Embedding** | Text embedding | Semantic search, document similarity. |
 
-```json
-{
-  "label": "Display name shown in the UI",
-  "type": "openai",
-  "options": {
-    "host": "https://api.example.com",
-    "model": "model-name",
-    "key": "sk-...",
-    "max_tokens": 16384,
-    "temperature": 0.6,
-    "thinking": { "type": "disabled" },
-    "capabilities": {
-      "vision": true,
-      "tool_calls": true,
-      "reasoning": false,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
+## Assigning models to roles
 
-### `type`
+1. Open **Settings → Model Configuration**.
+2. For each role, select a model from the dropdown. Available models come from your configured providers.
+3. Click **Save**.
 
-| Value | Protocol | Use for |
-|-------|----------|---------|
-| `openai` | OpenAI Chat Completions | OpenAI, DeepSeek, Kimi, Qwen, Ollama, and any OpenAI-compatible endpoint |
-| `anthropic` | Anthropic Messages API | Claude models called directly via Anthropic's API |
+![Settings — Model role assignment](https://assets.yaoagents.com/en/settings/04-config-models-add-en-$__THEME.png)
 
-> **Tip:** Most third-party providers expose an OpenAI-compatible endpoint. Use `type: "openai"` and point `host` at the provider's base URL.
+If you haven't added any providers yet, use the [Cloud Service](/docs/en-us/settings/cloud-service) — it gives you instant access to all roles without additional setup.
 
-### `options`
+## Adding a model provider
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `host` | string | API base URL. If it ends with `/`, it is used as-is. Otherwise `/v1` is automatically prepended. |
-| `model` | string | Model identifier passed to the API (e.g. `gpt-4o`, `claude-sonnet-4-5-20250929`). |
-| `key` | string | API key. Use `$ENV.VARIABLE_NAME` to read from `.env`. |
-| `max_tokens` | int | Maximum tokens for the response. |
-| `temperature` | float | Sampling temperature. Omit for reasoning models that don't support it. |
-| `thinking` | object | Thinking / reasoning mode configuration (see below). |
-| `capabilities` | object | Tells Yao which features this model supports (see below). |
-| `azure` | string | Set to `"true"` when using an Azure OpenAI endpoint. |
-| `version` | string | Anthropic API version header. Default: `"2023-06-01"`. (Anthropic type only) |
+To use models from OpenAI, Anthropic, DeepSeek, Google, or any OpenAI-compatible service:
 
-#### `thinking`
+1. Click **Add Provider** at the bottom of the Model Configuration page.
+2. Select the provider type (OpenAI, Anthropic, DeepSeek, Google, Ollama, or Custom).
+3. Enter the required information:
 
-Controls extended reasoning / thinking mode.
+| Field | Description |
+|-------|-------------|
+| Name | A display label for this provider (e.g., "My OpenAI"). |
+| API Host | The base URL of the provider's API. Pre-filled for known providers. |
+| API Key | Your API key from the provider. |
+| Models | The specific model identifiers to make available (e.g., `gpt-4o`, `claude-sonnet-4-5-20250929`). |
 
-| Value | Effect |
-|-------|--------|
-| `{ "type": "disabled" }` | Thinking is off. |
-| `{ "type": "enabled" }` | Thinking is always on. |
-| `{ "type": "adaptive" }` | The model decides whether to think based on the query. |
-| `{ "type": "enabled", "budget_tokens": 10000 }` | Thinking on with a token budget (Anthropic models). |
+4. Click **Save**. The new models appear in the role dropdowns immediately.
 
-#### `capabilities`
+![Settings — Add model provider](https://assets.yaoagents.com/en/settings/05-config-models-add-deepseek-en-$__THEME.png)
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `vision` | bool or `"openai"` / `"claude"` | Image input support. `"openai"` uses the `image_url` format; `"claude"` uses the base64 format. |
-| `tool_calls` | bool | Function / tool calling support. |
-| `reasoning` | bool | Extended reasoning / chain-of-thought output. |
-| `streaming` | bool | Streaming response support (Server-Sent Events). |
-| `json` | bool | JSON mode support. |
-| `multimodal` | bool | General multimodal input (images, files). |
-| `audio` | bool | Audio understanding. |
-| `stt` | bool | Speech-to-text (Whisper-style transcription). |
+## Editing or removing a provider
 
-Yao sets sensible defaults for well-known model name patterns, so you can omit `capabilities` for common models. Always set it explicitly when using a custom or private model.
+Click the provider card to edit its settings. Use the delete button to remove a provider. Removing a provider unassigns any roles that were using its models — you'll need to reassign those roles.
 
----
+## Supported providers
 
-## Built-in connectors
+| Provider | Type | Notes |
+|----------|------|-------|
+| OpenAI | `openai` | GPT-4o, GPT-4.1, o3, o4-mini, etc. |
+| Anthropic | `anthropic` | Claude Opus 4, Claude Sonnet 4.5, etc. |
+| DeepSeek | `openai` | DeepSeek V4, R1, etc. OpenAI-compatible endpoint. |
+| Google | `openai` | Gemini models via OpenAI-compatible gateway. |
+| Ollama | `openai` | Local models. Set host to `http://127.0.0.1:11434/v1/`. |
+| Any OpenAI-compatible | `openai` | vLLM, LiteLLM, Azure OpenAI, Groq, Together, etc. |
 
-These four files ship with Yao Agents and read their values from `.env`.
+## Advanced: manual connector files
 
-### `default` — Balanced
-
-The main connector used by most AI Experts and robots.
-
-```json
-{
-  "label": "Balanced",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
-    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
-    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
-    "max_tokens": 16384,
-    "temperature": 0.6,
-    "thinking": { "type": "disabled" }
-  }
-}
-```
-
-`.env` keys: `DEFAULT_CONNECTOR_HOST`, `DEFAULT_CONNECTOR_MODEL`, `DEFAULT_CONNECTOR_KEY`
-
-### `thinking` — Deep Think
-
-Same endpoint as `default` but with adaptive thinking enabled — used when a robot or expert requests deep reasoning.
-
-```json
-{
-  "label": "Deep Think",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
-    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
-    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
-    "max_tokens": 16384,
-    "thinking": { "type": "adaptive" }
-  }
-}
-```
-
-### `vision` — Vision
-
-Handles image analysis tasks, falls back to `DEFAULT_CONNECTOR_*` if not separately configured.
-
-```json
-{
-  "label": "Vision",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.VISION_CONNECTOR_HOST",
-    "model": "$ENV.VISION_CONNECTOR_MODEL",
-    "key": "$ENV.VISION_CONNECTOR_KEY",
-    "max_tokens": 16384
-  }
-}
-```
-
-`.env` keys: `VISION_CONNECTOR_HOST`, `VISION_CONNECTOR_MODEL`, `VISION_CONNECTOR_KEY`
-
-### `whisper-1` — Speech-to-Text
-
-Transcribes audio input.
-
-```json
-{
-  "label": "Whisper-1",
-  "type": "openai",
-  "options": {
-    "model": "$ENV.VOICE_CONNECTOR_MODEL",
-    "key": "$ENV.VOICE_CONNECTOR_KEY",
-    "host": "$ENV.VOICE_CONNECTOR_HOST",
-    "capabilities": { "stt": true }
-  }
-}
-```
-
-`.env` keys: `VOICE_CONNECTOR_HOST`, `VOICE_CONNECTOR_MODEL`, `VOICE_CONNECTOR_KEY`
-
----
-
-## Adding a connector
-
-1. Create a new `.json` file (with `.conn.yao` extension) in `connectors/` — or in a sub-directory, e.g. `connectors/openai/gpt-4o.conn.yao`.
-2. Fill in the `type`, `options`, and optionally `capabilities`.
-3. Restart Yao Engine. The new connector appears in the connector selector across all robots and AI Experts.
-
-### Example: OpenAI GPT-4o
-
-```json
-{
-  "label": "GPT-4o",
-  "type": "openai",
-  "options": {
-    "model": "gpt-4o",
-    "key": "$ENV.OPENAI_API_KEY",
-    "host": "https://api.openai.com",
-    "max_tokens": 16384,
-    "capabilities": {
-      "vision": "openai",
-      "tool_calls": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### Example: Anthropic Claude Sonnet (direct API)
-
-```json
-{
-  "label": "Claude Sonnet 4.5",
-  "type": "anthropic",
-  "options": {
-    "model": "claude-sonnet-4-5-20250929",
-    "key": "$ENV.ANTHROPIC_API_KEY",
-    "capabilities": {
-      "vision": "claude",
-      "tool_calls": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### Example: Claude with extended thinking
-
-```json
-{
-  "label": "Claude Sonnet 4.5 Thinking",
-  "type": "anthropic",
-  "options": {
-    "model": "claude-sonnet-4-5-20250929",
-    "key": "$ENV.ANTHROPIC_API_KEY",
-    "thinking": { "type": "enabled", "budget_tokens": 10000 },
-    "capabilities": {
-      "vision": "claude",
-      "tool_calls": true,
-      "reasoning": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### Example: DeepSeek R1 (reasoning model)
-
-```json
-{
-  "label": "DeepSeek R1",
-  "type": "openai",
-  "options": {
-    "model": "deepseek-r1",
-    "key": "$ENV.DEEPSEEK_API_KEY",
-    "host": "https://api.deepseek.com",
-    "capabilities": {
-      "reasoning": true,
-      "streaming": true
-    }
-  }
-}
-```
-
-### Example: Local model via Ollama
-
-```json
-{
-  "label": "Llama 3.3 (Local)",
-  "type": "openai",
-  "options": {
-    "model": "llama3.3",
-    "key": "ollama",
-    "host": "http://127.0.0.1:11434/v1/",
-    "capabilities": {
-      "tool_calls": true,
-      "streaming": true,
-      "json": true
-    }
-  }
-}
-```
-
-> The `host` ends with `/` so Yao uses it as-is without appending `/v1`.
-
-### Example: Volcengine / ByteDance Ark (China MaaS)
-
-```json
-{
-  "label": "Doubao Seed 1.6 Flash",
-  "type": "openai",
-  "options": {
-    "model": "$ENV.VOLCENGINE_DOUBAO_SEED_1_6_FLASH",
-    "key": "$ENV.VOLCENGINE_API_KEY",
-    "host": "https://ark.cn-beijing.volces.com/api/v3/",
-    "capabilities": {
-      "vision": true,
-      "streaming": true,
-      "json": true
-    }
-  }
-}
-```
-
----
-
-## `host` URL rules
-
-The `host` field controls how the API URL is constructed:
-
-| `host` value | Result URL for `/chat/completions` |
-|---|---|
-| `https://api.openai.com` | `https://api.openai.com/v1/chat/completions` |
-| `https://api.openai.com/` | `https://api.openai.com/chat/completions` |
-| `https://my-proxy.example.com/openai/v1/` | `https://my-proxy.example.com/openai/v1/chat/completions` |
-
-**Rule:** If `host` ends with `/`, it is used as-is. Otherwise `/v1` is automatically prepended to every endpoint path.
-
----
-
-## Applying changes
-
-After adding or editing a connector file, restart Yao Engine for the change to take effect.
+For advanced use cases (custom capabilities, thinking mode configuration, Azure deployments), you can still create connector files manually. See [Environment Variables](/docs/en-us/settings/env-vars) for the underlying `.conn.yao` file format and directory structure.

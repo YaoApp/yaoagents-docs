@@ -1,0 +1,35 @@
+---
+slug: search-scrape
+---
+
+# Search and Scrape
+
+The **Search & Scrape** panel configures web search and page scraping providers used by AI Experts. When an expert needs to look something up online or extract content from a URL, it uses the provider configured here.
+
+![Settings — Search & Scrape](https://assets.yaoagents.com/en/settings/07-config-search-en-$__THEME.png)
+
+## Supported providers
+
+| Provider | Type | What it does |
+|----------|------|-------------|
+| [Tavily](https://tavily.com) | Search | AI-optimized web search API. Returns structured results ready for LLM consumption. |
+| [Serper](https://serper.dev) | Search | Google Search API. Fast, affordable, returns standard search results. |
+| [Brightdata](https://brightdata.com) | Scrape | Web scraping and data collection. Extracts content from pages that block simple fetches. |
+
+## Setup
+
+1. Sign up for the provider you want to use.
+2. Copy your API key from the provider's dashboard.
+3. Open **Settings → Search & Scrape** in Yao Agents.
+4. Select the provider and paste your API key.
+5. Click **Save**.
+
+## How experts use it
+
+When you ask an AI Expert a question that requires up-to-date information, it will automatically:
+
+1. Call the configured search provider to find relevant pages.
+2. Use the scrape provider (if configured) to extract full content from those pages.
+3. Synthesize the results into its answer.
+
+You don't need to configure every provider. A search provider alone is enough for most use cases. Add a scrape provider if your workflows involve extracting detailed content from specific websites.

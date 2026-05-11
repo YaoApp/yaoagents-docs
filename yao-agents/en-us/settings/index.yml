@@ -1,13 +1,25 @@
 slug: settings
 title: Settings
-summary: Configure environment variables, AI models, and MCP tools.
+summary: Configure system, cloud service, AI models, search, sandbox, email, and MCP tools.
 pages:
-  - slug: env-vars
-    title: Environment Variables
-    summary: Set and manage environment variables that control Yao Agents runtime behavior.
+  - slug: system-info
+    title: System Info
+    summary: View version numbers and runtime environment details.
+  - slug: cloud-service
+    title: Cloud Service
+    summary: Configure cloud service region, API endpoint, and authentication.
   - slug: ai-models
-    title: AI Models
-    summary: "Configure AI connectors: OpenAI, Claude, local models, etc."
+    title: Model Configuration
+    summary: Assign models to roles and add providers.
+  - slug: search-scrape
+    title: Search and Scrape
+    summary: Configure web search and scraping providers.
+  - slug: docker-setting
+    title: Sandbox
+    summary: Manage Docker and sandbox images.
+  - slug: email
+    title: Email
+    summary: Configure SMTP for email sending.
   - slug: mcp-tools
     title: MCP Tools
-    summary: Connect external MCP servers to extend the tools available to assistants.
+    summary: Connect external MCP servers to extend assistant capabilities.

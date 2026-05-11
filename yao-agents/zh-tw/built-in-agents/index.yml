@@ -5,9 +5,6 @@ pages:
   - slug: general
     title: General（通用助手）
     summary: 日常問答、通用任務、新手首選。
-  - slug: keeper
-    title: Keeper（知識庫管理）
-    summary: 儲存/檢索內容、分類標籤、外部資料匯入。
   - slug: pm
     title: PM（專案經理）
     summary: 專案管理、任務拆解與追蹤、團隊協作。

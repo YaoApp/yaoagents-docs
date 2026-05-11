@@ -1,0 +1,122 @@
+---
+slug: docker-setting
+---
+
+# 沙箱
+
+Yao Agents 中的 AI 任務代理在隔離的 Docker 容器中執行。在代理能夠執行任務（撰寫程式碼、瀏覽網頁、建構應用程式）之前，你需要先在電腦上安裝並啟動 Docker。
+
+![設定 — 沙箱](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
+
+沙箱設定面板會顯示你的 Docker 狀態以及已下載的沙箱映像檔。如果尚未安裝 Docker，Yao Agents 會提示你進行安裝。
+
+## 安裝 Docker Desktop
+
+### macOS
+
+1. 前往 [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) 並點擊 **Download for Mac**。
+   - 如果你使用 M1/M2/M3/M4 Mac，請選擇 **Apple Silicon**。
+   - 較舊的 Mac 請選擇 **Intel**。
+2. 開啟下載的 `.dmg` 檔案。
+3. 將 **Docker** 拖曳至**應用程式**資料夾。
+4. 從「應用程式」啟動 **Docker**，它會出現在選單列中。
+5. 等待 Docker 完成啟動（鯨魚圖示停止動畫）。
+6. 開啟終端機並驗證：
+
+```bash
+docker --version
+```
+
+你應該會看到類似 `Docker version 27.x.x` 的輸出。
+
+### Windows
+
+1. 確認已啟用 **WSL 2**：
+   - 以系統管理員身分開啟 PowerShell 並執行：
+
+```powershell
+wsl --install
+```
+
+   - 如果系統提示，請重新啟動電腦。
+
+2. 前往 [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) 並點擊 **Download for Windows**。
+3. 執行安裝程式。安裝過程中保持勾選 **Use WSL 2**。
+4. 安裝完成後，從開始功能表啟動 **Docker Desktop**。
+5. 等待 Docker 完成啟動（系統匣中的鯨魚圖示停止動畫）。
+6. 開啟 PowerShell 或命令提示字元並驗證：
+
+```powershell
+docker --version
+```
+
+### Linux
+
+在 Linux 上，直接安裝 Docker Engine：
+
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+```
+
+登出後重新登入以套用群組變更，然後驗證：
+
+```bash
+docker --version
+```
+
+如需詳細說明，請參閱 [Docker Engine 官方文件](https://docs.docker.com/engine/install/)。
+
+## Yao Agents 中的沙箱設定
+
+Docker 執行後，在 Yao Agents 中前往**設定 → 沙箱**。面板會顯示：
+
+| 欄位 | 說明 |
+|------|------|
+| Docker Version | 偵測到的 Docker 版本（例如 `29.4.1`）。若為空白，表示 Docker 未在執行。 |
+| Sandbox Images | 已下載映像檔的清單及其下載狀態。 |
+
+Yao Agents 會自動偵測 Docker。如果顯示版本號碼，表示已準備就緒。
+
+## 下載沙箱映像檔
+
+點擊每個映像檔旁的下載按鈕來拉取映像檔。最常用的四個映像檔為：
+
+| 映像檔 | 用途 |
+|--------|------|
+| `tai-sandbox-claude` | 大多數 AI 專家 — 文字任務、資料處理、郵件、API 呼叫。 |
+| `tai-sandbox-claude-desktop-lite` | 需要瀏覽器的任務（輕量版）。 |
+| `tai-sandbox-claude-desktop` | 小程式工坊，完整桌面環境。 |
+| `tai-sandbox-claude-desktop-ssh` | Web Builder — 透過 SSH 建構、預覽、部署。 |
+
+如果你只使用文字類型的專家，只需要 `tai-sandbox-claude` 即可。依需求再下載其他映像檔。
+
+你也可以從終端機手動拉取映像檔：
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+## 所有可用映像檔
+
+| 映像檔 | 桌面環境 | SSH | 適用場景 |
+|--------|----------|-----|----------|
+| `tai-sandbox-claude` | — | — | 大多數 AI 專家（文字類型任務） |
+| `tai-sandbox-claude-ssh` | — | ✓ | 連接遠端伺服器的代理 |
+| `tai-sandbox-claude-desktop-lite` | 輕量版 | — | 瀏覽器相關任務 |
+| `tai-sandbox-claude-desktop-lite-ssh` | 輕量版 | ✓ | 瀏覽器 + 遠端伺服器 |
+| `tai-sandbox-claude-desktop` | 完整版 (XFCE) | — | 小程式工坊 |
+| `tai-sandbox-claude-desktop-ssh` | 完整版 (XFCE) | ✓ | Web Builder（建構 + 部署） |
+
+所有映像檔皆支援 `linux/amd64` 和 `linux/arm64` 架構。
+
+## 疑難排解
+
+**未偵測到 Docker**
+請確認 Docker Desktop 正在執行。在 macOS 上，檢查選單列中的鯨魚圖示。在 Windows 上，檢查系統匣。啟動 Docker 後，請重新啟動 Yao Agents。
+
+**映像檔下載失敗**
+請檢查網路連線和可用磁碟空間。每個映像檔大約為 1–4 GB。
+
+**代理無法啟動**
+請先拉取所需的映像檔，然後重新啟動代理。在**設定 → 沙箱**中查看哪些映像檔已下載。

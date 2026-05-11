@@ -5,9 +5,6 @@ pages:
   - slug: general
     title: General（通用助手）
     summary: 日常问答、通用任务、新手首选。
-  - slug: keeper
-    title: Keeper（知识库管理）
-    summary: 保存/检索内容（网页/笔记/文件/书签）、分类标签、外部数据导入。
   - slug: pm
     title: PM（项目经理）
     summary: 项目管理、任务拆解与跟踪、团队协作。

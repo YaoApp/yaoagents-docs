@@ -2,317 +2,69 @@
 slug: ai-models
 ---
 
-# AI モデル
+# モデル設定
 
-Yao Agents の AI モデルは**コネクターファイル**（`.conn.yao`）として設定され、アプリケーションディレクトリ内の `connectors/` フォルダに保存されます。各ファイルが 1 つのモデル——タイプ・認証情報・機能——を定義します。
+**モデル設定**パネルでは、AI モデルをさまざまなロールに割り当てたり、新しいモデルプロバイダーを追加したりできます。すべて GUI で操作でき、ファイルの編集は不要です。
 
-Yao Agents に同梱されている 4 つの組み込みコネクターは `.env` の環境変数から設定を読み取るため、一般的なケースではコネクターファイルを直接編集する必要はありません。新しいプロバイダーを追加したり、モデルの動作を細かく調整したい場合にのみ、コネクターファイルを作成・編集します。
+![設定 — モデル設定](https://assets.yaoagents.com/en/settings/03-config-models-en-$__THEME.png)
 
----
+## モデルロール
 
-## コネクターファイルの形式
+Yao Agents はロールベースのモデルシステムを採用しています。各ロールにはそれぞれ異なる目的があり、ロールごとに異なるモデル（またはプロバイダー）を割り当てることができます：
 
-コネクターファイルは 3 つのフィールドを持つ JSON ファイルです：
+| ロール | 目的 | 使用場面 |
+|--------|------|---------|
+| **Default** | 汎用タスク | 一般的な会話、日常的な Q&A、コンテンツ生成。 |
+| **Heavy** | 複雑な推論 | 深い分析、長期的な計画、マルチステップの問題解決。 |
+| **Light** | 高速かつシンプルなタスク | クイック返信、分類、短い要約。 |
+| **Vision** | 画像理解 | スクリーンショットの読み取り、チャートの分析、OCR タスク。 |
+| **Audio** | 音声認識 | 音声入力の文字起こし。 |
+| **Embedding** | テキスト埋め込み | セマンティック検索、ドキュメントの類似度比較。 |
 
-```json
-{
-  "label": "UI に表示される名前",
-  "type": "openai",
-  "options": {
-    "host": "https://api.example.com",
-    "model": "model-name",
-    "key": "sk-...",
-    "max_tokens": 16384,
-    "temperature": 0.6,
-    "thinking": { "type": "disabled" },
-    "capabilities": {
-      "vision": true,
-      "tool_calls": true,
-      "reasoning": false,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
+## ロールへのモデル割り当て
 
-### `type`
+1. **設定 → モデル設定**を開きます。
+2. 各ロールについて、ドロップダウンからモデルを選択します。使用可能なモデルは設定済みのプロバイダーから取得されます。
+3. **保存**をクリックします。
 
-| 値 | プロトコル | 用途 |
-|----|-----------|------|
-| `openai` | OpenAI Chat Completions | OpenAI・DeepSeek・Kimi・Qwen・Ollama、および OpenAI 互換エンドポイント全般 |
-| `anthropic` | Anthropic Messages API | Anthropic API を直接呼び出す Claude モデル |
+![設定 — モデルロールの割り当て](https://assets.yaoagents.com/en/settings/04-config-models-add-en-$__THEME.png)
 
-> **ヒント：** ほとんどのサードパーティプロバイダーは OpenAI 互換エンドポイントを提供しています。`type: "openai"` を使い、`host` にプロバイダーのベース URL を指定するだけで使えます。
+まだプロバイダーを追加していない場合は、[クラウドサービス](/docs/ja-jp/settings/cloud-service)を使用してください。追加の設定なしで、すべてのロールにすぐにアクセスできます。
 
-### `options`
+## モデルプロバイダーの追加
 
-| フィールド | 型 | 説明 |
-|-----------|---|------|
-| `host` | 文字列 | API ベース URL。`/` で終わる場合はそのまま使用。それ以外は各エンドポイントパスの前に自動的に `/v1` が追加されます。 |
-| `model` | 文字列 | API に渡すモデル識別子（例：`gpt-4o`・`claude-sonnet-4-5-20250929`）。 |
-| `key` | 文字列 | API キー。`$ENV.変数名` で `.env` から読み込めます。 |
-| `max_tokens` | 整数 | レスポンスの最大トークン数。 |
-| `temperature` | 浮動小数点 | サンプリング温度。このパラメーターをサポートしない推論モデルでは省略してください。 |
-| `thinking` | オブジェクト | Thinking / 推論モードの設定（下記参照）。 |
-| `capabilities` | オブジェクト | このモデルがサポートする機能を Yao に伝えます（下記参照）。 |
-| `azure` | 文字列 | Azure OpenAI エンドポイントを使用する場合は `"true"` に設定。 |
-| `version` | 文字列 | Anthropic API バージョンヘッダー。デフォルト `"2023-06-01"`（anthropic タイプのみ）。 |
+OpenAI、Anthropic、DeepSeek、Google、またはその他の OpenAI 互換サービスのモデルを使用するには：
 
-#### `thinking`
+1. モデル設定ページの下部にある**プロバイダーを追加**をクリックします。
+2. プロバイダーの種類を選択します（OpenAI、Anthropic、DeepSeek、Google、Ollama、または Custom）。
+3. 必要な情報を入力します：
 
-拡張推論 / thinking モードを制御します。
+| 項目 | 説明 |
+|------|------|
+| Name | このプロバイダーの表示名（例：「My OpenAI」）。 |
+| API Host | プロバイダーの API のベース URL。既知のプロバイダーの場合は自動入力されます。 |
+| API Key | プロバイダーから取得した API キー。 |
+| Models | 利用可能にする具体的なモデル識別子（例：`gpt-4o`、`claude-sonnet-4-5-20250929`）。 |
 
-| 値 | 効果 |
-|----|------|
-| `{ "type": "disabled" }` | Thinking をオフにします。 |
-| `{ "type": "enabled" }` | 常に Thinking をオンにします。 |
-| `{ "type": "adaptive" }` | モデルが質問に応じて Thinking するかどうかを自動判断します。 |
-| `{ "type": "enabled", "budget_tokens": 10000 }` | トークンバジェットを設定して Thinking をオン（Anthropic モデル向け）。 |
+4. **保存**をクリックします。新しいモデルがロールのドロップダウンにすぐに表示されます。
 
-#### `capabilities`
+![設定 — モデルプロバイダーの追加](https://assets.yaoagents.com/en/settings/05-config-models-add-deepseek-en-$__THEME.png)
 
-| フィールド | 型 | 説明 |
-|-----------|---|------|
-| `vision` | bool または `"openai"` / `"claude"` | 画像入力サポート。`"openai"` は `image_url` 形式、`"claude"` は base64 形式を使用。 |
-| `tool_calls` | bool | 関数 / ツール呼び出しサポート。 |
-| `reasoning` | bool | 拡張推論 / チェーン・オブ・ソート出力。 |
-| `streaming` | bool | ストリーミングレスポンスサポート（Server-Sent Events）。 |
-| `json` | bool | JSON モードサポート。 |
-| `multimodal` | bool | 汎用マルチモーダル入力（画像・ファイル）。 |
-| `audio` | bool | 音声理解。 |
-| `stt` | bool | 音声テキスト変換（Whisper スタイルの文字起こし）。 |
+## プロバイダーの編集・削除
 
-Yao はよく知られたモデル名のパターンから適切なデフォルト値を自動的に推定するため、主要なモデルでは `capabilities` を省略できます。カスタムモデルやプライベートモデルを使う場合は明示的に設定してください。
+プロバイダーカードをクリックすると設定を編集できます。削除ボタンでプロバイダーを削除できます。プロバイダーを削除すると、そのモデルを使用していたロールの割り当てが解除されるため、再度割り当てる必要があります。
 
----
+## 対応プロバイダー
 
-## 組み込みコネクター
+| プロバイダー | タイプ | 備考 |
+|------------|--------|------|
+| OpenAI | `openai` | GPT-4o、GPT-4.1、o3、o4-mini など。 |
+| Anthropic | `anthropic` | Claude Opus 4、Claude Sonnet 4.5 など。 |
+| DeepSeek | `openai` | DeepSeek V4、R1 など。OpenAI 互換エンドポイント。 |
+| Google | `openai` | OpenAI 互換ゲートウェイ経由の Gemini モデル。 |
+| Ollama | `openai` | ローカルモデル。ホストを `http://127.0.0.1:11434/v1/` に設定します。 |
+| その他の OpenAI 互換 | `openai` | vLLM、LiteLLM、Azure OpenAI、Groq、Together など。 |
 
-以下の 4 ファイルが Yao Agents に同梱されており、`.env` から設定を読み取ります。
+## 上級者向け：コネクタファイルの手動作成
 
-### `default` — バランス型
-
-ほとんどの AI エキスパートとロボットが使用するメインコネクター。
-
-```json
-{
-  "label": "Balanced",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
-    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
-    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
-    "max_tokens": 16384,
-    "temperature": 0.6,
-    "thinking": { "type": "disabled" }
-  }
-}
-```
-
-`.env` の変数：`DEFAULT_CONNECTOR_HOST`・`DEFAULT_CONNECTOR_MODEL`・`DEFAULT_CONNECTOR_KEY`
-
-### `thinking` — ディープシンク
-
-`default` と同じエンドポイントを使用しますが、アダプティブ thinking を有効にしています——ロボットやエキスパートが深い推論を必要とする場合に使用。
-
-```json
-{
-  "label": "Deep Think",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.DEFAULT_CONNECTOR_HOST",
-    "model": "$ENV.DEFAULT_CONNECTOR_MODEL",
-    "key": "$ENV.DEFAULT_CONNECTOR_KEY",
-    "max_tokens": 16384,
-    "thinking": { "type": "adaptive" }
-  }
-}
-```
-
-### `vision` — ビジョン
-
-画像分析タスクを処理します。個別に設定されていない場合は `DEFAULT_CONNECTOR_*` にフォールバック。
-
-```json
-{
-  "label": "Vision",
-  "type": "openai",
-  "options": {
-    "host": "$ENV.VISION_CONNECTOR_HOST",
-    "model": "$ENV.VISION_CONNECTOR_MODEL",
-    "key": "$ENV.VISION_CONNECTOR_KEY",
-    "max_tokens": 16384
-  }
-}
-```
-
-`.env` の変数：`VISION_CONNECTOR_HOST`・`VISION_CONNECTOR_MODEL`・`VISION_CONNECTOR_KEY`
-
-### `whisper-1` — 音声テキスト変換
-
-音声入力を文字起こしします。
-
-```json
-{
-  "label": "Whisper-1",
-  "type": "openai",
-  "options": {
-    "model": "$ENV.VOICE_CONNECTOR_MODEL",
-    "key": "$ENV.VOICE_CONNECTOR_KEY",
-    "host": "$ENV.VOICE_CONNECTOR_HOST",
-    "capabilities": { "stt": true }
-  }
-}
-```
-
-`.env` の変数：`VOICE_CONNECTOR_HOST`・`VOICE_CONNECTOR_MODEL`・`VOICE_CONNECTOR_KEY`
-
----
-
-## コネクターを追加する
-
-1. `connectors/` 以下（または `connectors/openai/` などのサブディレクトリ）に `.conn.yao` ファイルを作成します。
-2. `type`・`options`・必要に応じて `capabilities` を入力します。
-3. Yao Engine を再起動します。新しいコネクターがすべてのロボットと AI エキスパートのコネクターセレクターに表示されます。
-
-### 例：OpenAI GPT-4o
-
-```json
-{
-  "label": "GPT-4o",
-  "type": "openai",
-  "options": {
-    "model": "gpt-4o",
-    "key": "$ENV.OPENAI_API_KEY",
-    "host": "https://api.openai.com",
-    "max_tokens": 16384,
-    "capabilities": {
-      "vision": "openai",
-      "tool_calls": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### 例：Anthropic Claude Sonnet（直接 API 接続）
-
-```json
-{
-  "label": "Claude Sonnet 4.5",
-  "type": "anthropic",
-  "options": {
-    "model": "claude-sonnet-4-5-20250929",
-    "key": "$ENV.ANTHROPIC_API_KEY",
-    "capabilities": {
-      "vision": "claude",
-      "tool_calls": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### 例：拡張 thinking を有効にした Claude
-
-```json
-{
-  "label": "Claude Sonnet 4.5 Thinking",
-  "type": "anthropic",
-  "options": {
-    "model": "claude-sonnet-4-5-20250929",
-    "key": "$ENV.ANTHROPIC_API_KEY",
-    "thinking": { "type": "enabled", "budget_tokens": 10000 },
-    "capabilities": {
-      "vision": "claude",
-      "tool_calls": true,
-      "reasoning": true,
-      "streaming": true,
-      "json": true,
-      "multimodal": true
-    }
-  }
-}
-```
-
-### 例：DeepSeek R1（推論モデル）
-
-```json
-{
-  "label": "DeepSeek R1",
-  "type": "openai",
-  "options": {
-    "model": "deepseek-r1",
-    "key": "$ENV.DEEPSEEK_API_KEY",
-    "host": "https://api.deepseek.com",
-    "capabilities": {
-      "reasoning": true,
-      "streaming": true
-    }
-  }
-}
-```
-
-### 例：Ollama でローカルモデルを使う
-
-```json
-{
-  "label": "Llama 3.3（ローカル）",
-  "type": "openai",
-  "options": {
-    "model": "llama3.3",
-    "key": "ollama",
-    "host": "http://127.0.0.1:11434/v1/",
-    "capabilities": {
-      "tool_calls": true,
-      "streaming": true,
-      "json": true
-    }
-  }
-}
-```
-
-> `host` が `/` で終わっているため、Yao はそのまま使用し `/v1` を追加しません。
-
-### 例：Volcengine / ByteDance Ark
-
-```json
-{
-  "label": "Doubao Seed 1.6 Flash",
-  "type": "openai",
-  "options": {
-    "model": "$ENV.VOLCENGINE_DOUBAO_SEED_1_6_FLASH",
-    "key": "$ENV.VOLCENGINE_API_KEY",
-    "host": "https://ark.cn-beijing.volces.com/api/v3/",
-    "capabilities": {
-      "vision": true,
-      "streaming": true,
-      "json": true
-    }
-  }
-}
-```
-
----
-
-## `host` URL ルール
-
-| `host` の値 | `/chat/completions` の完全な URL |
-|---|---|
-| `https://api.openai.com` | `https://api.openai.com/v1/chat/completions` |
-| `https://api.openai.com/` | `https://api.openai.com/chat/completions` |
-| `https://my-proxy.example.com/openai/v1/` | `https://my-proxy.example.com/openai/v1/chat/completions` |
-
-**ルール：** `host` が `/` で終わる場合はそのまま使用。それ以外は各エンドポイントパスの前に自動的に `/v1` が追加されます。
-
----
-
-## 設定を反映する
-
-コネクターファイルを追加・変更したら、Yao Engine を再起動して設定を反映させてください。
+高度なユースケース（カスタム機能、Thinking モード設定、Azure デプロイメントなど）では、コネクタファイルを手動で作成することも可能です。基盤となる `.conn.yao` ファイルの形式とディレクトリ構造については、[環境変数](/docs/ja-jp/settings/env-vars)を参照してください。

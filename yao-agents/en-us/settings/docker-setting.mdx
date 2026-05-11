@@ -1,0 +1,122 @@
+---
+slug: docker-setting
+---
+
+# Sandbox
+
+AI Task Agents in Yao Agents run inside isolated Docker containers. Before agents can execute tasks — writing code, browsing the web, building apps — you need Docker installed and running on your machine.
+
+![Settings — Sandbox](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
+
+The Sandbox settings panel shows your Docker status and which sandbox images are downloaded. If Docker is not installed, Yao Agents will prompt you to set it up.
+
+## Install Docker Desktop
+
+### macOS
+
+1. Go to [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) and click **Download for Mac**.
+   - Choose **Apple Silicon** if you have an M1/M2/M3/M4 Mac.
+   - Choose **Intel** for older Macs.
+2. Open the downloaded `.dmg` file.
+3. Drag **Docker** into **Applications**.
+4. Launch **Docker** from Applications. It will appear in the menu bar.
+5. Wait for Docker to finish starting (the whale icon stops animating).
+6. Open Terminal and verify:
+
+```bash
+docker --version
+```
+
+You should see something like `Docker version 27.x.x`.
+
+### Windows
+
+1. Make sure **WSL 2** is enabled:
+   - Open PowerShell as Administrator and run:
+
+```powershell
+wsl --install
+```
+
+   - Restart your computer if prompted.
+
+2. Go to [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) and click **Download for Windows**.
+3. Run the installer. Keep **Use WSL 2** checked during setup.
+4. After installation, launch **Docker Desktop** from the Start menu.
+5. Wait for Docker to finish starting (the whale icon in the system tray stops animating).
+6. Open PowerShell or Command Prompt and verify:
+
+```powershell
+docker --version
+```
+
+### Linux
+
+On Linux, install Docker Engine directly:
+
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+```
+
+Log out and back in for the group change to take effect, then verify:
+
+```bash
+docker --version
+```
+
+For detailed instructions, see the [official Docker Engine docs](https://docs.docker.com/engine/install/).
+
+## Sandbox settings in Yao Agents
+
+Once Docker is running, go to **Settings → Sandbox** in Yao Agents. The panel shows:
+
+| Field | Description |
+|-------|-------------|
+| Docker Version | The detected Docker version (e.g., `29.4.1`). If blank, Docker isn't running. |
+| Sandbox Images | List of downloaded images with their download status. |
+
+Yao Agents automatically detects Docker. If it shows a version number, you're ready to go.
+
+## Download sandbox images
+
+Click the download button next to each image to pull it. The four most commonly used images are:
+
+| Image | What it's for |
+|-------|---------------|
+| `tai-sandbox-claude` | Most AI Experts — text tasks, data processing, email, API calls. |
+| `tai-sandbox-claude-desktop-lite` | Tasks that need a browser (lightweight). |
+| `tai-sandbox-claude-desktop` | Applet Workshop, full desktop environment. |
+| `tai-sandbox-claude-desktop-ssh` | Web Builder — build, preview, deploy over SSH. |
+
+If you only use text-based experts, `tai-sandbox-claude` is all you need. Download more images as needed.
+
+You can also pull images manually from the terminal:
+
+```bash
+docker pull yaoapp/tai-sandbox-claude:latest
+```
+
+## All available images
+
+| Image | Desktop | SSH | Best for |
+|-------|---------|-----|----------|
+| `tai-sandbox-claude` | — | — | Most AI Experts (text-based tasks) |
+| `tai-sandbox-claude-ssh` | — | ✓ | Agents connecting to remote servers |
+| `tai-sandbox-claude-desktop-lite` | Lightweight | — | Browser-based tasks |
+| `tai-sandbox-claude-desktop-lite-ssh` | Lightweight | ✓ | Browser + remote server |
+| `tai-sandbox-claude-desktop` | Full (XFCE) | — | Applet Workshop |
+| `tai-sandbox-claude-desktop-ssh` | Full (XFCE) | ✓ | Web Builder (build + deploy) |
+
+All images support both `linux/amd64` and `linux/arm64`.
+
+## Troubleshooting
+
+**Docker not detected**
+Make sure Docker Desktop is running. On macOS, check the whale icon in the menu bar. On Windows, check the system tray. Restart Yao Agents after starting Docker.
+
+**Image download fails**
+Check your internet connection and available disk space. Each image is roughly 1–4 GB.
+
+**Agent won't start**
+Pull the required image first, then restart the agent. Check **Settings → Sandbox** to see which images are downloaded.

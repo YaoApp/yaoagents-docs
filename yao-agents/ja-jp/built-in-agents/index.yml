@@ -5,9 +5,6 @@ pages:
   - slug: general
     title: General（汎用アシスタント）
     summary: 日常Q&A、汎用タスク、初心者向け。
-  - slug: keeper
-    title: Keeper（ナレッジベース）
-    summary: コンテンツの保存/検索、タグ分類、外部データインポート。
   - slug: pm
     title: PM（プロジェクトマネージャー）
     summary: プロジェクト管理、タスク分解、チーム連携。
