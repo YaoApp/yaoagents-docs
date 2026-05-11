@@ -1,0 +1,71 @@
+---
+title: "用 Yao Agents 做品牌调研 PPT"
+description: "用 Yao Agents 调研 Labubu 并生成品牌调研 PPT，从配置到拿到成品全流程。"
+published_at: "2026-05-12"
+authors:
+  - name: Yao Team
+---
+
+# 用 Yao Agents 做品牌调研 PPT
+
+![最终效果](https://assets.yaoagents.com/en/tutorials/04-ppt-result-en-$__THEME.png)
+
+这个例子里，我们让 Yao Agents 调研 Labubu，生成一份品牌调研 PPT。
+
+> **示例成品** [下载 PDF →](https://assets.yaoagents.com/en/demos/labubu-growth-path.pdf)
+
+## 准备
+
+先检查三个设置。
+
+| 设置项 | 推荐配置 | 说明 |
+|--------|---------|------|
+| [模型](/docs/zh-cn/settings/ai-models) | DeepSeek V4 Pro | 配好 Default 模型 |
+| [搜索](/docs/zh-cn/settings/search-scrape) | Brightdata | 开启后才能联网查资料 |
+| [沙箱](/docs/zh-cn/settings/docker-setting) | `Transformer、Slides` 已下载 | 没有的话点一下下载 |
+
+![沙箱配置](https://assets.yaoagents.com/en/settings/08-config-sandbox-en-$__THEME.png)
+
+## 新建工作区
+
+在侧边栏新建一个工作区。做出来的文件都会存在这里。
+
+![新建工作区](https://assets.yaoagents.com/en/tutorials/01-create-workspace-en-$__THEME.png)
+
+## 发消息
+
+![对话](https://assets.yaoagents.com/en/tutorials/02-chat-request-en-$__THEME.png)
+
+选好工作区，在对话框里跟 Yao Agents 说：
+
+> 帮我调研一下 Labubu 的增长路径和全球走红的原因，做一份 PPT，6-7 页，风格符合 Labubu 的品牌调性，我要分享给市场团队。
+
+发完等着就行。Yao Agents 会分配给 Slides 专家，它会自动搜资料、整理内容、生成幻灯片、导出 PDF。
+
+![工作中](https://assets.yaoagents.com/en/tutorials/03-slides-working-en-$__THEME.png)
+
+## 看结果
+
+做好的 PPT 在工作区里，直接下载。
+
+![工作记录](https://assets.yaoagents.com/en/tutorials/05-work-log-en-$__THEME.png)
+
+点开文件就能预览：
+
+![PPT 预览](https://assets.yaoagents.com/en/tutorials/04-ppt-result-en-$__THEME.png)
+
+工作记录里能看到完整过程 — 搜了什么、写了什么、改了几版。
+
+---
+
+换个提示词，还能做这些：
+
+> 帮我对比 Labubu、Molly 和 Dimoo 三个 IP 的市场表现，做一份竞品分析 PPT，8 页左右。
+
+> 整理一下 2025 年潮玩行业的趋势和关键数据，做一份行业报告 PPT，给老板汇报用。
+
+> 我下周要做一个新产品发布会，产品是 XX，产品资料见附件，帮我做一份发布会演示 PPT，10 页，符合我们的品牌风格。
+>
+> （在对话框里点上传按钮，把产品文档一起发过去）
+
+[下载 Yao Agents](https://yaoagents.com/download)
