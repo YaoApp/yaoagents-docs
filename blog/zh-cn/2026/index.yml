@@ -1,4 +1,12 @@
 articles:
+  - slug: slides-research-report
+    title: "用 Yao Agents 做品牌调研 PPT"
+    summary: "一句话让 Yao Agents 帮你搜资料、做调研、生成一份可以直接分享的 PPT。以 Labubu 为例，从发消息到拿到成品全流程。"
+    category: tutorial
+    date: "2026-05-12"
+    author:
+      name: Yao Team
+
   - slug: settings-center
     title: "设置面板上线 — 接自己的模型，三步搞定"
     summary: "Yao Agents 新增设置面板，支持通过界面添加自定义模型提供商，配置搜索、邮件、沙箱等功能。建议重新下载最新版。"

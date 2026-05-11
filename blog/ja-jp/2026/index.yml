@@ -1,4 +1,12 @@
 articles:
+  - slug: slides-research-report
+    title: "Yao Agents でブランド調査スライドを作る"
+    summary: "Yao Agents で Labubu を調査し、ブランド調査スライドを生成。セットアップから完成品までの全手順。"
+    category: tutorial
+    date: "2026-05-12"
+    author:
+      name: Yao Team
+
   - slug: settings-center
     title: "設定パネル登場 — 自分のモデルを3ステップで接続"
     summary: "Yao Agents に設定パネルが追加。GUIからモデルプロバイダーの追加、検索・メール・サンドボックスの設定が可能に。"

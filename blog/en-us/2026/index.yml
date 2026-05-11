@@ -1,4 +1,12 @@
 articles:
+  - slug: slides-research-report
+    title: "Create a Brand Research Deck with Yao Agents"
+    summary: "Use Yao Agents to research Labubu and generate a brand research slide deck. Full walkthrough from setup to finished PDF."
+    category: tutorial
+    date: "2026-05-12"
+    author:
+      name: Yao Team
+
   - slug: settings-center
     title: "Settings Panel Is Live — Connect Your Own Models in 3 Steps"
     summary: "Yao Agents now has a settings panel. Add your own model providers, configure search, email, and sandbox — all from the GUI."

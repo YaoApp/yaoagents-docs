@@ -1,4 +1,12 @@
 articles:
+  - slug: slides-research-report
+    title: "用 Yao Agents 做品牌調研 PPT"
+    summary: "用 Yao Agents 調研 Labubu 並生成品牌調研 PPT，從設定到拿到成品全流程。"
+    category: tutorial
+    date: "2026-05-12"
+    author:
+      name: Yao Team
+
   - slug: settings-center
     title: "設定面板上線 — 接自己的模型，三步搞定"
     summary: "Yao Agents 新增設定面板，支援透過介面添加自訂模型提供商，設定搜尋、郵件、沙箱等功能。建議重新下載最新版。"
