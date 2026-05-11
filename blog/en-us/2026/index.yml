@@ -1,4 +1,12 @@
 articles:
+  - slug: settings-center
+    title: "Settings Panel Is Live — Connect Your Own Models in 3 Steps"
+    summary: "Yao Agents now has a settings panel. Add your own model providers, configure search, email, and sandbox — all from the GUI."
+    category: release
+    date: "2026-05-11"
+    author:
+      name: Yao Team
+
   - slug: deepseek-v4-integration
     title: "Setting Up DeepSeek V4 in Yao Agents"
     summary: "DeepSeek V4 just dropped — 1M context window, massively improved Agent capabilities. Here's how to hook up DeepSeek V4 Pro and V4 Flash in Yao Agents."

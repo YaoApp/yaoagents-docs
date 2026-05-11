@@ -1,4 +1,12 @@
 articles:
+  - slug: settings-center
+    title: "設定パネル登場 — 自分のモデルを3ステップで接続"
+    summary: "Yao Agents に設定パネルが追加。GUIからモデルプロバイダーの追加、検索・メール・サンドボックスの設定が可能に。"
+    category: release
+    date: "2026-05-11"
+    author:
+      name: Yao Team
+
   - slug: deepseek-v4-integration
     title: "Yao Agents で DeepSeek V4 を使う方法"
     summary: "DeepSeek V4 がリリースされました。100万トークンのコンテキスト対応、Agent 性能も大幅アップ。この記事では、Yao Agents に DeepSeek V4 Pro と V4 Flash を接続する方法を紹介します。"

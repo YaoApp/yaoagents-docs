@@ -1,4 +1,12 @@
 articles:
+  - slug: settings-center
+    title: "设置面板上线 — 接自己的模型，三步搞定"
+    summary: "Yao Agents 新增设置面板，支持通过界面添加自定义模型提供商，配置搜索、邮件、沙箱等功能。建议重新下载最新版。"
+    category: release
+    date: "2026-05-11"
+    author:
+      name: Yao Team
+
   - slug: deepseek-v4-integration
     title: "在 Yao Agents 中接入 DeepSeek V4"
     summary: "DeepSeek V4 发布了，百万上下文、Agent 能力大幅增强。这篇教程教你怎么在 Yao Agents 里接上 DeepSeek V4 Pro 和 V4 Flash。"
