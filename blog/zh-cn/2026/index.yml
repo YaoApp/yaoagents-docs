@@ -1,4 +1,12 @@
 articles:
+  - slug: agent-smith
+    title: "Agent Smith — 用一句话构建你自己的 AI 专家"
+    summary: "Yao Agents 新增 Agent Smith，描述你的流程和需求，它自动搜技能、搭建、测试、上线。以股票分析专家为例，展示完整过程。"
+    category: release
+    date: "2026-05-30"
+    author:
+      name: Yao Team
+
   - slug: slides-research-report
     title: "用 Yao Agents 做品牌调研 PPT"
     summary: "一句话让 Yao Agents 帮你搜资料、做调研、生成一份可以直接分享的 PPT。以 Labubu 为例，从发消息到拿到成品全流程。"

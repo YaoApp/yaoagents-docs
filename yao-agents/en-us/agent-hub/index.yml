@@ -1,10 +1,10 @@
 slug: agent-hub
-title: Yao Agents Hub
-summary: "Extend capabilities: install ready-made agents or create your own."
+title: Expert Marketplace
+summary: Discover, install, and share AI experts, or create your own.
 pages:
   - slug: hub-overview
-    title: Hub Overview
-    summary: What is Yao Agents Hub, browsing and discovering agents.
+    title: Marketplace Overview
+    summary: Browse and discover AI experts, install with one click.
   - slug: custom-assistants
     title: Custom AI Experts
-    summary: "Ways to add new AI Experts: Yao Agents Hub, AI dev expert, build with code, or explore third-party ecosystems."
+    summary: Build automatically with Agent Smith, or create manually with code.

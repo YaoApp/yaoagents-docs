@@ -5,6 +5,9 @@ pages:
   - slug: general
     title: General
     summary: General-purpose assistant. Everyday Q&A, versatile tasks, best starting point for new users.
+  - slug: agent-smith
+    title: Agent Smith
+    summary: AI expert builder. Describe what you need — it creates, tests, and deploys your custom AI expert.
   - slug: pm
     title: PM
     summary: Project manager. Task breakdown, progress tracking, team coordination.
@@ -14,9 +17,6 @@ pages:
   - slug: insights
     title: Insights
     summary: Data analyst. Connect to databases, read spreadsheets, build ECharts dashboards with live VNC preview.
-  - slug: scout
-    title: Market Scout
-    summary: Market intelligence. Monitor subscription feeds, classify articles, organize insights.
   - slug: slides
     title: Slides
     summary: Slide deck builder. Turn outlines or documents into themed HTML presentations, export to PDF.
@@ -29,9 +29,6 @@ pages:
   - slug: applet
     title: Applet Workshop
     summary: Mini-app builder. Rapidly generate visual tools with Node.js, live VNC preview.
-  - slug: report-writer
-    title: Report Writer
-    summary: Report-writing robot (used in Mission Control). Auto-generates structured Markdown analysis reports.
   - slug: robot-host
     title: Robot Host
     summary: "Pipeline agent — Intake stage. Human-machine intermediary: collects input, reports status, confirms decisions."

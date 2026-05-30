@@ -5,6 +5,9 @@ pages:
   - slug: general
     title: General（通用助手）
     summary: 日常问答、通用任务、新手首选。
+  - slug: agent-smith
+    title: Agent Smith（打造专属专家）
+    summary: 说出需求，自动创建、测试并上线你的专属 AI 专家。
   - slug: pm
     title: PM（项目经理）
     summary: 项目管理、任务拆解与跟踪、团队协作。
@@ -14,9 +17,6 @@ pages:
   - slug: insights
     title: Insights（数据分析）
     summary: 连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。
-  - slug: scout
-    title: Market Scout（市场情报）
-    summary: 自动读取订阅源、抓取最新内容、分类归档市场洞察。
   - slug: slides
     title: Slides（幻灯片制作）
     summary: 从大纲或文档生成专业 HTML 演示稿并导出 PDF。
@@ -29,9 +29,6 @@ pages:
   - slug: applet
     title: Applet Workshop（小工具开发）
     summary: 快速生成可视化 mini-tool，Node.js + VNC 实时预览。
-  - slug: report-writer
-    title: Report Writer（报告撰写）
-    summary: 机器人类型。在任务编排中自动生成结构化 Markdown 分析报告。
   - slug: robot-host
     title: Robot Host（接单）
     summary: 流水线智能体。人机交互中介、接收输入、反馈状态。

@@ -5,6 +5,9 @@ pages:
   - slug: general
     title: General（汎用アシスタント）
     summary: 日常Q&A、汎用タスク、初心者向け。
+  - slug: agent-smith
+    title: Agent Smith（専属エキスパート作成）
+    summary: 要件を伝えるだけで、カスタムAIエキスパートを自動作成・テスト・デプロイ。
   - slug: pm
     title: PM（プロジェクトマネージャー）
     summary: プロジェクト管理、タスク分解、チーム連携。
@@ -14,9 +17,6 @@ pages:
   - slug: insights
     title: Insights（データ分析）
     summary: データベース接続、スプレッドシート読み込み、EChartsダッシュボード構築、VNCライブプレビュー。
-  - slug: scout
-    title: Market Scout（マーケット情報）
-    summary: 購読フィードを自動取得、記事分類、市場インサイトを整理。
   - slug: slides
     title: Slides（スライド作成）
     summary: アウトラインや文書からHTML形式のプロスライドを生成し、PDFエクスポート。
@@ -29,9 +29,6 @@ pages:
   - slug: applet
     title: Applet Workshop（ミニアプリ）
     summary: Node.jsでビジュアルミニツールを素早く生成、VNCライブプレビュー。
-  - slug: report-writer
-    title: Report Writer（レポート作成）
-    summary: ロボットタイプ。タスクオーケストレーションで構造化Markdownレポートを自動生成。
   - slug: robot-host
     title: Robot Host（受付）
     summary: パイプラインエージェント。入力収集、ステータスフィードバック。

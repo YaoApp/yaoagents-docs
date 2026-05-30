@@ -1,10 +1,10 @@
 slug: agent-hub
-title: Yao Agents Hub
-summary: 機能拡張：既製エージェントのインストールまたは自作。
+title: エキスパートマーケットプレイス
+summary: AIエキスパートの発見・インストール・共有、または自作。
 pages:
   - slug: hub-overview
-    title: Hub 概要
-    summary: Yao Agents Hubとは、エージェントの閲覧と発見。
+    title: マーケットプレイス概要
+    summary: AIエキスパートを閲覧・発見、ワンクリックでインストール。
   - slug: custom-assistants
     title: カスタムAIエキスパート
-    summary: AIエキスパートを追加する方法：Yao Agents Hub、AI開発エキスパート、コーディング、サードパーティエコシステム。
+    summary: Agent Smithで自動構築、またはコードで手動作成。

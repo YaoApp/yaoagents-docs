@@ -1,4 +1,12 @@
 articles:
+  - slug: agent-smith
+    title: "Agent Smith — Build the Exact AI Expert You Need"
+    summary: "Yao Agents now includes Agent Smith. Tell it what you need, and it finds skills, builds, tests, and ships your custom AI expert — hands-free. Full walkthrough with a Stock Analyst example."
+    category: release
+    date: "2026-05-30"
+    author:
+      name: Yao Team
+
   - slug: slides-research-report
     title: "Create a Brand Research Deck with Yao Agents"
     summary: "Use Yao Agents to research Labubu and generate a brand research slide deck. Full walkthrough from setup to finished PDF."

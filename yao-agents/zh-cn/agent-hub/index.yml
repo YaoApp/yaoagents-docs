@@ -1,10 +1,10 @@
 slug: agent-hub
-title: Yao Agents Hub
-summary: 扩展 Agent 能力：安装现成的，或自己创建。
+title: 专家市场
+summary: 发现、安装和分享 AI 专家，或自己创建。
 pages:
   - slug: hub-overview
-    title: Hub 概览
-    summary: 什么是 Yao Agents Hub、浏览与发现。
+    title: 专家市场概览
+    summary: 浏览和发现 AI 专家，一键安装。
   - slug: custom-assistants
     title: 自定义 AI 专家
-    summary: 添加新 AI 专家的几种方式：Yao Agents Hub 安装、AI 开发专家创建、编写代码、探索第三方生态。
+    summary: 用 Agent Smith 自动构建，或用代码手动创建。

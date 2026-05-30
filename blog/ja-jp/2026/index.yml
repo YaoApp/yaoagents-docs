@@ -1,4 +1,12 @@
 articles:
+  - slug: agent-smith
+    title: "Agent Smith — 一言で自分だけのAIエキスパートを構築"
+    summary: "Yao Agents に Agent Smith が登場。ワークフローを説明するだけで、スキル検索・構築・テスト・デプロイまで全自動。株式アナリストの例で全工程を紹介。"
+    category: release
+    date: "2026-05-30"
+    author:
+      name: Yao Team
+
   - slug: slides-research-report
     title: "Yao Agents でブランド調査スライドを作る"
     summary: "Yao Agents で Labubu を調査し、ブランド調査スライドを生成。セットアップから完成品までの全手順。"

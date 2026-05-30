@@ -441,72 +441,72 @@ const yaoAgents: Product = {
       slug: "agent-hub",
       locales: {
         "en-us": {
-          title: "Yao Agents Hub",
+          title: "Expert Marketplace",
           summary:
-            "Extend capabilities: install ready-made agents or create your own.",
+            "Discover, install, and share AI experts, or create your own.",
           pages: [
             {
               slug: "hub-overview",
-              title: "Hub Overview",
+              title: "Marketplace Overview",
               summary:
-                "What is Yao Agents Hub, browsing and discovering agents.",
+                "Browse and discover AI experts, install with one click.",
             },
             {
               slug: "custom-assistants",
               title: "Custom AI Experts",
               summary:
-                "Ways to add new AI Experts: Yao Agents Hub, AI dev expert, build with code, or explore third-party ecosystems.",
+                "Build automatically with Agent Smith, or create manually with code.",
             },
           ],
         },
         "zh-cn": {
-          title: "Yao Agents Hub",
-          summary: "扩展 Agent 能力：安装现成的，或自己创建。",
+          title: "专家市场",
+          summary: "发现、安装和分享 AI 专家，或自己创建。",
           pages: [
             {
               slug: "hub-overview",
-              title: "Hub 概览",
-              summary: "什么是 Yao Agents Hub、浏览与发现。",
+              title: "专家市场概览",
+              summary: "浏览和发现 AI 专家，一键安装。",
             },
             {
               slug: "custom-assistants",
               title: "自定义 AI 专家",
               summary:
-                "添加新 AI 专家的几种方式：Yao Agents Hub 安装、AI 开发专家创建、编写代码、探索第三方生态。",
+                "用 Agent Smith 自动构建，或用代码手动创建。",
             },
           ],
         },
         "zh-tw": {
-          title: "Yao Agents Hub",
-          summary: "擴展 Agent 能力：安裝現成的，或自己建立。",
+          title: "專家市場",
+          summary: "發現、安裝和分享 AI 專家，或自己建立。",
           pages: [
             {
               slug: "hub-overview",
-              title: "Hub 概覽",
-              summary: "什麼是 Yao Agents Hub、瀏覽與發現。",
+              title: "專家市場概覽",
+              summary: "瀏覽和發現 AI 專家，一鍵安裝。",
             },
             {
               slug: "custom-assistants",
               title: "自訂 AI 專家",
               summary:
-                "新增 AI 專家的幾種方式：Yao Agents Hub 安裝、AI 開發專家建立、撰寫程式碼、探索第三方生態。",
+                "用 Agent Smith 自動構建，或用程式碼手動建立。",
             },
           ],
         },
         "ja-jp": {
-          title: "Yao Agents Hub",
-          summary: "機能拡張：既製エージェントのインストールまたは自作。",
+          title: "エキスパートマーケットプレイス",
+          summary: "AIエキスパートの発見・インストール・共有、または自作。",
           pages: [
             {
               slug: "hub-overview",
-              title: "Hub 概要",
-              summary: "Yao Agents Hubとは、エージェントの閲覧と発見。",
+              title: "マーケットプレイス概要",
+              summary: "AIエキスパートを閲覧・発見、ワンクリックでインストール。",
             },
             {
               slug: "custom-assistants",
               title: "カスタムAIエキスパート",
               summary:
-                "AIエキスパートを追加する方法：Yao Agents Hub、AI開発エキスパート、コーディング、サードパーティエコシステム。",
+                "Agent Smithで自動構築、またはコードで手動作成。",
             },
           ],
         },
@@ -842,6 +842,12 @@ const yaoAgents: Product = {
                 "General-purpose assistant. Everyday Q&A, versatile tasks, best starting point for new users.",
             },
             {
+              slug: "agent-smith",
+              title: "Agent Smith",
+              summary:
+                "AI expert builder. Describe what you need — it creates, tests, and deploys your custom AI expert.",
+            },
+            {
               slug: "pm",
               title: "PM",
               summary:
@@ -858,12 +864,6 @@ const yaoAgents: Product = {
               title: "Insights",
               summary:
                 "Data analyst. Connect to databases, read spreadsheets, build ECharts dashboards with live VNC preview.",
-            },
-            {
-              slug: "scout",
-              title: "Market Scout",
-              summary:
-                "Market intelligence. Monitor subscription feeds, classify articles, organize insights.",
             },
             {
               slug: "slides",
@@ -888,12 +888,6 @@ const yaoAgents: Product = {
               title: "Applet Workshop",
               summary:
                 "Mini-app builder. Rapidly generate visual tools with Node.js, live VNC preview.",
-            },
-            {
-              slug: "report-writer",
-              title: "Report Writer",
-              summary:
-                "Report-writing robot (used in Mission Control). Auto-generates structured Markdown analysis reports.",
             },
             {
               slug: "robot-host",
@@ -944,6 +938,11 @@ const yaoAgents: Product = {
               summary: "日常问答、通用任务、新手首选。",
             },
             {
+              slug: "agent-smith",
+              title: "Agent Smith（打造专属专家）",
+              summary: "说出需求，自动创建、测试并上线你的专属 AI 专家。",
+            },
+            {
               slug: "pm",
               title: "PM（项目经理）",
               summary: "项目管理、任务拆解与跟踪、团队协作。",
@@ -958,11 +957,6 @@ const yaoAgents: Product = {
               title: "Insights（数据分析）",
               summary:
                 "连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。",
-            },
-            {
-              slug: "scout",
-              title: "Market Scout（市场情报）",
-              summary: "自动读取订阅源、抓取最新内容、分类归档市场洞察。",
             },
             {
               slug: "slides",
@@ -985,12 +979,6 @@ const yaoAgents: Product = {
               slug: "applet",
               title: "Applet Workshop（小工具开发）",
               summary: "快速生成可视化 mini-tool，Node.js + VNC 实时预览。",
-            },
-            {
-              slug: "report-writer",
-              title: "Report Writer（报告撰写）",
-              summary:
-                "机器人类型。在任务编排中自动生成结构化 Markdown 分析报告。",
             },
             {
               slug: "robot-host",
@@ -1034,6 +1022,11 @@ const yaoAgents: Product = {
               summary: "日常問答、通用任務、新手首選。",
             },
             {
+              slug: "agent-smith",
+              title: "Agent Smith（打造專屬專家）",
+              summary: "說出需求，自動建立、測試並上線你的專屬 AI 專家。",
+            },
+            {
               slug: "pm",
               title: "PM（專案經理）",
               summary: "專案管理、任務拆解與追蹤、團隊協作。",
@@ -1048,11 +1041,6 @@ const yaoAgents: Product = {
               title: "Insights（資料分析）",
               summary:
                 "連接資料庫、讀取表格、建構 ECharts 互動看板，VNC 即時預覽。",
-            },
-            {
-              slug: "scout",
-              title: "Market Scout（市場情報）",
-              summary: "自動讀取訂閱源、擷取最新內容、分類歸檔市場洞察。",
             },
             {
               slug: "slides",
@@ -1075,12 +1063,6 @@ const yaoAgents: Product = {
               slug: "applet",
               title: "Applet Workshop（小工具開發）",
               summary: "快速生成可視化 mini-tool，Node.js + VNC 即時預覽。",
-            },
-            {
-              slug: "report-writer",
-              title: "Report Writer（報告撰寫）",
-              summary:
-                "機器人類型。在任務編排中自動生成結構化 Markdown 分析報告。",
             },
             {
               slug: "robot-host",
@@ -1125,6 +1107,11 @@ const yaoAgents: Product = {
               summary: "日常Q&A、汎用タスク、初心者向け。",
             },
             {
+              slug: "agent-smith",
+              title: "Agent Smith（専属エキスパート作成）",
+              summary: "要件を伝えるだけで、カスタムAIエキスパートを自動作成・テスト・デプロイ。",
+            },
+            {
               slug: "pm",
               title: "PM（プロジェクトマネージャー）",
               summary: "プロジェクト管理、タスク分解、チーム連携。",
@@ -1139,12 +1126,6 @@ const yaoAgents: Product = {
               title: "Insights（データ分析）",
               summary:
                 "データベース接続、スプレッドシート読み込み、EChartsダッシュボード構築、VNCライブプレビュー。",
-            },
-            {
-              slug: "scout",
-              title: "Market Scout（マーケット情報）",
-              summary:
-                "購読フィードを自動取得、記事分類、市場インサイトを整理。",
             },
             {
               slug: "slides",
@@ -1169,12 +1150,6 @@ const yaoAgents: Product = {
               title: "Applet Workshop（ミニアプリ）",
               summary:
                 "Node.jsでビジュアルミニツールを素早く生成、VNCライブプレビュー。",
-            },
-            {
-              slug: "report-writer",
-              title: "Report Writer（レポート作成）",
-              summary:
-                "ロボットタイプ。タスクオーケストレーションで構造化Markdownレポートを自動生成。",
             },
             {
               slug: "robot-host",
