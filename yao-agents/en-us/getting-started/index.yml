@@ -11,6 +11,12 @@ pages:
   - slug: ai-experts-intro
     title: "AI Experts: Find the Right One"
     summary: Core concept 1. Each AI Expert is a domain specialist. Learn how to pick the right one, describe your needs, and get the best results.
+  - slug: what-is-kanban
+    title: "Kanban Board: Manage Tasks Visually"
+    summary: Core concept 3. Organize tasks on a visual board, assign them to AI, and track progress with drag-and-drop.
+  - slug: what-is-inbox
+    title: "Inbox: Stay Informed"
+    summary: Core concept 4. A smart notification center — AI updates you on task progress and asks for your input when needed.
   - slug: mission-control-intro
     title: "Mission Control: Orchestrate Automation"
     summary: Core concept 2. You are the commander — assemble a team of experts, define the workflow, and let them collaborate automatically.

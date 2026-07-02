@@ -11,6 +11,12 @@ pages:
   - slug: ai-experts-intro
     title: AI 專家：找對人，事半功倍
     summary: 核心概念 1。每個 AI 專家都是對應領域的專才。如何選對專家、如何描述需求、如何獲得最佳結果。
+  - slug: what-is-kanban
+    title: 任務看板：可視化管理任務
+    summary: 核心概念 3。在可視化看板上組織任務、指派給 AI 執行、追蹤進度。
+  - slug: what-is-inbox
+    title: 收件匣：不錯過任何進展
+    summary: 核心概念 4。智慧通知中心，即時推送任務事件，支援直接回覆 AI 提問。
   - slug: mission-control-intro
     title: 任務控制中心：編排自動化
     summary: 核心概念 2。你來編排——拉一組專家組成團隊，定義流程，讓它們自動協作完成。

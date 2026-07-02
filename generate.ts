@@ -112,6 +112,18 @@ const yaoAgents: Product = {
                 "Core concept 1. Each AI Expert is a domain specialist. Learn how to pick the right one, describe your needs, and get the best results.",
             },
             {
+              slug: "what-is-kanban",
+              title: "Kanban Board: Manage Tasks Visually",
+              summary:
+                "Core concept 3. Organize tasks on a visual board, assign them to AI, and track progress with drag-and-drop.",
+            },
+            {
+              slug: "what-is-inbox",
+              title: "Inbox: Stay Informed",
+              summary:
+                "Core concept 4. A smart notification center — AI updates you on task progress and asks for your input when needed.",
+            },
+            {
               slug: "mission-control-intro",
               title: "Mission Control: Orchestrate Automation",
               summary:
@@ -146,6 +158,18 @@ const yaoAgents: Product = {
               title: "AI 专家：找对人，事半功倍",
               summary:
                 "核心概念 1。每个 AI 专家都是对应领域的专才。如何选对专家、如何描述需求、如何获得最佳结果。",
+            },
+            {
+              slug: "what-is-kanban",
+              title: "任务看板：可视化管理任务",
+              summary:
+                "核心概念 3。在可视化看板上组织任务、分配给 AI 执行、追踪进度。",
+            },
+            {
+              slug: "what-is-inbox",
+              title: "收件箱：不错过任何进展",
+              summary:
+                "核心概念 4。智能通知中心，实时推送任务事件，支持直接回复 AI 提问。",
             },
             {
               slug: "mission-control-intro",
@@ -184,6 +208,18 @@ const yaoAgents: Product = {
                 "核心概念 1。每個 AI 專家都是對應領域的專才。如何選對專家、如何描述需求、如何獲得最佳結果。",
             },
             {
+              slug: "what-is-kanban",
+              title: "任務看板：可視化管理任務",
+              summary:
+                "核心概念 3。在可視化看板上組織任務、指派給 AI 執行、追蹤進度。",
+            },
+            {
+              slug: "what-is-inbox",
+              title: "收件匣：不錯過任何進展",
+              summary:
+                "核心概念 4。智慧通知中心，即時推送任務事件，支援直接回覆 AI 提問。",
+            },
+            {
               slug: "mission-control-intro",
               title: "任務控制中心：編排自動化",
               summary:
@@ -218,6 +254,18 @@ const yaoAgents: Product = {
               title: "AI エキスパート：適切な専門家を選ぶ",
               summary:
                 "コアコンセプト 1。各 AI エキスパートは専門分野のスペシャリストです。適切なエキスパートの選び方、要件の伝え方、最良の結果を得る方法。",
+            },
+            {
+              slug: "what-is-kanban",
+              title: "タスクボード：タスクをビジュアルに管理",
+              summary:
+                "コアコンセプト 3。ビジュアルボードでタスクを整理し、AIに割り当て、進捗を追跡。",
+            },
+            {
+              slug: "what-is-inbox",
+              title: "受信トレイ：進捗を見逃さない",
+              summary:
+                "コアコンセプト 4。タスクイベントをリアルタイムで通知し、AIの質問に直接回答できるスマート通知センター。",
             },
             {
               slug: "mission-control-intro",

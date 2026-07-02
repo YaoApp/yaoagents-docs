@@ -1,4 +1,12 @@
 articles:
+  - slug: kanban-inbox
+    title: "タスクボード + 受信トレイ登場 — AI が作業し、あなたは結果を確認するだけ"
+    summary: "Yao Agents にタスクボードとスマート受信トレイが新登場。タスクを並べれば AI が実行し、完了したら通知、判断が必要なら質問が届きます。"
+    category: release
+    date: "2026-07-02"
+    author:
+      name: Yao Team
+
   - slug: agent-smith
     title: "Agent Smith — 一言で自分だけのAIエキスパートを構築"
     summary: "Yao Agents に Agent Smith が登場。ワークフローを説明するだけで、スキル検索・構築・テスト・デプロイまで全自動。株式アナリストの例で全工程を紹介。"

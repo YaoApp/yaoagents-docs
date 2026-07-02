@@ -1,4 +1,12 @@
 articles:
+  - slug: kanban-inbox
+    title: "任务看板 + 收件箱上线 — AI 帮你干活，你只管看结果"
+    summary: "Yao Agents 新增任务看板和智能收件箱。把要做的事列出来，AI 去执行，完成了通知你，有问题直接问你。"
+    category: release
+    date: "2026-07-02"
+    author:
+      name: Yao Team
+
   - slug: agent-smith
     title: "Agent Smith — 用一句话构建你自己的 AI 专家"
     summary: "Yao Agents 新增 Agent Smith，描述你的流程和需求，它自动搜技能、搭建、测试、上线。以股票分析专家为例，展示完整过程。"
