@@ -1,0 +1,13 @@
+servers:
+  - slug: bj
+    name: "Polaris（デモサーバー）"
+    region: "中国・北京"
+    url: "https://bj.yaoagents.cn"
+    status: online
+    registration: invite
+    contact_email: "agent@iqka.com"
+    wechat_qr: "wechat-bj.png"
+    tai_nodes:
+      - name: "XII CLOUD"
+        memory: "128G"
+        cpu: "32C"

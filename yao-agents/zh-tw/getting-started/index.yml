@@ -20,6 +20,9 @@ pages:
   - slug: mission-control-intro
     title: 任務控制中心：編排自動化
     summary: 核心概念 2。你來編排——拉一組專家組成團隊，定義流程，讓它們自動協作完成。
+  - slug: connect-to-server
+    title: 連接到伺服器
+    summary: 如何將 Yao Agents 用戶端連接到伺服器、設定地址並登入。
   - slug: whats-next
     title: 更進一步
     summary: 產品還有更多能力：Tai Link 連接多裝置、整合接入 IM / API、Yao Agents Hub 擴展新助手。

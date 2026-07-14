@@ -1,0 +1,13 @@
+servers:
+  - slug: bj
+    name: "北辰（演示伺服器）"
+    region: "中國北京"
+    url: "https://bj.yaoagents.cn"
+    status: online
+    registration: invite
+    contact_email: "agent@iqka.com"
+    wechat_qr: "wechat-bj.png"
+    tai_nodes:
+      - name: "XII CLOUD"
+        memory: "128G"
+        cpu: "32C"
