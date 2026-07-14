@@ -21,8 +21,8 @@ pages:
     title: ミッションコントロール：自動化のオーケストレーション
     summary: コアコンセプト 2。あなたが指揮者です。専門家チームを編成し、ワークフローを定義して自動連携させます。
   - slug: connect-to-server
-    title: サーバーへの接続
-    summary: Yao Agents クライアントをサーバーに接続し、アドレスを設定してサインインする方法。
+    title: クラウドサーバーに接続
+    summary: ローカルセットアップ不要——ホスティングされた Yao Agents サーバーに接続し、すぐに AI エキスパートを利用。
   - slug: whats-next
     title: 次のステップ
     summary: さらなる機能の概要：Tai Link、統合、Yao Agents Hub。各機能の一行紹介とリンク。

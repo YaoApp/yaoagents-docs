@@ -130,6 +130,12 @@ const yaoAgents: Product = {
                 "Core concept 2. You are the commander — assemble a team of experts, define the workflow, and let them collaborate automatically.",
             },
             {
+              slug: "connect-to-server",
+              title: "Connect to a Cloud Server",
+              summary:
+                "Skip local setup — connect to a hosted Yao Agents server and start using AI Experts instantly.",
+            },
+            {
               slug: "whats-next",
               title: "What's Next",
               summary:
@@ -176,6 +182,12 @@ const yaoAgents: Product = {
               title: "任务控制中心：编排自动化",
               summary:
                 "核心概念 2。你来编排——拉一组专家组成团队，定义流程，让它们自动协作完成。",
+            },
+            {
+              slug: "connect-to-server",
+              title: "连接云服务器",
+              summary:
+                "跳过本地安装——连接一台托管的 Yao Agents 服务器，即刻使用 AI 专家。",
             },
             {
               slug: "whats-next",
@@ -226,6 +238,12 @@ const yaoAgents: Product = {
                 "核心概念 2。你來編排——拉一組專家組成團隊，定義流程，讓它們自動協作完成。",
             },
             {
+              slug: "connect-to-server",
+              title: "連接雲端伺服器",
+              summary:
+                "跳過本機安裝——連接一台託管的 Yao Agents 伺服器，即刻使用 AI 專家。",
+            },
+            {
               slug: "whats-next",
               title: "更進一步",
               summary:
@@ -272,6 +290,12 @@ const yaoAgents: Product = {
               title: "ミッションコントロール：自動化のオーケストレーション",
               summary:
                 "コアコンセプト 2。あなたが指揮者です。専門家チームを編成し、ワークフローを定義して自動連携させます。",
+            },
+            {
+              slug: "connect-to-server",
+              title: "クラウドサーバーに接続",
+              summary:
+                "ローカルセットアップ不要——ホスティングされた Yao Agents サーバーに接続し、すぐに AI エキスパートを利用。",
             },
             {
               slug: "whats-next",

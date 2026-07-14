@@ -1,6 +1,6 @@
 servers:
   - slug: bj
-    name: "Polaris (Demo Server)"
+    name: "Polaris (Trial Server)"
     region: "Beijing, China"
     url: "https://bj.yaoagents.cn"
     status: online

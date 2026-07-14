@@ -1,6 +1,6 @@
 servers:
   - slug: bj
-    name: "北辰（演示伺服器）"
+    name: "北辰（體驗伺服器）"
     region: "中國北京"
     url: "https://bj.yaoagents.cn"
     status: online

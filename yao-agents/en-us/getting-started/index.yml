@@ -21,8 +21,8 @@ pages:
     title: "Mission Control: Orchestrate Automation"
     summary: Core concept 2. You are the commander — assemble a team of experts, define the workflow, and let them collaborate automatically.
   - slug: connect-to-server
-    title: Connect to a Server
-    summary: How to connect your Yao Agents client to a server, configure the address, and sign in.
+    title: Connect to a Cloud Server
+    summary: Skip local setup — connect to a hosted Yao Agents server and start using AI Experts instantly.
   - slug: whats-next
     title: What's Next
     summary: "Brief overview of advanced capabilities: Tai Link, Integrations, Yao Agents Hub. One-sentence intro + links."

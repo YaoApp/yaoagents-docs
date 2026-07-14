@@ -1,4 +1,12 @@
 articles:
+  - slug: cloud-server
+    title: "Cloud Servers Are Live — No Engine, No Setup, Just Go"
+    summary: "Yao Agents now supports cloud servers. Skip the local install, connect to a hosted server, and start working. Beijing node is live for trial."
+    category: release
+    date: "2026-07-14"
+    author:
+      name: Yao Team
+
   - slug: kanban-inbox
     title: "Kanban Board + Inbox — Queue It Up, AI Knocks It Down"
     summary: "Yao Agents now has a task board and a smart inbox. Line up what needs doing, AI works through the list, and pings you when it's done — or when it needs a call from you."

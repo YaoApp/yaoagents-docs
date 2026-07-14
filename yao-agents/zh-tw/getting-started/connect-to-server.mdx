@@ -2,26 +2,56 @@
 slug: connect-to-server
 ---
 
-# 連接到伺服器
+# 連接雲端伺服器
 
-本指南幫助你將 Yao Agents 用戶端連接到伺服器。
+Yao Agents 預設連接本機 Yao Engine（Local Server）。如果你不想在自己的裝置上安裝 Engine，也可以直接連接一台雲端伺服器——登入後即可使用全部 AI 專家，無需任何本機設定。
 
-## 第一步：取得伺服器地址
+## 本機 vs 雲端
 
-造訪[伺服器](/servers)頁面，找到離你最近的伺服器，複製伺服器地址。
+| | 本機 (Local Server) | 雲端 (Cloud Server) |
+|---|---|---|
+| 需要安裝 Yao Engine | 是 | 否 |
+| 資料儲存 | 全部在你的裝置上 | 儲存在伺服器端 |
+| AI 模型 | 自備 Key 或接入雲端服務 | 伺服器預先設定 |
+| Tai Link 節點 | 自行連接 | 伺服器提供共享節點 |
+| 適合場景 | 注重隱私、長期使用 | 快速體驗、團隊共享 |
 
-## 第二步：開啟 Yao Agents
+## 連接步驟
 
-在你的裝置上啟動 Yao Agents 桌面應用。
+### 1. 選擇伺服器
 
-## 第三步：設定伺服器
+開啟 Yao Agents 用戶端，首次啟動會看到伺服器選擇頁面。預設已有 **Local Server**。點擊 **Add server** 新增一台雲端伺服器。
 
-進入 **設定 → 伺服器**，貼上你複製的伺服器地址。
+![伺服器選擇](https://assets.yaoagents.com/en/servers/01-servers-select-en-$__THEME.png)
 
-## 第四步：登入或註冊
+### 2. 填寫伺服器地址
 
-如果伺服器需要邀請碼，請在[伺服器](/servers)頁面申請。否則直接建立帳號。
+在彈出的表單中填入伺服器的 URL 和名稱。可以在 [/servers](/servers) 頁面找到可用的伺服器列表及地址。
 
----
+![新增伺服器](https://assets.yaoagents.com/en/servers/02-servers-add-en-$__THEME.png)
 
-> 本頁面為佔位內容，後續會補充詳細說明。
+### 3. 選擇並連接
+
+新增成功後，伺服器列表中會出現新的雲端伺服器。點擊它進入連線流程。
+
+![伺服器列表](https://assets.yaoagents.com/en/servers/03-servers-added-en-$__THEME.png)
+
+### 4. 登入
+
+輸入電子郵件，取得驗證碼，完成登入。部分伺服器可能需要邀請碼——可在 [/servers](/servers) 頁面查看申請方式。
+
+![登入頁面](https://assets.yaoagents.com/en/servers/04-servers-login-en-$__THEME.png)
+
+### 5. 開始使用
+
+登入成功後直接進入主介面，所有 AI 專家已就緒。操作方式和使用本機伺服器完全一樣——選擇專家、發起對話、建立任務。
+
+![雲端主介面](https://assets.yaoagents.com/en/servers/05-servers-main-en-$__THEME.png)
+
+## 切換伺服器
+
+你可以隨時在伺服器之間切換。點擊用戶端左上角的伺服器名稱，即可回到伺服器選擇頁面，在本機和雲端之間自由切換。
+
+## 可用伺服器
+
+造訪 [/servers](/servers) 頁面查看目前可用的雲端伺服器、地區、註冊方式和設定詳情。

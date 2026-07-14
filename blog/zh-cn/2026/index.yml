@@ -1,4 +1,12 @@
 articles:
+  - slug: cloud-server
+    title: "云服务器上线 — 不装 Engine，打开就用"
+    summary: "Yao Agents 支持连接云服务器。跳过本地安装，连上就用。当前北京节点已开放体验。"
+    category: release
+    date: "2026-07-14"
+    author:
+      name: Yao Team
+
   - slug: kanban-inbox
     title: "任务看板 + 收件箱上线 — AI 帮你干活，你只管看结果"
     summary: "Yao Agents 新增任务看板和智能收件箱。把要做的事列出来，AI 去执行，完成了通知你，有问题直接问你。"
