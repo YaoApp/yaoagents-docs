@@ -4,189 +4,75 @@ slug: installation
 
 # 安装
 
-大约十分钟，让 Yao Agents 在你的机器上跑起来。
+前往[下载页面](/download)获取 Yao Engine，选择对应平台和架构。
 
-## 你要安装什么
+## 第一步：启动 Yao Engine
 
-| 组件 | 作用 | 是否必需 |
-|------|------|---------|
-| **Yao Engine** | 驱动一切的本地服务器 | 必需 |
-| **Yao Agents** | 你每天使用的客户端应用 | 必需 |
-| **Tai Link** | 连接其他设备，让 AI 在远程设备上工作 | 按需 |
+安装完成后打开 Yao Engine，主窗口会显示 Yao 和 Tai 两个服务。
 
-安装顺序：先装 Yao Engine，再装 Yao Agents，最后按需安装 Tai Link。
+![Yao Engine](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
 
----
+> **注意：** 首次启动时，App Root 需指向一个空目录。版本要求 Yao Agents v1.6.1+。
 
-## 第一步 — 安装 Yao Engine
+点击 **Start**，启动后会显示各服务的 PID 和访问地址。
 
-Yao Engine 是整个系统的核心，其他组件都连接到它。不同平台的安装方式有所区别，选择你的平台：
+![Yao Engine 运行中](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
 
-### macOS
+## 第二步：打开欢迎页
 
-从 [yaoagents.com/download](https://yaoagents.com/download) 下载并运行 Yao Engine 安装包。
+点击 **Visit**，浏览器会打开欢迎页面，点击 **Get Started** 继续。
 
-| 架构 | 适用机型 |
-|------|---------|
-| Apple Silicon (arm64) | M1 / M2 / M3 / M4 Mac |
-| Intel (x86_64) | 较旧款 Mac |
+![欢迎页](https://assets.yaoagents.com/en/engine/03-engine-visit-en-$__THEME.png)
 
-1. **安装 Yao Engine** — 运行安装包并启动 Yao Engine，你将看到引擎状态窗口。
+## 第三步：登录
 
-   ![Yao Engine 运行中 — Application 标签页显示状态和服务地址](https://assets.yaoagents.com/en/engine/01-engine-app-en-$__THEME.png)
-
-2. **启动服务** — 点击引擎窗口中的 **Start Server**。启动后点击 **Visit**，在浏览器中打开欢迎页，确认一切正常。
-
-   ![浏览器中的 Yao Engine 欢迎页](https://assets.yaoagents.com/en/website/02-web-welcome-en-$__THEME.png)
-
-3. **安装 Docker Desktop** — 从 [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) 下载并安装。
-
-4. **拉取沙盒镜像**：
-   ```bash
-   docker pull yaoapp/tai-sandbox-claude:latest
-   docker pull yaoapp/tai-sandbox-claude-ssh:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
-   ```
-
-### Windows
-
-Yao Engine 在 Windows 上运行于 WSL2 环境中。请先配置好环境，再安装 Yao Engine。
-
-1. **启用 WSL2 并安装 Ubuntu** — 以管理员身份打开 PowerShell，运行：
-   ```powershell
-   wsl --install
-   ```
-   按提示重启电脑，然后打开 Ubuntu 应用完成初始设置（用户名和密码）。
-
-2. **安装 Docker Desktop** — 从 [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) 下载并安装。在 **Docker Desktop → Settings → Resources → WSL Integration** 中启用 WSL2 集成。
-
-3. **拉取沙盒镜像**：
-   ```bash
-   docker pull yaoapp/tai-sandbox-claude:latest
-   docker pull yaoapp/tai-sandbox-claude-ssh:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop-lite:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop-lite-ssh:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop:latest
-   docker pull yaoapp/tai-sandbox-claude-desktop-ssh:latest
-   ```
-
-4. **安装 Yao Engine** — 从 [yaoagents.com/download](https://yaoagents.com/download) 下载 Windows 安装包并运行，启动 Yao Engine，你将看到引擎状态窗口。
-
-   ![Yao Engine 运行中（Windows）](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Yao+Engine+on+Windows)
-
-5. **启动服务** — 点击 **Start Server**，然后点击 **Visit**，在浏览器中打开欢迎页，确认一切正常。
-
-   ![浏览器中的 Yao Engine 欢迎页](https://assets.yaoagents.com/en/website/02-web-welcome-en-$__THEME.png)
-
-### Linux
-
-Linux 安装面向开发者和自托管场景，请参考 Yao Engine 文档站的完整指引：
-
-[Yao Engine 文档 → yaoapps.com/docs](https://yaoapps.com/docs)
-
----
-
-### 沙盒镜像
-
-每个沙盒镜像都是一个 Docker 容器，AI Task Agent 在其中运行。按需拉取即可。
-
-| 镜像 | 桌面 | SSH | 适用 Agent |
-|------|------|-----|-----------|
-| `tai-sandbox-claude` | — | — | Postman、PM、Market Scout 及大多数 Agent |
-| `tai-sandbox-claude-ssh` | — | ✓ | 需要连接远程服务器的 Agent |
-| `tai-sandbox-claude-desktop-lite` | 轻量 | — | 不需要完整桌面的浏览器任务 |
-| `tai-sandbox-claude-desktop-lite-ssh` | 轻量 | ✓ | 同上，额外支持远程服务器访问 |
-| `tai-sandbox-claude-desktop` | 完整（XFCE）| — | Applet Workshop |
-| `tai-sandbox-claude-desktop-ssh` | 完整（XFCE）| ✓ | Web Builder（构建、测试、部署）|
-
-所有镜像支持 `linux/amd64` 和 `linux/arm64`。→ [沙盒镜像参考](/docs/zh-cn/resources/sandbox-images)
-
----
-
-## 第二步 — 安装 Yao Agents
-
-Yao Agents 是客户端应用，这是你每天使用的界面。
-
-从 [yaoagents.com/download](https://yaoagents.com/download) 下载并运行对应平台的安装包。
-
-> 💡 不确定选哪个 macOS 版本？Apple Silicon = M1/M2/M3/M4，Intel = 较旧款 Mac。
-
-首次打开 Yao Agents，添加你的 Yao Engine：
-
-1. 进入 **Settings → Engine**
-2. 输入服务器地址 — 如果 Yao Engine 运行在同一台机器上，默认地址为 `http://localhost:5099`
-3. 点击 **Connect** — 连接成功后状态指示灯变绿
-
-![Yao Agents 设置 — Engine 标签页，填写服务器地址](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Settings+%E2%86%92+Engine)
-
-连接成功后，系统会提示登录。使用默认账号：
+**首次登录**使用内置管理员账号：
 
 - **邮箱：** `root@yaoagents.com`
 - **密码：** `Yao123++`
 
-> 💡 首次登录后，请在 **Settings → Account** 修改密码。
+![登录](https://assets.yaoagents.com/en/engine/05-engine-login-code-en-$__THEME.png)
 
-![Yao Agents 登录界面](https://placehold.co/1200x750/1a1a2e/ffffff?text=Screenshot+needed%3A+Login+screen)
+> **注意：** 账号存储在本地设备上。如需注册其他用户，请先配置 SMTP 邮箱服务，否则无法接收注册验证码。
 
-登录后，你将进入主界面。
+## 第四步：配置模型
 
-![Yao Agents 主界面 — 空白对话，随时可以开始](https://assets.yaoagents.com/en/chat/01-chat-empty-en-$__THEME.png)
+点击侧边栏左下角头像，进入 **设置 → 模型配置**。
 
----
+![模型配置](https://assets.yaoagents.com/en/engine/06-engine-models-en-$__THEME.png)
 
-## 第三步 — 连接 AI 模型
+| 槽位 | 用途 |
+|------|------|
+| Default | 日常通用任务 |
+| Heavy | 复杂推理、长上下文 |
+| Light | 快速简单查询 |
+| Vision | 图片识别 |
+| Audio | 语音转文字 |
+| Embedding | 向量检索、知识库 |
 
-Yao Agents 需要接入 AI 模型才能工作。最简单的方式是使用 **Yao Agents 服务**——由团队托管的托管 API，登录即可使用，无需额外配置。
+> **注意：** DeepSeek 系列模型不支持图片和语音。使用 DeepSeek 时，请为 Vision 槽位配置其他模型（如 Claude、GPT-4o），Audio 槽位配置 Whisper 语音转录模型。
 
-### 方案 A — Yao Agents 服务（推荐）
+点击 **Add Provider** 添加模型服务商，填入凭据。
 
-1. 访问 [yaoagents.com](https://yaoagents.com) 并登录
-2. 在 **API Keys** 页面复制你的 API Key
+![添加服务商](https://assets.yaoagents.com/en/engine/07-engine-provider-add-en-$__THEME.png)
 
-   ![Yao Agents 控制台 — API Keys 页面](https://assets.yaoagents.com/en/console/02-console-keys-en-$__THEME.png)
+> **提示：** 添加 image2（OpenAI 兼容接口）的文生图/图生图模型后，Agent 在工作中如需生成或编辑图片会自动调度。
 
-3. 在 Yao Engine 的 **Models** 标签页中粘贴 Key
+选择默认模型。
 
-   ![Yao Engine — Models 标签页，填写 API Key](https://assets.yaoagents.com/en/engine/03-engine-models-en-$__THEME.png)
+![配置完成](https://assets.yaoagents.com/en/engine/08-engine-provider-default-en-$__THEME.png)
 
-该服务支持 Claude、GPT-4o、DeepSeek 等模型——按量计费，无需订阅。
+## 第五步：安装桌面客户端
 
-### 方案 B — 自带密钥（BYOK）
+桌面客户端适合日常使用，和浏览器互不冲突。
 
-想用自己的 LLM 账号？在 Yao Engine → **Models** 中设置自定义 API 端点和 Key，支持任何兼容 OpenAI 接口的提供商：Anthropic、OpenAI、DeepSeek、Ollama（本地）等。
+前往[客户端下载页](/download/yaoagents)下载安装。打开后填入服务器地址（与浏览器登录地址相同），点击 **Connect**。登录方式与浏览器一致。
 
-> 💡 **不确定选哪个？** 先用 Yao Agents 服务——这是最快能跑起来的路径。随时可以在 Yao Engine → Models 切换到 BYOK。
+![添加服务器](https://assets.yaoagents.com/en/servers/02-servers-add-en-$__THEME.png)
 
-模型连接成功后，就可以开始工作了。
-
----
-
-## Tai Link — 连接其他设备
-
-想让 AI 在其他机器上工作？在任意远程设备上安装 Tai Link——备用笔记本、服务器、虚拟机或容器。连接后，AI 团队可以在那台设备上操作，你的屏幕保持空闲。
-
-[连接第一台设备 →](/docs/zh-cn/tai-link/connect-first-device)
-
----
+> **提示：** 右键点击托盘图标可切换服务器、进入设置等。
 
 ## 下一步
 
-- [AI Expert：找对专家](/docs/zh-cn/getting-started/ai-experts-intro) — 为你的任务选择合适的专家
-- [Mission Control：编排自动化](/docs/zh-cn/getting-started/mission-control-intro) — 配置你的第一个 Robot
-- [连接第一台设备](/docs/zh-cn/tai-link/connect-first-device) — 让 AI 在其他机器上工作
-
----
-
-## 常见问题
-
-**Yao Agents 提示"Engine not running"**
-确保 Yao Engine 已打开并运行。点击菜单栏中的引擎图标查看状态。如果无法启动，检查端口 5099 是否被其他进程占用。
-
-**运行 Robot 时提示"Docker not found"**
-安装 [Docker Desktop](https://www.docker.com/products/docker-desktop/) 并确保它正在运行。Windows 用户请先配置好 WSL2。
-
-**Yao Agents 无法连接远程引擎**
-如果 Engine 运行在单独的服务器上，在 Yao Agents 的 **Settings → Engine** 中输入服务器地址。
+- [AI 专家](/docs/zh-cn/getting-started/ai-experts-intro) – 选一个专家，开始干活
+- [连接设备](/docs/zh-cn/tai-link/connect-first-device) – 通过 Tai Link 接入更多设备
