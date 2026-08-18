@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-harness
+    title: "DeepSeek Harness 打开就用，跨设备运行"
+    summary: "Yao Agents 集成了 DeepSeek Harness。桌面客户端或浏览器直接用，跨设备运行。"
+    category: release
+    date: "2026-08-18"
+    author:
+      name: Yao Team
+
   - slug: cloud-server
     title: "云服务器上线 — 不装 Engine，打开就用"
     summary: "Yao Agents 支持连接云服务器。跳过本地安装，连上就用。当前北京节点已开放体验。"

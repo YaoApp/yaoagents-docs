@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-harness
+    title: "DeepSeek Harness すぐ使える、デバイスをまたいで動く"
+    summary: "Yao Agents に DeepSeek Harness が統合されました。デスクトップアプリまたはブラウザで直接使え、複数デバイスで動作します。"
+    category: release
+    date: "2026-08-18"
+    author:
+      name: Yao Team
+
   - slug: cloud-server
     title: "クラウドサーバー提供開始 — Engine不要、接続するだけ"
     summary: "Yao Agents がクラウドサーバーに対応。ローカルインストール不要、接続するだけで利用開始。現在、北京ノードが体験利用可能。"
