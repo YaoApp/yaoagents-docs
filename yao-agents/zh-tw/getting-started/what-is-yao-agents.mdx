@@ -4,57 +4,43 @@ slug: what-is-yao-agents
 
 # Yao Agents 是什麼
 
-Yao Agents 是一款桌面 AI 應用——讓你擁有一支專屬的 AI 專家團隊，完全執行在你自己的裝置上，資料從不離開你的機器。
+所有 Agent 與工作空間集中管理，跑在你自己的裝置上。看板追蹤任務進度，桌面、手機、瀏覽器、API 隨時掌控。自架部署，資料不外流。
 
-> 你的 AI 團隊。在你的裝置上。由你掌控。
+![運作原理](https://assets.yaoagents.com/en/architecture/01-how-it-works-en-$__THEME.png)
+
+Agent 在專用裝置上並行運作，你接了幾台，它們就同時在幾台上做事。一個應用管理全部。多一台電腦，就多一份產能。
+
+[下載](/download) · [安裝指南](/docs/zh-tw/getting-started/installation)
 
 ## 為什麼選擇 Yao Agents
 
-安裝之後，你就擁有了一支 AI 員工隊伍——有的隨時解答問題，有的按計畫自動執行任務，還有一個在背景默默整理你丟給它的一切。它們在你的機器上工作，你的資料始終是你的。
+從電腦、手機或瀏覽器告訴 Agent 要做什麼，它們在你的裝置上同步作業，你繼續忙自己的。
 
-AI 不會占用你的電腦。把另一台裝置連接進來——備用筆電、虛擬機器、容器或機架上的伺服器——AI 團隊就在那台裝置上工作，你的螢幕依然自由。
+### 工作空間
 
-## 你的團隊能做什麼
+每個工作區都是獨立隔離的環境，不同工作各佔一處、互不干擾，多台電腦統一管理。工作成果沉澱為文件，累積成你的知識庫。
 
-- **隨時找到合適的專家** — 30+ 內建 AI Expert 涵蓋程式開發、寫作、研究、資料分析、專案管理等場景，每一個都為自己的領域精調過。
-- **無人值守自動執行任務** — Robot 按計畫觸發或自動執行。早報彙整、收件匣處理、資料報告——你睡著的時候它就做完了。
-- **跨裝置協同工作** — 透過 Tai Link 連接筆電、虛擬機器、容器或伺服器，AI 團隊在遠端裝置上操作，你自己的螢幕完全不受打擾。
+Agent 工作時，可跨節點取用需要的資料。
 
-![Yao Agents — AI Expert 面板，展示 30+ 內建專家](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
+![工作空間](https://assets.yaoagents.com/en/workspace/01-workspace-index-en-$__THEME.png)
 
-## 運作原理
+### 任務看板
 
-Yao Agents 以本機伺服器（Yao Engine）的形式執行在你的機器上，桌面用戶端連接到它——把 Engine 想像成大腦，用戶端是你看向它的那扇窗。
+在對話中說出你想做的事，Agent 會把它變成一項任務，放進看板。持續對話、反覆執行，越用越順手，逐漸長成專門處理這類工作的 Agent。
 
-想讓 AI 在另一台裝置上工作時，只需在那台機器上安裝 Tai Link。它會建立一條安全通道，連回你的 Yao Engine。AI 團隊隨即可以在那台裝置上操作，而你自己的螢幕完全空閒。
+還能把任務 Agent 接入自己的應用，或分享給更多人使用。
 
-所有對話歷史、知識、檔案和任務結果都儲存在你的裝置上。唯一對外的流量，是傳送給你所接入之 LLM 的提示詞——而這個選擇由你決定。
+![任務看板](https://assets.yaoagents.com/en/kanban/09-kanban-daily-en-$__THEME.png)
 
-## Yao Agents 不是什麼
+### 開放介面
 
-明確一些邊界，有助於理解這款產品：
+專家 Agent、任務 Agent 都能接入你自己的應用與業務流程。介面相容 API 標準，支援 SSE 與 WebSocket。
 
-- **不是無程式碼 Bot 搭建平台** — 不需要拼流程、設定 Pipeline 才能上手。開啟應用程式，選一個專家，開始工作就行。
-- **不是只給開發者用的工具** — 非技術使用者可以開箱即用。開發者可以透過 Hooks、MCP 和 Processes 進行深度擴充。
-- **不只是聊天視窗** — AI Expert 在你發起時執行任務；Robot 按計畫自主執行，同樣的任務它來。
+讓 Agent 融入你的業務，哪裡需要它，它就在哪裡。
+
+![開放介面](https://assets.yaoagents.com/en/openapi/01-openapi-task-en-$__THEME.png)
 
 ## 下一步
 
-- [安裝](/docs/zh-tw/getting-started/installation) — 幾分鐘內下載並完成設定
-- [AI Expert：找對專家](/docs/zh-tw/getting-started/ai-experts-intro) — 選擇合適的專家，開始工作
-- [Mission Control：編排自動化](/docs/zh-tw/getting-started/mission-control-intro) — 讓 Robot 處理你的重複性任務
-
----
-
-## 術語表
-
-| 術語 | 含義 |
-|------|------|
-| **AI Expert** | 針對特定領域調優的 AI 專家（程式開發、寫作、研究等）——30+ 內建，也可自行新增 |
-| **AI Task Agent** | 執行在 Mission Control 執行管道中的智能體 |
-| **Robot** | Mission Control 中的自主任務執行者——按計畫執行，無需手動觸發 |
-| **Mission Control** | 任務控制台——在這裡建立、排程和監控 Robot |
-| **Tai Link** | 將遠端裝置連接到 Yao Engine 的橋樑 |
-| **Yao Engine** | 驅動一切的本機伺服器——執行在你的機器上 |
-| **BYOK** | 自帶金鑰（Bring Your Own Key）——你提供所用 LLM 的 API Key |
-| **Pipeline** | Robot 完成任務時經過的一系列執行階段 |
+- [下載](/download) – 支援 macOS、Windows、Linux
+- [安裝指南](/docs/zh-tw/getting-started/installation) – 幾分鐘完成部署

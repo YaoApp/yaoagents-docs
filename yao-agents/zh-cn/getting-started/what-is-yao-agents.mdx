@@ -4,57 +4,43 @@ slug: what-is-yao-agents
 
 # Yao Agents 是什么
 
-Yao Agents 是一款桌面 AI 应用——让你拥有一支专属的 AI 专家团队，完全运行在你自己的设备上，数据从不离开你的机器。
+智能体与工作空间统一管理，跑在你自己的设备上。看板追踪任务进度，桌面、手机、浏览器、API 随时掌控。私有部署，数据不出门。
 
-> 你的 AI 团队。在你的设备上。由你掌控。
+![工作原理](https://assets.yaoagents.com/en/architecture/01-how-it-works-en-$__THEME.png)
+
+智能体在专用设备上并发运行，你连多少台，它们就同时在多少台上干活。一个应用统管全部。加电脑，就是加生产力。
+
+[下载](/download) · [安装指南](/docs/zh-cn/getting-started/installation)
 
 ## 为什么选择 Yao Agents
 
-安装之后，你就拥有了一支 AI 员工队伍——有的随时解答问题，有的按计划自动执行任务。它们在你的机器上工作，你的数据始终是你的。
+在电脑、手机或浏览器上告诉智能体要做什么，它们在你的设备上同时开工，你该干嘛干嘛。
 
-AI 不会占用你的电脑。把另一台设备连接进来——备用笔记本、虚拟机、容器或机架上的服务器——AI 团队就在那台设备上工作，你的屏幕依然自由。
+### 工作空间
 
-## 你的团队能做什么
+每个工作区都是隔离的空间，不同工作各占一处、互不干扰，多台电脑统一管理。工作沉淀成文档，攒成你的知识库。
 
-- **随时找到合适的专家** — 30+ 内置 AI Expert 覆盖编程、写作、调研、数据分析、项目管理等场景，每一个都为自己的领域精调过。
-- **无人值守自动执行任务** — Robot 按计划触发或自动运行。早报汇总、邮件处理、数据报告——你睡着的时候它就做完了。
-- **跨设备协同工作** — 通过 Tai Link 连接笔记本、虚拟机、容器或服务器，AI 团队在远程设备上操作，你自己的屏幕完全不受打扰。
+智能体工作时，可跨节点读取需要的资料。
 
-![Yao Agents — AI Expert 面板，展示 30+ 内置专家](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
+![工作空间](https://assets.yaoagents.com/en/workspace/01-workspace-index-en-$__THEME.png)
 
-## 工作原理
+### 任务看板
 
-Yao Agents 以本地服务器（Yao Engine）的形式运行在你的机器上，桌面客户端连接到它——把 Engine 想象成大脑，客户端是你看向它的那扇窗。
+在对话里说出你想做的事，智能体会把它变成一个任务，放进看板。持续对话、反复执行，越用越好用，成为一个专门处理此类任务的智能体。
 
-想让 AI 在另一台设备上工作时，只需在那台机器上安装 Tai Link。它会建立一条安全隧道，连回你的 Yao Engine。AI 团队随即可以在那台设备上操作，而你自己的屏幕完全空闲。
+还可以把任务智能体接入自己的应用，分享给更多人使用。
 
-所有对话历史、知识、文件和任务结果都存储在你的设备上。唯一对外的流量，是发送给你所接入的 LLM 的提示词——而这个选择由你决定。
+![任务看板](https://assets.yaoagents.com/en/kanban/09-kanban-daily-en-$__THEME.png)
 
-## Yao Agents 不是什么
+### 开放接口
 
-明确一些边界，有助于理解这款产品：
+专家智能体、任务智能体，都能接入你自己的应用和业务。接口兼容 API 标准，支持 SSE，同时支持 WebSocket。
 
-- **不是无代码 Bot 搭建平台** — 不需要拼流程、配 Pipeline 才能上手。打开应用，选一个专家，开始工作就行。
-- **不是只给开发者用的工具** — 非技术用户可以开箱即用。开发者可以通过 Hooks、MCP 和 Processes 进行深度扩展。
-- **不只是聊天窗口** — AI Expert 在你发起时执行任务；Robot 按计划自主运行，同样的任务它来。
+让智能体融入你的业务，哪里需要它，它就在哪里。
+
+![开放接口](https://assets.yaoagents.com/en/openapi/01-openapi-task-en-$__THEME.png)
 
 ## 下一步
 
-- [安装](/docs/zh-cn/getting-started/installation) — 几分钟内下载并完成配置
-- [AI Expert：找对专家](/docs/zh-cn/getting-started/ai-experts-intro) — 选择合适的专家，开始工作
-- [Mission Control：编排自动化](/docs/zh-cn/getting-started/mission-control-intro) — 让 Robot 处理你的重复性任务
-
----
-
-## 术语表
-
-| 术语 | 含义 |
-|------|------|
-| **AI Expert** | 针对特定领域调优的 AI 专家（编程、写作、调研等）——30+ 内置，也可自行添加 |
-| **AI Task Agent** | 运行在 Mission Control 执行管道中的智能体 |
-| **Robot** | Mission Control 中的自主任务执行者——按计划运行，无需手动触发 |
-| **Mission Control** | 任务控制台——在这里创建、调度和监控 Robot |
-| **Tai Link** | 将远程设备连接到 Yao Engine 的桥梁 |
-| **Yao Engine** | 驱动一切的本地服务器——运行在你的机器上 |
-| **BYOK** | 自带密钥（Bring Your Own Key）——你提供所用 LLM 的 API Key |
-| **Pipeline** | Robot 完成任务时经过的一系列执行阶段 |
+- [下载](/download) – 支持 macOS、Windows、Linux
+- [安装指南](/docs/zh-cn/getting-started/installation) – 几分钟完成部署
