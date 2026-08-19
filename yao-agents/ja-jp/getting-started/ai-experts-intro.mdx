@@ -2,78 +2,80 @@
 slug: ai-experts-intro
 ---
 
-# AI Expert：適切な専門家を選ぶ
+# AI エキスパート
 
-Yao Agents には 30 以上の AI Expert が内蔵されており、それぞれ特定の仕事に特化しています。呼べばすぐ来る専門家チームのようなもの——適切な人に適切な仕事を依頼すれば、万能型に何でも聞くより良い結果が得られます。
+Yao Agents には複数の AI エキスパートが内蔵されており、それぞれ特定の業務に特化しています。適切なエキスパートを選び、やりたいことを伝えるだけで、あとはお任せください。
 
-## AI Expert の仕組み
+![AI エキスパート一覧](https://assets.yaoagents.com/en/experts/03-experts-full-en-$__THEME.png)
 
-Expert にはそれぞれ明確な役割、専用のツールセット、独自の作業スタイルがあります。会話を開くと、その専門家と話しているのです——空のチャット画面ではありません。
+### DeepSeek Harness
 
-いくつか具体的な例を挙げます：
+DeepSeek Harness 搭載の汎用エージェント。コーディング、リサーチ、データ分析、ライティング、自動化——永続サンドボックスでターミナル、ブラウザ、VNC デスクトップを完備。
 
-- **Insights** はデータベースや表計算シートに接続し、分析を実行し、インタラクティブな ECharts ダッシュボードを描画します——ライブ VNC プレビュー付き。
-- **Slides** はアウトラインや文書をテーマ付きスライドデッキに変換し、PDF にエクスポートします——そのまま発表に使えます。
-- **Applet Workshop** は説明文から動作するミニアプリを作り、画面右側でリアルタイムに動いているのを確認できます。
-- **Web Builder** は Next.js サイト全体を生成し、VNC でプレビューし、SSH 経由でサーバーにデプロイします——一つの会話で最初から最後まで完結。
+![DeepSeek Harness](https://assets.yaoagents.com/en/experts/04-expert-deepseek-harness-en-$__THEME.png)
 
-これらはすべてすぐに使えます。設定は不要です。
+[詳細を見る →](/docs/ja-jp/built-in-agents/deepseek-harness)
 
-![AI Expert パネル — 30 以上の内蔵エキスパートを閲覧・選択](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
+### Claude Code
 
-## 適切な専門家を選ぶ
+Claude Code 搭載の汎用エージェント。コーディング、リサーチ、データ分析、ライティング、自動化——同様の永続サンドボックスとライブプレビューを備えています。
 
-ホーム画面から **AI Experts** パネルを開きます。Expert はカテゴリ別に整理されています——フィルタータブでタイプ別に絞り込んだり、名前やトピックで検索したりできます。
+![Claude Code](https://assets.yaoagents.com/en/experts/05-expert-claude-code-en-$__THEME.png)
 
-**どこから始めればいいか迷ったら？Yao Agents に聞いてみてください。**
+[詳細を見る →](/docs/ja-jp/built-in-agents/claude-code)
 
-リスト上部の **Yao Agents** はスマートルーターです——シンプルな質問は直接処理し、複雑なタスクは適切な専門家エージェントに振って作業を完了させます。どのエキスパートが自分のタスクに合うか分からないときは、やりたいことを説明するだけで、あとはお任せで大丈夫です。
+### Agent Smith
 
-![Yao Agents expert — 必要なことを伝えれば、適切な専門家にルーティングされる](https://assets.yaoagents.com/en/chat/02-chat-conversation-en-$__THEME.png)
+あなた専用の AI エキスパートを構築。要件を伝えると、Agent Smith がスキルを検索し、エキスパートを組み立て、サンドボックスでテストし、エキスパートリストにデプロイします。
 
-何をしたいか分かっている場合は、直接専門家に向かってください：
+![Agent Smith](https://assets.yaoagents.com/en/experts/06-expert-agent-smith-en-$__THEME.png)
 
-- **レポートを書く** → Report Writer
-- **市場情報を調べる** → Market Scout
-- **データを分析する** → Insights
-- **ツールやミニアプリを作る** → Applet Workshop
-- **メールを送受信する** → Postman
+[詳細を見る →](/docs/ja-jp/built-in-agents/agent-smith)
 
-**定期的に繰り返すタスク？Mission Control を使いましょう。** 毎回会話を繰り返す代わりに、Robot を設定して自動実行させてください。→ [Mission Control：自動化を編成する](/docs/ja-jp/getting-started/mission-control-intro)
+### Web Builder
 
-## すべての内蔵エキスパート
+会話からウェブサイトを構築・デプロイ。Next.js + Tailwind、VNC ライブプレビュー、ワンステップ SSH デプロイと HTTPS 自動設定。
 
-| エキスパート | できること | 最適な用途 | 詳細 |
-|------------|---------|----------|------|
-| **Yao Agents** | スマートルーター——簡単なタスクは直接処理し、複雑なものは専門家に振る | どこから始めるか迷ったとき | [見る](/docs/ja-jp/built-in-agents/general) |
-| **General Assistant** | 万能アシスタント——コーディング・リサーチ・ライティング・自動化を幅広くカバー | 決まったワークフローがない柔軟なタスク | [見る](/docs/ja-jp/built-in-agents/general) |
-| **Insights** | データアナリスト——データベース接続・表計算読み込み・ECharts ダッシュボード構築 | データ分析と可視化 | [見る](/docs/ja-jp/built-in-agents/insights) |
-| **Project Manager** | メールやファイルをスキャンし、ログとレポートを含む構造化プロジェクトを構築 | メールとファイルにまたがるプロジェクト管理 | [見る](/docs/ja-jp/built-in-agents/pm) |
-| **Postman** | SMTP/IMAP 経由でメールを送受信、HTML サポートとスレッド返信対応 | メール自動化 | [見る](/docs/ja-jp/built-in-agents/postman) |
-| **Market Scout** | 購読ソースを監視し、コンテンツを取得・分類してアーカイブ | 市場調査と競合追跡 | [見る](/docs/ja-jp/built-in-agents/scout) |
-| **Slides** | アウトラインや文書をテーマ付きスライドデッキに変換し PDF エクスポート | プレゼンとレポート | [見る](/docs/ja-jp/built-in-agents/slides) |
-| **Transformer** | Vision LLM で画像・PDF・JSON・CSV を構造化フォーマットに変換 | ドキュメント解析とデータ変換 | [見る](/docs/ja-jp/built-in-agents/transformer) |
-| **Applet Workshop** | Node.js で視覚的なミニツールを構築し VNC でリアルタイムプレビュー | クイックツールとインタラクティブユーティリティ | [見る](/docs/ja-jp/built-in-agents/applet) |
-| **Web Builder** | Next.js + Tailwind でウェブサイトやフォームアプリを構築し SSH デプロイ | ウェブサイト・LP・フォーム | [見る](/docs/ja-jp/built-in-agents/website) |
-| **Report Writer** | 構造化 Markdown 分析レポートを自動生成（Mission Control 内で使用）| Robot パイプライン内の自動レポーティング | [見る](/docs/ja-jp/built-in-agents/report-writer) |
+![Web Builder](https://assets.yaoagents.com/en/experts/07-expert-web-builder-en-$__THEME.png)
 
-## ワークスペース
+[詳細を見る →](/docs/ja-jp/built-in-agents/website)
 
-各 Expert はそれぞれの永続的なサンドボックス内で動作します。作成またはアップロードしたファイルは会話をまたいで保持されます——次に開いたとき、前回の続きから始められます。
+### Applet Workshop
 
-ワークスペースを管理するには、右上のナビゲーションバーの **Workspaces** をクリックします。そこから複数のワークスペースを作成して切り替えることができます——別々のプロジェクトに取り組んでいて、ファイルとコンテキストを分けておきたいときに便利です。任意の会話の下部にある入力エリアからも直接ワークスペースを切り替えることができます。
+ツールを説明するだけで、動作するアプリを取得。計算機、ダッシュボード、コンバーター、AI ツールをデスクトップ上でリアルタイムに構築・プレビュー。
 
-![ワークスペースセレクター — チャット下部からプロジェクトを切り替える](https://assets.yaoagents.com/en/tai/04-tai-workspace-select-en-$__THEME.png)
+![Applet Workshop](https://assets.yaoagents.com/en/experts/08-expert-applet-workshop-en-$__THEME.png)
+
+[詳細を見る →](/docs/ja-jp/built-in-agents/applet)
+
+### Slides
+
+トピック、アウトライン、ドキュメントから洗練されたスライドデッキを生成。9 種類の内蔵テーマ、1920×1080 PDF エクスポート。
+
+![Slides](https://assets.yaoagents.com/en/experts/09-expert-slides-en-$__THEME.png)
+
+[詳細を見る →](/docs/ja-jp/built-in-agents/slides)
+
+### Insights
+
+データベースに接続するか、スプレッドシートを投入。Insights が指標を設計し、インタラクティブな ECharts ダッシュボードを構築してライブプレビュー。
+
+![Insights](https://assets.yaoagents.com/en/experts/10-expert-insights-en-$__THEME.png)
+
+[詳細を見る →](/docs/ja-jp/built-in-agents/insights)
+
+## エキスパートの選び方
+
+ホーム画面から **AI エキスパート** パネルを開き、カテゴリタブで絞り込むか、名前で検索します。
 
 ## モデルの切り替え
 
-デフォルトでは、各エキスパートはプライマリとして設定したモデルを使用します。チャット下部のモデルピッカーで会話中いつでも切り替えられます。
+デフォルトではプライマリモデルを使用。会話中にチャット下部のモデルピッカーでいつでも切り替えられます。
 
-![Claude・DeepSeek・GPT・Kimi などのオプションを表示するモデルピッカー](https://assets.yaoagents.com/en/chat/08-chat-model-picker-en-$__THEME.png)
-
-> 💡 モデルによって得意分野が異なります。Claude はライティングと細やかな推論が得意です。GPT-4o は幅広いタスクに安定して対応します。DeepSeek は大量処理や分析作業でコストパフォーマンスが高いです。
+![モデルピッカー](https://assets.yaoagents.com/en/chat/08-chat-model-picker-en-$__THEME.png)
 
 ## 次のステップ
 
-- [Mission Control：自動化を編成する](/docs/ja-jp/getting-started/mission-control-intro) — 一回限りの会話から自律タスクへ
-- [内蔵 Agent](/docs/ja-jp/built-in-agents/general) — すべてのプリインストール済みエキスパートの詳細プロフィール
+- [カンバンボード：タスクを視覚管理](/docs/ja-jp/getting-started/what-is-kanban) — エキスパートにタスクを割り当て、ボードで進捗を追跡
+- [組み込みエージェント](/docs/ja-jp/built-in-agents/deepseek-harness) — 全プリインストールエキスパートの詳細プロフィール
+- [カスタム AI エキスパート](/docs/ja-jp/agent-hub/custom-assistants) — 独自のエキスパートを追加

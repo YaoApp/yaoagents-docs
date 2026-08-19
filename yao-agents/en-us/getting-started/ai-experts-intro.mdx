@@ -2,76 +2,80 @@
 slug: ai-experts-intro
 ---
 
-# AI Experts: Find the Right One
+# AI Experts
 
-Yao Agents comes with 30+ built-in AI Experts — each tuned for a specific job. Think of them as specialists on call: you go to the right one for the right task, and you get better results than asking a generalist everything.
+Yao Agents comes with a roster of AI Experts — each one built for a specific type of work. Pick the right expert, describe what you need, and let it handle the rest.
 
-## How AI Experts work
+![AI Experts — browse by category, pick a specialist](https://assets.yaoagents.com/en/experts/03-experts-full-en-$__THEME.png)
 
-Every Expert has a defined role, a set of tools, and a way of working. When you open a conversation, you're talking to that specialist — not a blank chat box.
+### DeepSeek Harness
 
-A few examples of what specialists can do:
+General-purpose agent powered by DeepSeek Harness. Coding, research, data analysis, writing, and automation — all in a persistent sandbox with terminal, browser, and VNC desktop.
 
-- **Insights** connects to your database or spreadsheet, runs analysis, and renders an interactive ECharts dashboard — live VNC preview included.
-- **Slides** turns an outline or document into a themed slide deck and exports it to PDF — ready to present.
-- **Applet Workshop** takes a description and builds a working mini-app — you can see it running in real time on the right side of the screen.
-- **Web Builder** scaffolds a full Next.js site, previews it via VNC, and deploys it to your server over SSH — start to finish in one conversation.
-You don't have to configure any of this. They're ready when you are.
+![DeepSeek Harness](https://assets.yaoagents.com/en/experts/04-expert-deepseek-harness-en-$__THEME.png)
 
-![AI Experts panel — browse and select from 30+ built-in experts](https://assets.yaoagents.com/en/experts/01-experts-grid-en-$__THEME.png)
+[View details →](/docs/en-us/built-in-agents/deepseek-harness)
+
+### Claude Code
+
+General-purpose agent powered by Claude Code. Coding, research, data analysis, writing, and automation — with the same persistent sandbox and live preview.
+
+![Claude Code](https://assets.yaoagents.com/en/experts/05-expert-claude-code-en-$__THEME.png)
+
+[View details →](/docs/en-us/built-in-agents/claude-code)
+
+### Agent Smith
+
+Build your own AI experts. Describe what you need — Agent Smith finds skills, assembles the expert, tests it in a sandbox, and deploys it to your expert list.
+
+![Agent Smith](https://assets.yaoagents.com/en/experts/06-expert-agent-smith-en-$__THEME.png)
+
+[View details →](/docs/en-us/built-in-agents/agent-smith)
+
+### Web Builder
+
+Build and deploy websites from a conversation. Next.js + Tailwind, live VNC preview, and one-step SSH deployment with HTTPS.
+
+![Web Builder](https://assets.yaoagents.com/en/experts/07-expert-web-builder-en-$__THEME.png)
+
+[View details →](/docs/en-us/built-in-agents/website)
+
+### Applet Workshop
+
+Describe a tool, get a running app. Calculators, dashboards, converters, AI-powered utilities — built and previewed live on a desktop.
+
+![Applet Workshop](https://assets.yaoagents.com/en/experts/08-expert-applet-workshop-en-$__THEME.png)
+
+[View details →](/docs/en-us/built-in-agents/applet)
+
+### Slides
+
+Turn any input — a topic, outline, or document — into a polished slide deck. 9 built-in themes, PDF export at 1920×1080.
+
+![Slides](https://assets.yaoagents.com/en/experts/09-expert-slides-en-$__THEME.png)
+
+[View details →](/docs/en-us/built-in-agents/slides)
+
+### Insights
+
+Connect to a database or drop in a spreadsheet. Insights designs metrics, builds an interactive ECharts dashboard, and previews it live.
+
+![Insights](https://assets.yaoagents.com/en/experts/10-expert-insights-en-$__THEME.png)
+
+[View details →](/docs/en-us/built-in-agents/insights)
 
 ## Picking the right expert
 
-Open the **AI Experts** panel from the home screen. You'll see Experts organized by category — use the filter tabs to browse by type, or search by name or topic.
-
-**Not sure where to start? Ask Yao Agents.**
-
-The **Yao Agents** expert at the top of the list is a smart router — it handles simple questions directly, and for complex tasks it dispatches the right specialist agent to get the work done. If you're new or unsure which expert fits your task, just describe what you need and it takes care of the rest.
-
-![Yao Agents expert — ask what you need and it routes to the right specialist](https://assets.yaoagents.com/en/chat/02-chat-conversation-en-$__THEME.png)
-
-Once you know what you need, go straight to the specialist:
-
-- **Writing a report** → Report Writer
-- **Digging up market info** → Market Scout
-- **Analyzing data** → Insights
-- **Building a tool or mini-app** → Applet Workshop
-- **Sending or reading emails** → Postman
-**Recurring task? Think Mission Control.** If you'll need something done regularly, set up a Robot instead of repeating the conversation. → [Mission Control: Orchestrate Automation](/docs/en-us/getting-started/mission-control-intro)
-
-## All built-in experts
-
-| Expert | What it does | Best for | Details |
-|--------|-------------|----------|---------|
-| **Yao Agents** | Smart router — handles simple tasks directly, dispatches specialists for complex ones | Not sure where to start | [View](/docs/en-us/built-in-agents/general) |
-| **General Assistant** | Versatile all-rounder for everyday tasks: coding, research, writing, automation | Open-ended tasks with no fixed workflow | [View](/docs/en-us/built-in-agents/general) |
-| **Insights** | Data analyst — connect to databases, read spreadsheets, build ECharts dashboards | Data analysis and visualization | [View](/docs/en-us/built-in-agents/insights) |
-| **Project Manager** | Scan emails and files, build structured projects with logs and reports | Tracking projects across emails and files | [View](/docs/en-us/built-in-agents/pm) |
-| **Postman** | Send and receive emails via SMTP/IMAP with HTML support and reply threading | Email automation | [View](/docs/en-us/built-in-agents/postman) |
-| **Market Scout** | Monitor subscription sources, fetch content, classify and archive market insights | Market research and competitive tracking | [View](/docs/en-us/built-in-agents/scout) |
-| **Slides** | Turn outlines or documents into themed slide decks, export to PDF | Presentations and reports | [View](/docs/en-us/built-in-agents/slides) |
-| **Transformer** | Convert images, PDFs, JSON, and CSV into structured formats using Vision LLM | Document parsing and data conversion | [View](/docs/en-us/built-in-agents/transformer) |
-| **Applet Workshop** | Build visual mini-tools with Node.js and preview them live via VNC | Quick tools and interactive utilities | [View](/docs/en-us/built-in-agents/applet) |
-| **Web Builder** | Build websites and form-based apps with Next.js + Tailwind, deploy over SSH | Websites, landing pages, and forms | [View](/docs/en-us/built-in-agents/website) |
-| **Report Writer** | Auto-generate structured Markdown analysis reports (used in Mission Control) | Automated reporting in Robot pipelines | [View](/docs/en-us/built-in-agents/report-writer) |
-
-## Workspaces
-
-Each Expert runs inside its own persistent sandbox. Files you create or upload stay there across conversations — your workspace picks up where you left off.
-
-To manage workspaces, click **Workspaces** in the top-right navigation bar. From there you can create multiple workspaces and switch between them — useful when you're working on separate projects and want to keep their files and context isolated. You can also switch workspace directly from the chat input area at the bottom of any conversation.
-
-![Workspace selector — switch between projects from the bottom of the chat](https://assets.yaoagents.com/en/tai/04-tai-workspace-select-en-$__THEME.png)
+Open the **AI Experts** panel from the home screen. Browse by category using the filter tabs, or search by name.
 
 ## Switching models
 
-By default, each expert uses whatever model you've set as your primary. You can switch models mid-conversation using the model picker at the bottom of the chat.
+Each expert uses your primary model by default. Switch mid-conversation using the model picker at the bottom of the chat.
 
-![Model picker showing Claude, DeepSeek, GPT, and Kimi options](https://assets.yaoagents.com/en/chat/08-chat-model-picker-en-$__THEME.png)
-
-> 💡 Different models have different strengths. Claude is strong at writing and nuanced reasoning. GPT-4o handles a wide range of tasks reliably. DeepSeek is cost-effective for high-volume or analytical work.
+![Model picker](https://assets.yaoagents.com/en/chat/08-chat-model-picker-en-$__THEME.png)
 
 ## What's next
 
-- [Mission Control: Orchestrate Automation](/docs/en-us/getting-started/mission-control-intro) — move from one-off chats to autonomous tasks
-- [Built-in Agents](/docs/en-us/built-in-agents/general) — detailed profiles of every pre-installed expert
+- [Kanban Board: Manage Tasks Visually](/docs/en-us/getting-started/what-is-kanban) — assign tasks to experts and track progress on a board
+- [Built-in Agents](/docs/en-us/built-in-agents/deepseek-harness) — detailed profiles of every pre-installed expert
+- [Custom AI Experts](/docs/en-us/agent-hub/custom-assistants) — add your own experts to the roster

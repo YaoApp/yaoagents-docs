@@ -1,0 +1,63 @@
+---
+slug: claude-code
+---
+
+# Claude Code
+
+![Claude Code](https://assets.yaoagents.com/en/experts/05-expert-claude-code-en-$__THEME.png)
+
+基于 Claude Code 的通用智能体。编程、研究、数据分析、写作、自动化——在复杂推理、长上下文理解和精细执行方面表现尤为出色。
+
+## 擅长什么
+
+- **编程** — 构建完整应用、重构代码库、调试、维护复杂多文件项目
+- **研究** — 抓取网页、综合多源信息、生成结构化报告
+- **数据分析** — 处理 CSV、JSON、Excel 文件；运行分析；生成图表和看板
+- **写作** — 撰写报告、方案、文档和 API 规范，表达精准细腻
+- **自动化** — 构建脚本、CLI 工具和流水线，将重复工作自动化
+- **实时预览** — 在沙箱中运行和测试一切，配备完整 VNC 桌面
+
+## 工作原理
+
+Claude Code 运行在与 DeepSeek Harness 相同的持久化 Linux 沙箱中——完整桌面、终端、文件系统、浏览器和 VNC。不同之处在于模型：它使用 Claude 进行推理，在复杂决策、长上下文理解和精细执行方面表现出色。
+
+你描述任务，Claude Code 规划方案、执行工作并验证结果。对于大型任务，它会将工作拆分为步骤，逐步检验后再继续。
+
+沙箱生命周期为 `longrunning`——空闲时暂停，回来时自动恢复。你构建的一切跨对话永久保存。
+
+## 提示词技巧
+
+**明确范围和约束。** "把认证模块从 Session 改为 JWT——保持现有 API 契约不变" 比 "优化认证" 好得多。
+
+**必要时描述架构。** 如果你想要 monorepo、微服务或某种设计模式，提前说明。否则 Claude Code 会选择合理的默认方案。
+
+**用它做多步骤工程。** Claude Code 的优势在于需要规划、文件间有依赖关系、且需要验证的任务。单文件脚本也行，但它是为更难的事情而生。
+
+**示例：**
+
+> 构建一个 TypeScript monorepo：共享库、REST API（Express）和 React 前端。设置 workspace 引用和统一构建命令。
+
+> 把这个 Python 项目从单个脚本重构为正式的包：CLI、配置管理和单元测试。外部行为不能改变。
+
+> 审查这个代码库，找出 5 个最大的性能瓶颈。修复最严重的那个，并给出前后基准对比。
+
+> 在这个 Next.js 应用中集成 Stripe 支付。添加结账页面、Webhook 处理和订阅管理。
+
+## 能力一览
+
+| 能力 | 说明 |
+|------|------|
+| 模型 | Claude（可配置） |
+| 语言 | Python、TypeScript、Go、Rust，以及任何可安装的语言 |
+| 网络访问 | 浏览网页、抓取数据、调用 API |
+| 文件读写 | 支持任何文件格式 |
+| 预览 | VNC 实时桌面——即时查看应用运行效果 |
+| 沙箱 | 持久化 Linux 桌面，完整终端和浏览器 |
+| 生命周期 | 长期运行——空闲暂停，返回恢复 |
+| 工作区 | 永久存储——代码和文件跨对话保留 |
+
+## 接下来
+
+- [DeepSeek Harness](/docs/zh-cn/built-in-agents/deepseek-harness) — 同样的沙箱能力，由 DeepSeek 驱动
+- [Web Builder](/docs/zh-cn/built-in-agents/website) — 完整的网站开发与部署
+- [AI 专家](/docs/zh-cn/getting-started/ai-experts-intro) — 查看所有内置专家

@@ -2,18 +2,15 @@ slug: built-in-agents
 title: 内置智能体
 summary: 所有随产品预装的智能体。每个有独立详情页：简介、擅长什么、使用场景、提示词参考、使用技巧。
 pages:
-  - slug: general
-    title: General（通用助手）
-    summary: 日常问答、通用任务、新手首选。
+  - slug: deepseek-harness
+    title: DeepSeek Harness（通用智能体）
+    summary: 基于 DeepSeek Harness 的通用智能体。编程、研究、数据分析、写作、自动化——持久化沙箱，配备终端、浏览器和 VNC。
+  - slug: claude-code
+    title: Claude Code（通用智能体）
+    summary: 基于 Claude Code 的通用智能体。编程、研究、数据分析、写作、自动化——持久化沙箱与实时预览。
   - slug: agent-smith
     title: Agent Smith（打造专属专家）
     summary: 说出需求，自动创建、测试并上线你的专属 AI 专家。
-  - slug: pm
-    title: PM（项目经理）
-    summary: 项目管理、任务拆解与跟踪、团队协作。
-  - slug: postman
-    title: Postman（邮件助手）
-    summary: 邮件撰写、定时发送、邮件模板。
   - slug: insights
     title: Insights（数据分析）
     summary: 连接数据库、读取表格、构建 ECharts 交互看板，VNC 实时预览。

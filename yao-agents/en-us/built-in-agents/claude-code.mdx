@@ -1,0 +1,63 @@
+---
+slug: claude-code
+---
+
+# Claude Code
+
+![Claude Code](https://assets.yaoagents.com/en/experts/05-expert-claude-code-en-$__THEME.png)
+
+General-purpose agent powered by Claude Code. Handle any task — coding, research, data analysis, writing, and automation — with strong performance on complex reasoning, long-context understanding, and nuanced architectural decisions.
+
+## What it's good at
+
+- **Coding** — build full applications, refactor codebases, debug, and maintain complex multi-file projects
+- **Research** — scrape the web, synthesize information from multiple sources, produce structured reports
+- **Data analysis** — process CSV, JSON, and Excel files; run analysis; generate charts and dashboards
+- **Writing** — draft reports, proposals, documentation, and API specs with precision and nuance
+- **Automation** — build scripts, CLI tools, and pipelines to automate repetitive workflows
+- **Live preview** — run and test everything in the sandbox with a full VNC desktop
+
+## How it works
+
+Claude Code runs in the same persistent Linux sandbox as DeepSeek Harness — full desktop, terminal, filesystem, browser, and VNC. The difference is the model: it uses Claude for reasoning, which brings strong performance on nuanced decisions, long-context understanding, and careful execution.
+
+You describe the task and Claude Code plans the approach, executes the work, and verifies the result. For large tasks it breaks the work into steps and checks each one before moving on.
+
+The sandbox is `longrunning` — it pauses when idle and resumes when you return. Everything you build persists across conversations.
+
+## How to write a good prompt
+
+**Be specific about scope and constraints.** "Refactor the auth module to use JWT instead of sessions — keep the existing API contract" is better than "improve auth."
+
+**Describe the architecture when it matters.** If you want a monorepo, microservices, or a specific pattern, say so upfront. Otherwise Claude Code will choose sensible defaults.
+
+**Use it for multi-step engineering.** Claude Code shines when the task involves planning, dependencies between files, and verification. Single-file scripts are fine too, but it's built for the harder stuff.
+
+**Examples:**
+
+> Build a TypeScript monorepo with a shared library, a REST API (Express), and a React frontend. Set up workspace references and a single build command.
+
+> Refactor this Python project from a flat script into a proper package with CLI, config management, and unit tests. Don't change the external behavior.
+
+> Review the attached codebase and identify the top 5 performance bottlenecks. Fix the worst one and benchmark before/after.
+
+> Integrate Stripe payments into this Next.js app. Add a checkout page, webhook handler, and subscription management.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Model | Claude (configurable) |
+| Languages | Python, TypeScript, Go, Rust, and anything installable |
+| Web access | Browse, scrape, fetch APIs |
+| File I/O | Read and write any file format |
+| Preview | Live VNC desktop — see apps running in real time |
+| Sandbox | Persistent Linux desktop, full terminal and browser |
+| Lifecycle | Long-running — pauses on idle, resumes on return |
+| Workspace | Permanently stored — code and files persist indefinitely |
+
+## What's next
+
+- [DeepSeek Harness](/docs/en-us/built-in-agents/deepseek-harness) — same sandbox capabilities, powered by DeepSeek
+- [Web Builder](/docs/en-us/built-in-agents/website) — for full website development with deployment
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts

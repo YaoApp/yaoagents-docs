@@ -2,18 +2,15 @@ slug: built-in-agents
 title: 組み込みエージェント
 summary: 製品にプリインストールされた全エージェント。各詳細ページあり。
 pages:
-  - slug: general
-    title: General（汎用アシスタント）
-    summary: 日常Q&A、汎用タスク、初心者向け。
+  - slug: deepseek-harness
+    title: DeepSeek Harness（汎用エージェント）
+    summary: DeepSeek Harness 搭載の汎用エージェント。コーディング、リサーチ、データ分析、ライティング、自動化——永続サンドボックス、ターミナル・ブラウザ・VNC 完備。
+  - slug: claude-code
+    title: Claude Code（汎用エージェント）
+    summary: Claude Code 搭載の汎用エージェント。コーディング、リサーチ、データ分析、ライティング、自動化——永続サンドボックスとライブプレビュー。
   - slug: agent-smith
     title: Agent Smith（専属エキスパート作成）
     summary: 要件を伝えるだけで、カスタムAIエキスパートを自動作成・テスト・デプロイ。
-  - slug: pm
-    title: PM（プロジェクトマネージャー）
-    summary: プロジェクト管理、タスク分解、チーム連携。
-  - slug: postman
-    title: Postman（メールアシスタント）
-    summary: メール作成、予約送信、テンプレート。
   - slug: insights
     title: Insights（データ分析）
     summary: データベース接続、スプレッドシート読み込み、EChartsダッシュボード構築、VNCライブプレビュー。

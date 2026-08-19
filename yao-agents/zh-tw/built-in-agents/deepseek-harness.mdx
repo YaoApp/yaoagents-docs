@@ -1,0 +1,63 @@
+---
+slug: deepseek-harness
+---
+
+# DeepSeek Harness
+
+![DeepSeek Harness](https://assets.yaoagents.com/en/experts/04-expert-deepseek-harness-en-$__THEME.png)
+
+基於 DeepSeek Harness 的通用 Agent。程式開發、研究、資料分析、寫作、自動化——在持久化沙箱中完成一切，終端機、檔案系統、瀏覽器和 VNC 桌面全部就緒。
+
+## 擅長什麼
+
+- **程式開發** — 撰寫、執行、除錯和重構任何語言的程式；搭建和維護複雜專案
+- **研究** — 抓取網頁、綜合多源資訊、生成結構化報告
+- **資料分析** — 處理 CSV、JSON、Excel 檔案；執行分析；生成圖表和看板
+- **寫作** — 撰寫報告、方案、郵件、Markdown 或 HTML 文件
+- **自動化** — 建構腳本、CLI 工具和流水線，將重複工作自動化
+- **即時預覽** — 在沙箱中執行應用和工具，透過 VNC 即時查看結果
+
+## 工作原理
+
+DeepSeek Harness 運行在持久化的 Linux 沙箱中，配備完整桌面環境。擁有終端機、瀏覽器、檔案系統和網路存取——相當於一台完整的工作機器。
+
+它使用 DeepSeek V4 Pro 或 V4 Flash 作為推理引擎。你描述需求，它規劃方案、執行工作、觀察結果並反覆迭代，直到滿意為止。
+
+沙箱生命週期為 `longrunning`——閒置時暫停，返回時自動恢復。程式碼、檔案和專案狀態跨對話永久保存。
+
+## 提示詞技巧
+
+**描述目標，不要描述步驟。** 「寫一個用 SQLite 管理待辦事項的 REST API」就夠了。不需要指定框架或檔案結構。
+
+**除錯時提供上下文。** 貼上錯誤訊息、相關程式碼，或兩者都給。上下文越多，修復越快。
+
+**自然地迭代。** 第一次結果出來後，繼續提要求：「加上認證」、「提升效能」、「寫測試」。沙箱保留狀態，每次請求都在上一次基礎上繼續。
+
+**範例：**
+
+> 寫一個 Python 腳本，讀取客戶訂單 CSV 檔案，生成按地區匯總的報表。
+
+> 除錯這個 Node.js 服務——POST 請求會當掉。這是錯誤訊息：[貼上]
+
+> 做一個網頁爬蟲，從這三個 URL 抓取產品價格，儲存到 JSON 檔案。
+
+> 搭建一個帶 JWT 認證的 Flask API，連接 SQLite，新增部落格 CRUD 介面。
+
+## 能力一覽
+
+| 能力 | 說明 |
+|------|------|
+| 模型 | DeepSeek V4 Pro / V4 Flash（可設定） |
+| 語言 | Python、Node.js、Bash，以及任何可安裝的語言 |
+| 網路存取 | 瀏覽網頁、抓取資料、呼叫 API |
+| 檔案讀寫 | 支援任何檔案格式 |
+| 預覽 | VNC 即時桌面——即時查看應用執行效果 |
+| 沙箱 | 持久化 Linux 桌面，完整終端機和瀏覽器 |
+| 生命週期 | 長期運行——閒置暫停，返回恢復 |
+| 工作區 | 永久儲存——程式碼和檔案跨對話保留 |
+
+## 接下來
+
+- [Claude Code](/docs/zh-tw/built-in-agents/claude-code) — 同樣的沙箱能力，由 Claude 驅動
+- [Applet Workshop](/docs/zh-tw/built-in-agents/applet) — 快速建構視覺化小工具
+- [AI 專家](/docs/zh-tw/getting-started/ai-experts-intro) — 查看所有內建專家

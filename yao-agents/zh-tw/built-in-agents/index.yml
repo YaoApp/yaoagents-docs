@@ -2,18 +2,15 @@ slug: built-in-agents
 title: 內建智能體
 summary: 所有隨產品預裝的智能體。每個有獨立詳情頁。
 pages:
-  - slug: general
-    title: General（通用助手）
-    summary: 日常問答、通用任務、新手首選。
+  - slug: deepseek-harness
+    title: DeepSeek Harness（通用 Agent）
+    summary: 基於 DeepSeek Harness 的通用 Agent。程式開發、研究、資料分析、寫作、自動化——持久化沙箱，配備終端機、瀏覽器和 VNC。
+  - slug: claude-code
+    title: Claude Code（通用 Agent）
+    summary: 基於 Claude Code 的通用 Agent。程式開發、研究、資料分析、寫作、自動化——持久化沙箱與即時預覽。
   - slug: agent-smith
     title: Agent Smith（打造專屬專家）
     summary: 說出需求，自動建立、測試並上線你的專屬 AI 專家。
-  - slug: pm
-    title: PM（專案經理）
-    summary: 專案管理、任務拆解與追蹤、團隊協作。
-  - slug: postman
-    title: Postman（郵件助手）
-    summary: 郵件撰寫、定時發送、郵件範本。
   - slug: insights
     title: Insights（資料分析）
     summary: 連接資料庫、讀取表格、建構 ECharts 互動看板，VNC 即時預覽。

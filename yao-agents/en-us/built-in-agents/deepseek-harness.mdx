@@ -1,0 +1,63 @@
+---
+slug: deepseek-harness
+---
+
+# DeepSeek Harness
+
+![DeepSeek Harness](https://assets.yaoagents.com/en/experts/04-expert-deepseek-harness-en-$__THEME.png)
+
+General-purpose agent powered by DeepSeek Harness. Handle any task — coding, research, data analysis, writing, and automation — in a persistent sandbox with terminal, filesystem, browser, and live VNC desktop.
+
+## What it's good at
+
+- **Coding** — write, run, debug, and refactor programs in any language; scaffold and maintain complex projects
+- **Research** — scrape the web, synthesize information from multiple sources, produce structured reports
+- **Data analysis** — process CSV, JSON, and Excel files; run analysis; generate charts and dashboards
+- **Writing** — draft reports, proposals, emails, documentation in Markdown or HTML
+- **Automation** — build scripts, CLI tools, and pipelines to automate repetitive workflows
+- **Live preview** — run web apps, scripts, and tools in the sandbox and see results in real time via VNC
+
+## How it works
+
+DeepSeek Harness runs in a persistent Linux sandbox with a full desktop environment. It has terminal access, a browser, filesystem, and network — essentially a complete machine at your disposal.
+
+It uses DeepSeek V4 Pro or V4 Flash as its reasoning engine. You describe what you need, and it plans the approach, executes the work, observes the result, and iterates until it's right.
+
+The sandbox is `longrunning` — it pauses when idle and resumes when you return. Your code, files, and project state persist across conversations indefinitely.
+
+## How to write a good prompt
+
+**Describe the goal, not the steps.** "Build a REST API that manages a todo list with SQLite" gives it enough to start. You don't need to specify the framework or file structure.
+
+**Provide context when debugging.** Paste the error message, the relevant code, or both. The more context, the faster the fix.
+
+**Iterate naturally.** After the first result, ask for changes: "add authentication", "make it faster", "write tests". The sandbox preserves state, so each request builds on the last.
+
+**Examples:**
+
+> Build a Python script that reads a CSV of customer orders and generates a summary report with totals by region.
+
+> Debug this Node.js server — it crashes on POST requests. Here's the error: [paste]
+
+> Create a web scraper that collects product prices from these three URLs and saves them to a JSON file.
+
+> Set up a Flask API with JWT auth, connect it to SQLite, and add CRUD endpoints for a blog.
+
+## Capabilities at a glance
+
+| Capability | Details |
+|------------|---------|
+| Model | DeepSeek V4 Pro / V4 Flash (configurable) |
+| Languages | Python, Node.js, Bash, and anything installable |
+| Web access | Browse, scrape, fetch APIs |
+| File I/O | Read and write any file format |
+| Preview | Live VNC desktop — see apps running in real time |
+| Sandbox | Persistent Linux desktop, full terminal and browser |
+| Lifecycle | Long-running — pauses on idle, resumes on return |
+| Workspace | Permanently stored — code and files persist indefinitely |
+
+## What's next
+
+- [Claude Code](/docs/en-us/built-in-agents/claude-code) — same sandbox capabilities, powered by Claude
+- [Applet Workshop](/docs/en-us/built-in-agents/applet) — for visual mini-tools with instant preview
+- [AI Experts: Find the Right One](/docs/en-us/getting-started/ai-experts-intro) — see all built-in experts
