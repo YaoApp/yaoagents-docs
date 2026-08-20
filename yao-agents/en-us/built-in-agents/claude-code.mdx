@@ -19,29 +19,35 @@ General-purpose agent powered by Claude Code. Handle any task — coding, resear
 
 ## How it works
 
-Claude Code runs in the same persistent Linux sandbox as DeepSeek Harness — full desktop, terminal, filesystem, browser, and VNC. The difference is the model: it uses Claude for reasoning, which brings strong performance on nuanced decisions, long-context understanding, and careful execution.
+Claude Code runs in the same persistent Docker sandbox as DeepSeek Harness — full desktop, terminal, filesystem, browser, and VNC. The difference is the model: it uses Claude for reasoning, which brings strong performance on nuanced decisions, long-context understanding, and careful execution.
 
 You describe the task and Claude Code plans the approach, executes the work, and verifies the result. For large tasks it breaks the work into steps and checks each one before moving on.
 
 The sandbox is `longrunning` — it pauses when idle and resumes when you return. Everything you build persists across conversations.
 
-## How to write a good prompt
+If Docker sandbox is not enabled, tasks execute directly on the machine where Yao Engine is installed.
 
-**Be specific about scope and constraints.** "Refactor the auth module to use JWT instead of sessions — keep the existing API contract" is better than "improve auth."
+## Best practices
 
-**Describe the architecture when it matters.** If you want a monorepo, microservices, or a specific pattern, say so upfront. Otherwise Claude Code will choose sensible defaults.
+**State the outcome and the constraints.** Don't micromanage the steps — describe what you want to be true when it's done, plus any boundaries. "Summarize this 50-page PDF into a 2-page executive brief, focus on financial risks" is better than "read page 1, then page 2..."
 
-**Use it for multi-step engineering.** Claude Code shines when the task involves planning, dependencies between files, and verification. Single-file scripts are fine too, but it's built for the harder stuff.
+**Let it interview you for complex tasks.** For anything non-trivial, start with a brief description and ask it to ask you clarifying questions before it begins. It will surface edge cases and trade-offs you might not have considered.
+
+**Explore first, then plan, then execute.** For large tasks, separate research from action. Ask it to read and understand the situation, propose a plan, then proceed only after you approve. This avoids wasted effort solving the wrong problem.
+
+**Give it verifiable success criteria.** If you can describe what "correct" looks like — specific numbers, a format, a comparison against a reference — include that in your prompt. It will verify its own output before delivering.
+
+**Keep the conversation going.** Each message builds on everything before it. Reference documents already in the workspace, ask follow-up questions, or refine the result. "Now turn that analysis into a slide deck" works because the full context is still there.
 
 **Examples:**
 
-> Build a TypeScript monorepo with a shared library, a REST API (Express), and a React frontend. Set up workspace references and a single build command.
+> Read the attached contract PDF. Extract all obligations, deadlines, and penalty clauses into a structured table. Flag anything due in the next 30 days.
 
-> Refactor this Python project from a flat script into a proper package with CLI, config management, and unit tests. Don't change the external behavior.
+> Research [company name] — financials, recent news, competitive position. Produce a one-page investment memo with a recommendation.
 
-> Review the attached codebase and identify the top 5 performance bottlenecks. Fix the worst one and benchmark before/after.
+> I have meeting notes from the past month (attached). Identify recurring themes, unresolved action items, and draft a status report for leadership.
 
-> Integrate Stripe payments into this Next.js app. Add a checkout page, webhook handler, and subscription management.
+> Analyze our customer support tickets (attached CSV). Find the top 5 complaint categories, suggest process improvements, and estimate impact.
 
 ## Capabilities at a glance
 
@@ -52,7 +58,7 @@ The sandbox is `longrunning` — it pauses when idle and resumes when you return
 | Web access | Browse, scrape, fetch APIs |
 | File I/O | Read and write any file format |
 | Preview | Live VNC desktop — see apps running in real time |
-| Sandbox | Persistent Linux desktop, full terminal and browser |
+| Sandbox | Persistent Docker desktop, full terminal and browser |
 | Lifecycle | Long-running — pauses on idle, resumes on return |
 | Workspace | Permanently stored — code and files persist indefinitely |
 

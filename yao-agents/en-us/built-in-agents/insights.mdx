@@ -22,6 +22,8 @@ It writes Python or JavaScript analysis code, generates ECharts configuration, b
 
 The sandbox uses a `longrunning` lifecycle — it pauses when idle and resumes when you return. The workspace is permanently stored; your dashboards, data files, and scripts are there next time you open the conversation.
 
+If Docker sandbox is not enabled, tasks execute directly on the machine where Yao Engine is installed.
+
 ## How to write a good prompt
 
 **Lead with the data source.** Tell Insights where the data is: a database connection, a file attachment, or both. The more specific you are, the faster it gets to the analysis.

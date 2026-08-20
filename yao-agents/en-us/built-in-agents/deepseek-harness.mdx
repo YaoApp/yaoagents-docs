@@ -19,29 +19,35 @@ General-purpose agent powered by DeepSeek Harness. Handle any task — coding, r
 
 ## How it works
 
-DeepSeek Harness runs in a persistent Linux sandbox with a full desktop environment. It has terminal access, a browser, filesystem, and network — essentially a complete machine at your disposal.
+DeepSeek Harness runs in a persistent Docker sandbox with a full desktop environment. It has terminal access, a browser, filesystem, and network — essentially a complete machine at your disposal.
 
 It uses DeepSeek V4 Pro or V4 Flash as its reasoning engine. You describe what you need, and it plans the approach, executes the work, observes the result, and iterates until it's right.
 
 The sandbox is `longrunning` — it pauses when idle and resumes when you return. Your code, files, and project state persist across conversations indefinitely.
 
-## How to write a good prompt
+If Docker sandbox is not enabled, tasks execute directly on the machine where Yao Engine is installed.
 
-**Describe the goal, not the steps.** "Build a REST API that manages a todo list with SQLite" gives it enough to start. You don't need to specify the framework or file structure.
+## Best practices
 
-**Provide context when debugging.** Paste the error message, the relevant code, or both. The more context, the faster the fix.
+**Describe the outcome and constraints.** Tell it what you want to be true when it's done, plus any boundaries. Don't dictate how to get there — let it figure out the approach. "Find out which products are driving revenue growth and show me a breakdown by region" is enough.
 
-**Iterate naturally.** After the first result, ask for changes: "add authentication", "make it faster", "write tests". The sandbox preserves state, so each request builds on the last.
+**Give it context upfront.** Attach files, paste screenshots, reference documents already in the workspace, or describe the situation in detail. The more context it has, the fewer back-and-forth rounds you'll need.
+
+**For complex tasks, break it into phases.** Ask it to research first, then plan, then execute. This avoids solving the wrong problem. Example: "First look at this spreadsheet and tell me what data is available. Then suggest what analysis would be useful."
+
+**Give it a way to verify.** If you can describe what "done" looks like — a file in a specific format, a chart that shows a trend, a report with specific sections — say so. It will check its own work before delivering.
+
+**Keep the conversation going.** Each message builds on everything before it. Say "now add a comparison to last year" or "make it shorter" — it keeps the full context and picks up right where you left off.
 
 **Examples:**
 
-> Build a Python script that reads a CSV of customer orders and generates a summary report with totals by region.
+> Research the top 5 competitors in [industry], summarize their pricing models, and produce a comparison table.
 
-> Debug this Node.js server — it crashes on POST requests. Here's the error: [paste]
+> Analyze the attached sales-report.xlsx. Which products are growing fastest? Build a dashboard with the key metrics.
 
-> Create a web scraper that collects product prices from these three URLs and saves them to a JSON file.
+> Draft a project proposal for [topic]. Audience: executive team. Keep it under 3 pages. Include a timeline and budget estimate.
 
-> Set up a Flask API with JWT auth, connect it to SQLite, and add CRUD endpoints for a blog.
+> Monitor this RSS feed daily and send me a summary of anything related to [topic]. Save results to a running log.
 
 ## Capabilities at a glance
 
@@ -52,7 +58,7 @@ The sandbox is `longrunning` — it pauses when idle and resumes when you return
 | Web access | Browse, scrape, fetch APIs |
 | File I/O | Read and write any file format |
 | Preview | Live VNC desktop — see apps running in real time |
-| Sandbox | Persistent Linux desktop, full terminal and browser |
+| Sandbox | Persistent Docker desktop, full terminal and browser |
 | Lifecycle | Long-running — pauses on idle, resumes on return |
 | Workspace | Permanently stored — code and files persist indefinitely |
 

@@ -22,6 +22,8 @@ Transformer 使用注入了 Vision LLM 憑證的 desktop-lite 沙箱處理 OCR �
 
 輸出檔案儲存到 Workspace。生命週期為 `oneshot`——每次對話使用全新容器——但所有輸出檔案跨工作階段持久保存在 Workspace 中。
 
+如果未啟用 Docker 沙箱，任務將直接在安裝 Yao Engine 的機器上執行。
+
 ## 怎麼寫好 Prompt
 
 **上傳檔案並說明輸出格式。** 「將這張掃描發票提取為 JSON」或「將這個 CSV 轉換為格式化的 Excel 檔案」就夠了。

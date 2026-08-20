@@ -18,11 +18,13 @@ A versatile agent that handles any task — coding, research, data analysis, wri
 
 ## How it works
 
-General Assistant runs inside a persistent Linux sandbox with a full desktop and VNC. Every session keeps its files — you can pick up a project across multiple conversations without starting from scratch.
+General Assistant runs inside a persistent Docker sandbox with a full desktop and VNC. Every session keeps its files — you can pick up a project across multiple conversations without starting from scratch.
 
 It has full terminal, filesystem, and network access. It can install packages, run servers, open a browser on the VNC desktop, and write output back to the workspace.
 
 The **workspace is permanently stored** — files you've generated, scripts you've built, and data you've processed are all still there next time you open the conversation, regardless of how long you've been away. The underlying container pauses when idle and restarts when you return, but your files are never lost.
+
+If Docker sandbox is not enabled, tasks execute directly on the machine where Yao Engine is installed.
 
 ## How to write a good prompt
 
@@ -55,7 +57,7 @@ General Assistant has no predefined workflow, which means the quality of your re
 | File I/O | Read and write CSV, JSON, Excel, PDF, images, text |
 | Visualization | matplotlib, plotly, ECharts |
 | LLM sub-calls | Summarize, classify, translate via built-in API |
-| Sandbox | Persistent Linux desktop, VNC, full terminal |
+| Sandbox | Persistent Docker desktop, VNC, full terminal |
 | Workspace | Permanently stored — files persist across conversations indefinitely |
 
 ## What's next

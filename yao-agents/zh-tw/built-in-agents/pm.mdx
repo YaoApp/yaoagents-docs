@@ -23,6 +23,8 @@ Project Manager 使用基於 Workspace 的專案儲存。每個專案位於 `pro
 
 沙箱執行 `oneshot`——每次對話使用全新容器，沒有背景狀態。所有專案記錄儲存在 Workspace 中，跨工作階段持久保留。
 
+如果未啟用 Docker 沙箱，任務將直接在安裝 Yao Engine 的機器上執行。
+
 ## 怎麼寫好 Prompt
 
 **掃描郵件時，指定資料夾。** 告訴 Project Manager 要掃描哪個日期資料夾：「掃描今天的郵件。」它負責分類處理。

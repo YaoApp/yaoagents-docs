@@ -22,6 +22,8 @@ Transformer uses a desktop-lite sandbox with Vision LLM credentials injected for
 
 Output files are saved to the workspace. The lifecycle is `oneshot` — a fresh container per conversation — but all output files persist in the workspace across sessions.
 
+If Docker sandbox is not enabled, tasks execute directly on the machine where Yao Engine is installed.
+
 ## How to write a good prompt
 
 **Attach the file and name the output format.** "Extract this scanned invoice to JSON" or "convert this CSV to a formatted Excel file" is enough to get started.

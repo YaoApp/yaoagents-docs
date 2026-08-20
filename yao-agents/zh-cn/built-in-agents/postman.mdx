@@ -23,6 +23,8 @@ Postman 将邮件账户存储在 Workspace 中，通过昵称引用。获取邮�
 
 沙箱每次对话运行 `oneshot`。所有邮件归档和账户配置保存在 Workspace 中，跨会话持久保留。
 
+如果未启用 Docker 沙箱，任务将直接在安装 Yao Engine 的机器上执行。
+
 ## 怎么写好 Prompt
 
 **指定账户。** 每次都要告诉 Postman 使用哪个账户——通过昵称或描述："从我的工作账户（robot1）获取新邮件。"

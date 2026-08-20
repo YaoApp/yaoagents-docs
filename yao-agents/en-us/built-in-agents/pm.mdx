@@ -23,6 +23,8 @@ When you ask it to scan emails, it reads the `INDEX.md` in your email folders to
 
 The sandbox runs `oneshot` — a fresh container for each conversation, so there's no background state. All project records live in the workspace and persist between sessions.
 
+If Docker sandbox is not enabled, tasks execute directly on the machine where Yao Engine is installed.
+
 ## How to write a good prompt
 
 **For email scanning, point it at a folder.** Tell Project Manager which date folder to scan: "scan today's emails." It handles the triage.
