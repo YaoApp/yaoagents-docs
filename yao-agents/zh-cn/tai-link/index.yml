@@ -26,6 +26,3 @@ pages:
   - slug: security-and-privacy
     title: 安全与隐私
     summary: 连接加密、授权管理、断开设备。
-  - slug: tunnel-mode
-    title: 隧道模式
-    summary: NAT 穿透，无需端口转发。

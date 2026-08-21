@@ -8,7 +8,29 @@ Tai Link は一つの原則に基づいて設計されています：**あなた
 
 ## 認証
 
-Tai Link は **OAuth 2.0 デバイスフロー**で Yao に認証します：
+Tai Link は 2 種類の認証方式に対応しています：
+
+### Server Key
+
+Server Key は無人運用向けの静的認証情報です。ブラウザ操作が不要なため、ヘッドレスサーバーや CI ランナーなど対話的ログインが難しい環境に適しています。
+
+1. Yao Engine で Key を生成：`yao server-key create --name "my-node"`。
+2. `config.yml` の `yao.server_key` に Key を設定。
+3. Tai Link は起動時に自動認証されます。
+
+1 つの Server Key で複数ノードを同時に接続できます。
+
+Server Key を無効化：
+
+```bash
+yao server-key revoke <KEY_ID>
+```
+
+無効化すると、その Key を使用しているすべてのノードが即座に切断されます。
+
+### OAuth 2.0 デバイスフロー
+
+ブラウザを開ける個人デバイスに適しています：
 
 1. 初回起動時に、Tai Link が一意のクライアント ID とマシン ID を生成します。
 2. ブラウザでデバイスを承認します（一回限りの操作）。

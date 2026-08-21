@@ -2,85 +2,67 @@
 slug: installation
 ---
 
-# Tai Link をインストールする
+# Tai Link のインストール
 
-Agent に作業させたいマシンに Tai Link サーバーをインストールします。所要時間は約 5 分です。
-
-## はじめる前に
-
-- 稼働中の Yao Agents インスタンス（ローカルまたはクラウド）があり、リモートマシンがネットワーク経由でアクセスできること。
-- リモートマシンが **macOS・Linux・Windows**（x86-64 または ARM64）で動作していること。
+Agent を動かしたいマシンに Tai Link をダウンロード・インストールします。
 
 ## ダウンロード
 
-[yaoagents.com/download](/download) にアクセスし、お使いのプラットフォーム向けの Tai Link をダウンロードしてください。
+[ダウンロードページ](/download/tai)から対応プラットフォームの Tai Link を取得してください。
 
-| プラットフォーム | ファイル名 |
-|----------------|-----------|
-| macOS（Apple Silicon）| `tai-darwin-arm64` |
-| macOS（Intel）| `tai-darwin-amd64` |
-| Linux（x86-64）| `tai-linux-amd64` |
-| Linux（ARM64）| `tai-linux-arm64` |
-| Windows（x86-64）| `tai-windows-amd64.exe` |
+| プラットフォーム | ファイル |
+|-----------------|---------|
+| macOS (Apple Silicon) | `tai-darwin-arm64` |
+| macOS (Intel) | `tai-darwin-amd64` |
+| Linux (x86-64) | `tai-linux-amd64` |
+| Linux (ARM64) | `tai-linux-arm64` |
+| Windows (x86-64) | `tai-windows-amd64.exe` |
 
-ダウンロード後、バイナリを PATH の通ったディレクトリに配置します。
-
-**macOS / Linux：**
+**macOS / Linux:**
 
 ```bash
 chmod +x tai-*
 sudo mv tai-* /usr/local/bin/tai
 ```
 
-**Windows：**
+**Windows:** PowerShell を開き、`.exe` をシステム PATH のフォルダに移動します：
 
-`.exe` をシステム PATH 内のフォルダに移動するか、ダウンロードした場所から直接実行してください。
+```powershell
+Move-Item tai-windows-amd64.exe C:\Windows\tai.exe
+```
 
-## サーバーを起動する
+## 確認
 
-Yao Agents インスタンスのアドレスを指定して Tai Link を起動します：
+**macOS / Linux:**
 
 ```bash
-tai server http://<YOUR_YAO_SERVER>:5099
+tai version --all
 ```
 
-`<YOUR_YAO_SERVER>` は Yao Agents が動作しているマシンの IP またはホスト名に置き換えてください。
-
-## 設定ファイル（任意）
-
-本番環境では、フラグの代わりに `config.yml` を作成することをお勧めします：
-
-```yaml
-yao:
-  server: "http://<YOUR_YAO_SERVER>:5099"
-  display_name: "オフィスサーバー"
-
-data: /data/volumes
-
-log:
-  level: info
-  file: logs/tai.log
+```
+Version:    1.8.6
+Git Commit: 991a213
+Build Time: 2026-08-21T06:25:18Z
+Go Version: go1.25.12
+OS/Arch:    darwin/arm64
 ```
 
-設定ファイルで起動するには：
+**Windows (PowerShell):**
 
-```bash
-tai server --config config.yml
+```powershell
+tai version --all
 ```
 
-Tai Link はカレントディレクトリと `/etc/tai/config.yml` を自動的に探索します。
-
-## インストールの確認
-
-起動後、ターミナルに以下が表示されます：
-
 ```
-tai server ready
+Version:    1.8.6
+Git Commit: 991a213
+Build Time: 2026-08-21T06:25:20Z
+Go Version: go1.25.13
+OS/Arch:    windows/amd64
 ```
 
-Yao サーバーに到達できれば、Tai Link は自動的に認証・登録を行います。Yao Agents の UI を確認してください——数秒以内に Tai Link パネルにデバイスが表示されます。
+バージョン情報が表示されればインストール完了です。
 
 ## 次のステップ
 
-- [最初のデバイスを接続する](/docs/ja-jp/tai-link/connect-first-device) — 認証とペアリングを完了する
-- [トンネルモード](/docs/ja-jp/tai-link/tunnel-mode) — NAT トラバーサルの仕組みを理解する
+- [最初のデバイスを接続](/docs/ja-jp/tai-link/connect-first-device) — Server Key の作成、設定ファイルの記述、Tai Link の起動

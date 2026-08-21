@@ -4,70 +4,142 @@ slug: connect-first-device
 
 # 連接第一台裝置
 
-將遠端機器與你的 Yao Agents 實例配對，讓 Agent 開始在上面工作。
+設定 Tai Link，透過 Server Key 將遠端機器接入 Yao Agents。
 
-## 開始之前
+## 準備
 
-- 已在遠端機器上[安裝 Tai Link](/docs/zh-tw/tai-link/installation)。
-- 遠端機器能透過網路存取你的 Yao Agents 伺服器。
+- 目標機器已[安裝 Tai Link](/docs/zh-tw/tai-link/installation)。
+- 一台正在執行的 Yao Engine 伺服器（Yao v1.0.0-rc10+），目標機器能透過網路存取。
 
-## 第一步 — 啟動 Tai Link
+## 第 1 步 — 建立 Server Key
 
-在遠端機器上，指定 Yao 實例位址啟動 Tai Link：
+如果已有 Server Key 可直接沿用——同一個 Key 支援多台裝置同時使用。否則建立新的：
+
+在 Yao Engine 介面底部點選 **Open Terminal**。
+
+![Yao Engine — 點選 Open Terminal](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
+
+執行：
 
 ```bash
-tai server http://<你的_YAO_伺服器>:5099
+yao server-key create --name "my-node"
 ```
 
-Tai Link 會立即嘗試註冊。若是首次啟動，會開啟 OAuth 裝置授權流程——終端機中會印出一個 URL 和一次性驗證碼。
-
-## 第二步 — 授權
-
-在任意瀏覽器中開啟終端機顯示的 URL，輸入驗證碼，以你的 Yao Agents 帳號登入完成授權。
-
-![Tai Link — 配對介面](https://assets.yaoagents.com/en/tai/05-tai-connect-en-$__THEME.png)
-
-授權成功後，終端機顯示：
+輸出：
 
 ```
-Login successful!
-  Client ID:  ...
-  Machine ID: ...
-  Server:     http://<你的_YAO_伺服器>:5099
+  Server key created successfully
+
+  Key ID:  sk-a1b2c3d4e5f6
+  Name:    my-node
+  Key:     yao-sk:64-char-hex-string...
+
+  ⚠ Save this key now. It will not be shown again.
 ```
 
-Tai Link 將憑證儲存在本地，之後自動使用刷新令牌續期——除非你主動執行 `tai logout`，否則不需要重新登入。
+複製完整 Key（`yao-sk:...`），第 2 步會用到。
 
-## 第三步 — 在 Yao Agents 中確認
+## 第 2 步 — 編寫設定檔
 
-切換到 Yao Agents 介面，開啟 **Tai Link** 面板，新裝置應顯示為**在線**。
+在目標機器上建立 `config.yml`：
 
-![Tai Link — 裝置已連接](https://assets.yaoagents.com/en/tai/05-tai-connect-done-en-$__THEME.png)
+**macOS / Linux:**
 
-裝置卡片顯示：
+```yaml
+yao:
+  server: "<YOUR_YAO_SERVER>"
+  node_id: "my-node"
+  display_name: "Office Server"
+  server_key: "yao-sk:your-key-here"
 
-- **顯示名稱** — 透過 `--display-name` 或 `config.yml` 設定，預設為主機名稱。
-- **狀態** — 在線 / 離線。
-- **功能** — Docker、K8s、VNC、Host Exec 的圖示（取決於 Tai Link 啟動時偵測到的功能）。
+data: /path/to/your/data
 
-## 第四步 — 測試連線
+host_exec:
+  only: true
+  full_access: true
 
-最快的驗證方式：開啟裝置詳情，點擊**遠端桌面**，你應該能在 VNC 檢視器中看到遠端螢幕。
+log:
+  level: info
+```
 
-也可以讓 AI 專家執行一個任務——例如請 General Assistant「列出遠端伺服器上 /tmp 目錄的檔案」，它會自動透過 Tai Link 路由命令。
+**Windows:**
+
+```yaml
+yao:
+  server: "<YOUR_YAO_SERVER>"
+  node_id: "my-node"
+  display_name: "Office Server"
+  server_key: "yao-sk:your-key-here"
+
+data: "C:\\TaiData"
+
+host_exec:
+  only: true
+  full_access: true
+
+log:
+  level: info
+  file: logs/tai.log
+```
+
+| 欄位 | 說明 |
+|------|------|
+| `yao.server` | Yao Agents 伺服器位址。在 Yao Engine 歡迎頁可以看到，與用戶端登入位址相同。 |
+| `yao.node_id` | 節點唯一識別碼。多台裝置之間不能重複。 |
+| `yao.display_name` | 在 Yao Agents 介面中顯示的名稱。 |
+| `yao.server_key` | 第 1 步建立的 Server Key。 |
+| `data` | 工作空間資料目錄，Agent 在此讀寫檔案。Windows 路徑需使用雙反斜線（`\\`）。 |
+| `host_exec.only` | 宿主機執行模式——Agent 直接在本機執行命令，不使用 Docker 容器。 |
+| `host_exec.full_access` | 不限制命令與路徑，允許完全存取。 |
+
+## 第 3 步 — 啟動 Tai Link
+
+```bash
+tai server --config config.yml
+```
+
+正常啟動後會看到類似輸出：
+
+```
+level=INFO msg="logger initialized" level=info format=text file=logs/tai.log
+level=INFO msg="tai server" module=server version=1.8.6 ...
+level=INFO msg="tai server starting" module=server grpc=[127.0.0.1:0] ...
+```
+
+Tai Link 透過 Server Key 自動認證，無需瀏覽器登入。裝置會在幾秒內出現在 Yao Agents 介面中。
+
+## 第 4 步 — 確認連線
+
+點選頂部導覽列的 **電腦**，開啟電腦面板。新裝置應顯示為 **Running**。
+
+![Tai Link — 裝置面板](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+建立工作區時，即可選擇該節點作為執行環境。
+
+## 管理 Server Key
+
+列出所有 Key：
+
+```bash
+yao server-key list
+```
+
+撤銷 Key：
+
+```bash
+yao server-key revoke sk-a1b2c3d4e5f6
+```
 
 ## 常見問題
 
 **裝置沒有出現在 Tai Link 面板。**
-檢查遠端機器是否能存取 Yao 伺服器，確認防火牆沒有阻斷 gRPC 埠（預設 9900）的對外連線。查看 Tai Link 終端機的錯誤訊息。
+檢查目標機器能否存取 Yao 伺服器，確認防火牆未攔截出站連線。查看 Tai Link 終端機的錯誤訊息。
 
-**出現「Login failed」或「token refresh」錯誤。**
-執行 `tai logout`，再重新執行 `tai login --server http://<你的_YAO_伺服器>:5099` 手動重新認證。
-
-**裝置顯示「離線」但 Tai Link 正在執行。**
-隧道可能中斷了，Tai Link 會以指數退避方式自動重連（2 秒到最長 2 分鐘）。檢查網路連線並稍等片刻。
+**裝置顯示「Offline」但 Tai Link 正在執行。**
+隧道可能斷開了。Tai Link 會自動重連（指數退避）。檢查網路並稍等片刻。
 
 ## 下一步
 
-- [裝置管理](/docs/zh-tw/tai-link/device-management) — 重新命名、組織和監控裝置
-- [遠端桌面](/docs/zh-tw/tai-link/remote-desktop) — 即時觀看 Agent 工作
+- [裝置管理](/docs/zh-tw/tai-link/device-management) — 重新命名、管理和監控裝置
+- [遠端桌面](/docs/zh-tw/tai-link/remote-desktop) — 即時查看 Agent 工作畫面
+- [隧道模式](/docs/zh-tw/tai-link/tunnel-mode) — NAT 穿透的運作原理

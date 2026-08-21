@@ -26,6 +26,3 @@ pages:
   - slug: security-and-privacy
     title: セキュリティとプライバシー
     summary: 接続暗号化、認証管理、デバイスの切断。
-  - slug: tunnel-mode
-    title: トンネルモード
-    summary: NATトラバーサル、ポート転送不要。

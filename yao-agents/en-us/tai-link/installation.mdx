@@ -4,16 +4,11 @@ slug: installation
 
 # Install Tai Link
 
-Install the Tai Link server on the machine you want your agents to work on. The whole process takes about five minutes.
-
-## Before you start
-
-- A running Yao Agents instance (local or cloud) that the remote machine can reach over the network.
-- The remote machine runs **macOS, Linux, or Windows** (x86-64 or ARM64).
+Download and install Tai Link on the machine you want your agents to work on.
 
 ## Download
 
-Go to [yaoagents.com/download](/download) and download the Tai Link installer for your platform.
+On the remote machine, download Tai Link from the [download page](/download/tai).
 
 | Platform | File |
 |----------|------|
@@ -23,8 +18,6 @@ Go to [yaoagents.com/download](/download) and download the Tai Link installer fo
 | Linux (ARM64) | `tai-linux-arm64` |
 | Windows (x86-64) | `tai-windows-amd64.exe` |
 
-After downloading, place the binary in a directory on your PATH.
-
 **macOS / Linux:**
 
 ```bash
@@ -32,55 +25,44 @@ chmod +x tai-*
 sudo mv tai-* /usr/local/bin/tai
 ```
 
-**Windows:**
+**Windows:** open PowerShell and move the `.exe` to a folder in your system PATH:
 
-Move the `.exe` to a folder in your system PATH, or run it directly from the download location.
+```powershell
+Move-Item tai-windows-amd64.exe C:\Windows\tai.exe
+```
 
-## Start the server
+## Verify
 
-Point Tai Link to your Yao Agents instance:
+**macOS / Linux:**
 
 ```bash
-tai server http://<YOUR_YAO_SERVER>:5099
+tai version --all
 ```
 
-Replace `<YOUR_YAO_SERVER>` with the IP or hostname of the machine running Yao Agents.
-
-## Config file (optional)
-
-For production deployments, create a `config.yml` instead of passing flags:
-
-```yaml
-yao:
-  server: "http://<YOUR_YAO_SERVER>:5099"
-  display_name: "Office Server"
-
-data: /data/volumes
-
-log:
-  level: info
-  file: logs/tai.log
+```
+Version:    1.8.6
+Git Commit: 991a213
+Build Time: 2026-08-21T06:25:18Z
+Go Version: go1.25.12
+OS/Arch:    darwin/arm64
 ```
 
-Then start with:
+**Windows (PowerShell):**
 
-```bash
-tai server --config config.yml
+```powershell
+tai version --all
 ```
 
-Tai Link searches for `config.yml` in the current directory and `/etc/tai/config.yml` by default.
-
-## Verify the installation
-
-After starting, you should see:
-
 ```
-tai server ready
+Version:    1.8.6
+Git Commit: 991a213
+Build Time: 2026-08-21T06:25:20Z
+Go Version: go1.25.13
+OS/Arch:    windows/amd64
 ```
 
-If your Yao server is reachable, Tai Link will automatically authenticate and register. Check the Yao Agents UI — the device should appear in the Tai Link panel within a few seconds.
+If you see the version info, installation is successful.
 
 ## What's next
 
-- [Connect your first device](/docs/en-us/tai-link/connect-first-device) — authenticate and pair
-- [Tunnel mode](/docs/en-us/tai-link/tunnel-mode) — how NAT traversal works behind the scenes
+- [Connect your first device](/docs/en-us/tai-link/connect-first-device) — create a Server Key, write a config file, and start Tai Link

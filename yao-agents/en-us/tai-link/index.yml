@@ -26,6 +26,3 @@ pages:
   - slug: security-and-privacy
     title: Security & Privacy
     summary: Connection encryption, authorization management, disconnect devices.
-  - slug: tunnel-mode
-    title: Tunnel Mode
-    summary: NAT traversal, no port forwarding required.

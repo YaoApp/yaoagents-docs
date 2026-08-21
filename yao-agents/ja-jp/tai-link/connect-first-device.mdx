@@ -2,72 +2,144 @@
 slug: connect-first-device
 ---
 
-# 最初のデバイスを接続する
+# 最初のデバイスを接続
 
-リモートマシンを Yao Agents インスタンスとペアリングして、Agent が作業できるようにします。
+Tai Link を設定し、Server Key を使ってリモートマシンを Yao Agents に接続します。
 
-## はじめる前に
+## 事前準備
 
-- リモートマシンに [Tai Link がインストール済み](/docs/ja-jp/tai-link/installation)であること。
-- リモートマシンが Yao Agents サーバーにネットワーク経由でアクセスできること。
+- 対象マシンに [Tai Link がインストール済み](/docs/ja-jp/tai-link/installation)であること。
+- ネットワーク経由でアクセス可能な Yao Engine サーバー（Yao v1.0.0-rc10+）が稼働中であること。
 
-## ステップ 1 — Tai Link を起動する
+## ステップ 1 — Server Key を作成
 
-リモートマシンで、Yao インスタンスのアドレスを指定して Tai Link を起動します：
+既存の Server Key がある場合はそのまま使えます——1 つの Key で複数ノードの同時接続が可能です。なければ新しく作成します：
+
+Yao Engine 画面下部の **Open Terminal** をクリックします。
+
+![Yao Engine — Open Terminal をクリック](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
+
+実行：
 
 ```bash
-tai server http://<YOUR_YAO_SERVER>:5099
+yao server-key create --name "my-node"
 ```
 
-Tai Link はすぐに登録を試みます。初回起動時は OAuth デバイス認証フローが開始され、URL とワンタイムコードがターミナルに表示されます。
-
-## ステップ 2 — 認証する
-
-ターミナルに表示された URL をブラウザで開き、コードを入力して Yao Agents アカウントでサインインし、接続を承認します。
-
-![Tai Link — ペアリング画面](https://assets.yaoagents.com/en/tai/05-tai-connect-en-$__THEME.png)
-
-承認が完了すると、ターミナルに以下が表示されます：
+出力：
 
 ```
-Login successful!
-  Client ID:  ...
-  Machine ID: ...
-  Server:     http://<YOUR_YAO_SERVER>:5099
+  Server key created successfully
+
+  Key ID:  sk-a1b2c3d4e5f6
+  Name:    my-node
+  Key:     yao-sk:64-char-hex-string...
+
+  ⚠ Save this key now. It will not be shown again.
 ```
 
-Tai Link は認証情報をローカルに保存し、リフレッシュトークンで自動的に更新します。`tai logout` を実行しない限り、再ログインは不要です。
+Key 全体（`yao-sk:...`）をコピーしてください。ステップ 2 で使います。
 
-## ステップ 3 — Yao Agents で確認する
+## ステップ 2 — 設定ファイルを作成
 
-Yao Agents の UI に切り替えて **Tai Link** パネルを開くと、新しいデバイスが**オンライン**として表示されます。
+対象マシンに `config.yml` を作成します：
 
-![Tai Link — デバイス接続完了](https://assets.yaoagents.com/en/tai/05-tai-connect-done-en-$__THEME.png)
+**macOS / Linux:**
 
-デバイスカードに表示される情報：
+```yaml
+yao:
+  server: "<YOUR_YAO_SERVER>"
+  node_id: "my-node"
+  display_name: "Office Server"
+  server_key: "yao-sk:your-key-here"
 
-- **表示名** — `--display-name` または `config.yml` で設定、デフォルトはホスト名。
-- **ステータス** — オンライン / オフライン。
-- **機能** — Docker・K8s・VNC・Host Exec のアイコン（起動時に検出された機能のみ表示）。
+data: /path/to/your/data
 
-## ステップ 4 — 接続をテストする
+host_exec:
+  only: true
+  full_access: true
 
-最も手軽な確認方法：デバイス詳細を開いて**リモートデスクトップ**をクリックします。VNC ビューアーにリモートの画面が表示されれば成功です。
+log:
+  level: info
+```
 
-AI エキスパートにタスクを依頼して確認することもできます——たとえば General Assistant に「リモートサーバーの /tmp ディレクトリのファイルを一覧表示して」と頼むと、Tai Link を通じて自動的にコマンドがルーティングされます。
+**Windows:**
+
+```yaml
+yao:
+  server: "<YOUR_YAO_SERVER>"
+  node_id: "my-node"
+  display_name: "Office Server"
+  server_key: "yao-sk:your-key-here"
+
+data: "C:\\TaiData"
+
+host_exec:
+  only: true
+  full_access: true
+
+log:
+  level: info
+  file: logs/tai.log
+```
+
+| フィールド | 説明 |
+|-----------|------|
+| `yao.server` | Yao Agents サーバーアドレス。Yao Engine のウェルカムページで確認できます（クライアントのログインアドレスと同じ）。 |
+| `yao.node_id` | ノードの一意識別子。接続する各マシンで重複不可。 |
+| `yao.display_name` | Yao Agents UI に表示される名前。 |
+| `yao.server_key` | ステップ 1 で作成した Server Key。 |
+| `data` | ワークスペースのデータディレクトリ。Agent がファイルを読み書きします。Windows ではパスにダブルバックスラッシュ（`\\`）を使用。 |
+| `host_exec.only` | ホスト実行モード——Agent が Docker コンテナではなく、このマシン上で直接コマンドを実行します。 |
+| `host_exec.full_access` | コマンドやパスの制限なし、フルアクセスを許可。 |
+
+## ステップ 3 — Tai Link を起動
+
+```bash
+tai server --config config.yml
+```
+
+正常に起動すると以下のような出力が表示されます：
+
+```
+level=INFO msg="logger initialized" level=info format=text file=logs/tai.log
+level=INFO msg="tai server" module=server version=1.8.6 ...
+level=INFO msg="tai server starting" module=server grpc=[127.0.0.1:0] ...
+```
+
+Tai Link は Server Key で自動認証されるため、ブラウザでのログインは不要です。数秒以内にデバイスが Yao Agents UI に表示されます。
+
+## ステップ 4 — 接続を確認
+
+上部ナビゲーションバーの **Computers** をクリックしてパネルを開きます。新しいデバイスが **Running** と表示されていれば成功です。
+
+![Tai Link — デバイスパネル](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+ワークスペース作成時に、このノードを実行環境として選択できるようになります。
+
+## Server Key の管理
+
+すべての Key を一覧表示：
+
+```bash
+yao server-key list
+```
+
+Key を無効化：
+
+```bash
+yao server-key revoke sk-a1b2c3d4e5f6
+```
 
 ## トラブルシューティング
 
-**Tai Link パネルにデバイスが表示されない。**
-リモートマシンが Yao サーバーに到達できるか確認してください。ファイアウォールが gRPC ポート（デフォルト 9900）のアウトバウンド接続をブロックしていないか確認し、Tai Link のターミナルにエラーメッセージがないかチェックしてください。
+**デバイスが Tai Link パネルに表示されない。**
+対象マシンから Yao サーバーにアクセスできるか確認してください。ファイアウォールが送信接続をブロックしていないか確認し、Tai Link ターミナルのエラーメッセージを確認してください。
 
-**「Login failed」または「token refresh」エラーが出る。**
-`tai logout` を実行してから `tai login --server http://<YOUR_YAO_SERVER>:5099` を実行し、手動で再認証してください。
-
-**Tai Link が動いているのにデバイスが「オフライン」と表示される。**
-トンネルが切断されている可能性があります。Tai Link は指数バックオフで自動再接続します（2 秒〜最大 2 分）。ネットワーク接続を確認して少し待ってみてください。
+**デバイスが「Offline」と表示されるが Tai Link は稼働中。**
+トンネルが切断された可能性があります。Tai Link は指数バックオフで自動再接続します。ネットワークを確認し、しばらくお待ちください。
 
 ## 次のステップ
 
-- [デバイス管理](/docs/ja-jp/tai-link/device-management) — デバイスの名前変更・整理・監視
-- [リモートデスクトップ](/docs/ja-jp/tai-link/remote-desktop) — Agent の作業をリアルタイムで確認する
+- [デバイス管理](/docs/ja-jp/tai-link/device-management) — デバイスの名前変更、整理、監視
+- [リモートデスクトップ](/docs/ja-jp/tai-link/remote-desktop) — Agent の作業をリアルタイムで確認
+- [トンネルモード](/docs/ja-jp/tai-link/tunnel-mode) — NAT 越えの仕組み

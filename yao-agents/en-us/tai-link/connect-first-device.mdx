@@ -4,70 +4,142 @@ slug: connect-first-device
 
 # Connect Your First Device
 
-Pair a remote machine with your Yao Agents instance so agents can start working on it.
+Configure Tai Link and connect a remote machine to your Yao Agents instance using a Server Key.
 
 ## Before you start
 
 - Tai Link is [installed](/docs/en-us/tai-link/installation) on the remote machine.
-- The remote machine can reach your Yao Agents server over the network.
+- A running Yao Engine server (Yao v1.0.0-rc10+) that the remote machine can reach over the network.
 
-## Step 1 — Start Tai Link
+## Step 1 — Create a Server Key
 
-On the remote machine, start the Tai Link server pointing to your Yao instance:
+If you already have a Server Key, you can reuse it — a single key works for multiple nodes simultaneously. Otherwise, create a new one:
+
+In Yao Engine, click **Open Terminal** at the bottom of the application window.
+
+![Yao Engine — click Open Terminal](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
+
+Run:
 
 ```bash
-tai server http://<YOUR_YAO_SERVER>:5099
+yao server-key create --name "my-node"
 ```
 
-Tai Link attempts to register immediately. If this is the first time, it opens an OAuth device flow — a URL and a one-time code are printed in the terminal.
-
-## Step 2 — Authorize
-
-Open the URL in any browser and enter the device code shown in the terminal. Sign in with your Yao Agents account to authorize the connection.
-
-![Tai Link — Pairing screen](https://assets.yaoagents.com/en/tai/05-tai-connect-en-$__THEME.png)
-
-Once authorized, the terminal shows:
+Output:
 
 ```
-Login successful!
-  Client ID:  ...
-  Machine ID: ...
-  Server:     http://<YOUR_YAO_SERVER>:5099
+  Server key created successfully
+
+  Key ID:  sk-a1b2c3d4e5f6
+  Name:    my-node
+  Key:     yao-sk:64-char-hex-string...
+
+  ⚠ Save this key now. It will not be shown again.
 ```
 
-Tai Link saves the credentials locally and uses refresh tokens for future sessions — you won't need to log in again unless you explicitly run `tai logout`.
+Copy the full key (`yao-sk:...`). You'll need it in Step 2.
 
-## Step 3 — Confirm in Yao Agents
+## Step 2 — Write the config file
 
-Switch to the Yao Agents UI. Open the **Tai Link** panel and you should see the new device listed as **Online**.
+Create `config.yml` on the remote machine:
 
-![Tai Link — Device connected](https://assets.yaoagents.com/en/tai/05-tai-connect-done-en-$__THEME.png)
+**macOS / Linux:**
 
-The device card shows:
+```yaml
+yao:
+  server: "<YOUR_YAO_SERVER>"
+  node_id: "my-node"
+  display_name: "Office Server"
+  server_key: "yao-sk:your-key-here"
 
-- **Display name** — set via `--display-name` or `config.yml`; defaults to the hostname.
-- **Status** — Online / Offline.
-- **Capabilities** — Docker, K8s, VNC, Host Exec (depending on what Tai Link detected at startup).
+data: /path/to/your/data
 
-## Step 4 — Test the connection
+host_exec:
+  only: true
+  full_access: true
 
-The quickest way to confirm everything works: open the device detail, click **Remote Desktop**, and you should see the remote screen in the VNC viewer.
+log:
+  level: info
+```
 
-Alternatively, ask an AI Expert to run a task — for example, ask General Assistant to "list the files in /tmp on my remote server". It should route the command through Tai Link automatically.
+**Windows:**
+
+```yaml
+yao:
+  server: "<YOUR_YAO_SERVER>"
+  node_id: "my-node"
+  display_name: "Office Server"
+  server_key: "yao-sk:your-key-here"
+
+data: "C:\\TaiData"
+
+host_exec:
+  only: true
+  full_access: true
+
+log:
+  level: info
+  file: logs/tai.log
+```
+
+| Field | Description |
+|-------|-------------|
+| `yao.server` | Yao Agents server address. Found on the Yao Engine welcome page (same as client login address). |
+| `yao.node_id` | Unique identifier for this node. Must be different across all connected machines. |
+| `yao.display_name` | Friendly name shown in the Yao Agents UI. |
+| `yao.server_key` | The Server Key created in Step 1. |
+| `data` | Workspace storage directory. Agents read and write files here. On Windows, use double backslashes (`\\`) for paths. |
+| `host_exec.only` | Run in host-execution mode — agents execute commands directly on this machine instead of inside Docker containers. |
+| `host_exec.full_access` | Allow unrestricted command execution (no whitelist or path sandbox). |
+
+## Step 3 — Start Tai Link
+
+```bash
+tai server --config config.yml
+```
+
+You should see output like:
+
+```
+level=INFO msg="logger initialized" level=info format=text file=logs/tai.log
+level=INFO msg="tai server" module=server version=1.8.6 ...
+level=INFO msg="tai server starting" module=server grpc=[127.0.0.1:0] ...
+```
+
+Tai Link authenticates automatically using the Server Key — no browser login needed. The device appears in your Yao Agents UI within a few seconds.
+
+## Step 4 — Confirm in Yao Agents
+
+Click **Computers** in the top navigation bar to open the Computers panel. Your new device should appear as **Running**.
+
+![Tai Link — Device panel](https://assets.yaoagents.com/en/tai/01-tai-devices-en-$__THEME.png)
+
+When creating a workspace, you can now select this node as the execution environment.
+
+## Manage Server Keys
+
+List all keys:
+
+```bash
+yao server-key list
+```
+
+Revoke a key:
+
+```bash
+yao server-key revoke sk-a1b2c3d4e5f6
+```
 
 ## Troubleshooting
 
 **Device doesn't appear in the Tai Link panel.**
-Check that the remote machine can reach the Yao server. Verify no firewall blocks outbound connections on the gRPC port (default 9900). Look at the Tai Link terminal for error messages.
-
-**"Login failed" or "token refresh" errors.**
-Run `tai logout` followed by `tai login --server http://<YOUR_YAO_SERVER>:5099` to re-authenticate manually.
+Check that the remote machine can reach the Yao server. Verify no firewall blocks outbound connections. Look at the Tai Link terminal for error messages.
 
 **Device shows "Offline" even though Tai Link is running.**
-The tunnel may have disconnected. Tai Link reconnects automatically with exponential backoff (2 seconds → up to 2 minutes). Check network connectivity and wait a moment.
+The tunnel may have disconnected. Tai Link reconnects automatically with exponential backoff. Check network connectivity and wait a moment.
 
 ## What's next
 
 - [Device management](/docs/en-us/tai-link/device-management) — rename, organize, and monitor devices
 - [Remote desktop](/docs/en-us/tai-link/remote-desktop) — watch agents work in real time
+- [Tunnel mode](/docs/en-us/tai-link/tunnel-mode) — how NAT traversal works behind the scenes

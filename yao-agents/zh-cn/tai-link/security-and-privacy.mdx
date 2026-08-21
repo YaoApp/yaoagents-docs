@@ -8,7 +8,29 @@ Tai Link 的设计围绕一个核心原则：**你的数据留在你的设备上
 
 ## 身份认证
 
-Tai Link 使用 **OAuth 2.0 设备授权流**向 Yao 认证：
+Tai Link 支持两种认证方式：
+
+### Server Key
+
+Server Key 是面向无人值守场景的静态凭证。无需浏览器交互，适用于无界面服务器、CI 执行器或任何不便进行交互式登录的环境。
+
+1. 在 Yao Engine 中生成 Key：`yao server-key create --name "my-node"`。
+2. 将 Key 写入 `config.yml` 的 `yao.server_key` 字段。
+3. Tai Link 启动时自动完成认证。
+
+一个 Server Key 可同时用于多台设备。
+
+吊销 Server Key：
+
+```bash
+yao server-key revoke <KEY_ID>
+```
+
+一旦吊销，使用该 Key 的所有节点将立即断开连接。
+
+### OAuth 2.0 设备授权流
+
+适用于可以打开浏览器的个人设备：
 
 1. 首次启动时，Tai Link 生成唯一的客户端 ID 和机器 ID。
 2. 你通过浏览器授权设备（一次性操作）。

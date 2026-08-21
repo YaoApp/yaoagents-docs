@@ -4,83 +4,65 @@ slug: installation
 
 # 安裝 Tai Link
 
-在你想讓 Agent 工作的那台機器上安裝 Tai Link 服務端，整個流程大約五分鐘。
-
-## 開始之前
-
-- 已有一個執行中的 Yao Agents 實例（本地或雲端），遠端機器能透過網路存取到它。
-- 遠端機器執行 **macOS、Linux 或 Windows**（x86-64 或 ARM64）。
+在目標機器上下載並安裝 Tai Link。
 
 ## 下載
 
-前往 [yaoagents.com/download](/download) 下載適合你平台的 Tai Link 安裝包。
+前往[下載頁面](/download/tai)取得對應平台的 Tai Link。
 
-| 平台 | 檔案名稱 |
-|------|---------|
-| macOS（Apple Silicon）| `tai-darwin-arm64` |
-| macOS（Intel）| `tai-darwin-amd64` |
-| Linux（x86-64）| `tai-linux-amd64` |
-| Linux（ARM64）| `tai-linux-arm64` |
-| Windows（x86-64）| `tai-windows-amd64.exe` |
+| 平台 | 檔案 |
+|------|------|
+| macOS (Apple Silicon) | `tai-darwin-arm64` |
+| macOS (Intel) | `tai-darwin-amd64` |
+| Linux (x86-64) | `tai-linux-amd64` |
+| Linux (ARM64) | `tai-linux-arm64` |
+| Windows (x86-64) | `tai-windows-amd64.exe` |
 
-下載後將二進位檔放到 PATH 中。
-
-**macOS / Linux：**
+**macOS / Linux:**
 
 ```bash
 chmod +x tai-*
 sudo mv tai-* /usr/local/bin/tai
 ```
 
-**Windows：**
+**Windows:** 開啟 PowerShell，將 `.exe` 移動到系統 PATH 目錄：
 
-將 `.exe` 移動到系統 PATH 下的目錄，或直接從下載位置執行。
+```powershell
+Move-Item tai-windows-amd64.exe C:\Windows\tai.exe
+```
 
-## 啟動服務端
+## 驗證
 
-指定 Yao Agents 實例位址啟動 Tai Link：
+**macOS / Linux:**
 
 ```bash
-tai server http://<你的_YAO_伺服器>:5099
+tai version --all
 ```
 
-將 `<你的_YAO_伺服器>` 替換為執行 Yao Agents 的機器 IP 或主機名稱。
-
-## 設定檔（可選）
-
-在正式環境中，建議建立 `config.yml` 代替命令列參數：
-
-```yaml
-yao:
-  server: "http://<你的_YAO_伺服器>:5099"
-  display_name: "辦公室伺服器"
-
-data: /data/volumes
-
-log:
-  level: info
-  file: logs/tai.log
+```
+Version:    1.8.6
+Git Commit: 991a213
+Build Time: 2026-08-21T06:25:18Z
+Go Version: go1.25.12
+OS/Arch:    darwin/arm64
 ```
 
-然後以設定檔啟動：
+**Windows (PowerShell):**
 
-```bash
-tai server --config config.yml
+```powershell
+tai version --all
 ```
 
-Tai Link 預設在目前目錄和 `/etc/tai/config.yml` 尋找設定檔。
-
-## 驗證安裝
-
-啟動後，終端機應顯示：
-
 ```
-tai server ready
+Version:    1.8.6
+Git Commit: 991a213
+Build Time: 2026-08-21T06:25:20Z
+Go Version: go1.25.13
+OS/Arch:    windows/amd64
 ```
 
-若 Yao 伺服器可達，Tai Link 會自動完成認證和註冊。切換到 Yao Agents 介面——裝置應在幾秒內出現在 Tai Link 面板中。
+看到版本資訊即表示安裝成功。
 
 ## 下一步
 
-- [連接第一台裝置](/docs/zh-tw/tai-link/connect-first-device) — 完成授權和配對
-- [隧道模式](/docs/zh-tw/tai-link/tunnel-mode) — 了解 NAT 穿透的運作原理
+- [連接第一台裝置](/docs/zh-tw/tai-link/connect-first-device) — 建立 Server Key、編寫設定檔並啟動 Tai Link

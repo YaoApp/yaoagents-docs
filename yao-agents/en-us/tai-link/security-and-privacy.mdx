@@ -8,7 +8,29 @@ Tai Link is designed around one principle: **your data stays on your devices**. 
 
 ## Authentication
 
-Tai Link authenticates with Yao using **OAuth 2.0 device flow**:
+Tai Link supports two authentication methods:
+
+### Server Key
+
+Server Keys are static credentials designed for unattended machines. No browser interaction is required — ideal for headless servers, CI runners, or any scenario where interactive login isn't practical.
+
+1. Generate a key in Yao Engine: `yao server-key create --name "my-node"`.
+2. Place the key in `config.yml` under `yao.server_key`.
+3. Tai Link authenticates automatically on startup.
+
+A single Server Key can be used across multiple nodes simultaneously.
+
+To revoke a Server Key:
+
+```bash
+yao server-key revoke <KEY_ID>
+```
+
+Once revoked, all nodes using that key will disconnect immediately.
+
+### OAuth 2.0 device flow
+
+Suitable for personal devices where you can open a browser:
 
 1. On first start, Tai Link generates a unique client ID and machine ID.
 2. You authorize the device through a browser (one-time step).
