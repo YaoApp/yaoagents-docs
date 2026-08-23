@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-vision
+    title: "DeepSeek 能看圖了"
+    summary: "DeepSeek V4 Flash Vision Exp 已可在 Yao Agents 中使用。新增模型提供商時即可選取。"
+    category: release
+    date: "2026-08-23"
+    author:
+      name: Yao Team
+
   - slug: deepseek-harness
     title: "DeepSeek Harness 打開就用，跨裝置運行"
     summary: "Yao Agents 集成了 DeepSeek Harness。桌面客戶端或瀏覽器直接用，跨裝置運行。"

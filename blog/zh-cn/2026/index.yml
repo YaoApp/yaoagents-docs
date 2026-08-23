@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-vision
+    title: "DeepSeek 视觉模型上线 — 看图理解一步到位"
+    summary: "Yao Agents 支持 DeepSeek V4 Flash Vision Exp，DeepSeek 首个视觉模型。配置模型时可直接选用。"
+    category: release
+    date: "2026-08-23"
+    author:
+      name: Yao Team
+
   - slug: deepseek-harness
     title: "DeepSeek Harness 打开就用，跨设备运行"
     summary: "Yao Agents 集成了 DeepSeek Harness。桌面客户端或浏览器直接用，跨设备运行。"

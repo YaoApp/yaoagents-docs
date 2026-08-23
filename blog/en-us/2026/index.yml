@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-vision
+    title: "DeepSeek Can See Now"
+    summary: "DeepSeek V4 Flash Vision Exp is live in Yao Agents. Pick it from DeepSeek or OpenCode Go when adding a model provider."
+    category: release
+    date: "2026-08-23"
+    author:
+      name: Yao Team
+
   - slug: deepseek-harness
     title: "DeepSeek Harness: Use It Across Your Devices"
     summary: "Yao Agents now includes DeepSeek Harness. Use it in the desktop app or browser, across all your devices."

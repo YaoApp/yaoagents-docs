@@ -1,0 +1,47 @@
+---
+title: "DeepSeek が画像対応に"
+description: "DeepSeek V4 Flash Vision Exp が Yao Agents で利用可能に。モデルプロバイダー追加時に選択できます。"
+published_at: "2026-08-23"
+authors:
+  - name: Yao Team
+---
+
+# DeepSeek が画像対応に
+
+![モデル設定 — DeepSeek V4 Vision](https://assets.yaoagents.com/en/settings/10-config-models-deepseek-v4-en-$__THEME.png)
+
+DeepSeek 初のビジョンモデル V4 Flash Vision Exp がリリースされ、Yao Agents でもすぐに使えるようになりました。
+
+## 何が変わるか
+
+これまで Agent がスクリーンショットの解析やグラフの読み取り、UI の確認を行うには、GPT-4o のような別のビジョンモデルを用意する必要がありました。これからは DeepSeek だけでテキストも画像もまとめて処理できます。
+
+## 追加されたビジョンモデル
+
+| モデル | 用途 |
+|--------|------|
+| DeepSeek V4 Flash Vision Exp | ビジョン + ツール呼び出し、高速処理 |
+| DeepSeek V4 Flash Vision Exp Thinking High | ビジョン + 深い推論、複雑なグラフ分析向け |
+
+コンテキスト長は V4 Flash テキスト版と同じ 100 万トークン。
+
+## 設定手順
+
+設定 → モデル設定 → プロバイダーを追加 で以下を選択：
+
+- **DeepSeek (OpenAI)** — 公式 API `api.deepseek.com`
+- **OpenCode Go** — ゲートウェイ `opencode.ai/zen/go`
+
+## あわせて追加されたモデル
+
+| モデル | 向いている場面 |
+|--------|--------------|
+| DeepSeek V4 Pro Thinking High | 高度な推論が必要な複雑タスク |
+| DeepSeek V4 Flash | 日常的なやりとりや軽いタスクを高速に |
+
+## 必要バージョン
+
+- Yao Engine Desktop **1.4.3+**
+- Yao **1.0.0-rc17+**
+
+[ダウンロードページ](/download)から最新版を入手、または Yao Engine Desktop 内でアップデート確認できます。

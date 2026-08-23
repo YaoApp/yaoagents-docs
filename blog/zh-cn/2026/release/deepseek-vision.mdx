@@ -1,0 +1,50 @@
+---
+title: "DeepSeek 视觉模型上线 — 看图理解一步到位"
+description: "Yao Agents 支持 DeepSeek V4 Flash Vision Exp，DeepSeek 首个视觉模型。配置模型时可直接选用。"
+published_at: "2026-08-23"
+authors:
+  - name: Yao Team
+---
+
+# DeepSeek 视觉模型上线 — 看图理解一步到位
+
+![模型配置 — DeepSeek V4 Vision](https://assets.yaoagents.com/en/settings/10-config-models-deepseek-v4-en-$__THEME.png)
+
+DeepSeek 发布了 V4 Flash Vision Exp——他们的首个视觉模型。现在 Yao Agents 已经支持，设置里直接可选。
+
+## 有什么用
+
+以前用 DeepSeek 跑 Agent 任务，遇到需要"看图"的场景（截屏分析、图表识别、UI 审查），得另外配一个支持视觉的模型（比如 GPT-4o）。现在 DeepSeek 自己就能看图了，一个提供商搞定所有事。
+
+## 可选的视觉模型
+
+| 模型 | 特点 |
+|------|------|
+| DeepSeek V4 Flash Vision Exp | 视觉 + 工具调用，速度快 |
+| DeepSeek V4 Flash Vision Exp Thinking High | 视觉 + 深度推理，复杂图表分析更准 |
+
+两个模型都支持百万级上下文（1M tokens），跟 V4 Flash 文本版一样。
+
+## 怎么配
+
+打开设置 → 模型配置 → 添加提供商，选择以下任一：
+
+- **DeepSeek (OpenAI)** — DeepSeek 官方 API，地址 `api.deepseek.com`
+- **OpenCode Go** — 聚合网关，地址 `opencode.ai/zen/go`
+
+
+## 同步更新的模型
+
+这次一起上线的还有：
+
+| 模型 | 说明 |
+|------|------|
+| DeepSeek V4 Pro Thinking High | 最强推理，复杂 Agent 任务 |
+| DeepSeek V4 Flash | 快速文本，日常对话和简单任务 |
+
+## 版本要求
+
+- Yao Engine Desktop **1.4.3+**
+- Yao **1.0.0-rc17+**
+
+从[下载页面](/download)获取最新版本，或在 Yao Engine Desktop 中检查更新。
