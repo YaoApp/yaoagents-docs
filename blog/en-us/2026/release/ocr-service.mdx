@@ -1,0 +1,45 @@
+---
+title: "OCR Is Here — Read Scans, Photos, and PDFs"
+description: "Yao Agents now has built-in OCR. Supports PaddleOCR, Baidu OCR, Google Cloud Vision, and Azure Document Intelligence."
+published_at: "2026-09-03"
+authors:
+  - name: Yao Team
+---
+
+# OCR Is Here — Read Scans, Photos, and PDFs
+
+![Settings — OCR Configuration](https://assets.yaoagents.com/en/ocr/01-ocr-settings-en-$__THEME.png)
+
+Yao Agents now supports OCR. Set up a provider and your AI experts can pull text out of images, scanned documents, and PDFs.
+
+## How It Works
+
+Send a PDF or image attachment to an AI expert and ask it to extract the text or convert it to Markdown.
+
+![OCR Task — PDF to Markdown](https://assets.yaoagents.com/en/ocr/02-ocr-task-en-$__THEME.png)
+
+The expert calls your configured OCR service and returns structured text.
+
+![OCR Result](https://assets.yaoagents.com/en/ocr/03-ocr-result-en-$__THEME.png)
+
+## Four Providers
+
+| Provider | Type | Highlights |
+|----------|------|-----------|
+| PaddleOCR | Self-hosted | Open-source, free, 100+ languages |
+| Baidu OCR | Cloud | General + high-accuracy recognition |
+| Google Cloud Vision | Cloud | Best multilingual, GenAI custom extraction |
+| Azure Document Intelligence | Cloud | Great at forms and key-value extraction |
+
+Pick one. Go to **Settings → OCR**, enter your API key, done.
+
+## Beyond Plain Text
+
+Besides general text, OCR also handles tables, handwriting, invoices, receipts, ID cards, and more. Unsupported types fall back to general recognition automatically.
+
+## Requirements
+
+- Yao **1.0.0-rc18+**
+- Yao Agents **1.1.7+**
+
+Get the latest from the [download page](/download) or check for updates in Yao Engine Desktop.

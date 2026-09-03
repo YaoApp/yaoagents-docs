@@ -1,4 +1,12 @@
 articles:
+  - slug: ocr-service
+    title: "OCR 上线 — 扫描件、照片、PDF 直接识别"
+    summary: "Yao Agents 新增 OCR 文字识别，支持 PaddleOCR、百度 OCR、Google Cloud Vision、Azure Document Intelligence 四种服务商。"
+    category: release
+    date: "2026-09-03"
+    author:
+      name: Yao Team
+
   - slug: deepseek-vision
     title: "DeepSeek 视觉模型上线 — 看图理解一步到位"
     summary: "Yao Agents 支持 DeepSeek V4 Flash Vision Exp，DeepSeek 首个视觉模型。配置模型时可直接选用。"

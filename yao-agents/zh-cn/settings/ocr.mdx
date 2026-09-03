@@ -1,0 +1,64 @@
+---
+slug: ocr
+---
+
+# OCR 文字识别
+
+配置 OCR 服务后，AI 专家可以识别图片和 PDF 中的文字，将扫描件、照片、截图等转换为可编辑的文本或 Markdown。
+
+![设置 — OCR](https://assets.yaoagents.com/en/ocr/01-ocr-settings-en-$__THEME.png)
+
+## 支持的服务商
+
+| 服务商 | 类型 | 说明 |
+|--------|------|------|
+| [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) | 自部署 | 开源 OCR 引擎，支持 100+ 语言，CPU/GPU 均可运行。 |
+| [百度 OCR](https://cloud.baidu.com/product/ocr) | 云服务 | 百度智能云文字识别，支持通用文字和高精度识别。 |
+| [Google Cloud Vision](https://cloud.google.com/vision) | 云服务 | 多语言识别能力最强，支持 GenAI 自定义提取。 |
+| [Azure Document Intelligence](https://azure.microsoft.com/products/ai-services/ai-document-intelligence) | 云服务 | 表单和键值对提取能力突出，支持隐藏文本层。 |
+
+不需要全部配置。选一个适合你的就行。
+
+## 设置方法
+
+1. 在服务商官网注册并获取 API Key。
+2. 打开 **设置 → OCR**。
+3. 选择服务商，填入凭证信息。
+4. 点击 **保存**。
+
+各服务商需要的字段：
+
+| 服务商 | 必填字段 |
+|--------|---------|
+| PaddleOCR | 服务地址（你的 PaddleOCR Serving 端点），API Key（选填） |
+| 百度 OCR | API Key、Secret Key |
+| Google Cloud Vision | API Key |
+| Azure Document Intelligence | API Key、Endpoint |
+
+## 支持的识别类型
+
+| 类型 | 说明 |
+|------|------|
+| `general` | 通用文字识别（默认） |
+| `table` | 表格识别 |
+| `handwriting` | 手写体 |
+| `document` | 文档版面分析 |
+| `invoice` | 发票 |
+| `receipt` | 小票/收据 |
+| `id_card` | 身份证 |
+| `passport` | 护照 |
+| `bank_card` | 银行卡 |
+| `license` | 营业执照 |
+| `license_plate` | 车牌 |
+
+不同服务商支持的类型不同。不支持的类型会自动降级为 `general`。
+
+## 使用方式
+
+配置完成后，发送附件给 AI 专家时会自动调用 OCR。常见用法：
+
+- 上传 PDF 扫描件，让专家提取文字并转为 Markdown
+- 拍照上传手写笔记，让专家整理成文本
+- 上传发票或收据，让专家提取关键字段
+
+![OCR 任务 — PDF 转 Markdown](https://assets.yaoagents.com/en/ocr/02-ocr-task-en-$__THEME.png)

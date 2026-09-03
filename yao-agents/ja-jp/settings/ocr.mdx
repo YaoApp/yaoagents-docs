@@ -1,0 +1,64 @@
+---
+slug: ocr
+---
+
+# OCR 文字認識
+
+OCR サービスを設定すると、AI エキスパートが画像や PDF からテキストを読み取り、スキャン書類・写真・スクリーンショットを編集可能なテキストや Markdown に変換できます。
+
+![設定 — OCR](https://assets.yaoagents.com/en/ocr/01-ocr-settings-en-$__THEME.png)
+
+## 対応プロバイダー
+
+| プロバイダー | 種別 | 説明 |
+|-------------|------|------|
+| [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) | セルフホスト | オープンソース OCR エンジン。100 以上の言語に対応、CPU/GPU で動作。 |
+| [Baidu OCR](https://cloud.baidu.com/product/ocr) | クラウド | 汎用テキストおよび高精度認識。 |
+| [Google Cloud Vision](https://cloud.google.com/vision) | クラウド | 多言語認識に最も強い。GenAI カスタム抽出にも対応。 |
+| [Azure Document Intelligence](https://azure.microsoft.com/products/ai-services/ai-document-intelligence) | クラウド | フォーム・キーバリュー抽出が得意。隠しテキストレイヤー対応。 |
+
+すべてを設定する必要はありません。用途に合ったものを 1 つ選んでください。
+
+## 設定手順
+
+1. 利用するプロバイダーに登録し、API キーを取得。
+2. **設定 → OCR** を開く。
+3. プロバイダーを選び、認証情報を入力。
+4. **保存** をクリック。
+
+プロバイダーごとの必須項目：
+
+| プロバイダー | 必須項目 |
+|-------------|---------|
+| PaddleOCR | サービス URL（PaddleOCR Serving エンドポイント）、API Key（任意） |
+| Baidu OCR | API Key、Secret Key |
+| Google Cloud Vision | API Key |
+| Azure Document Intelligence | API Key、Endpoint |
+
+## 認識タイプ
+
+| タイプ | 説明 |
+|--------|------|
+| `general` | 汎用テキスト認識（デフォルト） |
+| `table` | 表の抽出 |
+| `handwriting` | 手書き文字 |
+| `document` | 文書レイアウト解析 |
+| `invoice` | 請求書 |
+| `receipt` | レシート |
+| `id_card` | 身分証 |
+| `passport` | パスポート |
+| `bank_card` | 銀行カード |
+| `license` | 事業許可証 |
+| `license_plate` | ナンバープレート |
+
+対応タイプはプロバイダーによって異なります。非対応のタイプは自動的に `general` へフォールバックします。
+
+## 使い方
+
+設定後、AI エキスパートに添付ファイルを送ると OCR が自動で呼び出されます。よくある使い方：
+
+- スキャン PDF をアップロードし、テキスト抽出を Markdown で依頼
+- 手書きメモを撮影してアップロードし、文字起こしを依頼
+- 請求書やレシートをアップロードし、主要項目の抽出を依頼
+
+![OCR タスク — PDF から Markdown](https://assets.yaoagents.com/en/ocr/02-ocr-task-en-$__THEME.png)

@@ -20,6 +20,9 @@ pages:
   - slug: email
     title: 邮件
     summary: 配置 SMTP 邮件发送。
+  - slug: ocr
+    title: OCR 文字识别
+    summary: 配置 OCR 服务，让专家识别图片和 PDF 中的文字。
   - slug: mcp-tools
     title: MCP 工具
     summary: 连接外部 MCP 服务器，扩展助手可用的工具。

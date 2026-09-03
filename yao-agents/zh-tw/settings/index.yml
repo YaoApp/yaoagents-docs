@@ -20,6 +20,9 @@ pages:
   - slug: email
     title: 郵件
     summary: 設定 SMTP 郵件發送。
+  - slug: ocr
+    title: OCR 文字辨識
+    summary: 設定 OCR 服務，讓專家辨識圖片和 PDF 中的文字。
   - slug: mcp-tools
     title: MCP 工具
     summary: 連接外部 MCP 伺服器，擴展助手可用的工具。

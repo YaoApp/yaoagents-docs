@@ -1,0 +1,45 @@
+---
+title: "OCR 上線 — 掃描檔、照片、PDF 直接辨識"
+description: "Yao Agents 新增 OCR 文字辨識，支援 PaddleOCR、百度 OCR、Google Cloud Vision、Azure Document Intelligence 四種服務商。"
+published_at: "2026-09-03"
+authors:
+  - name: Yao Team
+---
+
+# OCR 上線 — 掃描檔、照片、PDF 直接辨識
+
+![設定 — OCR](https://assets.yaoagents.com/en/ocr/01-ocr-settings-en-$__THEME.png)
+
+Yao Agents 加入了 OCR 文字辨識功能。設定好之後，AI 專家就能讀取圖片和 PDF 裡的文字，把掃描檔、照片、截圖轉成可編輯的內容。
+
+## 怎麼用
+
+傳一個 PDF 或圖片附件給 AI 專家，說聲「擷取文字」或「轉成 Markdown」就好。
+
+![OCR 任務 — PDF 轉 Markdown](https://assets.yaoagents.com/en/ocr/02-ocr-task-en-$__THEME.png)
+
+專家會自動呼叫已設定的 OCR 服務辨識內容，輸出結構化的文字結果。
+
+![OCR 結果](https://assets.yaoagents.com/en/ocr/03-ocr-result-en-$__THEME.png)
+
+## 支援四種服務商
+
+| 服務商 | 類型 | 特點 |
+|--------|------|------|
+| PaddleOCR | 自架 | 開源免費，支援 100+ 語言 |
+| 百度 OCR | 雲端 | 通用文字 + 高精度辨識 |
+| Google Cloud Vision | 雲端 | 多語言最強，支援 GenAI 自訂擷取 |
+| Azure Document Intelligence | 雲端 | 表單與鍵值對擷取能力出色 |
+
+選一個就夠。開啟 **設定 → OCR**，填入 API Key 即可。
+
+## 不只是文字
+
+除了通用文字辨識，還支援表格、手寫體、發票、收據、身分證等專項類型。不同服務商涵蓋範圍不同，不支援的類型會自動降級為通用辨識。
+
+## 版本需求
+
+- Yao **1.0.0-rc18+**
+- Yao Agents **1.1.7+**
+
+至[下載頁面](/download)取得最新版，或從 Yao Engine Desktop 檢查更新。

@@ -20,6 +20,9 @@ pages:
   - slug: email
     title: メール
     summary: SMTPメール送信を設定。
+  - slug: ocr
+    title: OCR 文字認識
+    summary: OCR サービスを設定し、画像や PDF からテキストを抽出。
   - slug: mcp-tools
     title: MCPツール
     summary: 外部MCPサーバーに接続し、アシスタントのツールを拡張。

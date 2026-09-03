@@ -1,0 +1,64 @@
+---
+slug: ocr
+---
+
+# OCR
+
+Once an OCR provider is configured, AI experts can extract text from images and PDFs — turning scanned documents, photos, and screenshots into editable text or Markdown.
+
+![Settings — OCR](https://assets.yaoagents.com/en/ocr/01-ocr-settings-en-$__THEME.png)
+
+## Supported Providers
+
+| Provider | Type | Description |
+|----------|------|-------------|
+| [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) | Self-hosted | Open-source OCR engine, 100+ languages, runs on CPU or GPU. |
+| [Baidu OCR](https://cloud.baidu.com/product/ocr) | Cloud | General and high-accuracy text recognition. |
+| [Google Cloud Vision](https://cloud.google.com/vision) | Cloud | Best multilingual coverage, supports GenAI custom extraction. |
+| [Azure Document Intelligence](https://azure.microsoft.com/products/ai-services/ai-document-intelligence) | Cloud | Strong at form and key-value extraction, supports hidden text layers. |
+
+You only need one. Pick whichever suits your needs.
+
+## Setup
+
+1. Sign up with your chosen provider and get an API key.
+2. Open **Settings → OCR**.
+3. Select the provider and enter your credentials.
+4. Click **Save**.
+
+Required fields per provider:
+
+| Provider | Fields |
+|----------|--------|
+| PaddleOCR | Service URL (your PaddleOCR Serving endpoint), API Key (optional) |
+| Baidu OCR | API Key, Secret Key |
+| Google Cloud Vision | API Key |
+| Azure Document Intelligence | API Key, Endpoint |
+
+## Recognition Types
+
+| Type | Description |
+|------|-------------|
+| `general` | General text recognition (default) |
+| `table` | Table extraction |
+| `handwriting` | Handwritten text |
+| `document` | Document layout analysis |
+| `invoice` | Invoices |
+| `receipt` | Receipts |
+| `id_card` | ID cards |
+| `passport` | Passports |
+| `bank_card` | Bank cards |
+| `license` | Business licenses |
+| `license_plate` | License plates |
+
+Coverage varies by provider. Unsupported types automatically fall back to `general`.
+
+## Usage
+
+After setup, OCR kicks in automatically when you send an attachment to an AI expert. Common examples:
+
+- Upload a scanned PDF and ask the expert to extract text as Markdown
+- Snap a photo of handwritten notes and have the expert transcribe them
+- Upload an invoice or receipt for the expert to pull out key fields
+
+![OCR Task — PDF to Markdown](https://assets.yaoagents.com/en/ocr/02-ocr-task-en-$__THEME.png)

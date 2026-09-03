@@ -1,4 +1,12 @@
 articles:
+  - slug: ocr-service
+    title: "OCR 対応開始 — スキャン・写真・PDF のテキスト抽出"
+    summary: "Yao Agents に OCR 機能が追加。PaddleOCR・Baidu OCR・Google Cloud Vision・Azure Document Intelligence の 4 プロバイダーに対応。"
+    category: release
+    date: "2026-09-03"
+    author:
+      name: Yao Team
+
   - slug: deepseek-vision
     title: "DeepSeek が画像対応に"
     summary: "DeepSeek V4 Flash Vision Exp が Yao Agents で利用可能に。モデルプロバイダー追加時に選択できます。"

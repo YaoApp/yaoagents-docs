@@ -20,6 +20,9 @@ pages:
   - slug: email
     title: Email
     summary: Configure SMTP for email sending.
+  - slug: ocr
+    title: OCR
+    summary: Configure OCR to extract text from images and PDFs.
   - slug: mcp-tools
     title: MCP Tools
     summary: Connect external MCP servers to extend assistant capabilities.

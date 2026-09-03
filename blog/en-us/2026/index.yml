@@ -1,4 +1,12 @@
 articles:
+  - slug: ocr-service
+    title: "OCR Is Here — Read Scans, Photos, and PDFs"
+    summary: "Yao Agents now has built-in OCR. Supports PaddleOCR, Baidu OCR, Google Cloud Vision, and Azure Document Intelligence."
+    category: release
+    date: "2026-09-03"
+    author:
+      name: Yao Team
+
   - slug: deepseek-vision
     title: "DeepSeek Can See Now"
     summary: "DeepSeek V4 Flash Vision Exp is live in Yao Agents. Pick it from DeepSeek or OpenCode Go when adding a model provider."
