@@ -1,4 +1,12 @@
 articles:
+  - slug: android-beta
+    title: "安卓版上線（Beta）— 用手機指揮你的電腦做事"
+    summary: "Yao Agents 安卓版（Beta）上線。AI 專家跑在你自己的電腦上，出門用手機就能派工、看進度。"
+    category: release
+    date: "2026-09-07"
+    author:
+      name: Yao Team
+
   - slug: ocr-service
     title: "OCR 上線 — 掃描檔、照片、PDF 直接辨識"
     summary: "Yao Agents 新增 OCR 文字辨識，支援 PaddleOCR、百度 OCR、Google Cloud Vision、Azure Document Intelligence 四種服務商。"

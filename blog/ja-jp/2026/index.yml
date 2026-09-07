@@ -1,4 +1,12 @@
 articles:
+  - slug: android-beta
+    title: "Android版（Beta）登場 — スマホからPCに指示を送る"
+    summary: "Yao Agents の Android 版（Beta）が登場。AI エキスパートはあなたの PC で動くので、外出先からスマホで作業を指示して進捗も確認できます。"
+    category: release
+    date: "2026-09-07"
+    author:
+      name: Yao Team
+
   - slug: ocr-service
     title: "OCR 対応開始 — スキャン・写真・PDF のテキスト抽出"
     summary: "Yao Agents に OCR 機能が追加。PaddleOCR・Baidu OCR・Google Cloud Vision・Azure Document Intelligence の 4 プロバイダーに対応。"
