@@ -1,0 +1,56 @@
+---
+title: "DeepSeek V4.1 上線，圖像生成接入 GPT Image 2.5"
+description: "Yao Agents 新增 DeepSeek V4.1 Flash 系列，含 Thinking 三檔；同時接入 GPT Image 2.5 圖像模型，支援生成與編輯。"
+published_at: "2026-09-10"
+authors:
+  - name: Yao Team
+---
+
+# DeepSeek V4.1 上線，圖像生成接入 GPT Image 2.5
+
+DeepSeek V4.1 Flash 來了：百萬上下文、384K 輸出，原生支援視覺和工具呼叫。這次一起接入的還有 GPT Image 2.5 圖像模型，AI 專家現在能直接生成、編輯圖片。
+
+## DeepSeek V4.1 Flash 四個版本
+
+依任務複雜度挑：
+
+| 模型 | 思考 | 適合 |
+|------|------|------|
+| DeepSeek V4.1 Flash | 關閉 | 日常對話、快速任務 |
+| DeepSeek V4.1 Flash Thinking Low | 低 | 輕量推理，省 token |
+| DeepSeek V4.1 Flash Thinking High | 高 | 一般推理 |
+| DeepSeek V4.1 Flash Thinking Max | 最高 | 複雜 Agent 任務 |
+
+四個版本共用同一套規格：**1M 上下文**（1,048,576 tokens）、**最大輸出 384K tokens**，支援視覺、工具呼叫、串流輸出和 JSON。
+
+DeepSeek 與 OpenCode Go 都已經同步，設定時選一個就好。
+
+## 圖像生成：GPT Image 2.5
+
+新增兩個圖像模型：
+
+| 模型 | 能力 |
+|------|------|
+| GPT Image 2.5 Flare | 圖像生成 + 編輯 |
+| GPT Image 2.5 Sunburst | 圖像生成 + 編輯 |
+
+啟用後，AI 專家可以依描述生成圖片；編輯走 multipart 上傳，直接修改既有的圖片。
+
+## 同步上線的其他模型
+
+| 模型 | 上下文 |
+|------|--------|
+| GLM-5.3 / GLM-5.3-Flash | 1M |
+| Qwen3.8 Flash | 1M |
+| LongCat 2.0 | 1M |
+| Hy4 Preview | 960K |
+
+## 怎麼用
+
+設定 → 模型設定 → 選擇供應商，勾選要啟用的模型即可。
+
+## 版本要求
+
+- Yao **1.0.0-rc21+**
+
+從[下載頁面](/download)取得最新版本，或在 Yao Engine Desktop 中檢查更新。

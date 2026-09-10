@@ -1,0 +1,56 @@
+---
+title: "DeepSeek V4.1 登場、GPT Image 2.5 で画像生成にも対応"
+description: "Yao Agents に DeepSeek V4.1 Flash シリーズ（Thinking 3 段階）を追加。画像生成・編集に対応する GPT Image 2.5 も利用可能になりました。"
+published_at: "2026-09-10"
+authors:
+  - name: Yao Team
+---
+
+# DeepSeek V4.1 登場、GPT Image 2.5 で画像生成にも対応
+
+DeepSeek V4.1 Flash が登場しました。100万トークンのコンテキスト、384K の出力、ネイティブの視覚（Vision）とツール呼び出しに対応します。今回あわせて GPT Image 2.5 の画像モデルも追加され、AI エキスパートが直接画像を生成・編集できるようになりました。
+
+## DeepSeek V4.1 Flash の 4 バリエーション
+
+タスクの難易度で選べます：
+
+| モデル | 思考 | 向いている用途 |
+|------|------|------|
+| DeepSeek V4.1 Flash | オフ | 日常会話、素早いタスク |
+| DeepSeek V4.1 Flash Thinking Low | 低 | 軽い推論、トークン節約 |
+| DeepSeek V4.1 Flash Thinking High | 高 | 通常の推論 |
+| DeepSeek V4.1 Flash Thinking Max | 最大 | 複雑なエージェントタスク |
+
+4 つとも共通のスペックです：**コンテキスト 1M**（1,048,576 トークン）、**最大出力 384K トークン**。視覚、ツール呼び出し、ストリーミング、JSON に対応します。
+
+DeepSeek と OpenCode Go の両プロバイダーに反映済み。設定時はどちらかを選ぶだけです。
+
+## 画像生成：GPT Image 2.5
+
+画像モデルが 2 つ追加されました：
+
+| モデル | 機能 |
+|------|------|
+| GPT Image 2.5 Flare | 画像生成 + 編集 |
+| GPT Image 2.5 Sunburst | 画像生成 + 編集 |
+
+有効にすると、AI エキスパートが説明どおりに画像を生成できます。編集は multipart アップロードで、既存の画像をそのまま修正できます。
+
+## 同時に追加されたモデル
+
+| モデル | コンテキスト |
+|------|------|
+| GLM-5.3 / GLM-5.3-Flash | 1M |
+| Qwen3.8 Flash | 1M |
+| LongCat 2.0 | 1M |
+| Hy4 Preview | 960K |
+
+## 使い方
+
+設定 → モデル設定 → プロバイダーを選び、使いたいモデルにチェックを入れるだけです。
+
+## 動作要件
+
+- Yao **1.0.0-rc21+**
+
+最新版は[ダウンロードページ](/download)から入手するか、Yao Engine Desktop で更新を確認してください。

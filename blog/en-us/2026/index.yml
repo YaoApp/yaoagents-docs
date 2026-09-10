@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-v4-1-and-gpt-image-2-5
+    title: "DeepSeek V4.1 Is Here, Plus GPT Image 2.5 for Image Generation"
+    summary: "Yao Agents adds the DeepSeek V4.1 Flash family with three thinking levels, and brings in GPT Image 2.5 for image generation and editing."
+    category: release
+    date: "2026-09-10"
+    author:
+      name: Yao Team
+
   - slug: android-beta
     title: "Android Beta Is Live — Command Your Computers From Your Phone"
     summary: "Yao Agents is now on Android (Beta). Your AI experts run on your own computers — assign work and track progress from your phone."

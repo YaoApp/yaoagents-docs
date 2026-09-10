@@ -1,4 +1,12 @@
 articles:
+  - slug: deepseek-v4-1-and-gpt-image-2-5
+    title: "DeepSeek V4.1 上線，圖像生成接入 GPT Image 2.5"
+    summary: "Yao Agents 新增 DeepSeek V4.1 Flash 系列，含 Thinking 三檔；同時接入 GPT Image 2.5 圖像模型，支援生成與編輯。"
+    category: release
+    date: "2026-09-10"
+    author:
+      name: Yao Team
+
   - slug: android-beta
     title: "安卓版上線（Beta）— 用手機指揮你的電腦做事"
     summary: "Yao Agents 安卓版（Beta）上線。AI 專家跑在你自己的電腦上，出門用手機就能派工、看進度。"
