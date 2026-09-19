@@ -1,0 +1,10 @@
+slug: terms
+title: Terms
+summary: Terms of Service for the Tao cloud service and the Yao client software.
+pages:
+  - slug: service
+    title: Tao Terms of Service
+    summary: Terms of Service for the Tao AI capability gateway (v1.0.0, effective 2026-09-20).
+  - slug: yao-software
+    title: Yao Software Terms of Service
+    summary: Terms of Service for the Yao Engine / Yao Agents / Tai Link client software (v1.0.0, effective 2026-09-20).

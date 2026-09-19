@@ -1,0 +1,10 @@
+slug: privacy
+title: 隐私政策
+summary: Tao 云服务与 Yao 客户端软件的隐私政策。
+pages:
+  - slug: policy
+    title: Tao 隐私政策
+    summary: Tao AI 能力网关的隐私政策（v1.0.0，生效 2026-09-20）。
+  - slug: yao-software
+    title: Yao 软件隐私政策
+    summary: Yao Engine / Yao Agents / Tai Link 客户端软件的隐私政策（v1.0.0，生效 2026-09-20）。

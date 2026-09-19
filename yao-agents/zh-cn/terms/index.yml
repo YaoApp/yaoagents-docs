@@ -1,0 +1,10 @@
+slug: terms
+title: 服务条款
+summary: Tao 云服务与 Yao 客户端软件的服务条款。
+pages:
+  - slug: service
+    title: Tao 服务条款
+    summary: Tao AI 能力网关的服务条款（v1.0.0，生效 2026-09-20）。
+  - slug: yao-software
+    title: Yao 软件服务条款
+    summary: Yao Engine / Yao Agents / Tai Link 客户端软件的服务条款（v1.0.0，生效 2026-09-20）。

@@ -1,0 +1,223 @@
+---
+title: Tao Privacy Policy
+slug: privacy/policy
+locale: en-US
+applies_to: Tao Service — International site (yaoagents.com)
+version: 1.0.0
+effective_date: 2026-09-20
+status: Published (v1.0.0, effective 2026-09-20)
+---
+
+> **Version 1.0.0 ｜ Effective 2026-09-20.**
+
+# Tao Privacy Policy
+
+**Effective date:** 2026-09-20
+**Version:** 1.0.0
+
+This Privacy Policy explains how **Infinite Wisdom Software** ("**Tao**", "**we**", "**us**") collects, uses, shares and protects personal data when you access or use the Tao Service, the website at [yaoagents.com](https://yaoagents.com), the console, and related APIs (the "**Service**"). It should be read together with our [Terms of Service](/docs/ja/terms/service) (the "**Terms**"). Capitalised terms not defined here have the meaning given in the Terms.
+
+**By using the Service, you acknowledge this Privacy Policy.**
+
+---
+
+## 1. The short version
+
+- **Your content stays yours.** We do not store the content of your prompts, files, images, audio, URLs or model outputs. Customer Content is processed transiently to deliver your request, then discarded.
+- **We do not train on your data.** We do not use Customer Content to train or improve AI models or to build datasets.
+- **We do not sell your personal data.**
+- **We keep only what a paid service needs to operate:** your account details, payment and billing records, and usage **metadata** (such as which model you used and how many tokens/credits were consumed).
+- **Some Capabilities are provided by upstream providers.** When we forward your request to one of them, their own privacy and retention practices apply to that processing. We choose providers with appropriate safeguards where reasonably available.
+
+This summary is for convenience only and is not a substitute for the rest of this Policy.
+
+---
+
+## 2. Scope and controller
+
+2.1 This Policy applies to personal data we process as a **controller** in connection with the Service. It does not apply to:
+
+(a) third-party websites, apps or services you access through the Service (including target websites of the fetch Capability);  
+(b) Upstream Provider practices, which are governed by their own policies; or  
+(c) open-source software that we make available, which is governed by its applicable licence.  
+
+2.2 **Controller.** Infinite Wisdom Software. Contact: agent@iqka.com.
+
+2.3 **Region.** This Policy describes the **International deployment** available at [yaoagents.com](https://yaoagents.com).
+
+---
+
+## 3. What we do NOT store or retain
+
+We want to be precise about the centre of this Policy:
+
+3.1 **We do not store Customer Content.** The content of your Inputs and Outputs — including prompts and model responses, uploaded or generated images, audio files, OCR images/PDFs, search queries, and fetched web pages — is processed **transiently** to fulfil your request. It is not written to our databases, object storage, backups, data warehouses or analytics systems, and it is not used to train or improve models, to construct datasets, or for our own product development.
+
+3.2 **Our own infrastructure does not retain content either.** Where a Capability is fulfilled by our own infrastructure, the same no-retention rule applies: content stays in memory for the duration of the request.
+
+3.3 **Logs do not contain content.** Operational and security logs record metadata only — for example: timestamp, service, model, quantity/units, status, latency, target host, fetch path, and error codes. They do not record the body of a request or response.
+
+3.4 **What this means for legal requests.** Because we do not store Customer Content, in most cases we will have no Customer Content to produce in response to a legal request. We may retain and disclose the account and usage metadata described in Section 4.
+
+3.5 **Upstream providers.** When we forward a request to an Upstream Provider, that provider receives the Input to perform the request, and its own retention and use practices apply. Some providers are contractually zero-retention; others may retain data for a limited period for abuse monitoring or legal compliance. We select providers and configure integrations with this in mind, but we cannot make an absolute guarantee about every Upstream Provider. The same model or Capability may be served through different channels, and the channel may change; in all cases, we do not store Customer Content. See Section 6.
+
+---
+
+## 4. Personal data we collect and retain
+
+The table below summarises the categories of personal data we process. "Retention" indicates our default retention period; actual periods may be longer where required by law or necessary for a specific dispute.
+
+| Category | Examples | Why we process it | Retention |
+|---|---|---|---|
+| **Account & identity data** | Name/nickname, email address, phone number, avatar, bio, gender, account ID, language/region, tier | To create and manage your account, authenticate you, and communicate with you | While your account is active, then up to 90 days after deletion, unless a longer period is required |
+| **Third-party sign-in identifiers** | Google `sub` and email; WeChat openid/unionid; other OAuth identifiers | To let you sign in or bind an account | While the link is active; deleted on unbind/account deletion |
+| **Authentication & security data** | Password hash (bcrypt), refresh-token records, captcha session data, OAuth state, API-key metadata, sign-in/log-out records | To authenticate you, secure accounts, prevent fraud and abuse | Account lifetime; security logs 6 months |
+| **Contact & device data** | IP address, device/browser type, language, approximate location derived from IP, timestamps | To operate and secure the Service, enforce rate limits, and prevent abuse | 6 months |
+| **Billing & payment data** | Credits balance, transactions (recharge/consume/gift/refund), order records, invoices, billing entity, tax information; payment method token / last 4 digits (via the processor) | To meter usage, bill and collect payment, issue invoices, handle refunds and disputes | As required by tax and accounting law |
+| **Usage metadata** | Service, model, units (tokens/images/characters/requests), cost in Credits, pre-authorisation/reservation records, timestamp, API-key ID, user ID, upstream request ID, error/billing status | To meter, bill, reconcile, support you, and detect abuse | 24 months, then aggregated or deleted |
+| **Support & communications** | Emails, tickets, feedback, survey responses | To respond to you and improve support | 24 months after resolution |
+| **Marketing preferences** | Consent/withdrawal records, communication preferences | To send (or not send) marketing, and to honour your choices | Until withdrawn + 24 months |
+| **Website & cookie data** | Essential cookies/local storage, session data, analytics | To operate the website and console, keep you signed in, and understand aggregate usage | As described in Section 9 |
+
+We do not intentionally collect special-category data (such as health, biometric or political data) or data of children. You should not submit such data to the Service.
+
+---
+
+## 5. How we use personal data and our legal bases
+
+We process personal data for the following purposes. Where the GDPR or a similar law applies, we identify a legal basis.
+
+| Purpose | Legal basis (GDPR-style) |
+|---|---|
+| Provide, operate and maintain the Service (routing, metering, billing) | Performance of a contract |
+| Create and secure accounts; authenticate; enforce rate limits | Contract; legitimate interests (security) |
+| Prevent, detect and investigate fraud, abuse, spam and attacks | Legitimate interests; legal obligation |
+| Process payments, issue invoices, handle refunds, comply with tax/accounting law | Contract; legal obligation |
+| Respond to support requests and communicate service changes | Contract; legitimate interests |
+| Send marketing communications (where permitted) | Consent, or legitimate interests with opt-out |
+| Comply with legal requests and enforce our Terms | Legal obligation; legitimate interests |
+| Improve the Service using **aggregated or de-identified** information | Legitimate interests |
+| Establish, exercise or defend legal claims | Legitimate interests; legal obligation |
+
+We do **not** use Customer Content as an input to any of the purposes above, because we do not retain it. Analytics and improvement are based on aggregated metadata, not on content.
+
+---
+
+## 6. Sharing and disclosure
+
+6.1 **We do not sell your personal data.** We may share it in the limited circumstances below.
+
+6.2 **Upstream Providers.** To fulfil a request, we may transmit the necessary Input to third-party technical service providers appointed by us. Their types include:
+
+  - model inference and generation services;
+  - embedding, image and audio processing services;
+  - recognition and document-processing services;
+  - search services;
+  - fetching services;
+  - infrastructure and hosting services.
+
+Each provider processes data under its own terms and acts as our processor. The specific provider list is available on request at agent@iqka.com.
+
+6.3 **Payment processors.** On the International deployment, payments are processed by **Stripe**. We do not receive or store full card numbers. Stripe's privacy policy applies to its processing.
+
+6.4 **Service providers.** We use vendors for hosting, databases, caching, email/SMS delivery, captcha, error monitoring, security and analytics. They are bound to process data only on our instructions and subject to confidentiality.
+
+6.5 **Legal, safety and rights.** We may disclose data where required or permitted by law, including to respond to valid legal process, to protect the rights, property or safety of users or the public, to investigate abuse, or to enforce our Terms.
+
+6.6 **Corporate transactions.** Data may be transferred as part of a merger, acquisition, financing, reorganisation or sale of assets. We will inform you of the recipient as required by applicable law; the recipient will remain bound by this Policy, and where it changes the purposes or methods of processing we will obtain your consent again as required by law.
+
+6.7 **Aggregated and de-identified data.** We may share aggregated or de-identified data that cannot reasonably be used to identify you.
+
+6.8 **With your direction.** We may share data when you instruct or authorise us to do so.
+
+---
+
+## 7. International data transfers
+
+7.1 The Service is provided from the region in which your deployment operates. If you use the International deployment, your personal data may be processed in countries or regions other than your own, including jurisdictions where we or our providers operate. Those jurisdictions may have different data-protection laws.
+
+7.2 Where required, we rely on appropriate safeguards such as standard contractual clauses, an adequacy decision, or your consent, and we take steps to ensure a comparable level of protection.
+
+7.3 **Fetched content.** On the International deployment, retrieval that uses third-party fetching infrastructure may involve routing the target request through infrastructure located outside your jurisdiction. Because we do not retain the fetched content, this transfer is transient.
+
+7.4 You may contact us at agent@iqka.com for more information about transfers and the safeguards used.
+
+---
+
+## 8. Security
+
+8.1 We use technical and organisational measures designed to protect personal data, including encryption in transit (TLS), access controls, credential hashing, network segregation between regional deployments, key rotation and monitoring.
+
+8.2 No system is completely secure. We cannot guarantee absolute security. You are responsible for protecting your credentials and for using the Service over secure channels.
+
+8.3 If we become aware of a personal-data breach affecting you, we will notify you and the competent authority as required by applicable law.
+
+---
+
+## 9. Cookies and similar technologies
+
+9.1 We use cookies and similar technologies (including local storage) that are **essential** to operate the Service — for example, to keep you signed in, to remember security state, and to support captcha and OAuth flows. Disabling them may break functionality.
+
+9.2 We may use **functional** storage to remember preferences (such as language and theme).
+
+9.3 We may use **analytics** to understand aggregate usage of the website and console. Where required, we ask for consent before setting non-essential cookies, and you can withdraw consent at any time.
+
+9.4 We do not currently respond to "Do Not Track" signals. Where required by law we honour Global Privacy Control or equivalent signals.
+
+9.5 You can control cookies through your browser settings.
+
+---
+
+## 10. Your rights
+
+10.1 Subject to applicable law, you may have the right to:
+
+(a) **access** the personal data we hold about you;  
+(b) **correct** inaccurate data;  
+(c) **delete** your data (subject to legal retention obligations);  
+(d) **restrict or object** to certain processing;  
+(e) **port** data you provided to us;  
+(f) **withdraw consent** at any time (without affecting prior lawful processing);  
+(g) **opt out** of marketing; and  
+(h) **complain** to your local data-protection authority.  
+
+10.2 Because we do not store Customer Content, requests to delete or export "prompts" or "outputs" will ordinarily return no such content; we will confirm this and process any account/metadata data we hold.
+
+10.3 **California / US state residents.** You may have rights of access, deletion, correction, and to opt out of "sale" or "sharing" (we do not sell or share personal data as defined by the CCPA/CPRA), and to non-discrimination. You may exercise these rights via agent@iqka.com or the console. We will verify your request as permitted by law.
+
+10.4 **EEA/UK residents.** You may lodge a complaint with your supervisory authority.
+
+10.5 To exercise your rights, contact agent@iqka.com. We respond within the time required by law. We may need to verify your identity.
+
+---
+
+## 11. Retention
+
+11.1 We retain personal data only as long as necessary for the purposes described above, or as required by law. Retention periods are summarised in Section 4.
+
+11.2 When retention is no longer necessary, we delete or de-identify the data. Aggregated, non-identifying data may be retained for longer for analytics and service improvement.
+
+11.3 **Deletion.** Because we do not persist Customer Content, there is no content to delete on a scheduled basis; it is discarded when the request completes.
+
+---
+
+## 12. Children
+
+12.1 The Service is for adults. You must be at least 18 years old and have full legal capacity to use the Service. We do not knowingly collect personal data from minors; if you believe a minor has provided us personal data, contact us at agent@iqka.com and we will delete it.
+
+---
+
+## 13. Changes to this Policy
+
+13.1 We may update this Policy from time to time. Material changes will be notified by a website notice, email or console message a reasonable period in advance where required. Each version is dated and archived, and the version applicable to you is recorded.
+
+---
+
+## 14. Contact
+
+**Infinite Wisdom Software**
+Contact: agent@iqka.com
+
+---
+
+*This Policy describes the International deployment.*

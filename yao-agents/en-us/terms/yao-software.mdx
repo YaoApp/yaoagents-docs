@@ -1,0 +1,181 @@
+---
+title: Yao Software Terms of Service
+slug: terms/yao-software
+locale: en-US
+applies_to: Yao Engine · Yao Agents · Tai Link (local client software)
+version: 1.0.0
+effective_date: 2026-09-20
+status: Published (v1.0.0, effective 2026-09-20)
+---
+
+> **Version 1.0.0 ｜ Effective 2026-09-20.**
+
+# Yao Software Terms of Service
+
+**Effective date:** 2026-09-20
+**Version:** 1.0.0
+
+These Terms of Service ("**Terms**") are a legally binding agreement between you ("**you**") and **Infinite Wisdom Software**, a limited liability company ("**Yao**", "**we**", "**us**") governing your download, installation and use of the client software known as **Yao Engine**, **Yao Agents** and **Tai Link** (collectively, the "**Software**"). By downloading, installing or using the Software, you agree to these Terms. If you do not agree, do not install or use the Software.
+
+**Core commitment: the Software runs on your own devices. We do not collect, access or store your Local Content; when you call a cloud model or Tao Services, what input is sent is determined by the Agent you configure locally.**
+
+**If you are accepting these Terms on behalf of an organisation, you represent that you have authority to bind that organisation, and "you" refers to that organisation.**
+
+---
+
+## 1. Definitions
+
+1.1 **"Software"** means our **Yao Engine** (local runtime), **Yao Agents** (local agent workspace, including its desktop client, browser interface and APIs) and **Tai Link** (device-connectivity component), together with related updates, installers and documentation.
+
+1.2 **"Local Content"** means any content on your devices — workspaces and files, conversations and prompts, robot and task data, model inputs and outputs, screen content, command output, credentials, and anything else you process, generate or store using the Software.
+
+1.3 **"Tao Services"** means the Tao AI capability gateway we provide (including accounts, the model service, cloud servers, the Hub, updates and entitlement checks). Their use is governed by the [Tao Terms of Service](/docs/en-us/terms/service) and the [Tao Privacy Policy](/docs/en-us/privacy/policy).
+
+1.4 **"Third-Party Models"** means model providers you configure yourself (for example, OpenAI, Anthropic, DeepSeek, or a local Ollama instance).
+
+1.5 **"Credentials"** means the API keys, tokens, server keys and similar secrets you configure for Third-Party Models, Tao Services or device connections.
+
+---
+
+## 2. Licence
+
+2.1 We grant you a limited, non-exclusive, non-transferable, revocable licence to install and use the Software on devices you own or control, for your own or your organisation's internal purposes.
+
+2.2 Open-source components included in the Software are governed by their respective open-source licences; if these Terms conflict with such a licence, the open-source licence prevails.
+
+2.3 **Restrictions.** Except as permitted by law or by an open-source licence, you must not: reverse engineer, decompile or attempt to derive the source code of the Software; remove or obscure proprietary notices; resell, rent, lend, sublicense or otherwise make the Software available to third parties as a service; or circumvent or defeat the Software's licensing or security mechanisms. **Open-source components of the Software are excepted: they are governed by their respective open-source licences, and you may use, copy, modify and distribute them under those licences.**
+
+---
+
+## 3. Local operation and your data
+
+3.1 **The Software runs on your devices.** Workspaces, databases, files and logs are stored by default in the local directories you designate (for example, the App Root or data root).
+
+3.2 **We do not collect Local Content.** We do not collect, access, store or analyse Local Content; accordingly, it is not used to train or improve models, to build datasets, or for any other purpose. When you call a cloud model or Tao Services, what input is sent is determined by the Agent you configure locally; Tao's handling is described in the [Tao Privacy Policy](/docs/en-us/privacy/policy), and third-party models are governed by their own policies.
+
+3.3 **You control storage and backups.** You are responsible for local storage, access control, backups and security. Uninstalling the Software or deleting data is your operation; we cannot remotely access, recover or delete your local data.
+
+3.4 **Local accounts.** Accounts and credentials for a local instance are held on your device and are managed and reset by you.
+
+---
+
+## 4. Third-Party Models and Credentials
+
+4.1 The Software lets you configure Third-Party Models. Your use of them is governed by their own terms and privacy policies; **we are not a party to that relationship**.
+
+4.2 You are responsible for obtaining, safeguarding and rotating Credentials, and for any fees charged by third parties.
+
+4.3 When you use a Third-Party Model, the Software **sends your inputs directly to the provider you configured**; what input is sent is determined by the Agent you configure locally, and that transmission, retention and use are governed by that provider's terms and policies. We do not receive or store them.
+
+---
+
+## 5. Tai Link and device connections
+
+5.1 Tai Link lets your Yao Agents instance connect to and operate other devices you authorise.
+
+5.2 **Authorised devices only.** You must not use Tai Link to connect to, access or operate any device or data you do not own or are not lawfully authorised to control.
+
+5.3 Connections are established between Tai Link and your Yao Agents instance over an encrypted gRPC tunnel (TLS should be enabled in production for end-to-end encryption). We do not access or store the content exchanged between your devices.
+
+5.4 **High-risk capabilities.** Capabilities such as Host Exec, which run commands directly on the host operating system, are disabled by default; if you enable them, you configure the access policy and bear the associated risk. On shared machines, run Tai Link under a dedicated, least-privileged account.
+
+5.5 Keep server keys, OAuth tokens and other Credentials secure, and revoke them promptly if a device is lost or transferred, or on a change of personnel.
+
+---
+
+## 6. Tao Services (Optional)
+
+6.1 You may choose **not to use any Tao Service** and run the Software purely locally.
+
+6.2 If you use Tao Services (account, model service, cloud servers, Hub, updates or entitlement checks), their use is governed by the [Tao Terms of Service](/docs/en-us/terms/service) and the [Tao Privacy Policy](/docs/en-us/privacy/policy); we process the information described in those terms (for example, account information, usage metadata, and device and version information).
+
+6.3 The features, pricing and data locations of Tao Services are governed by the Tao Terms of Service and the applicable service page; in case of conflict, the Tao Terms of Service prevail for those Tao Services.
+
+---
+
+## 7. Updates and changes
+
+7.1 We may release updates from time to time; some updates may be required to continue using certain Tao Services or features.
+
+7.2 We may add, modify, deprecate or discontinue any feature of the Software. We will use reasonable efforts to give notice of material adverse changes where practicable.
+
+7.3 Features labelled beta, preview or experimental may be changed or withdrawn at any time.
+
+7.4 **Security updates.** We may release security updates to fix vulnerabilities; to protect your security, you should install updates promptly. Where a vulnerability is reported by a third-party security researcher (white hat), we will assess and fix it promptly and, where necessary, notify users by a website notice or in-product message.
+
+---
+
+## 8. Acceptable use
+
+8.1 You must not use the Software for unlawful purposes or in a way that infringes the rights of others.
+
+8.2 You must not use the Software to access, control or process any device or data you are not authorised to access, control or process.
+
+8.3 You must not use the Software for malware, unauthorised access, bulk or fraudulent registration, spam, fraud, intellectual-property infringement, or any other unlawful or infringing activity.
+
+8.4 You must not circumvent or defeat the Software's licensing, security or access-control mechanisms.
+
+8.5 If you use Tao Services, we may throttle, suspend or terminate them for violations in accordance with the Tao Terms of Service.
+
+---
+
+## 9. Intellectual Property; Feedback
+
+9.1 We and our licensors retain all right, title and interest in and to the Software (including code, documentation, interfaces, trademarks and all improvements). No rights are granted except as expressly stated in these Terms.
+
+9.2 You may not use our trademarks without our prior written permission, except for fair, factual references.
+
+9.3 If you voluntarily provide feedback, suggestions or ideas, you agree that we may use them to improve the Software, without compensation to you. We do not thereby acquire any rights in your Local Content.
+
+---
+
+## 10. Fees
+
+10.1 **The Software (Community Edition) is provided free of charge.** An enterprise edition or certain features may require a paid subscription, governed by a separately signed agreement or the purchase page.
+
+10.2 Tao Services are charged at the rates set out in the Tao Terms of Service. Except where required by applicable law or otherwise stated, fees paid are non-refundable.
+
+---
+
+## 11. Disclaimers; Limitation of Liability; Indemnity
+
+11.1 **Disclaimer.** To the maximum extent permitted by law, the Software is provided "**as is**" and "**as available**", without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, non-infringement, accuracy, availability, or uninterrupted or error-free operation. You are responsible for configuration, your environment, data backups, and for reviewing outputs.
+
+11.2 **Limitation of liability.** To the maximum extent permitted by law, we will not be liable for any indirect, incidental, special, consequential, exemplary or punitive damages, or for loss of profits, revenue, data, goodwill or business opportunity. **The Software (Community Edition) is provided free of charge and we assume no liability for such free use.** Liability for an enterprise edition is governed by the separately signed agreement, and liability for Tao Services is governed by the Tao Terms of Service.
+
+11.3 **Indemnity by you.** You will indemnify, defend and hold harmless us and our affiliates, directors, officers, employees and agents from and against any claims, actions, losses, liabilities and reasonable costs (including legal fees) arising out of or relating to the following, to the extent caused by your breach, unlawful act or fault and having a causal connection to your conduct; where you are a consumer, this Section does not require you to assume liability beyond what the law provides:
+
+(a) Local Content or third-party data you process with the Software;  
+(b) your breach of these Terms, in particular Section 8 (Acceptable use);  
+(c) your use of Tai Link to connect to, access or operate devices or data you are not authorised to control;  
+(d) your breach of a Third-Party Model's terms or of the Tao Terms of Service; or  
+(e) your use of the Software in violation of law or third-party rights.
+
+11.4 **Force majeure.** We are not liable for failure or delay caused by events beyond our reasonable control. To the extent force majeure prevents performance, liability is exempted in whole or in part as the law provides; if force majeure defeats the purpose of these Terms, either party may terminate. The affected party must notify the other promptly and provide evidence.
+
+---
+
+## 12. Suspension and Termination
+
+12.1 You may stop using the Software at any time and uninstall it and delete your local data yourself.
+
+12.2 If you breach these Terms, we may suspend or terminate your access to Tao Services; you may uninstall the local Software yourself.
+
+12.3 On termination, Sections that by their nature should survive (including ownership, disclaimers, limitation of liability and indemnity) survive.
+
+---
+
+## 13. Changes to These Terms
+
+13.1 We may amend these Terms from time to time. Material changes will be notified by a website notice or in-product message a reasonable period in advance; if we hold your contact details (for example, because you use Tao Services), we may also notify you by email or console message. Where the law provides otherwise as to the notice period, that provision applies. If you do not agree, you may stop using the Software; continued use constitutes acceptance. The version in effect when you accepted these Terms is recorded.
+
+---
+
+## 14. Contact
+
+**Infinite Wisdom Software**
+Contact: agent@iqka.com
+
+---
+
+*Summary of the local-first principle (non-binding): Yao Engine, Yao Agents and Tai Link run on your own devices, and your content always belongs to you. We do not collect, access or store your Local Content; when you call a cloud model or Tao Services, what input is sent is determined by the Agent you configure locally, and Tao handles it under the Tao Privacy Policy.*

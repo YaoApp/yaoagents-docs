@@ -1,0 +1,10 @@
+slug: privacy
+title: Privacy
+summary: Privacy Policies for the Tao cloud service and the Yao client software.
+pages:
+  - slug: policy
+    title: Tao Privacy Policy
+    summary: Privacy Policy for the Tao AI capability gateway (v1.0.0, effective 2026-09-20).
+  - slug: yao-software
+    title: Yao Software Privacy Policy
+    summary: Privacy Policy for the Yao Engine / Yao Agents / Tai Link client software (v1.0.0, effective 2026-09-20).
