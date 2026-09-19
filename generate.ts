@@ -1,4 +1,18 @@
 /**
+ * ⚠️ 一次性脚本（bootstrap only）—— 后续迭代请勿运行、请勿依赖。
+ *
+ * 本文件只在最初搭建文档目录结构时用过一次：用数据 + 代码批量生成
+ * `{product}/{locale}/{section}/index.yml` 与占位 `.mdx`。
+ *
+ * 之后的结构与内容维护一律**直接编辑仓库里的 `index.yml` / `.mdx` 文件**：
+ *   - 新增/删除/排序页面 → 直接改对应 `{section}/index.yml` 的 `pages` 数组
+ *   - 新增 section      → 直接改 product 根 `index.yml` 的 `sections` 数组并新建目录
+ *   - 正文              → 直接编辑 `.mdx`
+ *
+ * 不要运行本脚本：它会重写所有 `index.yml`，可能与仓库中后来手工维护的结构
+ * （如后加的 terms / privacy section）不一致。保留此文仅作最初目录约定的存档。
+ * ----------------------------------------------------------------------------
+ *
  * Generate documentation file structure for Yao Agents docs.
  *
  * Directory layout:
