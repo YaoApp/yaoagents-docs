@@ -1,4 +1,12 @@
 articles:
+  - slug: account-migration
+    title: "老用戶帳號遷移（Cloud Service → Tao Service）"
+    summary: "2026 年 9 月 23 日 15:00 UTC 開始帳號遷移，啟用新帳戶體系，Cloud Service 帳戶餘額將兌換為等額積分遷入 Tao Service。"
+    category: notice
+    date: "2026-09-22"
+    author:
+      name: Yao Team
+
   - slug: deepseek-v4-1-and-gpt-image-2-5
     title: "DeepSeek V4.1 上線，圖像生成接入 GPT Image 2.5"
     summary: "Yao Agents 新增 DeepSeek V4.1 Flash 系列，含 Thinking 三檔；同時接入 GPT Image 2.5 圖像模型，支援生成與編輯。"

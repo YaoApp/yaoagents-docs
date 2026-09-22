@@ -1,4 +1,12 @@
 articles:
+  - slug: account-migration
+    title: "Account Migration: Cloud Service → Tao Service"
+    summary: "On September 23, 2026 at 15:00 UTC, we start migrating accounts from Cloud Service to Tao Service and turn on the new account system."
+    category: notice
+    date: "2026-09-22"
+    author:
+      name: Yao Team
+
   - slug: deepseek-v4-1-and-gpt-image-2-5
     title: "DeepSeek V4.1 Is Here, Plus GPT Image 2.5 for Image Generation"
     summary: "Yao Agents adds the DeepSeek V4.1 Flash family with three thinking levels, and brings in GPT Image 2.5 for image generation and editing."
