@@ -1,0 +1,40 @@
+---
+slug: tao
+---
+
+# Tao：一個閘道，接上所有服務
+
+Tao 是 Yao Agents 的能力閘道。AI 模型、搜尋、抓取、儲存……你的 Agent 需要的一切，用一組 Key 全部接好，按積分計費。
+
+![Tao 服務](https://assets.yaoagents.com/en/tao/services-en-$__THEME.png)
+
+## 提供的服務
+
+| 服務 | 作用 | 介面 |
+|------|------|------|
+| AI 模型 | 對話、視覺 | `/v1/chat/completions` |
+| 結構化決策 | 分類、路由、評分、抽取（Jev） | `/v1/decisions` |
+| 搜尋 | 網頁搜尋 | `/v1/search` |
+| 抓取 | 抓取網頁 | `/v1/fetch` |
+| OCR | 從圖片擷取文字 | `/v1/ocr/type` |
+| 圖像 | 生成與編輯圖片 | `/v1/images/generations`、`/v1/images/edits` |
+| 語音 | 轉錄與合成 | `/v1/audio/transcriptions`、`/v1/audio/speech` |
+| Embedding | 文字向量化 | `/v1/embeddings` |
+
+## 怎麼接入
+
+1. 打開[註冊頁](/register)，註冊即送 1,000 積分。
+2. 控制台點 **Create New Key**，複製 Key。
+3. 打開 Yao Agents，選 **Use Tao Service**，貼上 Key，點 **Verify and Configure**。
+
+接好後，設定裡顯示 **Connected**，模型設定自動填好。
+
+![模型設定](https://assets.yaoagents.com/en/tao/account-setup-10-en-$__THEME.png)
+
+Tao 相容 OpenAI 介面，不裝 Yao Agents 也能直接呼叫。
+
+## 計費
+
+按積分計量：模型、結構化決策、Embedding 按 token；搜尋、抓取按請求數；圖像、OCR 按張數；語音按秒數或字元數。
+
+> Tao 目前為 Beta 版，歡迎試用。

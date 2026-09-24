@@ -23,6 +23,9 @@ pages:
   - slug: connect-to-server
     title: 連接雲端伺服器
     summary: 跳過本機安裝——連接一台託管的 Yao Agents 伺服器，即刻使用 AI 專家。
+  - slug: tao
+    title: Tao：一個閘道，接上所有服務
+    summary: Tao 是 Yao Agents 的能力閘道：模型、搜尋、抓取、儲存等服務，一組 Key 全部接入，按積分計費。
   - slug: whats-next
     title: 更進一步
     summary: 產品還有更多能力：Tai Link 連接多裝置、整合接入 IM / API、Yao Agents Hub 擴展新助手。

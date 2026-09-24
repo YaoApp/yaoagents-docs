@@ -1,0 +1,40 @@
+---
+slug: tao
+---
+
+# Tao：1 つのゲートウェイですべてのサービスに接続
+
+Tao は Yao Agents のケイパビリティゲートウェイです。AI モデル、検索、取得、ストレージ——エージェントに必要なものを 1 つのキーにまとめ、クレジットで課金されます。
+
+![Tao のサービス](https://assets.yaoagents.com/en/tao/services-en-$__THEME.png)
+
+## 提供されるサービス
+
+| サービス | 内容 | エンドポイント |
+|------|------|------|
+| AI モデル | チャット、視覚 | `/v1/chat/completions` |
+| 構造化意思決定 | 分類、ルーティング、スコアリング、抽出（Jev） | `/v1/decisions` |
+| 検索 | Web 検索 | `/v1/search` |
+| 取得 | Web ページの取得 | `/v1/fetch` |
+| OCR | 画像からテキストを抽出 | `/v1/ocr/type` |
+| 画像 | 画像の生成と編集 | `/v1/images/generations`、`/v1/images/edits` |
+| 音声 | 文字起こしと音声合成 | `/v1/audio/transcriptions`、`/v1/audio/speech` |
+| Embedding | テキストのベクトル化 | `/v1/embeddings` |
+
+## 接続方法
+
+1. [登録ページ](/register) を開くと、登録で 1,000 クレジットがもらえます。
+2. コンソールで **Create New Key** をクリックし、キーをコピーします。
+3. Yao Agents を開き、**Use Tao Service** を選んでキーを貼り付け、**Verify and Configure** をクリックします。
+
+接続できると、設定に **Connected** と表示され、モデル設定も自動で入ります。
+
+![モデル設定](https://assets.yaoagents.com/en/tao/account-setup-10-en-$__THEME.png)
+
+Tao は OpenAI 互換 API を提供しているので、Yao Agents なしでも直接呼び出せます。
+
+## 課金
+
+クレジットで計量：モデル、構造化意思決定、Embedding はトークン単位、検索と取得はリクエスト数、画像と OCR は枚数、音声は秒数または文字数。
+
+> Tao は現在ベータ版です。ぜひお試しください。

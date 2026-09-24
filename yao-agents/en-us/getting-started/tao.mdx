@@ -1,0 +1,40 @@
+---
+slug: tao
+---
+
+# Tao: One Gateway to Every Service
+
+Tao is the capability gateway for Yao Agents. AI models, search, fetch, storage — everything your agents need, all behind one key, billed in credits.
+
+![Tao services](https://assets.yaoagents.com/en/tao/services-en-$__THEME.png)
+
+## What's included
+
+| Service | What it does | Endpoint |
+|------|------|------|
+| AI Models | Chat, vision | `/v1/chat/completions` |
+| Structured Decisions | Classification, routing, scoring, extraction (Jev) | `/v1/decisions` |
+| Search | Web search | `/v1/search` |
+| Fetch | Fetch web pages | `/v1/fetch` |
+| OCR | Extract text from images | `/v1/ocr/type` |
+| Image | Generate and edit images | `/v1/images/generations`, `/v1/images/edits` |
+| Audio | Transcribe and synthesize speech | `/v1/audio/transcriptions`, `/v1/audio/speech` |
+| Embeddings | Text embeddings | `/v1/embeddings` |
+
+## How to connect
+
+1. Open the [sign-up page](/register) — you get 1,000 credits when you register.
+2. In the console, click **Create New Key** and copy the key.
+3. Open Yao Agents, choose **Use Tao Service**, paste the key, and click **Verify and Configure**.
+
+Once it's connected, Settings shows **Connected** and your model configuration is filled in automatically.
+
+![Model configuration](https://assets.yaoagents.com/en/tao/account-setup-10-en-$__THEME.png)
+
+Tao speaks the OpenAI API, so you can call it directly without Yao Agents.
+
+## Pricing
+
+Metered in credits: models, structured decisions, and embeddings by tokens; search and fetch by requests; image and OCR by images; audio by seconds or characters.
+
+> Tao is in Beta — give it a try.

@@ -23,6 +23,9 @@ pages:
   - slug: connect-to-server
     title: クラウドサーバーに接続
     summary: ローカルセットアップ不要——ホスティングされた Yao Agents サーバーに接続し、すぐに AI エキスパートを利用。
+  - slug: tao
+    title: Tao：1 つのゲートウェイですべてのサービスに接続
+    summary: Tao は Yao Agents のケイパビリティゲートウェイ。モデル、検索、取得、ストレージなどを 1 つのキーにまとめ、クレジットで課金されます。
   - slug: whats-next
     title: 次のステップ
     summary: さらなる機能の概要：Tai Link、統合、Yao Agents Hub。各機能の一行紹介とリンク。

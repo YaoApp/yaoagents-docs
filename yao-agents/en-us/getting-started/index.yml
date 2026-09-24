@@ -23,6 +23,9 @@ pages:
   - slug: connect-to-server
     title: Connect to a Cloud Server
     summary: Skip local setup — connect to a hosted Yao Agents server and start using AI Experts instantly.
+  - slug: tao
+    title: "Tao: One Gateway to Every Service"
+    summary: Tao is the capability gateway for Yao Agents — models, search, fetch, storage and more, all behind one key and billed in credits.
   - slug: whats-next
     title: What's Next
     summary: "Brief overview of advanced capabilities: Tai Link, Integrations, Yao Agents Hub. One-sentence intro + links."
