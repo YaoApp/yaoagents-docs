@@ -1,0 +1,51 @@
+---
+title: "Tao 上線 — 一組 Key，接上所有模型與服務"
+description: "Tao 是給 Agent 用的能力閘道：模型、搜尋、抓取、儲存，一組 Key 全部搞定，按 Credits 計費。註冊送 1,000 Credits。"
+published_at: "2026-09-24"
+authors:
+  - name: Yao Team
+---
+
+# Tao 上線 — 一組 Key，接上所有模型與服務
+
+Tao 是給 Agent 用的能力閘道。模型、搜尋、抓取、儲存……你的 Agent 需要的一切，用一組 Key 全部接好，按 Credits 計費。
+
+## 怎麼接
+
+第一次打開 Yao Agents，會先問你要用哪種方式：
+
+- **Use Tao Service（推薦）**：一組 Key，系統自動把所有服務設好。
+- **Bring Your Own Key**：自己接 OpenAI、Anthropic、本機 Ollama 等，逐項設定。
+
+![選擇接入方式](https://assets.yaoagents.com/en/tao/account-setup-1-en-$__THEME.png)
+
+選 **Use Tao Service**，接著去註冊。到 [yaoagents.com](https://yaoagents.com) 用電子郵件驗證碼或 Google 註冊，送 **1,000 Credits**。邀請朋友，雙方各得 2,000。
+
+![註冊](https://assets.yaoagents.com/en/tao/account-setup-3-en-$__THEME.png)
+
+進控制台，點 **Create New Key**，複製產生的 Key（只顯示一次）。
+
+![控制台](https://assets.yaoagents.com/en/tao/account-setup-4-en-$__THEME.png)
+
+![建立 Key](https://assets.yaoagents.com/en/tao/account-setup-6-en-$__THEME.png)
+
+回到應用，把 Key 貼進去，點 **Verify and Configure**。
+
+![設定 Tao Service](https://assets.yaoagents.com/en/tao/account-setup-7-en-$__THEME.png)
+
+接好後，設定頁會顯示 **Connected** 和餘額；模型設定也會自動填好——對話、視覺、語音、Embedding、結構化決策，全部指向 Tao。
+
+![已連線](https://assets.yaoagents.com/en/tao/account-setup-9-en-$__THEME.png)
+
+![模型設定](https://assets.yaoagents.com/en/tao/account-setup-10-en-$__THEME.png)
+
+## 也可以直接呼叫
+
+Tao 提供 OpenAI 相容介面，不裝 Yao Agents 也能用：
+
+```bash
+curl https://api.yaoagents.com/v1/chat/completions \
+  -H "Authorization: Bearer sk-tao-..." \
+  -H "Content-Type: application/json" \
+  -d '{"model":"<model>","messages":[{"role":"user","content":"hi"}]}'
+```

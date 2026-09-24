@@ -1,0 +1,53 @@
+---
+title: "Jev 上線 — 在 Agent 裡使用結構化決策"
+description: "Jev 是 TypeSafe AI 的 System One 模型：不寫文字，只輸出帶信賴度的結構化決策。Tao 已接入，可在 Yao Agents 的 Agent 裡直接使用。"
+published_at: "2026-09-24"
+authors:
+  - name: Yao Team
+---
+
+# Jev 上線 — 在 Agent 裡使用結構化決策
+
+Jev 是 [TypeSafe AI](https://typesafe.ai) 的 **System One** 模型：不生成文字，只做決定。給它資料和一組帶型別的問題，它回傳帶信賴度的結構化結果，程式可以直接用。
+
+Tao 已經接入 Jev，現在可以在 Yao Agents 的 Agent 裡直接使用。
+
+## 什麼是 System One
+
+一般大模型輸出文字，程式得先解析、驗證，還可能偏掉。Jev 輸出的是**事先定義好的結構**，問題只有三種：
+
+- **choice（選擇）**：從你給的選項裡挑一個
+- **score（評分）**：按你給的評分標準打分
+- **noul**：判斷某個陳述是否成立，回傳 0–1 的機率
+
+choice 和 score 還會附上機率分布與校準過的信賴度。答案結構事先定義，編不出錯。回應時間 70–500ms，比一般模型快 40–200 倍。
+
+## 示範：10 張工單一次分類
+
+把表格交給 AI 專家，說一句「把這些工單分類，把預留的欄位填好」。
+
+![把 CSV 交給 AI](https://assets.yaoagents.com/en/decision-skill/decision-skill-1-en-$__THEME.png)
+
+Jev 一次批次呼叫就完成：10/10 全部填好，沒有空白欄位。每一列都會給出分類、意圖、優先級、情緒、升級機率、信賴度，並標示是否需要人工複核。
+
+![結果](https://assets.yaoagents.com/en/decision-skill/decision-skill-2-en-$__THEME.png)
+
+| 工單 | 分類 | 優先級 | 情緒 | 信賴度 | 人工複核 |
+|------|------|--------|------|:---:|:---:|
+| T-002 上傳崩潰 | technical | P1-Urgent | negative | 0.74 | 是 |
+| T-004 訂單在哪 | shipping | P3-Normal | neutral | 0.66 | 否 |
+| T-008 第三次追問 | technical | P1-Urgent | negative | 0.92 | 是 |
+| T-009 要 Slack 整合 | general | P3-Normal | positive | 0.67 | 否 |
+| T-010 結帳 500 | technical | P1-Urgent | negative | 0.98 | 是 |
+
+## 輸出
+
+- **填好的原表**：欄位順序不變，預留欄位全部填上。
+- **分類結果表**：另外一份，直接可用。
+- **完整明細**：每一格的機率分布、逐題信賴度，以及模型與 token 用量。
+
+Jev 也會標出最不確定的那一列：T-001 的升級機率 0.49，差 0.01 就到人工複核門檻，是整批裡最弱的一列——想留安全邊際的話，單獨看一眼。其餘分得很乾淨：自動完成 0.10–0.29，需要升級 0.61–0.96。
+
+## 怎麼開啟
+
+設定 → 模型設定 → **Structured Decisions**，選 **Tao Service / Jev**。Jev 走 Tao，接入方式見 [Tao 上線](/blog/zh-tw/2026/release/tao)。

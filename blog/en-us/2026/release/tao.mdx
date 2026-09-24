@@ -1,0 +1,51 @@
+---
+title: "Tao Is Live — One Key for Every Model and Service"
+description: "Tao is the capability gateway for your agents: models, search, fetch, storage — one key, billed in credits. Sign up and get 1,000 credits."
+published_at: "2026-09-24"
+authors:
+  - name: Yao Team
+---
+
+# Tao Is Live — One Key for Every Model and Service
+
+Tao is the capability gateway for your agents. Models, search, fetch, storage — everything your agents need, wired up behind a single key, billed in credits.
+
+## How to connect
+
+The first time you open Yao Agents, it asks how you want to set things up:
+
+- **Use Tao Service (recommended)** — one key, and every service is configured for you.
+- **Bring Your Own Key** — plug in OpenAI, Anthropic, local Ollama, and so on, service by service.
+
+![Choose how to connect](https://assets.yaoagents.com/en/tao/account-setup-1-en-$__THEME.png)
+
+Pick **Use Tao Service**, then sign up. Head to [yaoagents.com](https://yaoagents.com) and register with an email code or Google — you get **1,000 credits**. Invite a friend and you both get 2,000.
+
+![Sign up](https://assets.yaoagents.com/en/tao/account-setup-3-en-$__THEME.png)
+
+In the console, hit **Create New Key** and copy the key — it's shown once.
+
+![Console](https://assets.yaoagents.com/en/tao/account-setup-4-en-$__THEME.png)
+
+![Create key](https://assets.yaoagents.com/en/tao/account-setup-6-en-$__THEME.png)
+
+Back in the app, paste the key and click **Verify and Configure**.
+
+![Configure Tao Service](https://assets.yaoagents.com/en/tao/account-setup-7-en-$__THEME.png)
+
+Once it's connected, Settings shows **Connected** and your balance. Model configuration fills in automatically — chat, vision, audio, embeddings, and structured decisions all point at Tao.
+
+![Connected](https://assets.yaoagents.com/en/tao/account-setup-9-en-$__THEME.png)
+
+![Model configuration](https://assets.yaoagents.com/en/tao/account-setup-10-en-$__THEME.png)
+
+## Or call it directly
+
+Tao speaks the OpenAI API, so you can use it without Yao Agents:
+
+```bash
+curl https://api.yaoagents.com/v1/chat/completions \
+  -H "Authorization: Bearer sk-tao-..." \
+  -H "Content-Type: application/json" \
+  -d '{"model":"<model>","messages":[{"role":"user","content":"hi"}]}'
+```

@@ -1,0 +1,51 @@
+---
+title: "Tao 登場 — 1 つのキーですべてのモデルとサービスに接続"
+description: "Tao はエージェント向けのケイパビリティゲートウェイ。モデル、検索、取得、ストレージを 1 つのキーにまとめ、Credits で課金されます。登録で 1,000 Credits。"
+published_at: "2026-09-24"
+authors:
+  - name: Yao Team
+---
+
+# Tao 登場 — 1 つのキーですべてのモデルとサービスに接続
+
+Tao はエージェント向けのケイパビリティゲートウェイです。モデル、検索、取得、ストレージ——エージェントに必要なものを 1 つのキーにまとめ、Credits で課金されます。
+
+## 接続方法
+
+Yao Agents を初めて起動すると、設定方法を聞かれます：
+
+- **Use Tao Service（推奨）**：1 つのキーで、すべてのサービスが自動で設定されます。
+- **Bring Your Own Key**：OpenAI、Anthropic、ローカルの Ollama などを自分で個別に接続します。
+
+![接続方法の選択](https://assets.yaoagents.com/en/tao/account-setup-1-en-$__THEME.png)
+
+**Use Tao Service** を選んで、登録します。[yaoagents.com](https://yaoagents.com) でメールコードか Google で登録すると、**1,000 Credits** がもらえます。友だちを招待すると、双方に 2,000 Credits。
+
+![登録](https://assets.yaoagents.com/en/tao/account-setup-3-en-$__THEME.png)
+
+コンソールで **Create New Key** をクリックし、表示されたキーをコピーします（表示は一度きり）。
+
+![コンソール](https://assets.yaoagents.com/en/tao/account-setup-4-en-$__THEME.png)
+
+![キーの作成](https://assets.yaoagents.com/en/tao/account-setup-6-en-$__THEME.png)
+
+アプリに戻り、キーを貼り付けて **Verify and Configure** をクリックします。
+
+![Tao Service の設定](https://assets.yaoagents.com/en/tao/account-setup-7-en-$__THEME.png)
+
+接続できると、設定に **Connected** と残高が表示されます。モデル設定も自動で入ります——チャット、視覚、音声、Embedding、構造化意思決定のすべてが Tao を向きます。
+
+![接続済み](https://assets.yaoagents.com/en/tao/account-setup-9-en-$__THEME.png)
+
+![モデル設定](https://assets.yaoagents.com/en/tao/account-setup-10-en-$__THEME.png)
+
+## 直接呼び出すこともできます
+
+Tao は OpenAI 互換 API を提供しているので、Yao Agents なしでも使えます：
+
+```bash
+curl https://api.yaoagents.com/v1/chat/completions \
+  -H "Authorization: Bearer sk-tao-..." \
+  -H "Content-Type: application/json" \
+  -d '{"model":"<model>","messages":[{"role":"user","content":"hi"}]}'
+```

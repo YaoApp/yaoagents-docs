@@ -1,4 +1,20 @@
 articles:
+  - slug: jev
+    title: "Jev 上线 — 在 Agent 中使用结构化决策"
+    summary: "Jev 是 TypeSafe AI 的 System One 模型：不写文字，只输出带置信度的结构化决策。Tao 已接入，可在 Yao Agents 的 Agent 里直接使用。"
+    category: release
+    date: "2026-09-24"
+    author:
+      name: Yao Team
+
+  - slug: tao
+    title: "Tao 上线 — 一个 Key，接入所有模型与服务"
+    summary: "Tao 是面向 Agent 的能力网关：模型、搜索、抓取、存储，一个 Key 全搞定，按 Credits 计费。注册送 1,000 Credits。"
+    category: release
+    date: "2026-09-24"
+    author:
+      name: Yao Team
+
   - slug: account-migration
     title: "老用户账号迁移（Cloud Service → Tao Service）"
     summary: "2026 年 9 月 23 日 15:00 UTC 开始账号迁移，启用新账户体系，Cloud Service 账户余额将兑换为等额积分迁入 Tao Service。"

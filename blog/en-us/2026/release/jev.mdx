@@ -1,0 +1,53 @@
+---
+title: "Jev Is Live — Structured Decisions Inside Your Agent"
+description: "Jev is TypeSafe AI's System One model: it doesn't write text, it returns typed decisions with confidence. Now available in Yao Agents through Tao."
+published_at: "2026-09-24"
+authors:
+  - name: Yao Team
+---
+
+# Jev Is Live — Structured Decisions Inside Your Agent
+
+Jev is [TypeSafe AI](https://typesafe.ai)'s **System One** model. It doesn't write text — it makes decisions. Give it some data and a set of typed questions, and it hands back structured answers your code can act on.
+
+Tao has integrated Jev, so you can use it inside a Yao Agents agent today.
+
+## What "System One" means
+
+A normal LLM writes prose. Your code has to parse it, validate it, and hope it didn't drift. Jev goes the other way: the output is a **predefined structure**. There are only three kinds of question:
+
+- **choice** — pick one option from a list you provide
+- **score** — rate the state against a rubric you define
+- **noul** — decide whether a statement is true, returning a 0–1 probability
+
+Choice and score also come back with probability distributions and calibrated confidence. The shape is fixed, so there's nothing to hallucinate. Responses land in 70–500ms — 40–200x faster than a general model.
+
+## Demo: classifying 10 support tickets
+
+Hand the agent a spreadsheet, and ask it to classify the tickets and fill in the reserved columns.
+
+![Hand the agent a CSV](https://assets.yaoagents.com/en/decision-skill/decision-skill-1-en-$__THEME.png)
+
+Jev does it in one batch call: 10/10 filled, no blank cells. Every row gets a category, intent, priority, sentiment, escalation probability, and confidence — plus a flag for whether a human should review it.
+
+![Result](https://assets.yaoagents.com/en/decision-skill/decision-skill-2-en-$__THEME.png)
+
+| Ticket | Category | Priority | Sentiment | Confidence | Human review |
+|------|------|--------|------|:---:|:---:|
+| T-002 upload crashes | technical | P1-Urgent | negative | 0.74 | Yes |
+| T-004 where is my order | shipping | P3-Normal | neutral | 0.66 | No |
+| T-008 third time asking | technical | P1-Urgent | negative | 0.92 | Yes |
+| T-009 wants Slack | general | P3-Normal | positive | 0.67 | No |
+| T-010 checkout error 500 | technical | P1-Urgent | negative | 0.98 | Yes |
+
+## Output
+
+- **The filled file** — same column order, reserved columns completed.
+- **A classified copy** — ready to use on its own.
+- **The full detail** — probability distributions, per-question confidence, plus the model and token usage.
+
+Jev also flags the least certain row: T-001 sits at 0.49 escalation, one hundredth below the human-review threshold — the weakest row in the batch. Worth a look if you want a safety margin. Everything else splits cleanly: auto-complete 0.10–0.29, escalate 0.61–0.96.
+
+## Turning it on
+
+Settings → Model Configuration → **Structured Decisions**, and pick **Tao Service / Jev**. Jev runs through Tao — see [Tao Is Live](/blog/en-us/2026/release/tao) for how to connect.

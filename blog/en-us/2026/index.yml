@@ -1,4 +1,20 @@
 articles:
+  - slug: jev
+    title: "Jev Is Live — Structured Decisions Inside Your Agent"
+    summary: "Jev is TypeSafe AI's System One model: it doesn't write text, it returns typed decisions with confidence. Now available in Yao Agents through Tao."
+    category: release
+    date: "2026-09-24"
+    author:
+      name: Yao Team
+
+  - slug: tao
+    title: "Tao Is Live — One Key for Every Model and Service"
+    summary: "Tao is the capability gateway for your agents: models, search, fetch, storage — one key, billed in credits. Sign up and get 1,000 credits."
+    category: release
+    date: "2026-09-24"
+    author:
+      name: Yao Team
+
   - slug: account-migration
     title: "Account Migration: Cloud Service → Tao Service"
     summary: "On September 23, 2026 at 15:00 UTC, we start migrating accounts from Cloud Service to Tao Service and turn on the new account system."

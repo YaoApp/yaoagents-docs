@@ -1,4 +1,20 @@
 articles:
+  - slug: jev
+    title: "Jev 登場 — エージェントで構造化意思決定を使う"
+    summary: "Jev は TypeSafe AI の System One モデル。文章は生成せず、信頼度付きの型付き意思決定だけを返します。Tao が統合済みで、Yao Agents のエージェントでそのまま使えます。"
+    category: release
+    date: "2026-09-24"
+    author:
+      name: Yao Team
+
+  - slug: tao
+    title: "Tao 登場 — 1 つのキーですべてのモデルとサービスに接続"
+    summary: "Tao はエージェント向けのケイパビリティゲートウェイ。モデル、検索、取得、ストレージを 1 つのキーにまとめ、Credits で課金されます。登録で 1,000 Credits。"
+    category: release
+    date: "2026-09-24"
+    author:
+      name: Yao Team
+
   - slug: account-migration
     title: "アカウント移行のお知らせ（Cloud Service → Tao Service）"
     summary: "2026年9月23日 15:00 UTC より、Cloud Service から Tao Service へのアカウント移行を開始し、新しいアカウント体系を有効にします。"
