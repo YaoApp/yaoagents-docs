@@ -8,6 +8,9 @@ pages:
   - slug: installation
     title: インストール
     summary: macOS / Windows / Linux でダウンロードしてインストール。
+  - slug: install-client
+    title: デスクトップクライアントをインストール
+    summary: デスクトップクライアントをダウンロードし、Custom Server でローカル Engine に接続してサインイン、モデルサービスを設定します。
   - slug: ai-experts-intro
     title: AI エキスパート：適切な専門家を選ぶ
     summary: コアコンセプト 1。各 AI エキスパートは専門分野のスペシャリストです。適切なエキスパートの選び方、要件の伝え方、最良の結果を得る方法。

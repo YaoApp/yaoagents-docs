@@ -8,6 +8,9 @@ pages:
   - slug: installation
     title: Installation
     summary: Download and install on macOS, Windows, or Linux — as easy as installing any app.
+  - slug: install-client
+    title: Install the Desktop Client
+    summary: Download the desktop client, connect to your local Engine over Custom Server, sign in, and set up a model service.
   - slug: ai-experts-intro
     title: "AI Experts: Find the Right One"
     summary: Core concept 1. Each AI Expert is a domain specialist. Learn how to pick the right one, describe your needs, and get the best results.

@@ -8,6 +8,9 @@ pages:
   - slug: installation
     title: 安装
     summary: 在 macOS / Windows / Linux 上下载安装，像装普通 App 一样简单。
+  - slug: install-client
+    title: 安装桌面客户端
+    summary: 下载安装桌面客户端：Custom Server 连接本地 Engine，登录并配置模型服务。
   - slug: ai-experts-intro
     title: AI 专家：找对人，事半功倍
     summary: 核心概念 1。每个 AI 专家都是对应领域的专才。如何选对专家、如何描述需求、如何获得最佳结果。

@@ -1,0 +1,59 @@
+---
+slug: install-client
+---
+
+# デスクトップクライアントをインストール
+
+デスクトップクライアントは日常使いに向いています。自分の PC で動く Yao Engine に接続します。以下が一連の流れです。
+
+## 1. ダウンロードとインストール
+
+macOS / Windows / Linux に対応。[クライアントのダウンロードページ](/download/yaoagents) からダウンロードし、通常のアプリと同じようにインストールします。
+
+## 2. ローカル Engine に接続
+
+クライアントを開き、サーバー選択ウィンドウで **Custom Server** タブに切り替えます。
+
+![Custom Server](https://assets.yaoagents.com/en/login/login-custom-server-en-$__THEME.png)
+
+ローカル Engine のアドレス `http://127.0.0.1:5099`（ブラウザーと同じ）を入力し、**Connect** をクリックします。
+
+![アドレスを入力](https://assets.yaoagents.com/en/login/login-custom-server-url-en-$__THEME.png)
+
+> 接続できないときは、Yao Engine が起動しているか、アドレスとポートが正しいかを確認してください。
+
+## 3. サインイン / 登録
+
+メールアドレスを入力し、確認コードで認証して **Continue** をクリックします。
+
+![メールアドレスを入力](https://assets.yaoagents.com/en/servers/04-servers-login-en-$__THEME.png)
+
+- **登録済み**：そのままサインインします。
+- **未登録**：パスワードを設定し、**Sign Up** で登録します。
+
+![パスワードを設定](https://assets.yaoagents.com/en/login/login-reg-en-$__THEME.png)
+
+## 4. モデルサービスの設定
+
+モデルの入手元を選びます：
+
+- **Use Tao Service（推奨）**：1 つのキーでモデル、検索、取得、ストレージなどをまとめて利用。
+- **Bring Your Own Key**：OpenAI、Anthropic、ローカルの Ollama などを自分で接続。
+
+![モデルサービスの選択](https://assets.yaoagents.com/en/login/login-bind-key-en-$__THEME.png)
+
+Tao Service を選ぶ場合は、コンソールで **Create New Key** をクリックしてキーをコピーします。
+
+![キーの取得](https://assets.yaoagents.com/en/login/login-get-key-en-$__THEME.png)
+
+アプリに貼り付けて **Verify and Configure** をクリックします。
+
+![Tao Service の設定](https://assets.yaoagents.com/en/login/login-bind-key-step-2-en-$__THEME.png)
+
+## 5. 使い始める
+
+メイン画面が開きます。エキスパートを選び、メッセージを送るかタスクを作成してください。
+
+![メイン画面](https://assets.yaoagents.com/en/login/login-inbox-en-$__THEME.png)
+
+> **ヒント：** トレイアイコンを右クリックすると、サーバーの切り替えや設定を開けます。
