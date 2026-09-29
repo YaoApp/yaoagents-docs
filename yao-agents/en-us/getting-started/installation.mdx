@@ -25,49 +25,41 @@ Click **Start**. Both services will show their PIDs and addresses once running.
 
 ![Yao Engine running](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
 
+> **Tip:** The **Server** section shows the access addresses — `http://127.0.0.1:5099` on this machine, plus the addresses other devices on the same network can use. That's the server address the client needs.
+
 ## Step 2: Open the welcome page
 
 Click **Visit** to open the welcome page in your browser, then click **Get Started**.
 
 ![Welcome page](https://assets.yaoagents.com/en/engine/03-engine-visit-en-$__THEME.png)
 
-## Step 3: Sign in
+> **Tip:** You can also grab the server address from **Server URL** in the top-right corner of the welcome page.
 
-**First login** — use the default root account:
+## Step 3: Create your account
 
-- **Email:** `root@yaoagents.com`
-- **Password:** `Yao123++`
+From the welcome page, open the sign-in screen and enter **your own email**, then click **Continue** and verify the code.
 
-![Sign in](https://assets.yaoagents.com/en/engine/05-engine-login-code-en-$__THEME.png)
+![Enter email](https://assets.yaoagents.com/en/login/login-web-email-en-$__THEME.png)
 
-> **Note:** Accounts are stored locally. To register additional users, configure SMTP first, otherwise they won't receive the verification code.
+Set a password and click **Sign Up** to finish.
 
-## Step 4: Configure models
+![Create account](https://assets.yaoagents.com/en/login/login-web-reg-en-$__THEME.png)
 
-Open **Settings → Model Configuration** (avatar icon, bottom-left of sidebar).
+## Step 4: Connect Tao
 
-![Model Configuration](https://assets.yaoagents.com/en/engine/06-engine-models-en-$__THEME.png)
+After signing in, choose where your models come from — **Use Tao Service** is recommended: one key for models, search, fetch, storage, and more.
 
-| Slot | Used for |
-|------|----------|
-| Default | General tasks |
-| Heavy | Complex reasoning, long context |
-| Light | Fast, lightweight queries |
-| Vision | Image recognition |
-| Audio | Speech-to-text |
-| Embedding | Vector search, knowledge base |
+![Connect Tao](https://assets.yaoagents.com/en/login/login-bind-key-en-$__THEME.png)
 
-> **Note:** DeepSeek models do not support vision or audio. Assign a separate provider to those slots (e.g. Claude or GPT-4o for Vision, Whisper for Audio).
+Open the console, click **Create New Key**, and copy the key.
 
-Click **Add Provider** and enter your credentials.
+![Get the key](https://assets.yaoagents.com/en/login/login-get-key-en-$__THEME.png)
 
-![Add provider](https://assets.yaoagents.com/en/engine/07-engine-provider-add-en-$__THEME.png)
+Paste it into the app and click **Verify and Configure**. Settings will show **Connected**, and your model configuration fills in automatically.
 
-> **Tip:** Add an image2 (OpenAI-compatible) provider for text-to-image and image editing. Agents will automatically dispatch image generation tasks when needed.
+![Configure Tao Service](https://assets.yaoagents.com/en/login/login-bind-key-step-2-en-$__THEME.png)
 
-Select your default model.
-
-![Provider configured](https://assets.yaoagents.com/en/engine/08-engine-provider-default-en-$__THEME.png)
+> You can also pick **Bring Your Own Key** and configure OpenAI, Anthropic, or local Ollama providers yourself.
 
 ## Step 5: Connect the desktop client
 

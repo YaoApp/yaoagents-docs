@@ -25,49 +25,41 @@ Yao Engine はローカルサーバーです。1 台の PC にインストール
 
 ![Yao Engine 実行中](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
 
+> **ヒント：** ここの **Server** 欄がアクセス先アドレスです（この PC は `http://127.0.0.1:5099`、下の行は同じネットワーク内の他デバイスから使えるアドレス）。クライアントに入力するサーバーアドレスはここから取得します。
+
 ## ステップ 2：ウェルカムページを開く
 
 **Visit** をクリックしてブラウザでウェルカムページを開き、**Get Started** をクリックします。
 
 ![ウェルカムページ](https://assets.yaoagents.com/en/engine/03-engine-visit-en-$__THEME.png)
 
-## ステップ 3：サインイン
+> **ヒント：** ウェルカムページ右上の **Server URL** でもサーバーアドレスを確認できます。クライアントにはこのアドレスを入力します。
 
-**初回ログイン**は、組み込みの管理者アカウントを使用します：
+## ステップ 3：アカウント登録
 
-- **メール：** `root@yaoagents.com`
-- **パスワード：** `Yao123++`
+ウェルカムページからサインイン画面を開き、**ご自身のメールアドレス**を入力して **Continue** をクリックし、確認コードで認証します。
 
-![サインイン](https://assets.yaoagents.com/en/engine/05-engine-login-code-en-$__THEME.png)
+![メールアドレスを入力](https://assets.yaoagents.com/en/login/login-web-email-en-$__THEME.png)
 
-> **注意：** アカウントはローカルデバイスに保存されます。ユーザーを追加するには、先に SMTP を設定してください。設定しないと認証コードを受信できません。
+パスワードを設定し、**Sign Up** で登録を完了します。
 
-## ステップ 4：モデルを設定
+![アカウント登録](https://assets.yaoagents.com/en/login/login-web-reg-en-$__THEME.png)
 
-サイドバー左下のアバターをクリックし、**Settings → Model Configuration** を開きます。
+## ステップ 4：Tao を連携
 
-![モデル設定](https://assets.yaoagents.com/en/engine/06-engine-models-en-$__THEME.png)
+サインイン後、モデルの入手元を選びます。**Use Tao Service** がおすすめです。1 つのキーでモデル、検索、取得、ストレージなどをまとめて利用できます。
 
-| スロット | 用途 |
-|----------|------|
-| Default | 汎用タスク |
-| Heavy | 高度な推論、長文コンテキスト |
-| Light | 高速で軽量なクエリ |
-| Vision | 画像認識 |
-| Audio | 音声テキスト変換 |
-| Embedding | ベクトル検索、ナレッジベース |
+![Tao を連携](https://assets.yaoagents.com/en/login/login-bind-key-en-$__THEME.png)
 
-> **注意：** DeepSeek モデルは画像・音声に非対応です。DeepSeek 使用時は Vision スロットに別のモデル（Claude、GPT-4o 等）、Audio スロットに Whisper 音声文字起こしモデルを割り当ててください。
+コンソールで **Create New Key** をクリックし、キーをコピーします。
 
-**Add Provider** をクリックし、認証情報を入力します。
+![キーの取得](https://assets.yaoagents.com/en/login/login-get-key-en-$__THEME.png)
 
-![プロバイダー追加](https://assets.yaoagents.com/en/engine/07-engine-provider-add-en-$__THEME.png)
+アプリに貼り付けて **Verify and Configure** をクリックします。接続できると設定に **Connected** と表示され、モデル設定も自動で入ります。
 
-> **ヒント：** image2（OpenAI 互換インターフェース）のテキスト→画像/画像編集モデルを追加すると、エージェントが必要に応じて自動的に画像生成・編集を実行します。
+![Tao Service の設定](https://assets.yaoagents.com/en/login/login-bind-key-step-2-en-$__THEME.png)
 
-デフォルトモデルを選択します。
-
-![設定完了](https://assets.yaoagents.com/en/engine/08-engine-provider-default-en-$__THEME.png)
+> **Bring Your Own Key** を選び、OpenAI、Anthropic、ローカルの Ollama などを自分で設定することもできます。
 
 ## ステップ 5：デスクトップクライアントを接続
 

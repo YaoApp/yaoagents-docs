@@ -25,49 +25,41 @@ Yao Engine 是本地服务器：在一台电脑上装好，就可以直接用浏
 
 ![Yao Engine 运行中](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
 
+> **提示：** 这里的 **Server** 一栏就是访问地址（本机 `http://127.0.0.1:5099`，下面几行是同网络其他设备可用的地址）。客户端要填的服务器地址就取自这里。
+
 ## 第二步：打开欢迎页
 
 点击 **Visit**，浏览器会打开欢迎页面，点击 **Get Started** 继续。
 
 ![欢迎页](https://assets.yaoagents.com/en/engine/03-engine-visit-en-$__THEME.png)
 
-## 第三步：登录
+> **提示：** 欢迎页右上角的 **Server URL** 也能看到服务器地址，客户端填这个地址即可。
 
-**首次登录**使用内置管理员账号：
+## 第三步：注册账号
 
-- **邮箱：** `root@yaoagents.com`
-- **密码：** `Yao123++`
+欢迎页进入登录入口，填**你自己的邮箱**，点 **Continue**，通过验证码验证。
 
-![登录](https://assets.yaoagents.com/en/engine/05-engine-login-code-en-$__THEME.png)
+![输入邮箱](https://assets.yaoagents.com/en/login/login-web-email-en-$__THEME.png)
 
-> **注意：** 账号存储在本地设备上。如需注册其他用户，请先配置 SMTP 邮箱服务，否则无法接收注册验证码。
+设置密码，点 **Sign Up** 完成注册。
 
-## 第四步：配置模型
+![注册账号](https://assets.yaoagents.com/en/login/login-web-reg-en-$__THEME.png)
 
-点击侧边栏左下角头像，进入 **设置 → 模型配置**。
+## 第四步：绑定 Tao
 
-![模型配置](https://assets.yaoagents.com/en/engine/06-engine-models-en-$__THEME.png)
+登录后选择模型来源，推荐 **Use Tao Service**：一个 Key 接入模型、搜索、抓取、存储等全部服务。
 
-| 槽位 | 用途 |
-|------|------|
-| Default | 日常通用任务 |
-| Heavy | 复杂推理、长上下文 |
-| Light | 快速简单查询 |
-| Vision | 图片识别 |
-| Audio | 语音转文字 |
-| Embedding | 向量检索、知识库 |
+![绑定 Tao](https://assets.yaoagents.com/en/login/login-bind-key-en-$__THEME.png)
 
-> **注意：** DeepSeek 系列模型不支持图片和语音。使用 DeepSeek 时，请为 Vision 槽位配置其他模型（如 Claude、GPT-4o），Audio 槽位配置 Whisper 语音转录模型。
+到控制台 **Create New Key** 复制 Key。
 
-点击 **Add Provider** 添加模型服务商，填入凭据。
+![获取 Key](https://assets.yaoagents.com/en/login/login-get-key-en-$__THEME.png)
 
-![添加服务商](https://assets.yaoagents.com/en/engine/07-engine-provider-add-en-$__THEME.png)
+粘进应用，点 **Verify and Configure**。接好后设置里显示 **Connected**，模型配置会自动填好。
 
-> **提示：** 添加 image2（OpenAI 兼容接口）的文生图/图生图模型后，Agent 在工作中如需生成或编辑图片会自动调度。
+![配置 Tao Service](https://assets.yaoagents.com/en/login/login-bind-key-step-2-en-$__THEME.png)
 
-选择默认模型。
-
-![配置完成](https://assets.yaoagents.com/en/engine/08-engine-provider-default-en-$__THEME.png)
+> 也可以选 **Bring Your Own Key**，自己逐个配置 OpenAI、Anthropic、本地 Ollama 等服务商。
 
 ## 第五步：连接桌面客户端
 

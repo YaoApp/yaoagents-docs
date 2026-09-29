@@ -25,49 +25,41 @@ Yao Engine 是本機伺服器：在一台電腦上裝好，就能直接用瀏覽
 
 ![Yao Engine 執行中](https://assets.yaoagents.com/en/engine/02-engine-start-en-$__THEME.png)
 
+> **提示：** 這裡的 **Server** 欄位就是存取位址（本機 `http://127.0.0.1:5099`，下面幾行是同網路其他裝置可用的位址）。用戶端要填的伺服器位址就取自這裡。
+
 ## 步驟二：開啟歡迎頁
 
 點擊 **Visit**，瀏覽器會開啟歡迎頁面，接著點 **Get Started**。
 
 ![歡迎頁](https://assets.yaoagents.com/en/engine/03-engine-visit-en-$__THEME.png)
 
-## 步驟三：登入
+> **提示：** 歡迎頁右上角的 **Server URL** 也能看到伺服器位址，用戶端填這個位址即可。
 
-**首次登入**請使用內建管理員帳號：
+## 步驟三：註冊帳號
 
-- **信箱：** `root@yaoagents.com`
-- **密碼：** `Yao123++`
+從歡迎頁進入登入頁，填**你自己的信箱**，點 **Continue**，通過驗證碼驗證。
 
-![登入](https://assets.yaoagents.com/en/engine/05-engine-login-code-en-$__THEME.png)
+![輸入信箱](https://assets.yaoagents.com/en/login/login-web-email-en-$__THEME.png)
 
-> **注意：** 帳號儲存在本機裝置上。如需註冊其他使用者，請先設定 SMTP 郵件服務，否則無法收到註冊驗證碼。
+設定密碼，點 **Sign Up** 完成註冊。
 
-## 步驟四：設定模型
+![註冊帳號](https://assets.yaoagents.com/en/login/login-web-reg-en-$__THEME.png)
 
-點選側邊欄左下角頭像，進入 **設定 → 模型組態**。
+## 步驟四：綁定 Tao
 
-![模型組態](https://assets.yaoagents.com/en/engine/06-engine-models-en-$__THEME.png)
+登入後選擇模型來源，建議 **Use Tao Service**：一組 Key 接上模型、搜尋、抓取、儲存等全部服務。
 
-| 欄位 | 用途 |
-|------|------|
-| Default | 一般日常任務 |
-| Heavy | 複雜推理、長上下文 |
-| Light | 快速簡易查詢 |
-| Vision | 圖片辨識 |
-| Audio | 語音轉文字 |
-| Embedding | 向量搜尋、知識庫 |
+![綁定 Tao](https://assets.yaoagents.com/en/login/login-bind-key-en-$__THEME.png)
 
-> **注意：** DeepSeek 系列模型不支援圖片與語音。使用 DeepSeek 時，請為 Vision 欄位指定其他模型（如 Claude、GPT-4o），Audio 欄位指定 Whisper 語音轉錄模型。
+到控制台 **Create New Key** 複製 Key。
 
-點擊 **Add Provider** 新增模型供應商，填入憑證。
+![取得 Key](https://assets.yaoagents.com/en/login/login-get-key-en-$__THEME.png)
 
-![新增供應商](https://assets.yaoagents.com/en/engine/07-engine-provider-add-en-$__THEME.png)
+貼進應用，點 **Verify and Configure**。接好後設定裡顯示 **Connected**，模型設定會自動填好。
 
-> **提示：** 新增 image2（OpenAI 相容介面）的文生圖/圖生圖模型後，Agent 工作時如需產生或編輯圖片會自動調度。
+![設定 Tao Service](https://assets.yaoagents.com/en/login/login-bind-key-step-2-en-$__THEME.png)
 
-選擇預設模型。
-
-![設定完成](https://assets.yaoagents.com/en/engine/08-engine-provider-default-en-$__THEME.png)
+> 也可以選 **Bring Your Own Key**，自己逐項設定 OpenAI、Anthropic、本機 Ollama 等供應商。
 
 ## 步驟五：連接桌面用戶端
 
